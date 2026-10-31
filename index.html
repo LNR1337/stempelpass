@@ -1764,8 +1764,8 @@ SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", 
   levels: [[11, "Wandernadel"]],
   info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
   url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.40 Beta";
-const APP_CODE = 80;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.41 Beta";
+const APP_CODE = 81;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -4557,6 +4557,46 @@ function openAccountGoogle(){
 }
 const GOOGLE_G = '<svg viewBox="0 0 48 48" width="18" height="18" style="vertical-align:-3px"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.7 13.3l7.9 6.1C12.5 13.6 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17z"/><path fill="#FBBC05" d="M10.6 28.6c-.5-1.4-.8-3-.8-4.6s.3-3.2.8-4.6l-7.9-6.1C1 16.6 0 20.2 0 24s1 7.4 2.7 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.2 0-11.5-4.1-13.4-9.9l-7.9 6.1C6.6 42.6 14.6 48 24 48z"/></svg>';
 
+/* ---------- 🚪 Abmelden: Stempel sichern, Konto-Daten vom Handy entfernen, neu starten ---------- */
+/* Diese Einstellungen gehören zum Handy, nicht zum Konto – sie bleiben beim Abmelden */
+const KEEP_KEYS = ["sp.theme", "sp.base", "sp.legMin", "sp.regions", "sp.layout", "sp.gcfg", "sp.fixes", "sp.roles", "sp.navVoice", "sp.navEco",
+  "sp.poi", "sp.heat", "sp.bgRoutes", "sp.lastCode", "sp.installHint", "sp.updSkip", "sp.official", "sp.customHefte", "sp.news", "sp.newsSeen", "sp.reports", "sp.set", "sp.hefteOn", "sp.heftSel"];
+function openLogout(){
+  const hasPw = username && username.hasPw, g = load("sp.google", null);
+  const safe = hasPw || g;
+  openSheet(`<div class="kicker">Konto</div><h2>🚪 Abmelden</h2>
+    ${safe ? `<p>Deine Stempel, Freunde und dein Profil sind in der Cloud gespeichert. Wieder anmelden kannst du dich jederzeit mit ${[hasPw ? `<b>${esc(username.name)}</b> + Passwort` : "", g ? `<b>Google</b> (${esc(g)})` : ""].filter(Boolean).join(" oder ")}.</p>
+      <p class="hint">Fotos und Offline-Karten bleiben auf diesem Handy. Einstellungen wie Kartenansicht und Design auch.</p>`
+      : `<div class="notice bad"><b>Achtung: Du kommst danach nicht mehr in dein Konto!</b>Du hast weder ein Passwort noch Google verknüpft. Leg zuerst eins davon fest.</div>
+      <div class="actions">${googleOn() ? `<button class="btn" id="loG">${GOOGLE_G} Google verknüpfen</button>` : ""}<button class="btn" id="loPw">🔑 Passwort festlegen</button></div>`}
+    <p id="loMsg" style="color:var(--bad)"></p>
+    <div class="actions"><button class="btn ${safe ? "primary" : "warn"}" id="loGo">${safe ? "Abmelden" : "Trotzdem abmelden …"}</button><button class="btn quiet" id="sClose">Abbrechen</button></div>`);
+  const lg = $("#loG"); if (lg) lg.onclick = startGoogle;
+  const lp = $("#loPw"); if (lp) lp.onclick = openPassword;
+  $("#loGo").onclick = async () => {
+    const b = $("#loGo");
+    if (!safe && !b.dataset.sure) { b.dataset.sure = "1"; b.textContent = "Wirklich? Konto ist dann weg – nochmal tippen"; return; }
+    b.disabled = true; $("#loMsg").style.color = "var(--muted)"; $("#loMsg").textContent = "Sichere deine Stempel …";
+    try { clearTimeout(stampTimer); await pushStamps(); }
+    catch(e) {
+      if (!b.dataset.offline) { b.dataset.offline = "1"; b.disabled = false; $("#loMsg").style.color = "var(--bad)"; $("#loMsg").textContent = "Keine Verbindung – neue Stempel seit dem letzten Sichern würden fehlen. Nochmal tippen, um trotzdem abzumelden."; return; }
+    }
+    doLogout();
+  };
+  bindClose();
+}
+function doLogout(){
+  try { if (hasNative("bgLocStop")) NATIVE.bgLocStop(); } catch(e) {}
+  try { if (hasNative("navBg")) NATIVE.navBg(""); } catch(e) {}
+  try {
+    const drop = [];
+    for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith("sp.") && !KEEP_KEYS.includes(k) && !k.startsWith("sp.elev.")) drop.push(k); }
+    drop.forEach(k => localStorage.removeItem(k));
+  } catch(e) {}
+  save("sp.loggedOut", Date.now());
+  location.reload();
+}
+
 /* Stempel, Kaputt-Markierungen und Notizen in Firestore: stamps/{uid} */
 let stampTimer = null;
 function cloudPayload(){
@@ -4625,7 +4665,7 @@ function setWMode(mode){
   $("#wSwitch").textContent = login ? "Neu hier? Konto erstellen" : "Ich habe schon ein Konto";
   $("#wPw").hidden = $("#wPwL").hidden = !fb.ready();
   $("#wSwitch").hidden = !fb.ready();
-  $("#wMsg").textContent = "";
+  $("#wMsg").textContent = ""; $("#wMsg").style.color = "";
   updateGoogleUi();
 }
 function openWelcome(change, msg){
@@ -7052,6 +7092,7 @@ function openMenu(){
       ${fb.ready() && username ? menuRow("mLoc", "📍", "Standort mit Freunden", shareLoc ? "wird geteilt – antippen zum Beenden" : "aus") : ""}
       ${menuRow("mProfiles", "👥", "Stempelhefte (Personen)", `aktuell: ${esc(profileName())}${profiles.length > 1 ? ` · ${profiles.length} Hefte` : ""}`)}
       ${fb.ready() && username && username.reserved ? menuRow("mPw", "🔑", username.hasPw ? "Passwort ändern" : "Passwort festlegen", "") : ""}
+      ${fb.ready() && username && username.reserved ? menuRow("mLogout", "🚪", "Abmelden", "anderes Konto nutzen oder Handy weitergeben") : ""}
       ${googleOn() && username && username.reserved ? menuRow("mGoogle", "🔗", "Google-Anmeldung", load("sp.google", null) ? "verknüpft mit " + esc(load("sp.google", "")) : "verknüpfen – dann geht's ohne Passwort") : ""}
     </div>
     <h3>Daten & Speicher</h3>
@@ -7078,6 +7119,7 @@ function openMenu(){
   const mal = $("#mAlerts"); if (mal) mal.onclick = openAlerts;
   const mp = $("#mPw"); if (mp) mp.onclick = openPassword;
   const mg = $("#mGoogle"); if (mg) mg.onclick = openAccountGoogle;
+  const mlo = $("#mLogout"); if (mlo) mlo.onclick = openLogout;
   const mp2 = $("#mPw2"); if (mp2) mp2.onclick = openPassword;
   const ml = $("#mLoc"); if (ml) ml.onclick = () => shareLoc ? (closeSheet(), setShareLoc(false)) : askShareLoc();
   const ma = $("#mAdmin"); if (ma) ma.onclick = () => openAdmin();
@@ -8188,7 +8230,7 @@ setTimeout(async () => {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   setTimeout(() => {
     sp.classList.add("out");
-    setTimeout(() => { sp.hidden = true; if (!username) openWelcome(false); }, reduce ? 0 : 450);
+    setTimeout(() => { sp.hidden = true; if (!username) { openWelcome(false); if (load("sp.loggedOut", 0) > Date.now() - 60000) { setWMode("login"); $("#wMsg").style.color = "var(--done)"; $("#wMsg").textContent = "✓ Abgemeldet. Hier kannst du dich wieder anmelden – oder mit einem anderen Konto."; save("sp.loggedOut", 0); } } }, reduce ? 0 : 450);
   }, reduce ? 600 : 1500);
 })();
 

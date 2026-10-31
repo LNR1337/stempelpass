@@ -1,6 +1,6 @@
 {
- "code": 80,
- "version": "0.9.40 Beta",
- "notes": "App-Version in der Nutzerliste, Maps-Koordinaten",
+ "code": 81,
+ "version": "0.9.41 Beta",
+ "notes": "Abmelden",
  "apk": "Stempelpass.apk"
 }
