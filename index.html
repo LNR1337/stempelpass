@@ -744,6 +744,9 @@ body.cmping #routeChip{top:86px}
 #ppMap{position:absolute;inset:0}
 .pp-pin{position:absolute;left:50%;top:50%;width:30px;height:42px;margin:-42px 0 0 -15px;z-index:500;pointer-events:none;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 42'%3E%3Cpath d='M15 41C15 41 2 24 2 15a13 13 0 0 1 26 0c0 9-13 26-13 26z' fill='%23d0602b' stroke='%23fff' stroke-width='2.5'/%3E%3Ccircle cx='15' cy='15' r='5' fill='%23fff'/%3E%3C/svg%3E");filter:drop-shadow(0 3px 3px rgba(0,0,0,.35))}
 .pp-info{position:absolute;left:8px;bottom:8px;z-index:500;background:color-mix(in srgb,var(--surface) 92%,transparent);border-radius:8px;padding:2px 8px;font:600 .74rem var(--body);color:var(--fg);pointer-events:none}
+.pp-co{display:flex;gap:6px;margin-top:4px}.pp-co input{flex:1;min-width:0;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font:inherit;font-size:.88rem;background:var(--bg);color:var(--fg)}
+.pp-co .mini{border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:10px;padding:6px 12px;font:600 .86rem var(--body)}
+.pp-cohint{display:block;color:var(--muted);font-size:.74rem;margin:4px 0 6px}
 .pp-tap{position:absolute;right:8px;top:8px;z-index:500;background:color-mix(in srgb,var(--surface) 92%,transparent);border-radius:8px;padding:2px 8px;font:600 .74rem var(--body);color:var(--fg);pointer-events:none}
 .pp-tools{display:flex;gap:6px;margin-bottom:6px}.pp-tools .mini{border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:10px;padding:6px 12px;font:600 .86rem var(--body)}
 .pp-tip{font-size:.7rem;padding:1px 5px}
@@ -1760,8 +1763,8 @@ SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", 
   levels: [[11, "Wandernadel"]],
   info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
   url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.38 Beta";
-const APP_CODE = 78;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.39 Beta";
+const APP_CODE = 79;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -5216,9 +5219,31 @@ function mountPosPicker(el, start, ref){
   setTimeout(() => { pm.invalidateSize(); pm.setView(start, 17); }, 150);
   return pm;
 }
+/* Koordinaten aus Text lesen: "50.803, 10.444", Grad/Minuten/Sekunden oder Google-Maps-Link */
+function parseCoords(t){
+  t = String(t || "").trim(); if (!t) return null;
+  try { t = decodeURIComponent(t); } catch(e) {}
+  const ok = (a, b) => isFinite(a) && isFinite(b) && Math.abs(a) <= 90 && Math.abs(b) <= 180 && !(a === 0 && b === 0) ? [Math.round(a * 1e6) / 1e6, Math.round(b * 1e6) / 1e6] : null;
+  let m = t.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/); if (m) return ok(+m[1], +m[2]);
+  m = t.match(/[?&](?:q|query|ll|destination|center)=(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)/); if (m) return ok(+m[1], +m[2]);
+  m = t.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/); if (m) return ok(+m[1], +m[2]);
+  /* Grad, Minuten, Sekunden: 50°48'10.9"N 10°26'40.8"E */
+  const dms = [...t.matchAll(/(\d+(?:[.,]\d+)?)\s*°\s*(?:(\d+(?:[.,]\d+)?)\s*['′’]\s*)?(?:(\d+(?:[.,]\d+)?)\s*(?:"|″|”|'')\s*)?([NSEOW])/gi)];
+  if (dms.length >= 2) {
+    const v = x => { let d = +x[1].replace(",", ".") + (+(x[2] || "0").replace(",", ".")) / 60 + (+(x[3] || "0").replace(",", ".")) / 3600; return /[SW]/i.test(x[4]) ? -d : d; };
+    const lat = dms.find(x => /[NS]/i.test(x[4])), lon = dms.find(x => /[EOW]/i.test(x[4]));
+    if (lat && lon) return ok(v(lat), v(lon));
+  }
+  /* zwei Dezimalzahlen (auch mit Komma als Dezimalzeichen: "50,803 10,444") */
+  m = t.match(/(-?\d{1,2}\.\d+)\s*[,;\s]\s*(-?\d{1,3}\.\d+)/); if (m) return ok(+m[1], +m[2]);
+  m = t.match(/(-?\d{1,2},\d{3,})\s*[;\s]\s*(-?\d{1,3},\d{3,})/); if (m) return ok(+m[1].replace(",", "."), +m[2].replace(",", "."));
+  return null;
+}
 function posPickerHtml(){
   return `<div class="pospick"><div id="ppMap"></div><span class="pp-pin"></span><span class="pp-info" id="ppInfo"></span><span class="pp-tap">👆 Antippen setzt die Nadel</span></div>
-    <div class="pp-tools"><button class="mini" id="ppMe" type="button">📍 Mein Standort</button><button class="mini" id="ppSat" type="button">🛰️ Satellit</button></div>`;
+    <div class="pp-tools"><button class="mini" id="ppMe" type="button">📍 Mein Standort</button><button class="mini" id="ppSat" type="button">🛰️ Satellit</button></div>
+    <div class="pp-co"><input id="ppCo" placeholder="Koordinaten oder Google-Maps-Link einfügen" autocomplete="off" inputmode="text">${hasNative("clipText") || (navigator.clipboard && navigator.clipboard.readText) ? '<button class="mini" id="ppPaste" type="button" aria-label="Einfügen">📋</button>' : ""}<button class="mini" id="ppCoGo" type="button">Setzen</button></div>
+    <small class="pp-cohint">z. B. „50.803024, 10.444668“ – in Google Maps lange auf die Stelle drücken, dann die Zahlen oben antippen zum Kopieren.</small>`;
 }
 function bindPosPicker(s, start, ref){
   const pm = mountPosPicker($("#ppMap"), start, ref);
@@ -5226,6 +5251,15 @@ function bindPosPicker(s, start, ref){
   pm.on("move", info); info();
   /* Mit dem Finger an die richtige Stelle tippen: die Nadel springt dorthin */
   pm.on("click", e => { pm.panTo(e.latlng, { animate: true, duration: .35 }); vibrate(25); });
+  const setCo = () => {
+    const c = parseCoords($("#ppCo").value);
+    if (!c) { toast(/goo\.gl|g\.co\//.test($("#ppCo").value) ? "Kurz-Links aus „Teilen“ gehen nicht – in Google Maps lange auf die Stelle drücken und die Zahlen kopieren" : "Keine Koordinaten erkannt – z. B. 50.803024, 10.444668"); return; }
+    if (c[0] < 47 || c[0] > 56 || c[1] < 5 || c[1] > 16) { toast("Die Stelle liegt nicht in Deutschland – Breite und Länge vertauscht?"); return; }
+    pm.setView(c, 18); vibrate(25); toast(ref ? `Nadel gesetzt – ${fmtKm(distKm(ref, c))} von bisher` : "Nadel gesetzt");
+  };
+  $("#ppCoGo").onclick = setCo;
+  $("#ppCo").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); setCo(); } });
+  const pp = $("#ppPaste"); if (pp) pp.onclick = async () => { let t = ""; try { t = hasNative("clipText") ? NATIVE.clipText() : await navigator.clipboard.readText(); } catch(e) {} if (!t) { toast("Zwischenablage ist leer"); return; } $("#ppCo").value = t.trim(); setCo(); };
   $("#ppMe").onclick = () => { if (!myPos) { startLocate(true); toast("Suche Standort … gleich nochmal tippen"); return; } pm.setView(myPos, 18); };
   let sat = false, satL = null;
   $("#ppSat").onclick = () => { sat = !sat; if (sat) satL = L.tileLayer(BASES.sat.url, { maxZoom: 19 }).addTo(pm); else if (satL) pm.removeLayer(satL); $("#ppSat").textContent = sat ? "🗺️ Karte" : "🛰️ Satellit"; };
