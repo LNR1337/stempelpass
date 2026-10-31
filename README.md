@@ -1,4 +1,4 @@
-# Stempelpass
+# Stempeljagd
 
 Wandern · Stempeln · Sammeln
 

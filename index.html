@@ -7,12 +7,12 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Stempelpass">
+<meta name="apple-mobile-web-app-title" content="Stempeljagd">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <meta name="theme-color" content="#1d4a33">
-<title>Stempelpass</title>
+<title>Stempeljagd</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d4a33'/%3E%3Ccircle cx='32' cy='32' r='18' fill='none' stroke='%23f2c14e' stroke-width='5'/%3E%3Cpath d='M23 33l6 6 12-14' fill='none' stroke='%23f2c14e' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
 /* required styles */
@@ -791,7 +791,8 @@ details.pubmore{margin:4px 0 8px;font-size:.9rem}details.pubmore summary{color:v
 .lvlist li span{font-size:1.25rem}.lvlist li div{min-width:0;display:flex;flex-direction:column}.lvlist li b{font-size:.84rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.lvlist li small{font-size:.68rem;color:var(--muted)}
 /* Stempelkarte */
 .pmap{border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--forest) 7%,var(--bg));overflow:hidden}
-.pmap svg{display:block;width:100%;height:auto}
+.pmap svg{display:block;width:100%;height:auto}.pmap{position:relative;cursor:pointer}.pm-zoom{position:absolute;right:8px;top:8px;background:color-mix(in srgb,var(--surface) 90%,transparent);border:1px solid var(--line);border-radius:99px;padding:3px 10px;font:700 .72rem var(--body);color:var(--fg);pointer-events:none}
+.pmbig{height:62vh;min-height:320px;border-radius:14px;overflow:hidden;border:1px solid var(--line);margin-top:8px}.pmdot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle}
 .pm-bg circle{fill:var(--muted);opacity:.28}
 .pm-fg circle{stroke:var(--surface);stroke-width:.9}
 .pm-lb text{font:700 11px var(--body);fill:var(--fg);opacity:.75;text-anchor:middle;paint-order:stroke;stroke:var(--bg);stroke-width:3px}
@@ -836,6 +837,11 @@ details.pubmore{margin:4px 0 8px;font-size:.9rem}details.pubmore summary{color:v
 .sv-st.open{color:var(--open);background:color-mix(in srgb,var(--open) 13%,transparent)}.sv-st.bad{color:var(--bad);background:color-mix(in srgb,var(--bad) 11%,transparent)}
 .sv-head h2{margin:3px 0 2px!important;font-size:1.45rem!important}
 .sv-sub{color:var(--muted);font-size:.84rem}
+.sv-last{display:flex;width:fit-content;align-items:center;gap:7px;margin-top:7px;padding:4px 10px;border-radius:999px;background:color-mix(in srgb,var(--done) 14%,transparent);color:var(--done);font-size:.8rem;font-weight:600}
+.sv-last b{font-weight:800}
+.sv-last i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--done);box-shadow:0 0 0 0 var(--done);animation:lsPulse 1.8s ease-out infinite}
+@keyframes lsPulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--done) 60%,transparent)}100%{box-shadow:0 0 0 8px transparent}}
+.sv-last[hidden]{display:none}
 .sv-main{margin-top:12px}.sv-main .btn{width:100%}
 .sheet .btn.sv-code,.btn.primary.sv-code{background:var(--code);border-color:var(--code);color:#fff}
 .sv-row{display:flex;gap:8px;margin-top:8px}.sv-row .btn{flex:1;padding:10px 6px;font-size:.9rem;text-align:center;text-decoration:none}
@@ -1109,11 +1115,15 @@ nav.bottom button{font-size:.88rem}
 .mrow .track i.x{background:var(--route)}
 .notice.facts b{display:inline;margin:0}
 
-.splash{position:fixed;inset:0;z-index:2000;background:#1d4a33;display:grid;place-items:center;transition:opacity .45s ease}
+.splash{position:fixed;inset:0;z-index:2000;background:radial-gradient(circle at 50% 38%,#2f6b45 0,#1d4a33 45%,#16382a 100%);display:grid;place-items:center;transition:opacity .45s ease}
 .splash.out{opacity:0;pointer-events:none}
 .splash-in{display:flex;flex-direction:column;align-items:center;gap:18px;animation:spIn .7s ease both}
-.splash-logo{width:120px;height:120px}
-.splash-check{stroke-dasharray:80;stroke-dashoffset:80;animation:spCheck .6s .35s ease forwards}
+.splash-logo{width:210px;height:210px;overflow:visible;animation:spPop .55s ease both}
+@keyframes spPop{0%{transform:scale(.8);opacity:0}100%{transform:none;opacity:1}}
+.splash-rot{transform-origin:256px 256px;animation:spRot 24s linear infinite}
+@keyframes spRot{to{transform:rotate(360deg)}}
+.wlogo{border-radius:14px;box-shadow:0 3px 10px rgba(0,0,0,.15)}
+.splash-check{stroke-dasharray:90;stroke-dashoffset:90;animation:spCheck .6s .35s ease forwards}
 .splash-name{font:700 2.4rem/1.1 var(--display);color:#f3f7f2;letter-spacing:.01em;margin-top:14px}
 .splash-by{font:700 .88rem/1.3 var(--body);color:#f2c14e;letter-spacing:.1em;padding:0 16px 0 calc(16px + .1em);text-transform:uppercase;text-align:center;white-space:nowrap}
 .splash-by i{font-style:normal;opacity:.6;margin:0 .15em}
@@ -1126,7 +1136,7 @@ nav.bottom button{font-size:.88rem}
 .splash-beta{font:700 .7rem/1 var(--body);color:#1d4a33;background:#f2c14e;border-radius:999px;padding:4px 10px;letter-spacing:.2em;text-transform:uppercase;margin-top:6px}
 @keyframes spIn{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes spCheck{to{stroke-dashoffset:0}}
-@media (prefers-reduced-motion:reduce){.splash-in,.splash-check{animation:none;stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.splash-in,.splash-check,.splash-stamp,.splash-logo,.splash-rot{animation:none;stroke-dashoffset:0}}
 .welcome{position:fixed;inset:0;z-index:1500;background:color-mix(in srgb,#0d1f15 70%,transparent);display:grid;place-items:center;padding:16px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}
 .welcome-card{width:100%;max-width:380px;background:var(--surface);color:var(--fg);border-radius:18px;padding:22px 20px;display:flex;flex-direction:column;gap:10px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
 .welcome-card h2{font:700 1.35rem/1.2 var(--display);margin:4px 0 0;text-wrap:balance}
@@ -1455,12 +1465,10 @@ body.compact-hdr header .progress{max-height:0;opacity:0;margin-top:0}
 <body>
 <div id="splash" class="splash" aria-hidden="true">
   <div class="splash-in">
-    <svg class="splash-logo" viewBox="0 0 120 120" aria-hidden="true">
-      <circle cx="60" cy="60" r="44" fill="none" stroke="#f2c14e" stroke-width="7"/>
-      <circle cx="60" cy="60" r="53" fill="none" stroke="#f2c14e" stroke-width="2" stroke-dasharray="3 6" opacity=".7"/>
-      <path class="splash-check" d="M40 62l13 13 28-31" fill="none" stroke="#f2c14e" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <div class="splash-name">Stempelpass</div>
+<svg viewBox="0 0 512 512" class="splash-logo" aria-hidden="true"><defs><radialGradient id="splgl"><stop offset="0" stop-color="#e3b542" stop-opacity=".35"/><stop offset="1" stop-color="#e3b542" stop-opacity="0"/></radialGradient><path id="spltp" d="M256 256m-196 0a196 196 0 1 1 392 0a196 196 0 1 1 -392 0"/></defs>
+<circle cx="256" cy="242" r="170" fill="url(#splgl)"/><circle cx="256" cy="256" r="226" fill="none" stroke="#e3b542" stroke-width="8"/>
+<g class="splash-rot"><text font-family="Georgia,serif" font-weight="700" font-size="30" letter-spacing="3" textLength="1170" lengthAdjust="spacing" fill="#e3b542"><textPath href="#spltp" startOffset="0">STEMPELJAGD ★ STEMPELJAGD ★ STEMPELJAGD ★</textPath></text></g><path d="M256 440s-130-140-130-236a130 130 0 0 1 260 0c0 96-130 236-130 236z" fill="#16382a" stroke="#e3b542" stroke-width="14" stroke-linejoin="round" transform="translate(256 239) scale(.82) translate(-256 -240)"/><circle cx="256" cy="205" r="58" fill="#e3b542"/><path class="splash-check" d="M230 206l19 19 40-44" fill="none" stroke="#16382a" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="splash-name">Stempeljagd</div>
     <div class="splash-by">Wandern <i>·</i> Stempeln <i>·</i> Sammeln</div>
     <div class="splash-beta">Beta</div>
   </div>
@@ -1469,8 +1477,12 @@ body.compact-hdr header .progress{max-height:0;opacity:0;margin-top:0}
 </div>
 <div id="welcome" class="welcome" hidden role="dialog" aria-modal="true" aria-labelledby="wTitle">
   <form id="wForm" class="welcome-card" novalidate>
-    <svg viewBox="0 0 120 120" width="56" height="56" aria-hidden="true"><circle cx="60" cy="60" r="44" fill="none" stroke="#c9961c" stroke-width="8"/><path d="M40 62l13 13 28-31" fill="none" stroke="#c9961c" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <h2 id="wTitle">Willkommen beim Stempelpass!</h2>
+<svg viewBox="0 0 512 512" width="56" height="56" class="wlogo" aria-hidden="true"><defs><linearGradient id="welg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f6b45"/><stop offset="1" stop-color="#16382a"/></linearGradient><radialGradient id="well"><stop offset="0" stop-color="#e3b542" stop-opacity=".35"/><stop offset="1" stop-color="#e3b542" stop-opacity="0"/></radialGradient></defs>
+<rect width="512" height="512" fill="url(#welg)"/><g transform="translate(256 256) scale(.74) translate(-256 -256)">
+<circle cx="256" cy="242" r="170" fill="url(#well)"/>
+<circle cx="256" cy="256" r="226" fill="none" stroke="#e3b542" stroke-width="12"/><circle cx="256" cy="256" r="202" fill="none" stroke="#e3b542" stroke-width="5"/>
+<path d="M256 440s-130-140-130-236a130 130 0 0 1 260 0c0 96-130 236-130 236z" fill="#16382a" stroke="#e3b542" stroke-width="14" stroke-linejoin="round" transform="translate(256 239) scale(.82) translate(-256 -240)"/><circle cx="256" cy="205" r="58" fill="#e3b542"/><path d="M230 206l19 19 40-44" fill="none" stroke="#16382a" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+    <h2 id="wTitle">Willkommen bei Stempeljagd!</h2>
     <p id="wText">Wähle deinen Benutzernamen.</p>
     <label for="wName">Benutzername</label>
     <input id="wName" maxlength="20" autocomplete="username" autocapitalize="words" placeholder="z. B. Wanderfuchs">
@@ -1485,7 +1497,7 @@ body.compact-hdr header .progress{max-height:0;opacity:0;margin-top:0}
 </div>
 <header>
   <div class="top">
-    <h1>Stempelpass<small id="subtitle">Harz · 222 Stempelstellen</small></h1>
+    <h1>Stempeljagd<small id="subtitle">Harz · 222 Stempelstellen</small></h1>
     <div class="hbtns"><button class="iconbtn hbtn" id="heftsBtn" aria-label="Gebiete und Hefte">📚 Hefte</button>
     <button class="iconbtn" id="menuBtn" aria-label="Menü">⋯</button></div>
   </div>
@@ -1767,8 +1779,8 @@ SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", 
   levels: [[11, "Wandernadel"]],
   info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
   url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.42 Beta";
-const APP_CODE = 82;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.43 Beta";
+const APP_CODE = 83;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -2081,7 +2093,7 @@ function setBase(id){
   baseId = id; save("sp.base", id);
   baseLayers.forEach(l => map.removeLayer(l));
   const b = BASES[id];
-  const credit = MADE_BY ? 'Stempelpass von ' + esc(MADE_BY) + ' · ' : '';
+  const credit = MADE_BY ? 'Stempeljagd von ' + esc(MADE_BY) + ' · ' : '';
   baseLayers = [L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc", attribution: credit + b.attr })];
   if (b.labels) baseLayers.push(L.tileLayer(b.labels, { maxZoom: 19, maxNativeZoom: b.native, pane: "labels", opacity: 0.9 }));
   baseLayers.forEach(l => l.addTo(map).bringToBack());
@@ -2961,7 +2973,7 @@ function openStamp(k){
       <button class="sv-x" id="sClose" aria-label="Schließen">✕</button>${hasPos(s) ? '<span class="sv-big">⤢ Große Karte</span>' : ""}
       ${walk ? `<span class="sv-walk">🥾 ca. ${walk < 60 ? walk + " min" : km1(walk / 60) + " h"} zu Fuß</span>` : ""}</div>
     <div class="sv-head"><div class="sv-k"><span>${esc(stampKicker(set, s))}</span>${stat}</div>
-      <h2>${esc(s.name)}</h2><div class="sv-sub">${sub}${profiles.length > 1 ? " · Heft: " + esc(profileName()) : ""}</div></div>
+      <h2>${esc(s.name)}</h2><div class="sv-sub">${sub}${profiles.length > 1 ? " · Heft: " + esc(profileName()) : ""}</div><div class="sv-last" id="sLast" hidden></div></div>
     <div class="sv-main">${mainBtn}</div>
     <div class="sv-row">${row}</div>
     ${alerts.map(([c, t, x, rp]) => `<div class="sv-alert ${c}"><b>${t}</b><span>${x}</span>${rp ? `<button class="mini rphoto" data-rphoto="${esc(rp)}">📷 Foto</button>` : ""}</div>`).join("")}
@@ -2980,7 +2992,7 @@ function openStamp(k){
       <button id="sWatch"><i>${isWatched(set, k) ? "⭐" : "☆"}</i>${isWatched(set, k) ? "Gemerkt" : "Merken"}</button>
       <button id="svMore"><i>⋯</i>Mehr</button>
     </div>`);
-  if (fb.ready()) loadCheck(set, k);
+  if (fb.ready()) { loadCheck(set, k); loadLastStamp(set, k); }
   bindHelpLine(set, k);
   const st = $("#sToggle"); if (st) st.onclick = () => d ? confirmToggle(k, () => openStamp(k)) : (toggle(k), toast(`Nr. ${s.n} gestempelt`), openStamp(k));
   const smt = $("#sMethod"); if (smt) smt.onclick = () => openMethod(k, null, () => openStamp(k));
@@ -3154,6 +3166,42 @@ async function sendCheck(set, k, type){
     drawCheck(set, k, chkCache[set + "_" + k].v);
   } catch(e) { toast("Meldung hat nicht geklappt – Internet?"); }
 }
+/* ---------- 🕓 „Zuletzt gestempelt vor …“: wer digital war und es im Heft bestätigt (oder per GPS vor Ort stempelt), meldet still den Zeitpunkt – 48 h sichtbar ---------- */
+const lastStampCache = {};
+const LAST_MS = 48 * 3600000;
+function agoH(iso){
+  const m = Math.max(0, (Date.now() - new Date(iso).getTime()) / 60000);
+  if (m < 2) return "gerade eben";
+  if (m < 60) return `vor ${Math.round(m)} Min.`;
+  const h = Math.round(m / 60);
+  return h < 24 ? `vor ${h} Std.` : h < 36 ? "gestern" : `vor ${Math.round(h / 24)} Tagen`;
+}
+async function sendLastStamp(set, k){
+  if (!fb.ready() || !username || !username.code) return;
+  try {
+    const a = await fb.auth(), ts = new Date().toISOString();
+    for (const x of groupMembers(set, k)) {
+      await fb.req("PATCH", `/laststamp/${encodeURIComponent(x.set + "_" + x.k)}`, { fields: { ts: { timestampValue: ts }, uid: fsStr(a.uid) } });
+      lastStampCache[x.set + "_" + x.k] = { at: Date.now(), ts };
+    }
+  } catch(e) {}
+}
+async function loadLastStamp(set, k){
+  const mem = groupMembers(set, k);
+  const one = async x => {
+    const key = x.set + "_" + x.k, c = lastStampCache[key];
+    if (c && Date.now() - c.at < 300000) return c.ts;
+    try { const r = await fb.raw("GET", `/laststamp/${encodeURIComponent(key)}`); const ts = r.ok ? fv(await r.json(), "ts") : null; lastStampCache[key] = { at: Date.now(), ts }; return ts; } catch(e) { return null; }
+  };
+  const all = (await Promise.all(mem.map(one))).filter(Boolean).sort().reverse();
+  drawLastStamp(set, k, all[0] || null);
+}
+function drawLastStamp(set, k, ts){
+  const b = $("#sLast"); if (!b || selectedKey !== k || current !== set) return;
+  if (!ts || Date.now() - new Date(ts).getTime() > LAST_MS) { b.hidden = true; return; }
+  b.innerHTML = `<i></i><span><b>${esc(agoH(ts).replace(/^v/, "V").replace(/^g/, "G"))}</b> zuletzt gestempelt</span>`;
+  b.hidden = false;
+}
 async function loadTips(set, k, force){
   const key = set + "_" + k, box = () => $("#sTips");
   const draw = list => {
@@ -3265,7 +3313,7 @@ let changesSinceBackup = load("sp.changes", 0);
 function toggle(k){
   const prev = done[current][k];
   if (done[current][k]) { delete done[current][k]; setMethod(current, k, null); setGps(current, k, false); }
-  else { done[current][k] = today(); save("sp.lastStamp." + profile, { set: current, k, date: done[current][k] }); if (checkGpsAt(current, k)) setTimeout(() => toast("📍 Vor Ort bestätigt"), 900); }
+  else { done[current][k] = today(); save("sp.lastStamp." + profile, { set: current, k, date: done[current][k] }); if (checkGpsAt(current, k)) { setTimeout(() => toast("📍 Vor Ort bestätigt"), 900); sendLastStamp(current, k); } }
   save(doneKey(current), done[current]);
   linkNote(syncGroup(current, k, prev));
   if (!prev && isWatched(current, k)) setWatched(current, k, false);
@@ -3303,6 +3351,7 @@ function autoStampDo(set, k, ts){
 function overStamp(set, k){
   if (!done[set][k]) return;
   setMethod(set, k, "stamp");
+  sendLastStamp(set, k);
   scheduleSync(); refreshViews();
   const s = byKey[set].get(k); toast(`Nr. ${s ? s.n : k} ins Heft übertragen`);
 }
@@ -3442,7 +3491,7 @@ function openPlanner(){
       <button class="btn quiet" id="sClose">Abbrechen</button>
     </div>
     <details class="fset" style="margin-top:12px"><summary>Tour von Freunden öffnen</summary>
-      <p>Hat dir jemand eine Stempelpass-Tour geschickt? Die ganze Nachricht hier einfügen.</p>
+      <p>Hat dir jemand eine Stempeljagd-Tour geschickt? Die ganze Nachricht hier einfügen.</p>
       <textarea class="note" id="plImp" placeholder="Nachricht mit [stempeltour~…] einfügen"></textarea>
       <div class="actions" style="margin-top:8px"><button class="btn" id="plImpGo">Tour öffnen</button></div></details>`);
   $("#plImpGo").onclick = () => importTour($("#plImp").value);
@@ -3985,7 +4034,7 @@ setInterval(() => pushSeen(false), 120000);
 setInterval(() => { if (view === "friends" && !document.hidden && fb.ready() && username) refreshBoard(false); }, 60000);
 function renderFriends(){
   const el = $("#fbody");
-  const credit = MADE_BY ? `<p class="credit">Stempelpass von ${esc(MADE_BY)}</p>` : "";
+  const credit = MADE_BY ? `<p class="credit">Stempeljagd von ${esc(MADE_BY)}</p>` : "";
   if (!fb.ready()) { el.innerHTML = `<h2>Freunde</h2><p>Die Freunde-Funktion ist in dieser Version nicht eingerichtet.</p>${credit}`; return; }
   if (!username) {
     el.innerHTML = `<h2>Freunde</h2><p>Lege zuerst deinen Benutzernamen fest.</p><button class="btn primary" id="frName">Benutzernamen festlegen</button>${credit}`;
@@ -4074,8 +4123,8 @@ function renderFriends(){
     ${credit}`;
   $("#frCopy").onclick = e => {
     e.stopPropagation();
-    const t = `Füg mich in der App Stempelpass als Freund hinzu! Mein Name: ${username.name} – oder mein Code: ${fmtCode(username.code)}`;
-    if (hasNative("shareText")) { NATIVE.shareText("Stempelpass", t); return; }
+    const t = `Füg mich in der App Stempeljagd als Freund hinzu! Mein Name: ${username.name} – oder mein Code: ${fmtCode(username.code)}`;
+    if (hasNative("shareText")) { NATIVE.shareText("Stempeljagd", t); return; }
     try { navigator.clipboard.writeText(t).then(() => toast("Code kopiert – jetzt z. B. in WhatsApp einfügen"), () => toast("Dein Code: " + fmtCode(username.code))); }
     catch(e) { toast("Dein Code: " + fmtCode(username.code)); }
   };
@@ -4233,7 +4282,7 @@ async function ghLatest(repo){
   const r = await getJson(`https://api.github.com/repos/${repo}/releases/latest`);
   const m = String(r.tag_name || "").match(/(\d+)\s*$/), a = (r.assets || []).find(x => /\.apk$/i.test(x.name));
   if (!m || !a) return null;
-  return { code: +m[1], version: (r.name || "").replace(/^Stempelpass\s*/i, "").trim() || m[1], url: a.browser_download_url, notes: String(r.body || "").split("\n")[0].slice(0, 80) };
+  return { code: +m[1], version: (r.name || "").replace(/^Stempel(pass|jagd)\s*/i, "").trim() || m[1], url: a.browser_download_url, notes: String(r.body || "").split("\n")[0].slice(0, 80) };
 }
 /* Google-Drive-Freigabelink in direkten Download umwandeln */
 function directUrl(u){
@@ -4266,9 +4315,9 @@ function webInstallHint(){
   const android = /Android/.test(navigator.userAgent);
   setTimeout(() => {
     if (!$("#sheet").hidden || !$("#welcome").hidden) return;
-    openSheet(`<div class="kicker">Stempelpass</div><h2>📲 Als App installieren</h2>
-      ${IS_IOS ? `<ol class="steps"><li>Unten in Safari auf <b>Teilen</b> (Viereck mit Pfeil ⬆️) tippen</li><li><b>„Zum Home-Bildschirm“</b> wählen</li><li>Oben rechts auf <b>Hinzufügen</b></li></ol><p>Dann hast du Stempelpass als App-Symbol, im Vollbild und auch offline.</p>`
-        : android ? `<p>Für Android gibt es Stempelpass als richtige App – mit Stempel-Alarm, Widget und Navigation im Hintergrund.</p><div class="actions"><a class="btn primary" href="https://raw.githubusercontent.com/LNR1337/stempelpass/main/Stempelpass.apk">Android-App herunterladen</a></div>`
+    openSheet(`<div class="kicker">Stempeljagd</div><h2>📲 Als App installieren</h2>
+      ${IS_IOS ? `<ol class="steps"><li>Unten in Safari auf <b>Teilen</b> (Viereck mit Pfeil ⬆️) tippen</li><li><b>„Zum Home-Bildschirm“</b> wählen</li><li>Oben rechts auf <b>Hinzufügen</b></li></ol><p>Dann hast du Stempeljagd als App-Symbol, im Vollbild und auch offline.</p>`
+        : android ? `<p>Für Android gibt es Stempeljagd als richtige App – mit Stempel-Alarm, Widget und Navigation im Hintergrund.</p><div class="actions"><a class="btn primary" href="https://raw.githubusercontent.com/LNR1337/stempelpass/main/Stempelpass.apk">Android-App herunterladen</a></div>`
         : `<p>Im Browser-Menü „App installieren“ bzw. „Zum Startbildschirm hinzufügen“ wählen.</p>`}
       <div class="actions"><button class="btn quiet" id="sClose">Später</button></div>`);
     bindClose();
@@ -4353,7 +4402,7 @@ function checkForceUpdate(){
   const el = document.createElement("div");
   el.className = "forceupd";
   el.innerHTML = `<div class="fu-box"><div class="fu-ic">⬆️</div><h2>Bitte kurz aktualisieren</h2>
-    <p>Diese Version von Stempelpass wird nicht mehr unterstützt. Das Update dauert nur ein paar Sekunden – deine Stempel bleiben alle erhalten.</p>
+    <p>Diese Version von Stempeljagd wird nicht mehr unterstützt. Das Update dauert nur ein paar Sekunden – deine Stempel bleiben alle erhalten.</p>
     <p class="fu-v">Neu: ${esc(updInfo.version || String(updInfo.code))}${updInfo.notes ? " – " + esc(updInfo.notes) : ""}</p>
     <button class="btn primary" id="fuGo">Jetzt aktualisieren</button>
     <p class="fu-st" id="fuSt"></p>
@@ -4557,8 +4606,8 @@ async function googleToken(idt){
       if (username && username.reserved) { toast(`✓ Google verknüpft – du kannst dich jetzt mit ${j.email || "Google"} anmelden`); if (!$("#sheet").hidden) openAccountGoogle(); return; }
       googleNew = true; openWelcome(false); setWMode("google"); return;
     }
-    /* 2) Dieses Google-Konto gehört schon zu einem Stempelpass-Konto */
-    if (username && username.reserved) { toast("Dieses Google-Konto gehört schon zu einem anderen Stempelpass-Konto"); return; }
+    /* 2) Dieses Google-Konto gehört schon zu einem Stempeljagd-Konto */
+    if (username && username.reserved) { toast("Dieses Google-Konto gehört schon zu einem anderen Stempeljagd-Konto"); return; }
     j = await idCall("signInWithIdp", body(null));
     if (j.errorMessage) throw new Error(j.errorMessage);
     const a = saveAuthFrom(j); save("sp.google", j.email || "Google");
@@ -4678,7 +4727,7 @@ function setWMode(mode){
     $("#wTitle").textContent = "Fast geschafft!"; $("#wText").textContent = "Du bist mit Google angemeldet. Wähle jetzt noch deinen Benutzernamen – so finden dich deine Freunde.";
     $("#wPw").hidden = $("#wPwL").hidden = true; $("#wSwitch").hidden = true; $("#wGo").textContent = "Los geht's"; $("#wMsg").textContent = ""; updateGoogleUi(); $("#wGoogle").hidden = true; return;
   }
-  $("#wTitle").textContent = login ? "Anmelden" : "Willkommen beim Stempelpass!";
+  $("#wTitle").textContent = login ? "Anmelden" : "Willkommen bei Stempeljagd!";
   $("#wText").textContent = login ? "Melde dich mit deinem Benutzernamen und Passwort an. Deine Stempel, Freunde und dein Code kommen zurück."
     : "Wähle deinen Benutzernamen und ein Passwort. Mit dem Passwort kommst du nach einer Neuinstallation wieder in dein Konto.";
   $("#wPw").setAttribute("autocomplete", login ? "current-password" : "new-password");
@@ -5695,13 +5744,13 @@ function sharePlan(p){
   const lines = p.stamps.map((k, i) => { const s = byKey[p.set].get(k); return `${i + 1}. Nr. ${s.n} ${s.name}`; });
   const who = username ? username.name : "Ich";
   shareText("Stempeltour", `🥾 ${who} lädt dich zu einer Stempeltour ein!\n${SETS[p.set].title}, ${p.stamps.length} Stempel, ca. ${km1(p.km * 1.35)} km zu Fuß\n\n${lines.join("\n")}\n\n` +
-    `Google Maps: ${planMapsUrl(p)}\n\nIn Stempelpass öffnen: Routen → „Eigene Tour planen“ → diesen Text einfügen\n${tourCode(p.set, p.stamps, p.loop, p.start)}`);
+    `Google Maps: ${planMapsUrl(p)}\n\nIn Stempeljagd öffnen: Routen → „Eigene Tour planen“ → diesen Text einfügen\n${tourCode(p.set, p.stamps, p.loop, p.start)}`);
 }
 function shareRoute(r){
   const lines = r.stamps.map(k => { const s = byKey[current].get(k); return `Nr. ${k} ${s ? s.name : ""}`; });
   const start = r.pts[0];
   shareText("Stempeltour", `🥾 ${username ? username.name : "Ich"} lädt dich ein: ${r.name}\n${km1(r.km)} km${r.up ? ", ↑ " + r.up + " m" : ""}, ${r.loop ? "Rundweg" : "Strecke"}\n\n${lines.join("\n")}\n\n` +
-    `Zum Start: ${navUrl(start[0], start[1])}\n\nIn Stempelpass öffnen: Routen → „Eigene Tour planen“ → diesen Text einfügen\n[stempelroute~${current}~${r.name}]`);
+    `Zum Start: ${navUrl(start[0], start[1])}\n\nIn Stempeljagd öffnen: Routen → „Eigene Tour planen“ → diesen Text einfügen\n[stempelroute~${current}~${r.name}]`);
 }
 function importTour(text){
   const rt = /\[stempelroute~(\w+)~([^\]]+)\]/.exec(text || "");
@@ -5712,7 +5761,7 @@ function importTour(text){
     openRoute(r.id, true); return true;
   }
   const m = /\[stempeltour~(\w+)~([^~\]]+)~([01])~(-?[\d.]+),(-?[\d.]+)\]/.exec(text || "");
-  if (!m || !SETS[m[1]]) { toast("Im Text steht keine Stempelpass-Tour"); return false; }
+  if (!m || !SETS[m[1]]) { toast("Im Text steht keine Stempeljagd-Tour"); return false; }
   const set = m[1], loop = m[3] === "1", start = [+m[4], +m[5]];
   const seq = m[2].split(",").map(k => byKey[set].get(k)).filter(s => s && hasPos(s));
   if (!seq.length) { toast("Die Stempel dieser Tour kennt deine App nicht"); return false; }
@@ -5875,11 +5924,11 @@ function storyImage(pin){
   g.fillText(st.label, cx, 1380 + lines.slice(0, 3).length * 100);
   g.fillStyle = "#f3f7f2"; g.font = "700 54px Bitter, Georgia, serif"; g.fillText(username ? username.name : profileName(), cx, 1700);
   g.fillStyle = "rgba(243,247,242,.6)"; g.font = "600 36px 'Source Sans 3', system-ui, sans-serif";
-  g.fillText(new Date().toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" }) + "  ·  Stempelpass", cx, 1770);
+  g.fillText(new Date().toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" }) + "  ·  Stempeljagd", cx, 1770);
   return c.toDataURL("image/png");
 }
 function shareStory(pin){
-  const url = storyImage(pin), text = `🎉 ${pin.title} geschafft! #Stempelpass #Wandern`;
+  const url = storyImage(pin), text = `🎉 ${pin.title} geschafft! #Stempeljagd #Wandern`;
   if (hasNative("shareImage")) { NATIVE.shareImage(url, text); return; }
   const a = document.createElement("a"); a.href = url; a.download = "stempelpass-" + pin.id.replace(/[^a-z0-9]/gi, "-") + ".png"; document.body.appendChild(a); a.click(); a.remove();
 }
@@ -6044,13 +6093,13 @@ async function diaryHtml(withPhotos){
     <div class="sum"><div><b>${cnt("hwn")}/222</b>Harzer Wandernadel</div><div><b>${cnt("tou")}/430</b>Touringen</div><div><b>${cnt("hws") + cnt("tos")}</b>Sonderstempel</div>${cnt("tab") ? `<div><b>${cnt("tab")}/24</b>Bad Tabarz</div>` : ""}${cnt("sax") ? `<div><b>${cnt("sax")}/11</b>Sächs. Schweiz</div>` : ""}${VOR_SETS.map(st => cnt(st) ? `<div><b>${cnt(st)}/${stamps[st].length}</b>${esc(SETS[st].short)}</div>` : "").join("")}<div><b>${days.length}</b>Wandertage</div></div>
     ${Object.keys(earned).length ? `<p class="badges"><b>Abzeichen:</b> ${BADGES.filter(b => earned[b[0]]).map(b => b[1] + " " + esc(b[2])).join(" · ")}</p>` : ""}
     ${body || "<p>Noch keine Stempel eingetragen.</p>"}
-    <p class="foot">Erstellt mit Stempelpass${MADE_BY ? " von " + esc(MADE_BY) : ""}</p></body></html>`;
+    <p class="foot">Erstellt mit Stempeljagd${MADE_BY ? " von " + esc(MADE_BY) : ""}</p></body></html>`;
 }
 async function exportDiary(){
   const withPhotos = !!($("#dPhotos") && $("#dPhotos").checked);
   toast("Tagebuch wird erstellt …");
   const html = await diaryHtml(withPhotos);
-  if (hasNative("printHtml")) { NATIVE.printHtml("Stempelpass-Wandertagebuch", html); return; }
+  if (hasNative("printHtml")) { NATIVE.printHtml("Stempeljagd-Wandertagebuch", html); return; }
   const f = document.createElement("iframe");
   f.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0";
   document.body.appendChild(f);
@@ -6480,11 +6529,11 @@ function levelStoryImage(lv, newTitle){
   g.fillText(`${lv.st} Stempel · ${lv.xp.toLocaleString("de-DE")} Punkte`, cx, 1470);
   g.fillStyle = "#f3f7f2"; g.font = "700 54px Bitter, Georgia, serif"; g.fillText(username ? username.name : profileName(), cx, 1700);
   g.fillStyle = "rgba(243,247,242,.6)"; g.font = "600 36px 'Source Sans 3', system-ui, sans-serif";
-  g.fillText(new Date().toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" }) + "  ·  Stempelpass", cx, 1770);
+  g.fillText(new Date().toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" }) + "  ·  Stempeljagd", cx, 1770);
   return c.toDataURL("image/png");
 }
 function shareLevel(lv, newTitle){
-  const url = levelStoryImage(lv, newTitle), text = `⭐ Level ${lv.L} – ${lv.title}! #Stempelpass #Wandern`;
+  const url = levelStoryImage(lv, newTitle), text = `⭐ Level ${lv.L} – ${lv.title}! #Stempeljagd #Wandern`;
   if (hasNative("shareImage")) { NATIVE.shareImage(url, text); return; }
   const a = document.createElement("a"); a.href = url; a.download = `stempelpass-level-${lv.L}.png`; document.body.appendChild(a); a.click(); a.remove();
 }
@@ -6524,7 +6573,7 @@ function profMapHtml(c){
     .map(([id, r]) => `<text x="${(r.x / r.n).toFixed(0)}" y="${(r.y / r.n).toFixed(0)}">${esc(PM_NAME[id] || "")}</text>`).join("");
   const sets = Object.entries(got.reduce((a, [st]) => { const r = REGION[st] || st; a[r] = (a[r] || 0) + 1; return a; }, {}));
   return `<h3>🗺️ Stempelkarte <small class="pcount">${got.length} Orte</small></h3>
-    <div class="pmap"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet"><g class="pm-bg">${bg}</g><g class="pm-fg">${fg}</g><g class="pm-lb">${labels}</g></svg></div>
+    <div class="pmap" role="button" aria-label="Stempelkarte groß öffnen"><span class="pm-zoom">⤢ Groß & zoomen</span><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet"><g class="pm-bg">${bg}</g><g class="pm-fg">${fg}</g><g class="pm-lb">${labels}</g></svg></div>
     <div class="pm-leg">${sets.sort((a, b) => b[1] - a[1]).map(([r, n]) => `<span>${esc(PM_NAME[r] || r)} <b>${n}</b></span>`).join("")}</div>`;
 }
 
@@ -6590,6 +6639,47 @@ function bindProfRings(me){
     $("#pDetail").querySelectorAll("[data-goto]").forEach(g => g.onclick = () => { const [st, kk] = g.dataset.goto.split("|"); openStampIn(st, kk); });
   });
   $("#pDetail").querySelectorAll("[data-goto]").forEach(g => g.onclick = () => { const [st, kk] = g.dataset.goto.split("|"); openStampIn(st, kk); });
+}
+/* Stempelkarte groß: echte Karte zum Zoomen, mit Namen beim Reinzoomen */
+let pmBig = null;
+function openProfileMap(c, name, back){
+  if (!c || !c.stamps) return;
+  const got = [];
+  for (const st of SET_KEYS) for (const k of c.stamps[st] || []) { const s = byKey[st] && byKey[st].get(k); if (s && hasPos(s)) got.push([st, s]); }
+  if (!got.length) return;
+  const regs = new Set(got.map(([st]) => REGION[st] || st));
+  openSheet(`<button class="sv-back" id="pbBack">‹ Zurück zum Profil</button><div class="kicker">Stempelkarte</div><h2>🗺️ ${esc(name)} <small class="pcount">${got.length} Orte</small></h2>
+    <div class="pmbig" id="pmBig"></div>
+    <div class="pm-leg" style="margin-top:8px"><span><i class="pmdot" style="background:var(--pc-hwn)"></i>gestempelt</span><span><i class="pmdot" style="background:var(--muted);opacity:.5"></i>noch offen</span><span>🔍 reinzoomen für Namen</span></div>
+    <div class="actions"><button class="btn quiet" id="pbBack2">Zurück</button></div>`);
+  $("#pbBack").onclick = $("#pbBack2").onclick = () => { if (pmBig) { pmBig.remove(); pmBig = null; } back(); };
+  const b = BASES[baseId] || BASES.osm;
+  const pm = pmBig = L.map($("#pmBig"), { zoomControl: true, attributionControl: false, preferCanvas: true });
+  L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc" }).addTo(pm);
+  if (b.labels) L.tileLayer(b.labels, { maxZoom: 19, maxNativeZoom: b.native }).addTo(pm);
+  const have = new Set(got.map(([st, s]) => st + "|" + s.k));
+  /* offene Stempel in denselben Gebieten blass dahinter */
+  for (const st of SET_KEYS) {
+    if (!regs.has(REGION[st] || st) || isSonder(st)) continue;
+    for (const s of stamps[st]) if (hasPos(s) && !have.has(st + "|" + s.k))
+      L.circleMarker([s.lat, s.lon], { radius: 4, weight: 1, color: "#fff", fillColor: css("--muted"), fillOpacity: .45, opacity: .6 })
+        .bindTooltip(`${isSonder(st) ? "" : "Nr. " + s.n + " "}${s.name} · offen`, { direction: "top" }).on("click", () => openStampIn(st, s.k)).addTo(pm);
+  }
+  const lab = L.layerGroup().addTo(pm);
+  for (const [st, s] of got)
+    L.circleMarker([s.lat, s.lon], { radius: 7, weight: 2, color: "#fff", fillColor: css(PM_COL[st] || "--pc-acc"), fillOpacity: 1 })
+      .bindTooltip(`${isSonder(st) ? "" : "Nr. " + s.n + " "}${s.name} · ${SETS[st].short || SETS[st].title}`, { direction: "top" })
+      .on("click", () => openStampIn(st, s.k)).addTo(pm);
+  const drawLabels = () => {
+    lab.clearLayers();
+    if (pm.getZoom() < 14) return;
+    const bd = pm.getBounds().pad(0.2);
+    got.filter(([, s]) => bd.contains([s.lat, s.lon])).slice(0, 120).forEach(([st, s]) =>
+      L.marker([s.lat, s.lon], { interactive: false, keyboard: false, icon: L.divIcon({ className: "stlabel d", html: `<span>${isSonder(st) ? "" : `<b>${esc(s.n)}</b> `}${esc(s.name)}</span>`, iconSize: [0, 0], iconAnchor: [0, -14] }) }).addTo(lab));
+  };
+  pm.on("zoomend moveend", drawLabels);
+  const pts = got.map(([, s]) => [s.lat, s.lon]);
+  setTimeout(() => { pm.invalidateSize(); pm.fitBounds(pts, { padding: [24, 24], maxZoom: 14 }); }, 120);
 }
 function profileHtml(m, c, me){
   const shown = (c.badges.show || []).map(id => BADGES.find(b => b[0] === id)).filter(Boolean);
@@ -6670,6 +6760,7 @@ async function openFriendProfile(code){
     <div class="actions">${c.stamps ? '<button class="btn" id="fpMap">🗺️ Auf der Karte vergleichen</button>' : ""}${friendLocs[code] ? '<button class="btn" id="fpLoc">📍 Standort auf der Karte</button>' : ""}<button class="btn warn" id="fpRemove">Freund entfernen …</button><button class="btn quiet" id="sClose">Schließen</button></div>`);
   bindProfRings(false);
   { const pl = $("#pLevel"); if (pl) pl.onclick = () => openLevelInfo(m, c, () => openFriendProfile(code)); }
+  { const pmx = $("#sheet .pmap"); if (pmx) pmx.onclick = () => openProfileMap(c, m.name, () => openFriendProfile(code)); }
   $("#fpRemove").onclick = () => {
     const b = $("#fpRemove");
     if (!b.dataset.sure) { b.dataset.sure = "1"; b.textContent = `${m.name} wirklich entfernen? Nochmal tippen`; return; }
@@ -6698,6 +6789,7 @@ function openMyProfile(){
   const pbe = $("#pbEdit"); if (pbe) pbe.onclick = openEditProfile;
   bindProfRings(true);
   { const pl = $("#pLevel"); if (pl) pl.onclick = () => openLevelInfo(myBoardEntry(), myCardLocal(), openMyProfile); }
+  { const pmx = $("#sheet .pmap"); if (pmx) pmx.onclick = () => openProfileMap(myCardLocal(), username ? username.name : profileName(), openMyProfile); }
   $("#sheet").querySelectorAll("[data-goto]").forEach(b => b.onclick = () => { const [st, kk] = b.dataset.goto.split("|"); openStampIn(st, kk); });
   bindClose();
 }
@@ -6816,7 +6908,7 @@ $("#reportPhotoInput").addEventListener("change", async e => {
 function openReport(set, k, state, back){
   const s = byKey[set].get(k); if (!s) return;
   openSheet(`<div class="kicker">Meldung für alle · Nr. ${esc(s.n)}</div><h2>${esc(s.name)}</h2>
-    <p>${state === "broken" ? "Alle Stempelpass-Nutzer sehen, dass dieser Stempel kaputt ist – mit deinem Namen und dem Datum." : "Alle sehen, dass der Stempel wieder funktioniert. Die Kaputt-Meldung verschwindet dann."}</p>
+    <p>${state === "broken" ? "Alle Stempeljagd-Nutzer sehen, dass dieser Stempel kaputt ist – mit deinem Namen und dem Datum." : "Alle sehen, dass der Stempel wieder funktioniert. Die Kaputt-Meldung verschwindet dann."}</p>
     <div class="field"><label for="rpNote">${state === "broken" ? "Was ist kaputt? (optional)" : "Hinweis (optional)"}</label>
       <textarea class="note" id="rpNote" maxlength="140" placeholder="${state === "broken" ? "z. B. Stempel fehlt, Kasten aufgebrochen, Kissen trocken" : "z. B. Neuer Stempel ist da"}"></textarea></div>
     <div class="field"><label>${state === "broken" ? "📷 Beweisfoto (Pflicht)" : "📷 Foto (optional)"}</label>
@@ -7136,7 +7228,7 @@ function openMenu(){
       ${hasNative("downloadTiles") ? menuRow("mOffline", "🗺️", "Offline-Karte", "Pakete laden, Speicher verwalten") : ""}
       ${menuRow("mDefects", "⚠️", "Offizielle Defektmeldungen", "Harzer Wandernadel & Touringen")}
     </div>
-    <div class="mlist" style="margin-top:14px">${menuRow("mAbout", "ℹ️", "Über Stempelpass", APP_VERSION + (fbOn ? " · Nutzer-ID" : ""))}</div>
+    <div class="mlist" style="margin-top:14px">${menuRow("mAbout", "ℹ️", "Über Stempeljagd", APP_VERSION + (fbOn ? " · Nutzer-ID" : ""))}</div>
     <div class="actions" style="margin-top:14px"><button class="btn quiet" id="sClose">Schließen</button></div>`);
   $("#mTheme").onclick = e => { e.stopPropagation(); const v = e.target.dataset.v; if (!v) return; $("#mTheme").querySelectorAll("button").forEach(b => b.classList.toggle("on", b === e.target)); setTheme(v); };
   $("#mProfile").onclick = openMyProfile;
@@ -7182,7 +7274,7 @@ function openBackupMenu(){
   if (bs) bs.onclick = async () => {
     const withPhotos = $("#bkPhotos") && $("#bkPhotos").checked;
     const json = await backupData(withPhotos);
-    NATIVE.saveFile(`Stempelpass-Backup-${today()}.json`, json);
+    NATIVE.saveFile(`Stempeljagd-Backup-${today()}.json`, json);
   };
   $("#bkLoad").onclick = () => $("#fileInput").click();
   $("#sheet details").addEventListener("toggle", async e => { if (e.target.open) $("#bk").value = await backupData(false); });
@@ -7236,13 +7328,13 @@ function openDefectsMenu(){
 }
 function openAboutMenu(){
   const a = fb.ready() && load("sp.fbAuth", null);
-  openSheet(`${subHead("Info", "ℹ️ Über Stempelpass")}
-    <div class="about"><b>Stempelpass ${APP_VERSION}</b>${MADE_BY ? `<span>Hergestellt von ${esc(MADE_BY)}</span>` : ""}
+  openSheet(`${subHead("Info", "ℹ️ Über Stempeljagd")}
+    <div class="about"><b>Stempeljagd ${APP_VERSION}</b>${MADE_BY ? `<span>Hergestellt von ${esc(MADE_BY)}</span>` : ""}
       <a class="ig" href="https://www.instagram.com/tino_b8/" target="_blank" rel="noopener"><span class="ig-at">@</span>Tino_b8 auf Instagram</a></div>
     ${a ? `<h3>Dein Konto</h3><div class="notice facts"><b>Benutzername:</b> ${esc(username ? username.name : "noch keiner")} <small style="margin:0">(ändern kann ihn nur ein Admin)</small><br><b>Nutzer-ID:</b> <span id="myUid" style="font-family:ui-monospace,monospace;font-size:.85rem;overflow-wrap:anywhere">${esc(a.uid)}</span>${isAdmin ? "<br><b>Rang:</b> 👑 Admin" : isMod ? "<br><b>Rang:</b> 🛡️ Moderator" : ""}</div>
       <div class="actions"><button class="btn" id="mUid">Nutzer-ID kopieren</button></div>` : ""}
     <h3>Daten</h3>
-    <p>Stempelstellen und Routen aus den offiziellen GPX-Dateien. Karte © OpenStreetMap-Mitwirkende. Wetter und Höhen: Open-Meteo.com. Wegberechnung: FOSSGIS-Routing (OSRM, OpenStreetMap). Stempelpass ist eine private App und gehört nicht zur Harzer Wandernadel oder zu Touringen.</p>`);
+    <p>Stempelstellen und Routen aus den offiziellen GPX-Dateien. Karte © OpenStreetMap-Mitwirkende. Wetter und Höhen: Open-Meteo.com. Wegberechnung: FOSSGIS-Routing (OSRM, OpenStreetMap). Stempeljagd ist eine private App und gehört nicht zur Harzer Wandernadel oder zu Touringen.</p>`);
   $("#mBack").onclick = openMenu;
   const mu = $("#mUid"); if (mu) mu.onclick = () => { const t = $("#myUid").textContent; try { navigator.clipboard.writeText(t).then(() => toast("Nutzer-ID kopiert"), () => toast(t)); } catch(e) { toast(t); } };
 }
@@ -7663,7 +7755,7 @@ function checkCrash(){
   if (!t) return false;
   try { NATIVE.clearCrash(); } catch(e) {}
   const short = t.split("\n").slice(0, 14).join("\n");
-  openSheet(`<div class="kicker">Hinweis</div><h2>Stempelpass ist abgestürzt</h2>
+  openSheet(`<div class="kicker">Hinweis</div><h2>Stempeljagd ist abgestürzt</h2>
     <p>Beim letzten Mal ist die App abgestürzt. ${/LocationService|ForegroundService|startForeground/.test(t) ? "Es lag am Live-Standort – der ist jetzt ausgeschaltet, damit es nicht wieder passiert." : ""} Schick den Fehlertext gern an Tino, dann kann er es beheben.</p>
     <pre class="errbox">${esc(short)}</pre>
     <div class="actions"><button class="btn primary" id="crCopy">Fehlertext kopieren</button><button class="btn quiet" id="sClose">OK</button></div>`);
@@ -7682,7 +7774,7 @@ function bgResult(d){
   if (d.reason === "always") {
     save("sp.bgPending", true);
     openSheet(`<div class="kicker">Standort im Hintergrund</div><h2>„Immer zulassen“ fehlt</h2>
-      <p>Damit Stempelpass auch bei geschlossener App deinen Standort nutzen darf (Teilen wie Snapchat oder sparsamer Stempel-Alarm), braucht es die Standort-Erlaubnis <b>„Immer zulassen“</b>.</p>
+      <p>Damit Stempeljagd auch bei geschlossener App deinen Standort nutzen darf (Teilen wie Snapchat oder sparsamer Stempel-Alarm), braucht es die Standort-Erlaubnis <b>„Immer zulassen“</b>.</p>
       <p>Tippe auf „Einstellungen öffnen“ → <b>Berechtigungen</b> → <b>Standort</b> → <b>Immer zulassen</b>. Danach einfach zurück in die App.</p>
       <div class="actions"><button class="btn primary" id="bgSet">Einstellungen öffnen</button><button class="btn" id="bgLive">Stattdessen Live (mit Benachrichtigung)</button><button class="btn quiet" id="bgOff">Nur bei offener App teilen</button></div>`);
     $("#bgSet").onclick = () => { closeSheet(); NATIVE.openAppSettings(); };

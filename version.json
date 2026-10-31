@@ -1,6 +1,6 @@
 {
- "code": 82,
- "version": "0.9.42 Beta",
- "notes": "Positions-Korrekturen bleiben erhalten, Namen beim Reinzoomen",
+ "code": 83,
+ "version": "0.9.43 Beta",
+ "notes": "Neuer Name: Stempeljagd · Neues Logo · Freunde-Stempelkarte groß und zoombar · Stempel zeigen 'Vor X Std. zuletzt gestempelt'",
  "apk": "Stempelpass.apk"
 }
