@@ -1,6 +1,6 @@
 {
- "code": 76,
- "version": "0.9.36 Beta",
- "notes": "Neue Stempel-Ansicht, Moderatoren, Positionen melden, Wortfilter, Brotterode korrigiert",
+ "code": 77,
+ "version": "0.9.37 Beta",
+ "notes": "Fix: Großer Inselsberg und Stempel in mehreren Heften",
  "apk": "Stempelpass.apk"
 }
