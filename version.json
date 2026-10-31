@@ -1,6 +1,6 @@
 {
- "code": 77,
- "version": "0.9.37 Beta",
- "notes": "Fix: Großer Inselsberg und Stempel in mehreren Heften",
+ "code": 78,
+ "version": "0.9.38 Beta",
+ "notes": "Google-Anmeldung, Web-App fürs iPhone",
  "apk": "Stempelpass.apk"
 }
