@@ -866,6 +866,9 @@ details.pubmore{margin:4px 0 8px;font-size:.9rem}details.pubmore summary{color:v
 li.hoff{opacity:.75}
 .btn.gbtn{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#1f1f1f;border:1px solid #dadce0;margin-top:8px}
 .au-ver{display:inline-block;margin-top:4px;font:700 .68rem var(--body);border-radius:99px;padding:1px 8px}.au-ver.cur{color:var(--done);background:color-mix(in srgb,var(--done) 12%,transparent)}.au-ver.old{color:var(--open);background:color-mix(in srgb,var(--open) 12%,transparent)}
+.stlabel{background:none;border:0}
+.stlabel span{position:absolute;left:0;top:0;transform:translateX(-50%);white-space:nowrap;max-width:180px;overflow:hidden;text-overflow:ellipsis;background:color-mix(in srgb,var(--surface) 92%,transparent);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:2px 7px;font:600 .72rem/1.3 var(--body);box-shadow:0 2px 6px rgba(0,0,0,.18);pointer-events:none}
+.stlabel span b{color:var(--open)}.stlabel.d span b{color:var(--done)}
 .sv-opts{display:flex;flex-direction:column}
 .sv-opt{display:flex;align-items:center;gap:12px;text-align:left;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--fg);padding:12px 2px;font:inherit}
 .sv-opt i{font-style:normal;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:1.2rem;background:var(--bg);flex:none}
@@ -1764,8 +1767,8 @@ SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", 
   levels: [[11, "Wandernadel"]],
   info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
   url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.41 Beta";
-const APP_CODE = 81;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.42 Beta";
+const APP_CODE = 82;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -2233,6 +2236,7 @@ function drawMarkers(fit){
   }
   renderLegend(legCnt);
   renderCmpBar(cmpCnt);
+  drawStampLabels();
   if (fit && pts.length && !activeRoute) map.fitBounds(pts, { padding: [24, 24], maxZoom: 12 });
 }
 
@@ -2418,7 +2422,24 @@ function drawPoi(){
     if (failed && !poiWarned) { poiWarned = true; toast("Parkplätze & Einkehr gerade nicht abrufbar (Internet?)"); }
   }, 500);
 }
-map.on("moveend", () => { if (showPoi) drawPoi(); });
+map.on("moveend", () => { if (showPoi) drawPoi(); drawStampLabels(); });
+/* Ganz nah rangezoomt: Name der Stempel direkt an den Punkten anzeigen */
+var STAMP_LABEL_ZOOM = 15;
+var stampLabelLayer = null, labelKey = "";
+function drawStampLabels(){
+  if (!stampLabelLayer) stampLabelLayer = L.layerGroup().addTo(map);
+  const z = map.getZoom(), on = z >= STAMP_LABEL_ZOOM && view === "map";
+  const bd = map.getBounds().pad(0.2);
+  const list = on ? visible().filter(s => hasPos(s) && bd.contains([s.lat, s.lon])).slice(0, 120) : [];
+  const key = on ? z + "|" + current + "|" + list.map(s => s.k + (isDone(current, s.k) ? "d" : "")).join(",") : "off";
+  if (key === labelKey) return;
+  labelKey = key; stampLabelLayer.clearLayers();
+  for (const s of list) {
+    const d = isDone(current, s.k);
+    L.marker([s.lat, s.lon], { interactive: false, keyboard: false, zIndexOffset: -1000,
+      icon: L.divIcon({ className: "stlabel" + (d ? " d" : ""), html: `<span>${isSonder(current) ? "" : `<b>${esc(s.n)}</b> `}${esc(s.name)}${d ? " ✓" : ""}</span>`, iconSize: [0, 0], iconAnchor: [0, -14] }) }).addTo(stampLabelLayer);
+  }
+}
 if (showPoi) setTimeout(drawPoi, 800);
 /* Im Stempel: was ist in der Nähe? */
 async function fillNearPoi(el, s){
@@ -5063,6 +5084,8 @@ function applyCustomHefte(list, quiet){
     if (heftSel[set] && heftSel[set] !== "all" && !heftOf(heftSel[set])) setHeft(set, "all");
   }
   buildGroups();
+  /* Sonderhefte wurden neu aufgebaut → Positions-Korrekturen wieder draufsetzen */
+  if (typeof applyFixes === "function" && Object.keys(stampFixes || {}).length) applyFixes(stampFixes, true);
   if (!quiet) render(false);
 }
 /* ---------- 🧹 Sauber halten: Wortfilter für alles, was andere lesen können ---------- */
@@ -5219,21 +5242,32 @@ async function setModerator(uid, code, name, on){
   if (code) await saveRoles(c => { if (on) c[code] = "mod"; else if (c[code] === "mod") delete c[code]; });
 }
 /* ---------- 📍 Stempel-Positionen: Nutzer melden, Admin korrigiert für alle (Firestore config/fixes, ohne neue App) ---------- */
-let stampFixes = {};   // "set|k" -> { lat, lon, name?, hint?, ts }
+var stampFixes = {};   // "set|k" -> { lat, lon, name?, hint?, ts }
+var fixTouched = [];
 function applyFixes(map, quiet){
   /* erst alles auf den Original-Stand zurück, dann neu anwenden */
-  for (const key of Object.keys(stampFixes)) {
-    const [st, k] = key.split("|"), s = byKey[st] && byKey[st].get(k);
-    if (s && s._o) { Object.assign(s, s._o); delete s._o; }
-  }
+  for (const s of fixTouched) if (s._o) { Object.assign(s, s._o); delete s._o; }
+  fixTouched = [];
   stampFixes = map || {};
+  const touch = s => { if (!s._o) { s._o = { lat: s.lat, lon: s.lon, name: s.name, hint: s.hint }; fixTouched.push(s); } };
   for (const [key, f] of Object.entries(stampFixes)) {
     const [st, k] = key.split("|"), s = byKey[st] && byKey[st].get(k);
     if (!s) continue;
-    s._o = { lat: s.lat, lon: s.lon, name: s.name, hint: s.hint };
+    touch(s);
     if (f.lat != null && f.lon != null) { s.lat = +f.lat; s.lon = +f.lon; }
     if (f.name) s.name = f.name;
     if (f.hint != null) s.hint = f.hint;
+  }
+  /* Gleiche Stempelstelle in anderen Heften (z. B. Inselsberg in Tabarz und Brotterode) mitverschieben,
+     solange dort nicht selbst etwas korrigiert wurde */
+  for (const [key, f] of Object.entries(stampFixes)) {
+    if (f.lat == null || f.lon == null) continue;
+    const [st, k] = key.split("|"); if (!byKey[st] || !byKey[st].has(k)) continue;
+    for (const m of groupMembers(st, k)) {
+      if ((m.set === st && m.k === k) || stampFixes[m.set + "|" + m.k]) continue;
+      const t = byKey[m.set].get(m.k); if (!t) continue;
+      touch(t); t.lat = +f.lat; t.lon = +f.lon;
+    }
   }
   save("sp.fixes", stampFixes);
   if (!quiet) { try { refreshViews(); scheduleNearbyList(); } catch(e) {} }
@@ -6094,7 +6128,8 @@ function groupKey(set, s){
   if (s.hwn) return "hwn:" + s.hwn;
   if (s.tou) return "tou:" + s.tou;
   const h = heftOf(s.heft);
-  if (hasPos(s) && !(h && h.own)) return "pos:" + s.lat.toFixed(4) + "," + s.lon.toFixed(4);
+  const o = s._o && s._o.lat != null ? s._o : s;   // Gruppe nach Original-Position (auch nach einer Korrektur)
+  if (hasPos(o) && !(h && h.own)) return "pos:" + o.lat.toFixed(4) + "," + o.lon.toFixed(4);
   return set + "|" + s.k;
 }
 function buildGroups(){

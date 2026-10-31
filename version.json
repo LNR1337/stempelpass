@@ -1,6 +1,6 @@
 {
- "code": 81,
- "version": "0.9.41 Beta",
- "notes": "Abmelden",
+ "code": 82,
+ "version": "0.9.42 Beta",
+ "notes": "Positions-Korrekturen bleiben erhalten, Namen beim Reinzoomen",
  "apk": "Stempelpass.apk"
 }
