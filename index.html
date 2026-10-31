@@ -733,7 +733,7 @@ body.cmping #routeChip{top:86px}
 .chk-b span{flex-basis:100%;font-size:.8rem;color:var(--muted)}
 .chk-b button{flex:1;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:10px;padding:7px 8px;font:600 .86rem var(--body)}
 .abars{display:block;width:100%;height:auto}.abars text{font:600 9px var(--body);fill:var(--muted);text-anchor:middle}.abars text.v{fill:var(--fg);font-weight:700}.abars line{stroke:var(--line)}
-.ahb{display:grid;grid-template-columns:96px 1fr auto;align-items:center;gap:8px;margin:5px 0;font-size:.85rem}.ahb i{height:10px;border-radius:9px;background:var(--line);overflow:hidden;display:block}.ahb i b{display:block;height:100%;border-radius:9px}.ahb em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums;font-size:.82rem}
+.ahb{display:grid;grid-template-columns:110px 1fr auto;align-items:center;gap:8px;margin:5px 0;font-size:.85rem}.ahb i{height:10px;border-radius:9px;background:var(--line);overflow:hidden;display:block}.ahb i b{display:block;height:100%;border-radius:9px}.ahb em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums;font-size:.82rem}
 .atop{margin:0;padding-left:22px}.atop li{padding:5px 0;border-bottom:1px solid var(--line);font-size:.9rem}.atop li b{font-weight:600}.atop li span{float:right;color:var(--muted);font-size:.82rem}
 .astats+.astats{margin-top:8px}
 .forceupd{position:fixed;inset:0;z-index:3000;display:grid;place-items:center;background:var(--forest);color:var(--forest-fg);padding:24px;text-align:center}
@@ -865,6 +865,7 @@ details.pubmore{margin:4px 0 8px;font-size:.9rem}details.pubmore summary{color:v
 .sv-back{border:0;background:transparent;color:var(--muted);font:700 .85rem var(--body);padding:0 0 8px}
 li.hoff{opacity:.75}
 .btn.gbtn{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#1f1f1f;border:1px solid #dadce0;margin-top:8px}
+.au-ver{display:inline-block;margin-top:4px;font:700 .68rem var(--body);border-radius:99px;padding:1px 8px}.au-ver.cur{color:var(--done);background:color-mix(in srgb,var(--done) 12%,transparent)}.au-ver.old{color:var(--open);background:color-mix(in srgb,var(--open) 12%,transparent)}
 .sv-opts{display:flex;flex-direction:column}
 .sv-opt{display:flex;align-items:center;gap:12px;text-align:left;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--fg);padding:12px 2px;font:inherit}
 .sv-opt i{font-style:normal;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:1.2rem;background:var(--bg);flex:none}
@@ -1763,8 +1764,8 @@ SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", 
   levels: [[11, "Wandernadel"]],
   info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
   url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.39 Beta";
-const APP_CODE = 79;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.40 Beta";
+const APP_CODE = 80;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -3781,7 +3782,7 @@ async function pushProfile(){
   if (!fb.ready() || !username) return;
   await syncUsername();
   if (!username.code) return;
-  try { await fb.req("PATCH", `/profiles/${username.code}?${STAT_MASK_VER}`, { fields: Object.assign(statsFields(), { ver: { integerValue: String(APP_CODE) } }) }); }
+  try { await fb.req("PATCH", `/profiles/${username.code}?${STAT_MASK_VER}`, { fields: Object.assign(statsFields(), { ver: { integerValue: String((NATIVE ? 0 : 10000) + APP_CODE) } }) }); }
   catch(e0) { try { await fb.req("PATCH", `/profiles/${username.code}?${STAT_MASK}`, { fields: statsFields() }); }
   catch(e) {
     /* Alte Datenbank-Regeln kennen tab/sax/recent noch nicht → ohne die neuen Felder speichern */
@@ -4702,6 +4703,17 @@ async function loadAdmin(){
   const [users, profs, , mods] = await Promise.all([listAll("/users"), listAll("/profiles"), loadPosReports(), listAll("/moderators").catch(() => [])]);
   adminCache = { users, profs, mods: new Set(mods.map(docId)) };
 }
+/* App-Version eines Nutzers (Profilfeld ver: Nummer, +10000 = Web-App/iPhone) */
+function verInfo(v){
+  if (!v) return { txt: "alte Version", short: "alt", code: 0, web: false };
+  const web = v >= 10000, c = v % 10000, name = c >= 41 ? "0.9." + (c - 40) : "Nr. " + c;
+  return { txt: (web ? "🌐 Web " : "📱 ") + name, short: name, code: c, web };
+}
+function verChip(v){
+  const i = verInfo(v), pub = updInfo ? updInfo.code : APP_CODE;
+  const cls = !i.code ? "old" : i.web || i.code >= pub ? "cur" : "old";
+  return `<span class="au-ver ${cls}" title="${i.code ? "App-Nummer " + i.code : "schickt noch keine Version (vor 0.9.35)"}">${esc(i.txt)}${cls === "old" && i.code ? " · Update fehlt" : ""}</span>`;
+}
 /* ---------- 📊 Admin: Statistik ---------- */
 function barsSvg(vals, labels, col){
   const W = 320, H = 110, n = vals.length, mx = Math.max(1, ...vals), bw = (W - 8) / n;
@@ -4729,7 +4741,7 @@ async function openStatsAdmin(){
   for (const p of profs) for (const [d, n] of Object.entries(p.recent || {})) { const i = 29 - Math.floor((now - Date.parse(d + "T12:00")) / day); if (i >= 0 && i < 30) dd[i] += n; }
   /* Versionen */
   const vers = {}; for (const p of profs) { const k = p.ver ? String(p.ver) : "alt"; vers[k] = (vers[k] || 0) + 1; }
-  const vlist = Object.entries(vers).sort((a, b) => (b[0] === "alt" ? -1 : +b[0]) - (a[0] === "alt" ? -1 : +a[0]));
+  const vlist = Object.entries(vers).sort((a, b) => (b[0] === "alt" ? -1 : +b[0] % 10000) - (a[0] === "alt" ? -1 : +a[0] % 10000));
   const vmax = Math.max(1, ...Object.values(vers)), pub = updInfo ? updInfo.code : APP_CODE;
   const top = profs.slice().sort((a, b) => (b.hwn + b.tou + b.tab + b.sax) - (a.hwn + a.tou + a.tab + a.sax)).slice(0, 5);
   const rmax = Math.max(1, ...Object.values(tot));
@@ -4751,7 +4763,7 @@ async function openStatsAdmin(){
     <h3>Gebiete</h3>
     ${hbar("⛰️ Harz", tot.hwn, rmax, "var(--pc-hwn)")}${hbar("🌲 Touringen", tot.tou, rmax, "var(--pc-tou)")}${hbar("🏔️ Tabarz", tot.tab, rmax, "var(--pc-tab)")}${hbar("🪨 Sachsen", tot.sax, rmax, "var(--pc-sax)")}${hbar("📘 Sonder", tot.son, rmax, "var(--pc-son)")}
     <h3>App-Versionen <small class="pcount">veröffentlicht: Nr. ${pub}</small></h3>
-    ${vlist.map(([v, n]) => hbar(v === "alt" ? "älter" : "Nr. " + v, n, vmax, +v >= pub ? "var(--done)" : "var(--open)", n === 1 ? " Nutzer" : " Nutzer")).join("")}
+    ${vlist.map(([v, n]) => hbar(v === "alt" ? "älter" : verInfo(+v).txt, n, vmax, v !== "alt" && (+v >= 10000 || +v >= pub) ? "var(--done)" : "var(--open)", " Nutzer")).join("")}
     <p class="hint">„älter“ = Versionen, die ihre Nummer noch nicht mitschicken (vor 0.9.35).</p>
     <h3>Top-Sammler</h3>
     <ol class="atop">${top.map(p => `<li><b>${esc(p.name)}</b><span>${p.hwn + p.tou + p.tab + p.sax} Stempel</span></li>`).join("")}</ol>
@@ -4821,7 +4833,7 @@ async function openAdmin(){
     </div>
     <h3>Nutzer <small class="pcount">${all.length}</small></h3>
     <div class="frow" style="margin-bottom:8px"><input id="auQ" type="search" placeholder="Name oder Code suchen" autocomplete="off">
-      <select id="auSort" aria-label="Sortierung"><option value="seen">Zuletzt online</option><option value="name">Name</option><option value="total">Stempel</option></select></div>
+      <select id="auSort" aria-label="Sortierung"><option value="seen">Zuletzt online</option><option value="name">Name</option><option value="total">Stempel</option><option value="ver">App-Version</option></select></div>
     <ul class="ausers" id="auList"></ul>
     <p class="hint" style="margin-top:8px">Tippe auf einen Nutzer für Stempel, Umbenennen, Übertragen oder Löschen. Stempelzahlen kommen aus den Apps der Nutzer.</p>
     <div class="actions"><button class="btn quiet" id="sClose">Schließen</button></div>`);
@@ -4840,13 +4852,13 @@ async function openAdmin(){
   const drawUsers = () => {
     const q = norm($("#auQ").value).trim(), qc = cleanCode($("#auQ").value);
     let list = all.filter(x => !q || norm(x.name).includes(q) || (qc && x.code && x.code.includes(qc)));
-    list.sort((a, b) => auSort === "name" ? a.name.localeCompare(b.name, "de") : auSort === "total" ? b.total - a.total : String(b.seen).localeCompare(String(a.seen)));
+    list.sort((a, b) => auSort === "name" ? a.name.localeCompare(b.name, "de") : auSort === "total" ? b.total - a.total : auSort === "ver" ? (verInfo(a.p && a.p.ver).code - verInfo(b.p && b.p.ver).code) || a.name.localeCompare(b.name, "de") : String(b.seen).localeCompare(String(a.seen)));
     $("#auList").innerHTML = list.length ? list.map(x => {
       const on = x.seen && Date.now() - Date.parse(x.seen) < ONLINE_MS;
       return `<li><button class="au-row" data-auopen>
           <span class="au-av ${on ? "on" : ""}">${esc(x.name.slice(0, 1).toUpperCase())}</span>
           <span class="au-t"><b>${esc(x.name)}${x.uid === load("sp.fbAuth", {}).uid ? " (du)" : ""}${adminCache.mods && adminCache.mods.has(x.uid) ? ' <i class="rank mod">🛡️ Mod</i>' : roles[x.code] === "admin" ? ' <i class="rank admin">👑 Admin</i>' : ""}</b><small>${x.code ? fmtCode(x.code) : "kein Code"} · ${esc(seenText(x.seen) || "noch nie online")}</small>
-            ${x.p ? `<span class="au-ch"><span>⛰️ ${x.p.hwn}</span><span>🌲 ${x.p.tou}</span>${x.p.tab ? `<span>🏔️ ${x.p.tab}</span>` : ""}${x.p.hws + x.p.tos ? `<span>📘 ${x.p.hws + x.p.tos}</span>` : ""}</span>` : ""}</span>
+            ${x.p ? `<span class="au-ch"><span>⛰️ ${x.p.hwn}</span><span>🌲 ${x.p.tou}</span>${x.p.tab ? `<span>🏔️ ${x.p.tab}</span>` : ""}${x.p.hws + x.p.tos ? `<span>📘 ${x.p.hws + x.p.tos}</span>` : ""}</span>` : ""}${x.p ? verChip(x.p.ver) : ""}</span>
           <span class="au-tot">${x.total}<small>Stempel</small></span></button>
         <div class="ubtns" hidden><button class="mini" data-ustamp="${esc(x.uid)}">📋 Stempel</button><button class="mini" data-uren="${esc(x.uid)}">✏️ Umbenennen</button><button class="mini" data-umove="${esc(x.uid)}">🔁 Übertragen</button><button class="mini" data-umod="${esc(x.uid)}">${adminCache.mods && adminCache.mods.has(x.uid) ? "🛡️ Moderator entfernen" : "🛡️ Zum Moderator"}</button><button class="mini" data-udel="${esc(x.uid)}">🗑️ Löschen</button></div></li>`;
     }).join("") : '<li class="empty">Kein Nutzer passt zur Suche.</li>';
@@ -8153,7 +8165,10 @@ loadPhotos().then(() => { if (view === "list") renderList(); });
 setTimeout(() => loadOfficial(false), 300);
 setTimeout(async () => {
   showNews();
-  if (fb.ready()) { loadNews(); loadReports(); await loadCustomHefte(); await loadFixes(); loadRoles(); loadGoogleCfg(); setTimeout(() => window.__google(), 500); try { await syncUsername(); } catch(e) {} try { await pullStamps(); } catch(e) {} await checkAdmin(); checkUpdate(); }
+  if (fb.ready()) { loadNews(); loadReports(); await loadCustomHefte(); await loadFixes(); loadRoles(); loadGoogleCfg(); setTimeout(() => window.__google(), 500); try { await syncUsername(); } catch(e) {} try { await pullStamps(); } catch(e) {} await checkAdmin(); checkUpdate();
+    /* neue App-Version einmal ans Profil melden, damit Admins sie sehen */
+    const vs = (NATIVE ? 0 : 10000) + APP_CODE;
+    if (load("sp.verSent", 0) !== vs && username && username.code) pushProfile().then(() => save("sp.verSent", vs)).catch(() => {}); }
   webInstallHint();
   if (fb.ready() && username) refreshBoard(false);
   renderLocPill();

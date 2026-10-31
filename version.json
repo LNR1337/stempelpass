@@ -1,6 +1,6 @@
 {
- "code": 79,
- "version": "0.9.39 Beta",
- "notes": "Stempel-Position per Google-Maps-Koordinaten setzen",
+ "code": 80,
+ "version": "0.9.40 Beta",
+ "notes": "App-Version in der Nutzerliste, Maps-Koordinaten",
  "apk": "Stempelpass.apk"
 }

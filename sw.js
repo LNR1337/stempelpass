@@ -1,5 +1,5 @@
 /* Stempelpass Web-App: App offline verfügbar, Kartenkacheln zwischenspeichern */
-const V = "sp-79-1793438216";
+const V = "sp-80-1793438368";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(V).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => {
