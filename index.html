@@ -924,6 +924,9 @@ h1 small{display:block;font:600 .7rem/1.2 var(--body);letter-spacing:.12em;text-
 .bar{height:8px;border-radius:99px;background:color-mix(in srgb,#000 28%,transparent);margin-top:8px;overflow:hidden}
 .bar i{display:block;height:100%;width:0;background:var(--gold);border-radius:99px;transition:width .4s}
 .pnext{font-size:.85rem;opacity:.85;margin-top:5px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.mapbad{position:absolute;left:10px;top:10px;z-index:5;display:flex;align-items:center;gap:6px;border:0;border-radius:99px;padding:6px 12px 6px 9px;background:rgba(20,40,30,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#fff;font:700 .82rem/1.2 var(--body);box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.mapbad::before{content:"⚠️";font-size:.9rem}
+.mapbad[hidden],main:has(.routechip:not([hidden])) .mapbad,main:has(.navtop:not([hidden])) .mapbad{display:none}
 .warnlink{border:0;background:transparent;padding:0;color:#ffd6d6;font-weight:700;font-size:.85rem;text-decoration:underline;text-underline-offset:2px}
 
 main{flex:1;position:relative;min-height:0}
@@ -1409,6 +1412,17 @@ li.done.m-code .rt.done{color:var(--code)}li.done.m-digital .rt.done{color:var(-
 .mecard .mini,.fhead .iconbtn{border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:9px;padding:7px 10px;font:600 .82rem var(--body)}
 .fhead{display:flex;align-items:center;justify-content:space-between;margin:16px 0 6px}.fhead h3{margin:0}
 .fhead .iconbtn{font-size:1.05rem;padding:4px 11px}
+.addbox{margin:2px 0 6px}
+.fsearch{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 5px 5px 14px}
+.fsearch:focus-within{border-color:var(--gold)}
+.fsearch input{flex:1;min-width:0;border:0;background:transparent;color:var(--fg);font:500 .95rem var(--body);padding:6px 0;outline:none}
+.fsearch .fs-i{opacity:.7}
+.fplus{flex:none;width:38px;height:38px;border-radius:50%;border:0;background:var(--gold);color:#1b1408;font:800 1.4rem/1 var(--body);display:grid;place-items:center}
+.mycode-row{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
+.mc-l{font-size:.8rem;color:var(--muted);font-weight:600}
+.mc-pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:999px;padding:6px 12px;font:600 .85rem var(--body)}
+.mc-pill b{letter-spacing:.04em}
+.mc-pill.gold{background:var(--gold);border-color:var(--gold);color:#1b1408;font-weight:800}
 #bSort{margin-bottom:8px}#bSort button{flex:1}
 .board li{cursor:pointer;gap:10px!important;padding:9px 12px!important}
 .board .rk{width:26px;text-align:center;flex:none}
@@ -1522,12 +1536,13 @@ body.compact-hdr header .progress{max-height:0;opacity:0;margin-top:0}
   <div class="progress">
     <div class="ptext"><b id="pCount">0</b><span>von <span id="pTotal">–</span> gestempelt</span><span id="pLevel" class="pill none">Noch keine Nadel</span></div>
     <div class="bar"><i id="pBar"></i></div>
-    <div class="pnext"><span id="pNext"></span><button id="pBroken" class="warnlink" hidden></button><button id="locPill" class="locpill" hidden>📍 Standort wird geteilt</button></div>
+    <div class="pnext"><span id="pNext"></span><button id="locPill" class="locpill" hidden>📍 Standort wird geteilt</button></div>
   </div>
 </header>
 
 <main>
   <div id="map"></div>
+  <button id="pBroken" class="mapbad" hidden></button>
   <div class="legend" id="legend"><span><i style="background:var(--open)"></i>offen</span><span><i style="background:var(--done)"></i>gestempelt</span><span><i style="background:var(--code)"></i>Code</span><span><i style="background:var(--digital)"></i>digital</span><span><i style="background:var(--broken);border-color:var(--bad)"></i>kaputt</span><span><i style="background:var(--open);border-color:var(--gold)"></i>Hinweis</span></div>
   <div class="routechip lochip" id="locChip" hidden><span id="locChipText"></span><button id="locChipX" aria-label="Standorte ausblenden">✕</button></div>
   <div class="routechip trackchip" id="trackChip" hidden><span id="trackChipText"></span><button id="trackChipGo" aria-label="Aufzeichnung">■</button></div>
@@ -1779,8 +1794,8 @@ SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", 
   levels: [[11, "Wandernadel"]],
   info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
   url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.43 Beta";
-const APP_CODE = 83;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.44 Beta";
+const APP_CODE = 84;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -4092,15 +4107,16 @@ function renderFriends(){
   const friends = ms.filter(m => m.code !== username.code).length;
   const sortLbl = { all: "Gesamt", week: "Diese Woche", month: "Dieser Monat" };
   el.innerHTML = `
-    <div class="mecard" id="frMe">
-      <span class="bavb ${showOnline ? "is-on" : ""}">${avatarHtml(myCard, "pav sm")}</span>
-      <span class="mc-t"><b>${esc(username.name)}</b><small>Code <code>${fmtCode(username.code)}</code>${myRank && friends ? ` · Platz ${myRank} von ${ms.length}` : ""}</small></span>
-      <button class="mini" id="frCopy">Code teilen</button>
-    </div>
 
     ${friendReqs.length ? `<h3>👋 Freundschaftsanfragen (${friendReqs.length})</h3><ul class="reqs">${friendReqs.map(r => `<li><span class="bav">👤</span>
       <span class="who"><b>${esc(r.name)}</b><small>möchte dein Freund sein${r.created ? " · " + esc(ago(r.created)) : ""}</small></span>
       <button class="mini primary" data-racc="${esc(r.code)}">Annehmen</button><button class="mini" data-rdec="${esc(r.code)}">Ablehnen</button></li>`).join("")}</ul>` : ""}
+    <div class="addbox">
+    <div class="fsearch"><span class="fs-i">🔎</span><input id="frCode" placeholder="Freund hinzufügen: Name oder Code" autocomplete="off" maxlength="20" aria-label="Freund hinzufügen"><button class="fplus" id="frAdd" aria-label="Hinzufügen">+</button></div>
+    <div class="mycode-row"><span class="mc-l">Dein Code</span><span class="mc-pill">🔑 <b>${fmtCode(username.code)}</b></span><button class="mc-pill gold" id="frCopy" aria-label="Meinen Code teilen">📤 Teilen</button></div>
+    ${Object.keys(sentReqs).length ? `<ul class="reqs sent">${Object.entries(sentReqs).map(([c, r]) => `<li><span class="bav">⏳</span><span class="who"><b>${esc(r.name)}</b><small>Anfrage gesendet – wartet auf Antwort</small></span><button class="mini" data-rcan="${esc(c)}">Zurückziehen</button></li>`).join("")}</ul>` : ""}
+    </div>
+
     <div class="fhead"><h3>Rangliste${weekAll ? ` <small class="wk">· diese Woche +${weekAll}</small>` : ""}</h3><button class="iconbtn" id="frRefresh" aria-label="Aktualisieren">${boardBusy ? "…" : "↻"}</button></div>
     <div class="seg" id="bSort">${Object.entries(sortLbl).map(([v, t]) => `<button data-v="${v}" class="${boardSort === v ? "on" : ""}">${t}</button>`).join("")}</div>
     ${ms.length ? `<ul class="fcards">${rows}</ul>` : `<p>${boardBusy ? "Wird geladen …" : "Tippe auf ↻."}</p>`}
@@ -4108,11 +4124,6 @@ function renderFriends(){
     ${friends ? `<div class="actions" style="margin-top:8px"><button class="btn" id="frMap">📍 Freunde auf der Karte</button></div>` : ""}
 
     ${feedHtml(ms)}
-
-    <h3>Freund hinzufügen</h3>
-    <div class="inrow"><input id="frCode" placeholder="Benutzername oder Code" autocomplete="off" maxlength="20"><button class="btn primary" id="frAdd">Hinzufügen</button></div>
-    <p class="hint">Dein Freund bekommt eine Anfrage. Sobald er sie annimmt, seht ihr euch in der Rangliste.</p>
-    ${Object.keys(sentReqs).length ? `<ul class="reqs sent">${Object.entries(sentReqs).map(([c, r]) => `<li><span class="bav">⏳</span><span class="who"><b>${esc(r.name)}</b><small>Anfrage gesendet – wartet auf Antwort</small></span><button class="mini" data-rcan="${esc(c)}">Zurückziehen</button></li>`).join("")}</ul>` : ""}
 
     <details class="fset"><summary>Einstellungen</summary>
       <label class="checkline"><input type="checkbox" id="frLoc" ${shareLoc ? "checked" : ""}> Meinen Standort mit Freunden teilen</label>
@@ -4137,12 +4148,11 @@ function renderFriends(){
   $("#frLoc").onchange = e => { if (e.target.checked) { e.target.checked = false; askShareLoc(); } else setShareLoc(false).then(renderFriends); };
   const fm = $("#frMap"); if (fm) fm.onclick = () => openLocations();
   el.querySelectorAll("[data-locfocus]").forEach(b => b.onclick = e => { e.stopPropagation(); openLocations(b.dataset.locfocus); });
-  el.querySelectorAll("li[data-prof]").forEach(b => b.onclick = () => openFriendProfile(b.dataset.prof));
+  el.querySelectorAll("li[data-prof]").forEach(b => b.onclick = () => b.dataset.prof === username.code ? openMyProfile() : openFriendProfile(b.dataset.prof));
   el.querySelectorAll("[data-racc]").forEach(b => b.onclick = () => { b.disabled = true; acceptRequest(b.dataset.racc); });
   el.querySelectorAll("[data-rdec]").forEach(b => b.onclick = () => { b.disabled = true; declineRequest(b.dataset.rdec); });
   el.querySelectorAll("[data-rcan]").forEach(b => b.onclick = () => { b.disabled = true; cancelRequest(b.dataset.rcan); });
   updateFriendBadge();
-  $("#frMe").onclick = e => { if (e.target.closest("#frCopy")) return; openMyProfile(); };
 }
 
 /* ---------- Benutzername und Freundescode (einmalig, in Firebase reserviert; ändern nur Admins) ---------- */
@@ -7791,9 +7801,10 @@ function syncBg(){
   const st = bgState();
   if (st.error) { if ($("#sheet").hidden) showBgError(st.error); else { shareBg = "off"; save("sp.shareBg", shareBg); try { NATIVE.bgClearError(); } catch(e) {} } return; }
   if (bgMode() === "live" && st.stoppedByUser && !st.on) {
-    if (bgShare()) { shareBg = "off"; save("sp.shareBg", shareBg); shareLoc = false; save("sp.shareLoc", false); renderLocPill(); }
-    if (nearAlerts) { nearAlerts = false; save("sp.nearAlerts", false); }
-    toast("Über die Benachrichtigung ausgeschaltet");
+    let changed = false;
+    if (bgShare()) { shareBg = "off"; save("sp.shareBg", shareBg); shareLoc = false; save("sp.shareLoc", false); renderLocPill(); changed = true; }
+    if (nearAlerts) { nearAlerts = false; save("sp.nearAlerts", false); changed = true; }
+    if (changed) toast("Über die Benachrichtigung ausgeschaltet");
     return;
   }
   if (!bgShare() && !nearAlerts) { if (st.on) NATIVE.bgLocStop(); return; }

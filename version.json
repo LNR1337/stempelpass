@@ -1,6 +1,6 @@
 {
- "code": 83,
- "version": "0.9.43 Beta",
- "notes": "Neuer Name: Stempeljagd · Neues Logo · Freunde-Stempelkarte groß und zoombar · Stempel zeigen 'Vor X Std. zuletzt gestempelt'",
+ "code": 84,
+ "version": "0.9.44 Beta",
+ "notes": "Grünes App-Icon beim Start · 'Stempel kaputt' jetzt auf der Karte · Freunde: neue Suchleiste und eigener Code zum Teilen · Benachrichtigungs-Meldung kommt nicht mehr bei jedem Start",
  "apk": "Stempelpass.apk"
 }
