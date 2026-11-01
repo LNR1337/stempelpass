@@ -1231,7 +1231,10 @@ li.done.m-digital .chk{background:var(--digital);border-color:var(--digital)}
 .switch input:focus-visible+i{outline:2px solid var(--gold);outline-offset:2px}
 .fcards{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:9px}
 .fcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;cursor:pointer}
-.fcard.me{border:2px solid var(--me);padding:11px}
+@property --ga{syntax:"<angle>";inherits:false;initial-value:0deg}
+.fcard.me{border:2px solid transparent;padding:11px;background:linear-gradient(var(--surface),var(--surface)) padding-box,conic-gradient(from var(--ga),var(--gold) 0deg,var(--gold) 250deg,#fff6d0 300deg,var(--gold) 350deg) border-box;box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 18%,transparent);animation:meRun 3s linear infinite}
+@keyframes meRun{to{--ga:360deg}}
+@media (prefers-reduced-motion:reduce){.fcard.me{animation:none}}
 .fcard .ftop{display:flex;align-items:center;gap:10px}
 .fcard .medal{flex:none;width:28px;text-align:center;font-size:1.45rem;line-height:1}.fcard .rkn{font:700 1.05rem var(--display);color:var(--muted)}
 .fcard .who{flex:1;min-width:0}.fcard .who b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:1rem}
@@ -1239,6 +1242,8 @@ li.done.m-digital .chk{background:var(--digital);border-color:var(--digital)}
 .fcard .tot{flex:none;text-align:right}.fcard .tot b{display:block;font:700 1.45rem/1 var(--display);font-variant-numeric:tabular-nums}
 .fcard .trend{display:block;font-size:.76rem;font-weight:700;color:var(--muted);margin-top:3px;white-space:nowrap}.fcard .trend.up{color:var(--done)}
 .fcard .minis{display:grid;gap:8px;margin-top:10px}
+.fcard .mtrack{height:7px;border-radius:9px;background:var(--line);margin-top:12px;overflow:hidden}.fcard .mstack{display:flex;gap:2px;height:100%;border-radius:9px;overflow:hidden}.fcard .mstack i{display:block;min-width:4px}
+.fcard .mleg{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:6px;font-size:.78rem;color:var(--muted)}.fcard .mleg span{display:inline-flex;align-items:center;gap:5px}.fcard .mleg i{width:8px;height:8px;border-radius:50%}.fcard .mleg b{color:var(--fg)}
 .fcard .mini span{display:block;font-size:.72rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.fcard .mini b{display:block;font-size:.9rem}
 .fcard .mbar{height:5px;border-radius:9px;background:var(--line);overflow:hidden;margin-top:3px}.fcard .mbar i{display:block;height:100%;min-width:2px}
 .fcard .fchip{display:inline-block;margin-top:8px;font-size:.76rem;border:1px solid var(--line);border-radius:99px;padding:1px 9px;color:var(--muted)}
@@ -1256,17 +1261,20 @@ li.done.m-digital .chk{background:var(--digital);border-color:var(--digital)}
 /* Profil nutzt die Farben der App (wie Karte, Liste und Freunde) */
 :root{--pb1:color-mix(in srgb,var(--forest) 78%,#7fb08f);--pb2:var(--forest);--pc-acc:var(--gold);--pc-hwn:var(--done);--pc-tou:var(--route);--pc-tab:var(--digital);--pc-sax:var(--code);--pc-vor:var(--open);--pc-dre:#7a9a3a;--pc-bro:#b0663a;--pc-wip:#c98a2b;--pc-son:var(--gold)}
 .pkick{position:relative;z-index:2;color:#e8f0ea!important;opacity:.9;padding-right:118px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pbanner{height:96px;margin:-16px calc(-1 * max(18px,env(safe-area-inset-right,0px))) 0 calc(-1 * max(18px,env(safe-area-inset-left,0px)));background:linear-gradient(160deg,var(--pb1),var(--pb2) 70%);position:relative;height:104px}
+.pbanner{height:96px;margin:-16px calc(-1 * max(18px,env(safe-area-inset-right,0px))) 0 calc(-1 * max(18px,env(safe-area-inset-left,0px)));background:linear-gradient(160deg,var(--pb1),var(--pb2) 70%);position:relative;height:126px}
 .sheet .pkick + .pbanner{margin-top:-34px}
 .pb-edit{position:absolute;right:14px;top:12px;border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.15);color:#fff;border-radius:99px;padding:4px 11px;font:600 .8rem var(--body)}
-.phead{display:flex;align-items:flex-start;gap:14px;margin-top:-52px;position:relative}
+.phead{display:flex;align-items:flex-start;gap:14px;margin-top:-74px;position:relative}
 .pavring{position:relative;flex:none;border-radius:50%;background:var(--surface);padding:2px}
 .pavring.is-on::after{content:"";position:absolute;right:8px;top:8px;width:14px;height:14px;border-radius:50%;background:#2ecc71;border:2px solid var(--surface)}
 .pmedal{position:absolute;right:-4px;bottom:2px;width:34px;height:34px;border-radius:50%;background:var(--surface);border:2px solid var(--gc,var(--pc-acc));display:grid;place-items:center;font-size:1.15rem;line-height:1;box-shadow:0 2px 6px rgba(0,0,0,.25)}
 .pring{--p:0;--c:var(--gold);--s:64px;--w:7px;width:var(--s);height:var(--s);border-radius:50%;background:conic-gradient(var(--c) calc(var(--p) * 1%),var(--line) 0);display:grid;place-items:center;flex:none}
 .pring>span{width:calc(var(--s) - 2 * var(--w));height:calc(var(--s) - 2 * var(--w));border-radius:50%;background:var(--surface);display:grid;place-items:center;font:700 .95rem/1 var(--display);overflow:hidden}
 .pavring .pav{width:84px;height:84px;border:0;font-size:2.7rem}
-.ph-t{padding-top:60px;min-width:0;flex:1}.ph-t h2{margin:0 0 6px;font-size:1.45rem;line-height:1.1;overflow-wrap:anywhere}
+.ph-t{padding-top:30px;min-width:0;flex:1}.ph-nm{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px}.ph-t h2{margin:0;font-size:1.6rem;line-height:1.1;overflow-wrap:anywhere;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+.ph-t .rank{box-shadow:0 1px 6px rgba(0,0,0,.2)}
+.ph-nm .rank{margin:0;font-size:.76rem;padding:4px 10px;line-height:1.2}.ph-nm h2{line-height:1.15}
+.ph-row{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-top:10px}.ph-row::-webkit-scrollbar{display:none}.ph-row span{flex:none}
 .ph-chips{display:flex;flex-wrap:wrap;gap:5px}.ph-chips span{font-size:.76rem;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:2px 9px;white-space:nowrap}.ph-chips span.on{color:var(--done);border-color:color-mix(in srgb,var(--done) 45%,transparent)}
 .ph-goal{display:flex;align-items:center;gap:10px;margin-top:12px;padding:9px 12px;border-radius:14px;background:color-mix(in srgb,var(--gc,var(--pc-acc)) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--gc,var(--pc-acc)) 45%,transparent);font-size:.95rem}
 .ph-goal{width:100%;text-align:left;color:var(--fg);font:inherit;font-size:.95rem}
@@ -1422,6 +1430,8 @@ li.done.m-code .rt.done{color:var(--code)}li.done.m-digital .rt.done{color:var(-
 .mc-l{font-size:.8rem;color:var(--muted);font-weight:600}
 .mc-pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:999px;padding:6px 12px;font:600 .85rem var(--body)}
 .mc-pill b{letter-spacing:.04em}
+.mc-pill .mc-cp{font-style:normal;font-size:.75rem;opacity:.6;margin-left:2px}
+.mc-pill.ok{border-color:var(--done);color:var(--done)}
 .mc-pill.gold{background:var(--gold);border-color:var(--gold);color:#1b1408;font-weight:800}
 #bSort{margin-bottom:8px}#bSort button{flex:1}
 .board li{cursor:pointer;gap:10px!important;padding:9px 12px!important}
@@ -1794,8 +1804,8 @@ SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", 
   levels: [[11, "Wandernadel"]],
   info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
   url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.45 Beta";
-const APP_CODE = 85;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.46 Beta";
+const APP_CODE = 86;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -3851,6 +3861,8 @@ function statsFields(){
     tou: { integerValue: String(Object.keys(d.tou).length) }, tos: { integerValue: String(Object.keys(d.tos).length) },
     level: { stringValue: hwnLevelOf(nh) }, updated: { timestampValue: new Date().toISOString() },
     tab: { integerValue: String(Object.keys(d.tab || {}).length) }, sax: { integerValue: String(Object.keys(d.sax || {}).length) },
+    bro: { integerValue: String(Object.keys(d.bro || {}).length) }, wip: { integerValue: String(Object.keys(d.wip || {}).length) },
+    dre: { integerValue: String(Object.keys(d.dre || {}).length) }, nhv: { integerValue: String(Object.keys(d.nhv || {}).length) },
     recent: { stringValue: JSON.stringify(recentDays(d)) }
   };
   const ls = load("sp.lastStamp.p0", null);
@@ -3864,6 +3876,8 @@ function statsFields(){
 const STAT_MASK_OLD = ["hwn","hws","tou","tos","level","last","updated"].map(f => "updateMask.fieldPaths=" + f).join("&");
 const STAT_MASK = STAT_MASK_OLD + "&" + ["tab","sax","recent"].map(f => "updateMask.fieldPaths=" + f).join("&");
 const STAT_MASK_VER = STAT_MASK + "&updateMask.fieldPaths=ver";
+const STAT_EXTRA = ["bro","wip","dre","nhv"];
+const STAT_MASK_ALL = STAT_MASK_VER + "&" + STAT_EXTRA.map(f => "updateMask.fieldPaths=" + f).join("&");
 /* Stempel pro Tag der letzten 35 Tage – damit Freunde „Diese Woche“ und „Dieser Monat“ rechnen können */
 function recentDays(d){
   const from = isoDay(Date.now() - 35 * 864e5), out = {};
@@ -3876,19 +3890,23 @@ function decodeProfile(doc){
   let last = null;
   if (f.last && f.last.mapValue) { const m = f.last.mapValue.fields || {}; last = { set: v(m.set), n: v(m.n), name: v(m.name), date: v(m.date) }; }
   let recent = {}; try { recent = JSON.parse(v(f.recent) || "{}") || {}; } catch(e) { recent = {}; }
-  return { ver: v(f.ver) || 0, code: doc.name.split("/").pop(), uid: v(f.uid), name: v(f.name) || "?", hwn: v(f.hwn) || 0, hws: v(f.hws) || 0, tou: v(f.tou) || 0, tos: v(f.tos) || 0, tab: v(f.tab) || 0, sax: v(f.sax) || 0, recent, level: v(f.level) || "", updated: v(f.updated), last };
+  return { ver: v(f.ver) || 0, code: doc.name.split("/").pop(), uid: v(f.uid), name: v(f.name) || "?", hwn: v(f.hwn) || 0, hws: v(f.hws) || 0, tou: v(f.tou) || 0, tos: v(f.tos) || 0, tab: v(f.tab) || 0, sax: v(f.sax) || 0, bro: v(f.bro) || 0, wip: v(f.wip) || 0, dre: v(f.dre) || 0, nhv: v(f.nhv) || 0, recent, level: v(f.level) || "", updated: v(f.updated), last };
 }
 async function pushProfile(){
   if (!fb.ready() || !username) return;
   await syncUsername();
   if (!username.code) return;
-  try { await fb.req("PATCH", `/profiles/${username.code}?${STAT_MASK_VER}`, { fields: Object.assign(statsFields(), { ver: { integerValue: String((NATIVE ? 0 : 10000) + APP_CODE) } }) }); }
-  catch(e0) { try { await fb.req("PATCH", `/profiles/${username.code}?${STAT_MASK}`, { fields: statsFields() }); }
-  catch(e) {
-    /* Alte Datenbank-Regeln kennen tab/sax/recent noch nicht → ohne die neuen Felder speichern */
-    const f = statsFields(); delete f.tab; delete f.sax; delete f.recent;
-    await fb.req("PATCH", `/profiles/${username.code}?${STAT_MASK_OLD}`, { fields: f });
-  } }
+  /* Neueste Felder zuerst – kennen die Datenbank-Regeln sie noch nicht, schrittweise ohne sie speichern */
+  const ver = { ver: { integerValue: String((NATIVE ? 0 : 10000) + APP_CODE) } };
+  const base = () => { const f = statsFields(); STAT_EXTRA.forEach(k => delete f[k]); return f; };
+  const tries = [
+    [STAT_MASK_ALL, () => Object.assign(statsFields(), ver)],
+    [STAT_MASK_VER, () => Object.assign(base(), ver)],
+    [STAT_MASK, base],
+    [STAT_MASK_OLD, () => { const f = base(); delete f.tab; delete f.sax; delete f.recent; return f; }]];
+  let err;
+  for (const [mask, fields] of tries) { try { await fb.req("PATCH", `/profiles/${username.code}?${mask}`, { fields: fields() }); err = null; break; } catch(e) { err = e; } }
+  if (err) throw err;
   save("sp.fbPending", false);
 }
 function scheduleSync(){
@@ -4083,13 +4101,13 @@ function renderFriends(){
   const mine = code => code === username.code;
   const recentOf = m => mine(m.code) ? recentDays(profile === "p0" ? done : loadDone("p0")) : (m.recent || {});
   const since = (m, from) => Object.entries(recentOf(m)).reduce((a, [d, n]) => a + (d >= from ? n : 0), 0);
-  const totalOf = m => m.hwn + m.tou + (m.tab || 0) + (m.sax || 0);   // Sonderstempel zählen in der Rangliste nicht
+  const totalOf = m => mTotal(m);   // Sonderstempel (Harz-/Touringen-Sonder) zählen in der Rangliste nicht
   const key = m => boardSort === "week" ? since(m, weekFrom) : boardSort === "month" ? since(m, monthFrom) : totalOf(m);
   const ms = board ? board.list.slice().sort((x, y) => key(y) - key(x) || totalOf(y) - totalOf(x) || x.name.localeCompare(y.name, "de")) : [];
-  const anyTab = ms.some(m => m.tab), anySax = ms.some(m => m.sax);
-  const cols = [["Harz", m => m.hwn, 222, "var(--done)"], ["Touringen", m => m.tou, 430, "var(--route)"]];
-  if (anyTab) cols.push(["Tabarz", m => m.tab || 0, 24, "var(--digital)"]);
-  if (anySax) cols.push(["Sachsen", m => m.sax || 0, 11, "var(--code)"]);
+  /* Alle Hefte – je Person nur die, in denen sie mindestens einen Stempel hat */
+  const cols = [["Harz", "hwn", "var(--done)"], ["Touringen", "tou", "var(--route)"], ["Tabarz", "tab", "var(--digital)"], ["Brotterode", "bro", "#ee8350"],
+    ["Wippertal", "wip", "#d9a62e"], ["Dreiländereck", "dre", "#e06fa3"], ["Harzvorland", "nhv", "#8fb34a"], ["Sachsen", "sax", "var(--code)"]]
+    .map(([t, k, col]) => [t, m => m[k] || 0, (stamps[k] || []).length || 1, col]);
   let rank = 0, prev = null, myRank = 0;
   const ranked = ms.map((m, i) => { if (key(m) !== prev) { rank = i + 1; prev = key(m); } if (mine(m.code)) myRank = rank; return { m, rank }; });
   const weekAll = ms.reduce((a, m) => a + since(m, weekFrom), 0);
@@ -4108,7 +4126,10 @@ function renderFriends(){
     const wkN = since(m, weekFrom);
     const trend = boardSort === "all" ? (wkN ? `<span class="trend up">▲ +${wkN}</span>` : `<span class="trend">±0</span>`) : `<span class="trend">${totalOf(m)} gesamt</span>`;
     const full = i < 3 || me;
-    const minis = full ? `<div class="minis" style="grid-template-columns:repeat(${cols.length},1fr)">${cols.map(([t, f, max, col]) => `<div class="mini"><span>${t}</span><b>${f(m)}</b><div class="mbar"><i style="width:${Math.min(100, Math.round(f(m) / max * 100))}%;background:${col}"></i></div></div>`).join("")}</div>` : "";
+    /* Harz & Touringen als eigene Balken, alle anderen Hefte (mit mind. 1 Stempel) in einem Farb-Balken darunter */
+    const main = cols.slice(0, 2), rest = cols.slice(2).filter(([, f]) => f(m) > 0);
+    const minis = full ? `<div class="minis" style="grid-template-columns:repeat(2,1fr)">${main.map(([t, f, max, col]) => `<div class="mini"><span>${t}</span><b>${f(m)}</b><div class="mbar"><i style="width:${Math.min(100, Math.round(f(m) / max * 100))}%;background:${col}"></i></div></div>`).join("")}</div>`
+      + (rest.length ? `<div class="mtrack"><div class="mstack" style="width:${Math.max(4, Math.round(rest.reduce((a, [, f]) => a + f(m), 0) / rest.reduce((a, [, , max]) => a + max, 0) * 100))}%">${rest.map(([t, f, , col]) => `<i style="flex:${f(m)};background:${col}"></i>`).join("")}</div></div><div class="mleg">${rest.map(([t, f, , col]) => `<span><i style="background:${col}"></i>${t} <b>${f(m)}</b></span>`).join("")}</div>` : "") : "";
     const h = c && c.hike && c.hike.last;
     const hDays = h ? Math.round((Date.parse(isoDay(Date.now()) + "T12:00") - Date.parse(h.d + "T12:00")) / 864e5) : 99;
     const hike = full && h && hDays <= 3 ? `<span class="fchip">🥾 ${hDays === 0 ? "heute" : hDays === 1 ? "gestern" : "vor " + hDays + " Tagen"} ${km1(h.km)} km${h.n ? " · " + h.n + " Stempel" : ""}</span>` : "";
@@ -4128,7 +4149,7 @@ function renderFriends(){
       <button class="mini primary" data-racc="${esc(r.code)}">Annehmen</button><button class="mini" data-rdec="${esc(r.code)}">Ablehnen</button></li>`).join("")}</ul>` : ""}
     <div class="addbox">
     <div class="fsearch"><span class="fs-i">🔎</span><input id="frCode" placeholder="Freund hinzufügen: Name oder Code" autocomplete="off" maxlength="20" aria-label="Freund hinzufügen"><button class="fplus" id="frAdd" aria-label="Hinzufügen">+</button></div>
-    <div class="mycode-row"><span class="mc-l">Dein Code</span><span class="mc-pill">🔑 <b>${fmtCode(username.code)}</b></span><button class="mc-pill gold" id="frCopy" aria-label="Meinen Code teilen">📤 Teilen</button></div>
+    <div class="mycode-row"><span class="mc-l">Dein Code</span><button class="mc-pill" id="frCodeCopy" aria-label="Code kopieren">🔑 <b>${fmtCode(username.code)}</b><i class="mc-cp">📋</i></button><button class="mc-pill gold" id="frCopy" aria-label="Meinen Code teilen">📤 Teilen</button></div>
     ${Object.keys(sentReqs).length ? `<ul class="reqs sent">${Object.entries(sentReqs).map(([c, r]) => `<li><span class="bav">⏳</span><span class="who"><b>${esc(r.name)}</b><small>Anfrage gesendet – wartet auf Antwort</small></span><button class="mini" data-rcan="${esc(c)}">Zurückziehen</button></li>`).join("")}</ul>` : ""}
     </div>
 
@@ -4154,6 +4175,11 @@ function renderFriends(){
     try { navigator.clipboard.writeText(t).then(() => toast("Code kopiert – jetzt z. B. in WhatsApp einfügen"), () => toast("Dein Code: " + fmtCode(username.code))); }
     catch(e) { toast("Dein Code: " + fmtCode(username.code)); }
   };
+  $("#frCodeCopy").onclick = () => copyText(username.code, () => {
+    const b = $("#frCodeCopy"); if (!b) return; vibrate(20);
+    b.classList.add("ok"); b.innerHTML = "✓ <b>Kopiert</b>";
+    setTimeout(() => { const x = $("#frCodeCopy"); if (x) { x.classList.remove("ok"); x.innerHTML = `🔑 <b>${fmtCode(username.code)}</b><i class="mc-cp">📋</i>`; } }, 1600);
+  });
   $("#frAdd").onclick = () => addFriend($("#frCode").value);
   $("#frCode").addEventListener("keydown", e => { if (e.key === "Enter") addFriend(e.target.value); });
   $("#frRefresh").onclick = () => refreshBoard(true);
@@ -4690,6 +4716,11 @@ function doLogout(){
   } catch(e) {}
   save("sp.loggedOut", Date.now());
   appReload();
+}
+/* Text in die Zwischenablage – mit Ersatzweg für ältere WebViews */
+function copyText(t, ok){
+  const fallback = () => { try { const ta = document.createElement("textarea"); ta.value = t; ta.style.cssText = "position:fixed;opacity:0"; document.body.appendChild(ta); ta.select(); const r = document.execCommand("copy"); ta.remove(); if (r) ok(); else toast(t); } catch(e) { toast(t); } };
+  try { navigator.clipboard.writeText(t).then(ok, fallback); } catch(e) { fallback(); }
 }
 /* Neu laden: in der Android-App über die App selbst (die Startseite gibt es nicht im Internet) */
 function appReload(){
@@ -6023,7 +6054,7 @@ function pinReminder(){
 
 /* ---------- Freunde-Neuigkeiten ---------- */
 const SET_NAMES = { hwn: "Harz", hws: "Harz-Sonder", tou: "Touringen", tos: "Touringen-Sonder", tab: "Bad Tabarz", sax: "Sächs. Schweiz", wip: "Wippertal", dre: "Dreiländereck", nhv: "Nördl. Harzvorland", bro: "Brotterode" };
-const mTotal = m => m.hwn + m.tou + (m.tab || 0) + (m.sax || 0);   // wie in der Rangliste: ohne Sonderstempel
+const mTotal = m => m.hwn + m.tou + (m.tab || 0) + (m.sax || 0) + (m.bro || 0) + (m.wip || 0) + (m.dre || 0) + (m.nhv || 0);   // wie in der Rangliste: ohne Sonderstempel
 function feedHtml(list){
   const items = list.filter(m => m.code !== username.code && m.last && m.last.date && m.last.n)
     .sort((a, b) => b.last.date.localeCompare(a.last.date) || String(b.updated).localeCompare(String(a.updated))).slice(0, 8);
@@ -6733,9 +6764,9 @@ function profileHtml(m, c, me){
   return `<div class="pbanner">${me ? '<button class="pb-edit" id="pbEdit">✎ Bearbeiten</button>' : ""}</div>
     <div class="phead">
       <span class="pavring ${!me && isOnline(m.updated) ? "is-on" : ""}">${ring(goal ? goal.prog : 1, goal ? goal.col : "var(--pc-acc)", 100, 6, avatarHtml(c, "pav"))}${medalR ? `<span class="pmedal" style="--gc:${goal ? goal.col : "var(--pc-acc)"}" title="${esc(medalR.reached[1])}">${LV_ICON(medalR.reached[1])}</span>` : ""}</span>
-      <div class="ph-t"><h2>${esc(m.name)}</h2>${rankHtml(m.code)}
-        <div class="ph-chips">${!me && m.updated ? `<span class="${isOnline(m.updated) ? "on" : ""}">${isOnline(m.updated) ? "● online" : esc(seenText(m.updated).replace("zuletzt online ", "🕓 "))}</span>` : ""}${c.region ? `<span>📍 ${esc(c.region)}</span>` : ""}${since ? `<span>🗓️ ${esc(since)}</span>` : ""}</div></div>
+      <div class="ph-t"><div class="ph-nm"><h2>${esc(m.name)}</h2>${rankHtml(m.code)}</div></div>
     </div>
+    <div class="ph-chips ph-row">${!me && m.updated ? `<span class="${isOnline(m.updated) ? "on" : ""}">${isOnline(m.updated) ? "● online" : esc(seenText(m.updated).replace("zuletzt online ", "🕓 "))}</span>` : ""}${c.region ? `<span>📍 ${esc(c.region)}</span>` : ""}${since ? `<span>🗓️ ${esc(since)}</span>` : ""}</div>
     ${levelHtml(m, c)}
     ${goal ? `<button class="ph-goal" data-pgoal="${goal.id}" style="--gc:${goal.col}">${ring(goal.prog, goal.col, 46, 5, Math.round(goal.prog * 100) + "%")}<span><small class="pg-heft">${esc(goal.long)}</small>Noch <b>${goal.next[0] - goal.n}</b> bis <b>${esc(goal.next[1].replace(/^Touringen /, ""))}</b> ${LV_ICON(goal.next[1])}<small class="pg-hint">= farbiger Ring um ${me ? "dein" : "das"} Bild</small></span></button>` : ""}
     ${c.bio ? `<p class="bio">„${esc(c.bio)}“</p>` : ""}

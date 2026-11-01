@@ -1,6 +1,6 @@
 {
- "code": 85,
- "version": "0.9.45 Beta",
- "notes": "Google-Anmeldung wieder da · 'In der Nähe' funktioniert wieder · Abmelden zeigt keine Fehlerseite mehr",
+ "code": 86,
+ "version": "0.9.46 Beta",
+ "notes": "Rangliste mit allen Heften (Brotterode, Wippertal …) · Goldener Rand für dich · Code antippen = kopieren · Neuer Profil-Kopf · Routen bei 'In der Nähe' stabiler",
  "apk": "Stempelpass.apk"
 }
