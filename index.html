@@ -1271,10 +1271,10 @@ li.done.m-digital .chk{background:var(--digital);border-color:var(--digital)}
 .pring{--p:0;--c:var(--gold);--s:64px;--w:7px;width:var(--s);height:var(--s);border-radius:50%;background:conic-gradient(var(--c) calc(var(--p) * 1%),var(--line) 0);display:grid;place-items:center;flex:none}
 .pring>span{width:calc(var(--s) - 2 * var(--w));height:calc(var(--s) - 2 * var(--w));border-radius:50%;background:var(--surface);display:grid;place-items:center;font:700 .95rem/1 var(--display);overflow:hidden}
 .pavring .pav{width:84px;height:84px;border:0;font-size:2.7rem}
-.ph-t{padding-top:30px;min-width:0;flex:1}.ph-nm{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px}.ph-t h2{margin:0;font-size:1.6rem;line-height:1.1;overflow-wrap:anywhere;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+.ph-t{padding-top:34px;min-width:0;flex:1}.ph-nm{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px}.ph-t h2{margin:0;font-size:1.6rem;line-height:1.1;overflow-wrap:anywhere;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.35)}
 .ph-t .rank{box-shadow:0 1px 6px rgba(0,0,0,.2)}
-.ph-nm .rank{margin:0;font-size:.76rem;padding:4px 10px;line-height:1.2}.ph-nm h2{line-height:1.15}
-.ph-row{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-top:10px}.ph-row::-webkit-scrollbar{display:none}.ph-row span{flex:none}
+.ph-row .rank{flex:none;margin:0;font-size:.74rem;padding:2px 9px;line-height:1.35;border:1px solid transparent}.ph-nm{min-width:0}.ph-nm h2{flex:1;min-width:0;line-height:1.15;white-space:nowrap;overflow:hidden;overflow-wrap:normal;text-overflow:ellipsis}.ph-nm h2.l{font-size:1.3rem}.ph-nm h2.xl{font-size:1.08rem}
+.ph-chips.ph-row{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-top:10px}.ph-row::-webkit-scrollbar{display:none}.ph-row span{flex:none}
 .ph-chips{display:flex;flex-wrap:wrap;gap:5px}.ph-chips span{font-size:.76rem;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:2px 9px;white-space:nowrap}.ph-chips span.on{color:var(--done);border-color:color-mix(in srgb,var(--done) 45%,transparent)}
 .ph-goal{display:flex;align-items:center;gap:10px;margin-top:12px;padding:9px 12px;border-radius:14px;background:color-mix(in srgb,var(--gc,var(--pc-acc)) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--gc,var(--pc-acc)) 45%,transparent);font-size:.95rem}
 .ph-goal{width:100%;text-align:left;color:var(--fg);font:inherit;font-size:.95rem}
@@ -1804,8 +1804,8 @@ SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", 
   levels: [[11, "Wandernadel"]],
   info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
   url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.46 Beta";
-const APP_CODE = 86;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.47 Beta";
+const APP_CODE = 87;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -3904,9 +3904,10 @@ async function pushProfile(){
     [STAT_MASK_VER, () => Object.assign(base(), ver)],
     [STAT_MASK, base],
     [STAT_MASK_OLD, () => { const f = base(); delete f.tab; delete f.sax; delete f.recent; return f; }]];
-  let err;
-  for (const [mask, fields] of tries) { try { await fb.req("PATCH", `/profiles/${username.code}?${mask}`, { fields: fields() }); err = null; break; } catch(e) { err = e; } }
+  let err, lvl = -1;
+  for (let i = 0; i < tries.length; i++) { const [mask, fields] = tries[i]; try { await fb.req("PATCH", `/profiles/${username.code}?${mask}`, { fields: fields() }); err = null; lvl = i; break; } catch(e) { err = e; } }
   if (err) throw err;
+  save("sp.statLvl", lvl);   // 0 = alle Hefte gespeichert; sonst beim nächsten Start nochmal versuchen
   save("sp.fbPending", false);
 }
 function scheduleSync(){
@@ -6764,9 +6765,9 @@ function profileHtml(m, c, me){
   return `<div class="pbanner">${me ? '<button class="pb-edit" id="pbEdit">✎ Bearbeiten</button>' : ""}</div>
     <div class="phead">
       <span class="pavring ${!me && isOnline(m.updated) ? "is-on" : ""}">${ring(goal ? goal.prog : 1, goal ? goal.col : "var(--pc-acc)", 100, 6, avatarHtml(c, "pav"))}${medalR ? `<span class="pmedal" style="--gc:${goal ? goal.col : "var(--pc-acc)"}" title="${esc(medalR.reached[1])}">${LV_ICON(medalR.reached[1])}</span>` : ""}</span>
-      <div class="ph-t"><div class="ph-nm"><h2>${esc(m.name)}</h2>${rankHtml(m.code)}</div></div>
+      <div class="ph-t"><div class="ph-nm"><h2 class="${m.name.length > 16 ? "xl" : m.name.length > 11 ? "l" : ""}">${esc(m.name)}</h2></div></div>
     </div>
-    <div class="ph-chips ph-row">${!me && m.updated ? `<span class="${isOnline(m.updated) ? "on" : ""}">${isOnline(m.updated) ? "● online" : esc(seenText(m.updated).replace("zuletzt online ", "🕓 "))}</span>` : ""}${c.region ? `<span>📍 ${esc(c.region)}</span>` : ""}${since ? `<span>🗓️ ${esc(since)}</span>` : ""}</div>
+    <div class="ph-chips ph-row">${rankHtml(m.code)}${!me && m.updated ? `<span class="${isOnline(m.updated) ? "on" : ""}">${isOnline(m.updated) ? "● online" : esc(seenText(m.updated).replace("zuletzt online ", "🕓 "))}</span>` : ""}${c.region ? `<span>📍 ${esc(c.region)}</span>` : ""}${since ? `<span>🗓️ ${esc(since)}</span>` : ""}</div>
     ${levelHtml(m, c)}
     ${goal ? `<button class="ph-goal" data-pgoal="${goal.id}" style="--gc:${goal.col}">${ring(goal.prog, goal.col, 46, 5, Math.round(goal.prog * 100) + "%")}<span><small class="pg-heft">${esc(goal.long)}</small>Noch <b>${goal.next[0] - goal.n}</b> bis <b>${esc(goal.next[1].replace(/^Touringen /, ""))}</b> ${LV_ICON(goal.next[1])}<small class="pg-hint">= farbiger Ring um ${me ? "dein" : "das"} Bild</small></span></button>` : ""}
     ${c.bio ? `<p class="bio">„${esc(c.bio)}“</p>` : ""}
@@ -8402,7 +8403,7 @@ setTimeout(async () => {
   if (fb.ready()) { loadNews(); loadReports(); await loadCustomHefte(); await loadFixes(); loadRoles(); loadGoogleCfg(); setTimeout(() => window.__google(), 500); try { await syncUsername(); } catch(e) {} try { await pullStamps(); } catch(e) {} await checkAdmin(); checkUpdate();
     /* neue App-Version einmal ans Profil melden, damit Admins sie sehen */
     const vs = (NATIVE ? 0 : 10000) + APP_CODE;
-    if (load("sp.verSent", 0) !== vs && username && username.code) pushProfile().then(() => save("sp.verSent", vs)).catch(() => {}); }
+    if ((load("sp.verSent", 0) !== vs || load("sp.statLvl", -1) !== 0) && username && username.code) pushProfile().then(() => save("sp.verSent", vs)).catch(() => {}); }
   webInstallHint();
   if (fb.ready() && username) refreshBoard(false);
   renderLocPill();
