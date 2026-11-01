@@ -1,6 +1,6 @@
 {
- "code": 84,
- "version": "0.9.44 Beta",
- "notes": "Grünes App-Icon beim Start · 'Stempel kaputt' jetzt auf der Karte · Freunde: neue Suchleiste und eigener Code zum Teilen · Benachrichtigungs-Meldung kommt nicht mehr bei jedem Start",
+ "code": 85,
+ "version": "0.9.45 Beta",
+ "notes": "Google-Anmeldung wieder da · 'In der Nähe' funktioniert wieder · Abmelden zeigt keine Fehlerseite mehr",
  "apk": "Stempelpass.apk"
 }

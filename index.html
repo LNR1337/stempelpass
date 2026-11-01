@@ -1794,8 +1794,8 @@ SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", 
   levels: [[11, "Wandernadel"]],
   info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
   url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.44 Beta";
-const APP_CODE = 84;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.45 Beta";
+const APP_CODE = 85;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -2341,11 +2341,14 @@ function poiKind(t){
   if (t.amenity === "pub" || t.amenity === "biergarten") return "pub";
   return "food";
 }
-const poiQ = f => `[out:json][timeout:25];(nwr["amenity"="parking"]["access"!~"private|no|customers|permissive_no"]${f};nwr["amenity"~"^(restaurant|cafe|pub|biergarten)$"]${f};nwr["tourism"~"^(alpine_hut|wilderness_hut)$"]${f};node["highway"="bus_stop"]${f};node["railway"~"^(station|halt)$"]${f};);out center tags;`;
+const poiQ = f => `[out:json][timeout:15];(nwr["amenity"="parking"]["access"!~"private|no|customers|permissive_no"]${f};nwr["amenity"~"^(restaurant|cafe|pub|biergarten)$"]${f};nwr["tourism"~"^(alpine_hut|wilderness_hut)$"]${f};node["highway"="bus_stop"]${f};node["railway"~"^(station|halt)$"]${f};);out center tags;`;
+/* Mehrere Overpass-Server – der zuletzt funktionierende kommt zuerst dran */
+const OVERPASS = ["https://overpass-api.de/api/interpreter", "https://overpass.private.coffee/api/interpreter", "https://maps.mail.ru/osm/tools/overpass/api/interpreter", "https://overpass.kumi.systems/api/interpreter"];
 async function overpass(q){
   let err;
-  for (const u of ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]) {
-    try { return await getJson(u + "?data=" + encodeURIComponent(q)); } catch(e) { err = e; }
+  const good = load("sp.ovGood", ""), list = OVERPASS.slice().sort((a, b) => (b === good) - (a === good));
+  for (const u of list) {
+    try { const j = await getJson(u + "?data=" + encodeURIComponent(q)); if (!j || !Array.isArray(j.elements)) throw new Error("leer"); if (u !== good) save("sp.ovGood", u); return j; } catch(e) { err = e; }
   }
   throw err;
 }
@@ -2469,19 +2472,25 @@ function drawStampLabels(){
 }
 if (showPoi) setTimeout(drawPoi, 800);
 /* Im Stempel: was ist in der Nähe? */
-async function fillNearPoi(el, s){
-  el.innerHTML = '<p class="hint">Suche in OpenStreetMap …</p>';
+async function fillNearPoi(el, s, force){
+  el.innerHTML = '<p class="hint">Suche in OpenStreetMap … (kann ein paar Sekunden dauern)</p>';
   try {
-    const l = poiParse(await overpass(poiQ(`(around:1500,${s.lat.toFixed(5)},${s.lon.toFixed(5)})`)));
+    const l = await nearPoi(s, force);
     if (!el.isConnected) return;
-    l.forEach(p => p.d = distKm([s.lat, s.lon], [p.lat, p.lon]));
-    l.sort((a, b) => a.d - b.d);
     const pick = (kinds, n) => l.filter(p => kinds.includes(p.kind)).slice(0, n);
     const rows = [...pick(["park"], 3), ...pick(["food", "cafe", "pub", "hut"], 3), ...pick(["bus", "train"], 2)];
     if (!rows.length) { el.innerHTML = '<p class="hint">Im Umkreis von 1,5 km nichts eingetragen.</p>'; return; }
     el.innerHTML = `<ul class="poilist">${rows.map(p => `<li><span>${POI_IC[p.kind] === "P" ? "🅿️" : POI_IC[p.kind]}</span><div><b>${esc(p.name || POI_NAME[p.kind])}</b><small>${fmtKm(p.d)} Luftlinie · ${esc(POI_NAME[p.kind])}${poiInfo(p) ? " · " + esc(poiInfo(p)) : ""}</small>${ohBadge(p)}</div>
       <a href="${gmapsTo(p.lat, p.lon, p.kind === "park" ? "driving" : p.kind === "bus" || p.kind === "train" ? "transit" : "walking")}" target="_blank" rel="noopener">${p.kind === "park" ? "🚗 Hin" : p.kind === "bus" || p.kind === "train" ? "🚌 Fahrplan" : "🚶 Hin"}</a></li>`).join("")}</ul><small class="src">Daten: © OpenStreetMap-Mitwirkende</small>`;
-  } catch(e) { if (el.isConnected) el.innerHTML = '<p class="hint">Gerade nicht abrufbar (kein Internet?).</p>'; }
+  } catch(e) {
+    if (!el.isConnected) return;
+    const g = q => `https://www.google.com/maps/search/${encodeURIComponent(q)}/@${s.lat.toFixed(5)},${s.lon.toFixed(5)},15z`;
+    el.innerHTML = `<p class="hint">Die Karten-Datenbank (OpenStreetMap) antwortet gerade nicht – die Server sind oft überlastet. Probier es gleich nochmal.</p>
+      <div class="actions"><button class="btn" id="poiRetry">🔄 Nochmal versuchen</button></div>
+      <p class="hint" style="margin-top:10px">Oder direkt in Google Maps schauen:</p>
+      <div class="actions"><a class="btn" href="${g("Parkplatz")}" target="_blank" rel="noopener">🅿️ Parkplätze</a><a class="btn" href="${g("Restaurant")}" target="_blank" rel="noopener">🍽️ Einkehr</a><a class="btn" href="${g("Bushaltestelle")}" target="_blank" rel="noopener">🚏 Bus</a></div>`;
+    $("#poiRetry").onclick = () => fillNearPoi(el, s, true);
+  }
 }
 
 /* ---------- 🕒 Stempel, die nur zu bestimmten Zeiten erreichbar sind ---------- */
@@ -3042,11 +3051,17 @@ function openStamp(k){
   if (view === "map" && hasPos(s)) map.panTo([s.lat, s.lon]);
 }
 const poiNearCache = {};
-function nearPoi(s){
-  const key = s.lat.toFixed(4) + "," + s.lon.toFixed(4);
+/* Ergebnis je Stempel 30 Tage merken – Parkplätze & Gasthäuser ändern sich selten, und so klappt es auch ohne Netz */
+function nearPoi(s, force){
+  const key = s.lat.toFixed(4) + "," + s.lon.toFixed(4), sk = "sp.poiNear." + key;
+  const stored = load(sk, null);
+  if (!force && stored && Date.now() - stored.ts < 30 * 864e5) return Promise.resolve(stored.l);
+  if (force) delete poiNearCache[key];
   if (!poiNearCache[key]) poiNearCache[key] = overpass(poiQ(`(around:1500,${s.lat.toFixed(5)},${s.lon.toFixed(5)})`)).then(j => {
-    const l = poiParse(j); l.forEach(p => p.d = distKm([s.lat, s.lon], [p.lat, p.lon])); return l.sort((a, b) => a.d - b.d);
-  }).catch(e => { delete poiNearCache[key]; throw e; });
+    const l = poiParse(j); l.forEach(p => p.d = distKm([s.lat, s.lon], [p.lat, p.lon])); l.sort((a, b) => a.d - b.d);
+    try { save(sk, { ts: Date.now(), l: l.slice(0, 40) }); } catch(e) {}
+    return l;
+  }).catch(e => { delete poiNearCache[key]; if (stored) return stored.l; throw e; });
   return poiNearCache[key];
 }
 function openStampInfo(k){
@@ -4316,7 +4331,7 @@ function showWebUpdate(){
   const bn = $("#updBanner"); if (!bn) return;
   $("#updText").textContent = "Neue Version ist da";
   $("#updGo").textContent = "Neu laden"; $("#updGo").href = "#";
-  $("#updGo").onclick = e => { e.preventDefault(); location.reload(); };
+  $("#updGo").onclick = e => { e.preventDefault(); appReload(); };
   bn.hidden = false;
 }
 /* Hinweis: als App auf den Home-Bildschirm legen */
@@ -4579,10 +4594,10 @@ async function finishLogin(a, u, hasPw){
 /* ---------- 🔑 Mit Google anmelden (Google-ID-Token → Firebase signInWithIdp) ---------- */
 const WEB_BASE = "https://lnr1337.github.io/stempelpass/";
 const GCFG_URL = "https://raw.githubusercontent.com/LNR1337/stempelpass/main/google.json";
-let googleCfg = load("sp.gcfg", null), googleNew = false;
+let googleCfg = load("sp.gcfg", null) || { clientId: "153547322246-rk4h5og24dc6knglqhp02fhmqmaeamsl.apps.googleusercontent.com" }, googleNew = false;
 const googleOn = () => !!(fb.ready() && googleCfg && googleCfg.clientId);
 async function loadGoogleCfg(){
-  try { const j = await getJson(GCFG_URL + "?t=" + Math.floor(Date.now() / 36e5)); googleCfg = j && j.clientId ? { clientId: j.clientId } : null; save("sp.gcfg", googleCfg); }
+  try { const j = await getJson(GCFG_URL + "?t=" + Math.floor(Date.now() / 36e5)); if (j && j.clientId) { googleCfg = { clientId: j.clientId }; save("sp.gcfg", googleCfg); } }
   catch(e) {}
   updateGoogleUi();
 }
@@ -4674,6 +4689,11 @@ function doLogout(){
     drop.forEach(k => localStorage.removeItem(k));
   } catch(e) {}
   save("sp.loggedOut", Date.now());
+  appReload();
+}
+/* Neu laden: in der Android-App über die App selbst (die Startseite gibt es nicht im Internet) */
+function appReload(){
+  if (hasNative("reloadApp")) { try { NATIVE.reloadApp(); return; } catch(e) {} }
   location.reload();
 }
 
@@ -5658,7 +5678,10 @@ function renderUserStamps(){
 
 /* ---------- Abfragen ohne Schlüssel (Open-Meteo: Wetter und Höhen) ---------- */
 async function getJson(url){
-  if (hasNative("fetch")) return JSON.parse(await nativeFetch(url));
+  if (hasNative("fetch")) {
+    try { return JSON.parse(await nativeFetch(url)); }
+    catch(e) { if (!/nicht erlaubt/.test(e.message)) throw e; }   // ältere App-Hülle kennt die Adresse nicht → normal laden
+  }
   const r = await fetch(url);
   if (!r.ok) throw new Error("HTTP " + r.status);
   return r.json();
