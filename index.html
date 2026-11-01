@@ -1170,10 +1170,19 @@ li.sel .chk svg{opacity:1}
 .who-ic span.old{background:var(--broken)}
 .locbtn{display:inline-block;margin-top:4px;border:1px solid var(--me);color:var(--me);background:transparent;border-radius:99px;padding:3px 9px;font-size:.78rem;font-weight:700}
 
-.layerctl{background:var(--surface);border-radius:8px;overflow:visible;position:relative}
+.layerctl{background:var(--surface);border-radius:8px;overflow:visible;position:relative;z-index:1001}
 .layerctl .lc-btn{display:grid;place-items:center;width:34px;height:34px;border:0;background:var(--surface);color:var(--fg);border-radius:8px;padding:0}
-.layerctl .lc-menu{position:absolute;right:0;top:40px;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.25);overflow:hidden;min-width:130px}
+.layerctl .lc-menu{position:absolute;right:0;top:40px;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.25);overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;min-width:130px;max-height:var(--lcmax,60vh)}
+.layerctl .lc-menu button{flex:none}
 .layerctl .lc-menu[hidden]{display:none}
+.leaflet-touch .leaflet-bar,.leaflet-bar{border:0!important;border-radius:8px;box-shadow:0 1px 5px rgba(0,0,0,.35)!important;overflow:hidden}
+.leaflet-bar a,.leaflet-bar a:hover{background:var(--surface)!important;color:var(--fg)!important;border-bottom:1px solid var(--line)!important}
+.leaflet-bar a:last-child{border-bottom:0!important}
+.leaflet-bar a.leaflet-disabled{color:var(--muted)!important;opacity:.5}
+.leaflet-bar.layerctl{overflow:visible!important}
+.layerctl:has(.lc-menu:not([hidden])){z-index:1003}
+.leaflet-touch .leaflet-control-zoom a,.leaflet-control-zoom a{width:34px!important;height:34px!important;line-height:34px!important;font:600 20px/34px var(--body)!important;display:grid!important;place-items:center;text-indent:0}
+.leaflet-control-zoom{border-radius:8px!important}
 .layerctl .lc-menu button{border:0;background:transparent;color:var(--fg);text-align:left;padding:11px 14px;font:600 .95rem var(--body)}
 .layerctl .lc-menu button + button{border-top:1px solid var(--line)}
 .layerctl .lc-menu button.on{background:var(--forest);color:var(--forest-fg)}
@@ -1221,7 +1230,12 @@ li.done.m-digital .chk{background:var(--digital);border-color:var(--digital)}
 .ovkeys .tile-k.m-digital{border-color:var(--digital);background:var(--digital)}.ovkeys .tile-k.x{border:2px solid var(--bad);background:var(--broken)}
 .hsel{border-style:dashed!important;opacity:.9}
 .hefts button.x2on{border-color:color-mix(in srgb,var(--forest-fg) 55%,transparent);background:color-mix(in srgb,var(--forest-fg) 12%,transparent);color:var(--forest-fg);display:inline-flex;align-items:center;gap:6px}
-.x2dots{display:inline-flex}.x2dots i{width:9px;height:9px;border-radius:50%;margin-right:-3px;border:1.5px solid var(--forest)}
+.x2ring{display:inline-block;width:18px;height:18px;border-radius:50%;border:4px solid;background:var(--open);vertical-align:middle}
+.x2dots{display:inline-flex}
+.rows .sub2{display:flex;align-items:center;gap:8px}.rows .sub2 .pl{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rows .sub2 .ch.hf{flex:none;margin:0}
+.hget{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:10px 0}.hg-h{display:flex;align-items:center;gap:8px;font-size:1rem}.hg-h span{font-size:1.2rem}.hget p{margin:6px 0 8px;font-size:.88rem;color:var(--fg);line-height:1.4}.hget a.mini{display:inline-block;text-decoration:none}
+.hg-more summary{cursor:pointer;color:var(--muted);font-weight:600;margin:12px 0 4px}
+.hg-btn{width:100%;text-align:left;margin:4px 0 10px}.x2dots i{width:9px;height:9px;border-radius:50%;margin-right:-3px;border:1.5px solid var(--forest)}
 .x2row{display:flex;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px solid var(--line)}.x2row i{flex:none;width:16px;height:16px;border-radius:50%;border:3px solid;background:var(--open)}.x2row span{flex:1}.x2row small{display:block;color:var(--muted);font-size:.78rem}
 .hchoose{list-style:none;margin:0 0 10px;padding:0;border:1px solid var(--line);border-radius:12px}
 .hchoose li{display:flex;align-items:center;gap:10px;padding:10px 12px;border-top:1px solid var(--line)}.hchoose li:first-child{border-top:0}
@@ -1472,6 +1486,8 @@ body.hdr-ring header .progress{margin-top:4px}
 .reglist .ring{width:44px;height:44px}.reglist .ring span{width:36px;height:36px;font-size:.8rem}
 .frow{display:flex;gap:6px;align-items:center}
 .frow input[type=search]{flex:1;min-width:0;width:auto!important;padding:9px 10px!important}
+#list .frow{flex-wrap:wrap;row-gap:8px}#list .frow #q{flex:1 1 100%;font-size:1rem;padding:11px 14px 11px 38px!important;border-radius:12px;background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2393a39a' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4'/%3E%3C/svg%3E") no-repeat 13px center}
+#list .frow select{flex:1;max-width:none}
 .frow select{flex:none;max-width:118px;padding:9px 24px 9px 9px;border:1px solid var(--line);border-radius:10px;background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23889'/%3E%3C/svg%3E") no-repeat right 8px center;color:var(--fg);font:600 .85rem var(--body);-webkit-appearance:none;appearance:none}
 .frow select.act{border-color:var(--gold);background-color:color-mix(in srgb,var(--gold) 12%,var(--surface))}
 .ficon{flex:none;width:38px;height:38px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--fg);font-size:1.05rem;padding:0}
@@ -1807,8 +1823,8 @@ SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", 
   levels: [[11, "Wandernadel"]],
   info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
   url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.48 Beta";
-const APP_CODE = 88;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.49 Beta";
+const APP_CODE = 89;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -2141,7 +2157,11 @@ const LayerCtl = L.Control.extend({
       <div class="lc-menu" hidden>${Object.entries(BASES).map(([k, b]) => `<button type="button" data-base="${k}">${b.name}</button>`).join("")}<button type="button" data-bgr="1" class="lc-bgr">Touringen-Routen</button><button type="button" data-heat="1" class="lc-bgr">Fortschritts-Karte</button><button type="button" data-poi="1" class="lc-bgr lc-poi">🅿️ Parken · Einkehr · Bus</button><button type="button" data-cmp="1" class="lc-bgr lc-act">👥 Mit Freund vergleichen</button></div>`;
     L.DomEvent.disableClickPropagation(d);
     const menu = d.querySelector(".lc-menu");
-    d.querySelector(".lc-btn").onclick = () => { menu.hidden = !menu.hidden; };
+    d.querySelector(".lc-btn").onclick = () => {
+      menu.hidden = !menu.hidden;
+      /* Menü nie unter den Kartenrand laufen lassen – sonst scrollen */
+      if (!menu.hidden) { const mr = map.getContainer().getBoundingClientRect(), br = menu.getBoundingClientRect(); menu.style.setProperty("--lcmax", Math.max(160, mr.bottom - br.top - 44) + "px"); }
+    };
     menu.onclick = e => {
       if (e.target.dataset.poi) { showPoi = !showPoi; save("sp.poi", showPoi); menu.hidden = true; drawPoi(); toast(showPoi ? (map.getZoom() < POI_ZOOM ? "Parken & Einkehr an – näher ranzoomen, dann erscheinen sie" : "Parkplätze, Einkehr und Haltestellen werden geladen") : "Parken & Einkehr ausgeblendet"); return; }
       if (e.target.dataset.cmp) { menu.hidden = true; openCmpPick(); return; }
@@ -2572,7 +2592,7 @@ function renderList(){
     if (d && isGps(current, s.k)) chips.push('<span class="ch gps">📍 vor Ort gestempelt</span>');
     if (isWatched(current, s.k)) chips.push('<span class="ch star">⭐ gemerkt</span>');
     if (!d && timeLimited(current, s)) chips.push('<span class="ch warn">🕒 nur zeitweise</span>');
-    { const gm = groupMembers(current, s.k).length; if (gm > 1) chips.push(`<span class="ch">📚 ${gm} Hefte</span>`); }
+    const gmN = groupMembers(current, s.k).length, heftCh = gmN > 1 ? `<span class="ch hf">📚 ${gmN}</span>` : "";
     if (photos[current][s.k] && photos[current][s.k].length) chips.push(`<span class="ch">📷 ${photos[current][s.k].length}</span>`);
     if (notes[current][s.k]) chips.push('<span class="ch">✎ Notiz</span>');
     if (isSonder(current) && !hasPos(s)) chips.push('<span class="ch">ohne Kartenpunkt</span>');
@@ -2581,7 +2601,7 @@ function renderList(){
       : (myPos && hasPos(s) ? `<span class="rt">${fmtKm(distKm(myPos, [s.lat, s.lon]))}</span>` : "");
     return `<li class="${d ? "done" + mCls(current, s.k) : ""}${selMode && sel.has(s.k) ? " sel" : ""}" data-k="${esc(s.k)}">
       <button class="chk" data-act="toggle" aria-label="${d ? "Stempel entfernen" : "Als gestempelt markieren"}">${CHECK}</button>
-      <button class="info" data-act="open"><span class="nm"><span class="nr">${esc(s.n)}</span>${esc(s.name)}</span>${place ? `<span class="sub">${esc(place)}</span>` : ""}${chips.length ? `<span class="chips2">${chips.join("")}</span>` : ""}</button>
+      <button class="info" data-act="open"><span class="nm"><span class="nr">${esc(s.n)}</span>${esc(s.name)}</span>${place || heftCh ? `<span class="sub sub2"><span class="pl">${esc(place)}</span>${heftCh}</span>` : ""}${chips.length ? `<span class="chips2">${chips.join("")}</span>` : ""}</button>
       ${right}
     </li>`;
   };
@@ -2766,16 +2786,6 @@ const SET_COL = { hwn: "#3fbf6e", hws: "#8fd6a3", tou: "#c58ae8", tos: "#e3b4f5"
 let extraSets = (() => { const v = load("sp.extraSets", null); if (Array.isArray(v)) return v; const o = load("sp.extraSet", ""); return o ? [o] : []; })();
 function extraList(){ return extraSets.filter(st => st !== current && SETS[st] && stamps[st]); }
 function setExtras(l){ extraSets = l.filter((x, i, a) => a.indexOf(x) === i); save("sp.extraSets", extraSets); renderHefts(); drawMarkers(false); }
-function openExtraPicker(){
-  const cnt = st => `${stamps[st].filter(x => isDone(st, x.k)).length}/${stamps[st].length}`;
-  const list = SET_KEYS.filter(st => st !== current && stamps[st] && stamps[st].length);
-  openSheet(`<div class="kicker">Karte</div><h2>Weitere Hefte einblenden</h2><p class="hint" style="margin-top:-4px">Die Stempel der gewählten Hefte erscheinen zusätzlich auf der Karte – mit farbigem Rand. Antippen öffnet den Stempel im richtigen Heft.</p>
-    <div class="x2list">${list.map(st => `<label class="checkline x2row"><input type="checkbox" data-x2="${st}" ${extraSets.includes(st) ? "checked" : ""}><i style="border-color:${SET_COL[st]}"></i><span>${esc(SETS[st].title)}<small>${cnt(st)} gestempelt</small></span></label>`).join("")}</div>
-    <div class="actions"><button class="btn" id="x2Off">Alle aus</button><button class="btn primary" data-close>Fertig</button></div>`);
-  $("#sheet").querySelectorAll("[data-x2]").forEach(b => b.onchange = () => setExtras(b.checked ? extraSets.concat([b.dataset.x2]) : extraSets.filter(x => x !== b.dataset.x2)));
-  $("#x2Off").onclick = () => { setExtras([]); $("#sheet").querySelectorAll("[data-x2]").forEach(b => b.checked = false); };
-  bindClose();
-}
 function renderHefts(){
   const bar = $("#heftBar");
   const reg = REGION[current];
@@ -2783,7 +2793,7 @@ function renderHefts(){
   const on = (set, id) => current === set && (!id || H() === id);
   const btn = (set, id, label) => `<button data-pick="${set}|${id || ""}" class="${on(set, id) ? "on" : ""}">${esc(label)} <small>${cnt(set, id)}</small></button>`;
   const xl = extraList();
-  const x2 = xl.length ? `<button data-x2c="1" class="x2on"><span class="x2dots">${xl.map(st => `<i style="background:${SET_COL[st]}"></i>`).join("")}</span>＋ ${xl.length === 1 ? esc(SETS[xl[0]].short) : xl.length + " Hefte"}</button>` : `<button data-x2c="1" class="hsel">＋ Hefte einblenden</button>`;
+  const x2 = xl.length ? `<button data-x2c="1" class="x2on"><span class="x2dots">${xl.map(st => `<i style="background:${SET_COL[st]}"></i>`).join("")}</span>＋ ${xl.length === 1 ? esc(SETS[xl[0]].short) : xl.length + " Hefte"}</button>` : "";
   if (reg === "tab" || reg === "sax") { bar.innerHTML = btn(reg, "", SETS[reg].title) + x2; bar.hidden = false; return; }
   if (VOR_SETS.includes(reg)) { bar.innerHTML = btn(reg, "", SETS[reg].title) + x2; bar.hidden = false; return; }
   const main = reg === "harz" ? btn("hwn", "", "Wandernadel") : btn("tou", "", "Hauptheft");
@@ -6355,6 +6365,27 @@ function openHefteChooser(set){
   bindClose();
 }
 /* 📚 Alle Gebiete und Hefte an einem Ort an- und ausschalten */
+/* ---------- 🛒 Wo bekomme ich die Hefte? (Stand Nov. 2026, Quellen: Seiten der Anbieter) ---------- */
+const HEFT_GET = [
+  ["hwn", "⛰️", "In allen Tourist-Informationen im Harz, in der Servicestelle der Harzer Wandernadel (Schnappelberg 6, Blankenburg) und im Online-Shop. Die Begleithefte gibt es an denselben Stellen.", "https://www.harzer-wandernadel-shop.de/", "Online-Shop"],
+  ["tou", "🌲", "In vielen Tourist-Informationen in Thüringen und online im Online-Lesershop Thüringen – auch die Sondereditionen.", "https://www.touringen.de/", "touringen.de"],
+  ["tab", "🏔️", "In der Tourist-Info Bad Tabarz, am Aussichtsturm auf dem Großen Inselsberg und in der Buchhandlung am Spindlerplatz. Die Bronze-Nadel (ab 8 Stempeln) gibt es in der Tourist-Info für 3 € Schutzgebühr.", "https://www.bad-tabarz.de/gesundheitaktiverleben/freizeit-in-bad-tabarz/wandern", "Gemeinde Bad Tabarz"],
+  ["bro", "🏠", "Die Wanderkarte mit den Stempelfeldern gibt es in der Tourist-Information Brotterode-Trusetal. Für das Abzeichen reichen 5 der 8 Stempel.", SETS.bro.url, "Tourismus Brotterode-Trusetal"],
+  ["wip", "🚂", "In der Wipperliese, in teilnehmenden Gaststätten, an der Parkeisenbahn Vatterode, in der Tourist-Info Eisleben und im Büro der Mansfelder Bergwerksbahn – oder per Bestellformular (Versand 2 €).", SETS.wip.url, "Mansfelder Bergwerksbahn"],
+  ["dre", "🗺️", "In den Tourist-Infos Pansfelde, Ballenstedt, Harzgerode, Meisdorf und Aschersleben, in Schulles Konsum Mehringen und bei der Seeland GmbH (Schadeleben). Heft 3 € Schutzgebühr, die Nadel nach allen 22 Stempeln 7,50 €.", "https://dreilaendereckpfad.de/vertriebsstellen/", "Vertriebsstellen"],
+  ["nhv", "🌾", "Den Stempelpass kannst du beim Tourismusverband Nördliches Harzvorland herunterladen oder in den Samtgemeinden und Tourist-Infos mitnehmen.", SETS.nhv.url, "Nördliches Harzvorland"],
+  ["sax", "🪨", "Infos zum Heft und wo es das gibt, findest du auf der Seite zum Wanderpass.", SETS.sax.url, "Zum Wanderpass"]];
+function openHefteGet(back){
+  const mine = HEFT_GET.filter(([st]) => shownRegions.includes(REGION[st]));
+  const rest = HEFT_GET.filter(([st]) => !shownRegions.includes(REGION[st]));
+  const card = ([st, ic, txt, url, lbl]) => `<div class="hget"><div class="hg-h"><span>${ic}</span><b>${esc(SETS[st].title)}</b></div><p>${esc(txt)}</p>${url ? `<a class="mini" href="${esc(url)}" target="_blank" rel="noopener">🔗 ${esc(lbl)}</a>` : ""}</div>`;
+  openSheet(`<div class="kicker">📚 Hefte</div><h2>Wo bekomme ich die Hefte?</h2>
+    ${mine.map(card).join("")}
+    ${rest.length ? `<details class="hg-more"><summary>Weitere Gebiete (${rest.length})</summary>${rest.map(card).join("")}</details>` : ""}
+    <p class="hint">Angaben ohne Gewähr – Öffnungszeiten und Preise am besten kurz vorher prüfen.</p>
+    <div class="actions"><button class="btn" id="hgBack">Zurück</button></div>`);
+  $("#hgBack").onclick = () => (back || closeSheet)();
+}
 function openHefteAll(){
   const sw = (attr, id, on) => `<label class="switch"><input type="checkbox" ${attr}="${esc(id)}" ${on ? "checked" : ""}><i></i></label>`;
   const regRow = ([r, t]) => { const c = regionCount(r);
@@ -6363,7 +6394,10 @@ function openHefteAll(){
     return `<li><span class="hic">${h.icon || "📘"}</span><span class="t"><b>${esc(h.title)}</b><small>${l.length} Stempel${n ? ` · ${n} gesammelt` : ""}</small></span>${sw("data-ahon", set + "|" + h.id, heftActive(h.id))}</li>`; }).join("");
   openSheet(`<div class="kicker">Einstellungen</div><h2>📚 Gebiete & Hefte</h2>
     <p>Was du hier ausschaltest, verschwindet aus der Leiste oben, von der Karte und aus der Übersicht. Deine Stempel bleiben gespeichert.</p>
+    <button class="sv-line hg-btn" id="hgOpen"><span class="ic">🛒</span><span class="t"><b>Wo bekomme ich die Hefte?</b><small>Tourist-Infos, Shops & Preise</small></span></button>
     <h3>Gebiete</h3><ul class="hchoose">${REGIONS.map(regRow).join("")}</ul>
+    <h3 id="x2sec">🗺️ Zusätzlich auf der Karte</h3><p class="hint" style="margin-top:-4px">Stempel dieser Hefte siehst du auf der Karte auch, wenn du gerade in einem anderen Heft bist – mit farbigem Rand.</p>
+    <ul class="hchoose">${SET_KEYS.filter(st => stamps[st] && stamps[st].length).map(st => `<li><span class="hic"><i class="x2ring" style="border-color:${SET_COL[st]}"></i></span><span class="t"><b>${esc(SETS[st].title)}</b><small>${stamps[st].filter(x => isDone(st, x.k)).length}/${stamps[st].length} gestempelt${st === current ? " · gerade offen" : ""}</small></span>${sw("data-ax2", st, extraSets.includes(st))}</li>`).join("")}</ul>
     ${shownRegions.includes("harz") ? `<h3>Harz · Begleithefte</h3><ul class="hchoose">${heftRows("hws")}</ul>` : ""}
     ${shownRegions.includes("thue") ? `<h3>Touringen · Sondereditionen</h3><ul class="hchoose">${heftRows("tos")}</ul>` : ""}
     <div class="actions"><button class="btn primary" id="sClose">Fertig</button></div>`);
@@ -6374,6 +6408,8 @@ function openHefteAll(){
     const st = $("#sheet").scrollTop;
     setShownRegions(list); openHefteAll(); $("#sheet").scrollTop = st;
   });
+  $("#hgOpen").onclick = () => openHefteGet(openHefteAll);
+  $("#sheet").querySelectorAll("[data-ax2]").forEach(b => b.onchange = () => setExtras(b.checked ? extraSets.concat([b.dataset.ax2]) : extraSets.filter(x => x !== b.dataset.ax2)));
   $("#sheet").querySelectorAll("[data-ahon]").forEach(b => b.onchange = () => {
     const [set, id] = b.dataset.ahon.split("|");
     heftState[id] = b.checked; save("sp.hefteOn", heftState);
@@ -8029,7 +8065,7 @@ function setShownRegions(list){
 renderTabs();
 $("#heftBar").onclick = e => {
   const hs = e.target.closest("[data-hsel]"); if (hs) { openHefteChooser(hs.dataset.hsel); return; }
-  const x2 = e.target.closest("[data-x2c]"); if (x2) { openExtraPicker(); return; }
+  const x2 = e.target.closest("[data-x2c]"); if (x2) { openHefteAll(); const sec = $("#x2sec"); if (sec) sec.scrollIntoView({ block: "start" }); return; }
   const b = e.target.closest("[data-pick]"); if (!b) return;
   const [set, id] = b.dataset.pick.split("|");
   if (id) setHeft(set, id);
