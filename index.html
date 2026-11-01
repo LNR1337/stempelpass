@@ -1220,6 +1220,9 @@ li.done.m-digital .chk{background:var(--digital);border-color:var(--digital)}
 .ovkeys .tile-k.d{border:2px solid var(--done);background:var(--done)}.ovkeys .tile-k.m-code{border-color:var(--code);background:var(--code)}
 .ovkeys .tile-k.m-digital{border-color:var(--digital);background:var(--digital)}.ovkeys .tile-k.x{border:2px solid var(--bad);background:var(--broken)}
 .hsel{border-style:dashed!important;opacity:.9}
+.hefts button.x2on{border-color:color-mix(in srgb,var(--forest-fg) 55%,transparent);background:color-mix(in srgb,var(--forest-fg) 12%,transparent);color:var(--forest-fg);display:inline-flex;align-items:center;gap:6px}
+.x2dots{display:inline-flex}.x2dots i{width:9px;height:9px;border-radius:50%;margin-right:-3px;border:1.5px solid var(--forest)}
+.x2row{display:flex;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px solid var(--line)}.x2row i{flex:none;width:16px;height:16px;border-radius:50%;border:3px solid;background:var(--open)}.x2row span{flex:1}.x2row small{display:block;color:var(--muted);font-size:.78rem}
 .hchoose{list-style:none;margin:0 0 10px;padding:0;border:1px solid var(--line);border-radius:12px}
 .hchoose li{display:flex;align-items:center;gap:10px;padding:10px 12px;border-top:1px solid var(--line)}.hchoose li:first-child{border-top:0}
 .hchoose .hic{font-size:1.5rem;width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:9px;background:var(--bg);flex:none}
@@ -1804,8 +1807,8 @@ SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", 
   levels: [[11, "Wandernadel"]],
   info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
   url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.47 Beta";
-const APP_CODE = 87;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.48 Beta";
+const APP_CODE = 88;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -2270,6 +2273,19 @@ function drawMarkers(fit){
     m.bindTooltip(s.n + " · " + s.name + (x ? " (kaputt)" : "") + (d && isGps(current, s.k) ? " · 📍 vor Ort gestempelt" : ""), { direction: "top", offset: [0,-8] });
     m.addTo(layer);
     pts.push([s.lat, s.lon]);
+  }
+  const have = new Set(visible().filter(hasPos).map(s => s.lat.toFixed(4) + "," + s.lon.toFixed(4)));
+  for (const xs of extraList()) {
+    for (const s of stamps[xs]) {
+      const pk = hasPos(s) ? s.lat.toFixed(4) + "," + s.lon.toFixed(4) : "";
+      if (!pk || have.has(pk)) continue;
+      have.add(pk);
+      const d = isDone(xs, s.k);
+      const m = L.circleMarker([s.lat, s.lon], { radius: 7, weight: 3, color: SET_COL[xs] || "#b36be0", fillColor: d ? (({ code: c.code, digital: c.digital })[methodOf(xs, s.k)] || c.done) : c.open, fillOpacity: legFilter || cmpMap ? 0.3 : 0.9, opacity: legFilter || cmpMap ? 0.4 : 1 });
+      m.on("click", () => { const prev = current; setExtras(extraSets.filter(x => x !== xs).concat([prev])); openStampIn(xs, s.k); renderHefts(); });   // Hefte tauschen – alle bleiben sichtbar
+      m.bindTooltip(`${SETS[xs].short} · ${s.n} · ${s.name}`, { direction: "top", offset: [0,-8] });
+      m.addTo(layer);
+    }
   }
   renderLegend(legCnt);
   renderCmpBar(cmpCnt);
@@ -2745,19 +2761,36 @@ function openLayoutAdmin(){
   };
 }
 
+/* Weitere Hefte: deren Stempel zusätzlich auf der Karte zeigen (Rand in der Heft-Farbe, Antippen öffnet sie im richtigen Heft) */
+const SET_COL = { hwn: "#3fbf6e", hws: "#8fd6a3", tou: "#c58ae8", tos: "#e3b4f5", tab: "#35c9d6", bro: "#ee8350", wip: "#d9a62e", dre: "#e06fa3", nhv: "#8fb34a", sax: "#6f8ff0" };
+let extraSets = (() => { const v = load("sp.extraSets", null); if (Array.isArray(v)) return v; const o = load("sp.extraSet", ""); return o ? [o] : []; })();
+function extraList(){ return extraSets.filter(st => st !== current && SETS[st] && stamps[st]); }
+function setExtras(l){ extraSets = l.filter((x, i, a) => a.indexOf(x) === i); save("sp.extraSets", extraSets); renderHefts(); drawMarkers(false); }
+function openExtraPicker(){
+  const cnt = st => `${stamps[st].filter(x => isDone(st, x.k)).length}/${stamps[st].length}`;
+  const list = SET_KEYS.filter(st => st !== current && stamps[st] && stamps[st].length);
+  openSheet(`<div class="kicker">Karte</div><h2>Weitere Hefte einblenden</h2><p class="hint" style="margin-top:-4px">Die Stempel der gewählten Hefte erscheinen zusätzlich auf der Karte – mit farbigem Rand. Antippen öffnet den Stempel im richtigen Heft.</p>
+    <div class="x2list">${list.map(st => `<label class="checkline x2row"><input type="checkbox" data-x2="${st}" ${extraSets.includes(st) ? "checked" : ""}><i style="border-color:${SET_COL[st]}"></i><span>${esc(SETS[st].title)}<small>${cnt(st)} gestempelt</small></span></label>`).join("")}</div>
+    <div class="actions"><button class="btn" id="x2Off">Alle aus</button><button class="btn primary" data-close>Fertig</button></div>`);
+  $("#sheet").querySelectorAll("[data-x2]").forEach(b => b.onchange = () => setExtras(b.checked ? extraSets.concat([b.dataset.x2]) : extraSets.filter(x => x !== b.dataset.x2)));
+  $("#x2Off").onclick = () => { setExtras([]); $("#sheet").querySelectorAll("[data-x2]").forEach(b => b.checked = false); };
+  bindClose();
+}
 function renderHefts(){
   const bar = $("#heftBar");
   const reg = REGION[current];
   const cnt = (set, id) => { const l = stamps[set].filter(x => !id || (id === "all" ? heftActive(x.heft) : x.heft === id)); return `${l.filter(x => isDone(set, x.k)).length}/${l.length}`; };
   const on = (set, id) => current === set && (!id || H() === id);
   const btn = (set, id, label) => `<button data-pick="${set}|${id || ""}" class="${on(set, id) ? "on" : ""}">${esc(label)} <small>${cnt(set, id)}</small></button>`;
-  if (reg === "tab" || reg === "sax") { bar.innerHTML = btn(reg, "", SETS[reg].title); bar.hidden = false; return; }
-  if (VOR_SETS.includes(reg)) { bar.innerHTML = btn(reg, "", SETS[reg].title); bar.hidden = false; return; }
+  const xl = extraList();
+  const x2 = xl.length ? `<button data-x2c="1" class="x2on"><span class="x2dots">${xl.map(st => `<i style="background:${SET_COL[st]}"></i>`).join("")}</span>＋ ${xl.length === 1 ? esc(SETS[xl[0]].short) : xl.length + " Hefte"}</button>` : `<button data-x2c="1" class="hsel">＋ Hefte einblenden</button>`;
+  if (reg === "tab" || reg === "sax") { bar.innerHTML = btn(reg, "", SETS[reg].title) + x2; bar.hidden = false; return; }
+  if (VOR_SETS.includes(reg)) { bar.innerHTML = btn(reg, "", SETS[reg].title) + x2; bar.hidden = false; return; }
   const main = reg === "harz" ? btn("hwn", "", "Wandernadel") : btn("tou", "", "Hauptheft");
   const sset = reg === "harz" ? "hws" : "tos";
   if (isSonder(current) && H() !== "all" && !heftActive(H())) setHeft(current, "all");
   bar.innerHTML = main + btn(sset, "all", "Alle Sonder") + SONDER[sset].hefts.filter(h => heftActive(h.id)).map(h => btn(sset, h.id, (h.icon ? h.icon + " " : "") + h.short)).join("") +
-    `<button data-hsel="${sset}" class="hsel">＋ Hefte</button>`;
+    `<button data-hsel="${sset}" class="hsel">＋ Hefte</button>` + x2;
   bar.hidden = false;
 }
 function render(fit){
@@ -7996,6 +8029,7 @@ function setShownRegions(list){
 renderTabs();
 $("#heftBar").onclick = e => {
   const hs = e.target.closest("[data-hsel]"); if (hs) { openHefteChooser(hs.dataset.hsel); return; }
+  const x2 = e.target.closest("[data-x2c]"); if (x2) { openExtraPicker(); return; }
   const b = e.target.closest("[data-pick]"); if (!b) return;
   const [set, id] = b.dataset.pick.split("|");
   if (id) setHeft(set, id);
