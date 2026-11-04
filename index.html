@@ -1287,7 +1287,7 @@ li.done.m-digital .chk{background:var(--digital);border-color:var(--digital)}
 #v-friends{position:relative}#v-friends[data-badge]:not([data-badge=""])::after{content:attr(data-badge);position:absolute;top:-6px;right:-4px;min-width:18px;height:18px;border-radius:9px;background:var(--bad);color:#fff;font:700 11px/18px var(--body);padding:0 4px}
 /* Profil mit Ringen */
 /* Profil nutzt die Farben der App (wie Karte, Liste und Freunde) */
-:root{--pb1:color-mix(in srgb,var(--forest) 78%,#7fb08f);--pb2:var(--forest);--pc-acc:var(--gold);--pc-hwn:var(--done);--pc-tou:var(--route);--pc-tab:var(--digital);--pc-sax:var(--code);--pc-vor:var(--open);--pc-dre:#7a9a3a;--pc-bro:#b0663a;--pc-wip:#c98a2b;--pc-son:var(--gold)}
+:root{--pc-kne:#4fb3e8;--pb1:color-mix(in srgb,var(--forest) 78%,#7fb08f);--pb2:var(--forest);--pc-acc:var(--gold);--pc-hwn:var(--done);--pc-tou:var(--route);--pc-tab:var(--digital);--pc-sax:var(--code);--pc-vor:var(--open);--pc-dre:#7a9a3a;--pc-bro:#b0663a;--pc-wip:#c98a2b;--pc-son:var(--gold)}
 .pkick{position:relative;z-index:2;color:#e8f0ea!important;opacity:.9;padding-right:118px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pbanner{height:96px;margin:-16px calc(-1 * max(18px,env(safe-area-inset-right,0px))) 0 calc(-1 * max(18px,env(safe-area-inset-left,0px)));background:linear-gradient(160deg,var(--pb1),var(--pb2) 70%);position:relative;height:126px}
 .sheet .pkick + .pbanner{margin-top:-34px}
@@ -1571,6 +1571,7 @@ body.compact-hdr header .progress{max-height:0;opacity:0;margin-top:0}
     <button role="tab" data-region="nhv" hidden>Nördl. Harzvorland</button>
     <button role="tab" data-region="dre" hidden>Dreiländereck</button>
     <button role="tab" data-region="wip" hidden>Wippertal</button>
+    <button role="tab" data-region="kne" hidden>Kneipp-Rallye</button>
   </div>
   <div class="hefts" id="heftBar"></div>
   <div class="progress">
@@ -1787,13 +1788,24 @@ const BRO_DATA = [
   [7, "Besucherbergwerk „Hühn“", 50.78376, 10.4221, "Trusetal – Position ungefähr"],
   [8, "Trusetaler Wasserfall", 50.79518, 10.41784, "Trusetal – Position ungefähr"]
 ];
-const VOR_SETS = ["bro", "nhv", "dre", "wip"];
-const SET_KEYS = ["hwn","hws","tou","tos","tab","bro","sax","wip","dre","nhv"];
+const KNE_DATA = [
+  [1, "Wassertretstelle Wiesenbek", 51.62058, 10.48136, "Am Wiesenbeker Teich – kleiner Parkplatz in der Nähe"],
+  [2, "Wassertretstelle Kurpark", 51.62899, 10.47342, "Im Kurpark – Parkplatz Ritscherstraße 4"],
+  [3, "Tretstelle Traumspielplatz", 51.62984, 10.4747, "Am Traumspielplatz – Parkplatz Ritscherstraße 4"],
+  [4, "Wassertretstelle Flößwehrtal", 51.63675, 10.48915, "Parkmöglichkeiten entlang der Straße Masttal"],
+  [5, "Wassertretstelle Heibek", 51.631393, 10.451575, "Parkplatz Lutterstraße"],
+  [6, "Wassertretstelle Augenquelle", 51.635835, 10.460087, "Parkplatz Lutterstraße 17"],
+  [7, "Tretstelle Andreasbachtal", 51.63206, 10.42424, "Parkplatz Großer Andreasbach"],
+  [8, "Wassertretstelle „Grade“ Lutter", 51.65761, 10.45515, "Blaue Lagune – Parkplatz Lutterstraße 17"],
+  [9, "Armbecken im Kurpark-Pavillon", 51.63207, 10.47807, "Überdachter Pavillon mit Armbecken – Parkplatz Ritscherstraße 4"]
+];
+const VOR_SETS = ["bro", "nhv", "dre", "wip", "kne"];
+const SET_KEYS = ["hwn","hws","tou","tos","tab","bro","sax","wip","dre","nhv","kne"];
 const SONDER = { hws: HWS, tos: TOS };
 const isSonder = set => set === "hws" || set === "tos";
-const REGION = { hwn: "harz", hws: "harz", tou: "thue", tos: "thue", tab: "tab", sax: "sax", wip: "wip", dre: "dre", nhv: "nhv", bro: "bro" };
+const REGION = { hwn: "harz", hws: "harz", tou: "thue", tos: "thue", tab: "tab", sax: "sax", wip: "wip", dre: "dre", nhv: "nhv", bro: "bro", kne: "kne" };
 /* Bereiche oben in der Leiste (in den Einstellungen wählbar) */
-const REGIONS = [["harz", "Harz", "hwn"], ["thue", "Touringen", "tou"], ["tab", "Bad Tabarz", "tab"], ["bro", "Brotterode", "bro"], ["sax", "Sächs. Schweiz", "sax"], ["nhv", "Nördl. Harzvorland", "nhv"], ["dre", "Dreiländereck", "dre"], ["wip", "Wippertal", "wip"]];
+const REGIONS = [["harz", "Harz", "hwn"], ["thue", "Touringen", "tou"], ["tab", "Bad Tabarz", "tab"], ["bro", "Brotterode", "bro"], ["sax", "Sächs. Schweiz", "sax"], ["nhv", "Nördl. Harzvorland", "nhv"], ["dre", "Dreiländereck", "dre"], ["wip", "Wippertal", "wip"], ["kne", "Bad Lauterberg", "kne"]];
 let shownRegions = load("sp.regions", ["harz", "thue", "tab"]).flatMap(r => r === "vor" ? ["nhv", "dre", "wip"] : [r]).filter(r => REGIONS.some(x => x[0] === r));
 if (!shownRegions.length) shownRegions = ["harz"];
 const HWN_BASE = "https://www.harzer-wandernadel.de/stempelstellen/uebersichtskarte/";
@@ -1815,6 +1827,10 @@ SETS.tab = { title: "Bad Tabarzer Wandernadel", short: "Bad Tabarz", sub: "Bad T
   levels: [[8, "Bronze"], [15, "Silber"], [23, "Gold"]],
   info: "24 Stempel auf 7 Rundwegen rund um Bad Tabarz und den Großen Inselsberg. Stempelheft (1,50 €) und Nadel (3 €) in der Touristinfo Bad Tabarz, Reinhardsbrunner Str. 39. Bronze ab 8, Silber ab 15, Gold ab 23 Stempeln.",
   url: "https://www.outdooractive.com/de/list/wandernadel-bad-tabarz/307849739/" };
+SETS.kne = { title: "Wassertretstellen-Rallye Bad Lauterberg", short: "Kneipp-Rallye", sub: "Bad Lauterberg im Harz · 9 Stempelstellen", center: [51.636, 10.46], zoom: 13, near: " Bad Lauterberg",
+  levels: [[9, "Kneipp-Abzeichen"]],
+  info: "„Kneipp dich fit!“ – 8 Wassertretstellen und das Armbecken im Kurpark-Pavillon rund um Bad Lauterberg. An jeder Station gibt es einen Stempel. Das Stempelheft gibt es in der Tourist-Information (Ritscherstraße 4), mit vollem Heft gibt es dort das Abzeichen. Die Stationen sind von Mitte Oktober bis Mitte April geschlossen.",
+  url: "https://badlauterberg-urlaub.de/gesundheit/kneipp-fitness/wasser/", linkLabel: "Bad Lauterberg – Wassertretstellen" };
 SETS.bro = { title: "Wanderabzeichen Brotterode-Trusetal", short: "Brotterode", sub: "Brotterode-Trusetal · 8 Stempelstellen", center: [50.82, 10.44], zoom: 12, near: " Brotterode-Trusetal",
   levels: [[5, "Wanderabzeichen"]],
   info: "8 kleine Stempelhäuschen rund um Brotterode-Trusetal. Mit 5 Stempeln auf der Gästekarte bzw. im Stempelpass gibt es in den Tourist-Informationen Trusetal und Brotterode das Wanderabzeichen.",
@@ -1835,8 +1851,8 @@ SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", 
   levels: [[11, "Wandernadel"]],
   info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
   url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.50 Beta";
-const APP_CODE = 90;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.51 Beta";
+const APP_CODE = 91;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -1866,7 +1882,7 @@ let done = loadDone();
 const broken = Object.fromEntries(SET_KEYS.map(st => [st, load("sp.broken." + st, {})]));
 const notes  = Object.fromEntries(SET_KEYS.map(st => [st, load("sp.notes." + st, {})]));
 let official = { hwn: load("sp.official.hwn", null), tou: load("sp.official.tou", null), hws: null, tos: null };
-const photos = { hwn: {}, tou: {}, hws: {}, tos: {}, tab: {}, sax: {}, wip: {}, dre: {}, nhv: {}, bro: {} };
+const photos = { hwn: {}, tou: {}, hws: {}, tos: {}, tab: {}, sax: {}, wip: {}, dre: {}, nhv: {}, bro: {}, kne: {} };
 /* Art des Stempels je Heft-Profil: { pid: { set: { k: { m: "code"|"digital", c: "Code" } } } }; fehlt = im Heft gestempelt */
 let methods = load("sp.methods", {});
 /* Per GPS vor Ort bestätigt (wie in der Harz-App: im Umkreis von ca. 50 m): { pid: { set: { k: 1 } } } */
@@ -1901,9 +1917,9 @@ function setMethod(set, k, m, code){
   if (!m || m === "stamp") delete p[set][k]; else p[set][k] = { m, c: String(code || "").trim().slice(0, 40) };
   save("sp.methods", methods);
 }
-const stamps = { hwn: [], tou: [], hws: [], tos: [], tab: [], sax: [], wip: [], dre: [], nhv: [], bro: [] };
-const byKey = { hwn: new Map(), tou: new Map(), hws: new Map(), tos: new Map(), tab: new Map(), sax: new Map(), wip: new Map(), dre: new Map(), nhv: new Map(), bro: new Map() };
-const routes = { hwn: [], tou: [], hws: [], tos: [], tab: [], sax: [], wip: [], dre: [], nhv: [], bro: [] };
+const stamps = { hwn: [], tou: [], hws: [], tos: [], tab: [], sax: [], wip: [], dre: [], nhv: [], bro: [], kne: [] };
+const byKey = { hwn: new Map(), tou: new Map(), hws: new Map(), tos: new Map(), tab: new Map(), sax: new Map(), wip: new Map(), dre: new Map(), nhv: new Map(), bro: new Map(), kne: new Map() };
+const routes = { hwn: [], tou: [], hws: [], tos: [], tab: [], sax: [], wip: [], dre: [], nhv: [], bro: [], kne: [] };
 let current = load("sp.set", "hwn"); if (!SETS[current]) current = "hwn";
 let view = "map", filter = "all", sortBy = "num", query = "";
 let rFilter = "all", rSort = "name", rQuery = "";
@@ -1995,7 +2011,7 @@ function initData(){
   stamps.tos = TOS.stamps.map(s => Object.assign({}, s));
   stamps.tab = TAB_DATA.map(([n, name, lat, lon, hint]) => ({ k: String(n), n, name, lat, lon, hint: hint || "" }));
   stamps.sax = SAX_DATA.map(([n, name, lat, lon, hint]) => ({ k: String(n), n, name, lat, lon, hint: hint || "" }));
-  for (const [set, D] of [["wip", WIP_DATA], ["dre", DRE_DATA], ["nhv", NHV_DATA], ["bro", BRO_DATA]]) stamps[set] = D.map(([n, name, lat, lon, hint]) => ({ k: String(n), n, name, lat, lon, hint: hint || "" }));
+  for (const [set, D] of [["wip", WIP_DATA], ["dre", DRE_DATA], ["nhv", NHV_DATA], ["bro", BRO_DATA], ["kne", KNE_DATA]]) stamps[set] = D.map(([n, name, lat, lon, hint]) => ({ k: String(n), n, name, lat, lon, hint: hint || "" }));
   { const h = stamps.hwn.find(x => x.n === 219), w = stamps.wip.find(x => x.n === 20); if (h && w) { w.lat = h.lat; w.lon = h.lon; } }
   for (const set of SET_KEYS) stamps[set].forEach(s => byKey[set].set(s.k, s));
   applyCustomHefte(load("sp.customHefte", []), true);
@@ -2796,7 +2812,7 @@ function openLayoutAdmin(){
 }
 
 /* Weitere Hefte: deren Stempel zusätzlich auf der Karte zeigen (Rand in der Heft-Farbe, Antippen öffnet sie im richtigen Heft) */
-const SET_COL = { hwn: "#3fbf6e", hws: "#8fd6a3", tou: "#c58ae8", tos: "#e3b4f5", tab: "#35c9d6", bro: "#ee8350", wip: "#d9a62e", dre: "#e06fa3", nhv: "#8fb34a", sax: "#6f8ff0" };
+const SET_COL = { hwn: "#3fbf6e", hws: "#8fd6a3", tou: "#c58ae8", tos: "#e3b4f5", tab: "#35c9d6", bro: "#ee8350", wip: "#d9a62e", dre: "#e06fa3", nhv: "#8fb34a", kne: "#4fb3e8", sax: "#6f8ff0" };
 let extraSets = (() => { const v = load("sp.extraSets", null); if (Array.isArray(v)) return v; const o = load("sp.extraSet", ""); return o ? [o] : []; })();
 function extraList(){ return extraSets.filter(st => st !== current && SETS[st] && stamps[st]); }
 function setExtras(l){ extraSets = l.filter((x, i, a) => a.indexOf(x) === i); save("sp.extraSets", extraSets); renderHefts(); drawMarkers(false); }
@@ -3984,6 +4000,7 @@ function statsFields(){
     tab: { integerValue: String(Object.keys(d.tab || {}).length) }, sax: { integerValue: String(Object.keys(d.sax || {}).length) },
     bro: { integerValue: String(Object.keys(d.bro || {}).length) }, wip: { integerValue: String(Object.keys(d.wip || {}).length) },
     dre: { integerValue: String(Object.keys(d.dre || {}).length) }, nhv: { integerValue: String(Object.keys(d.nhv || {}).length) },
+    kne: { integerValue: String(Object.keys(d.kne || {}).length) },
     recent: { stringValue: JSON.stringify(recentDays(d)) }
   };
   const ls = load("sp.lastStamp.p0", null);
@@ -3997,7 +4014,7 @@ function statsFields(){
 const STAT_MASK_OLD = ["hwn","hws","tou","tos","level","last","updated"].map(f => "updateMask.fieldPaths=" + f).join("&");
 const STAT_MASK = STAT_MASK_OLD + "&" + ["tab","sax","recent"].map(f => "updateMask.fieldPaths=" + f).join("&");
 const STAT_MASK_VER = STAT_MASK + "&updateMask.fieldPaths=ver";
-const STAT_EXTRA = ["bro","wip","dre","nhv"];
+const STAT_EXTRA = ["bro","wip","dre","nhv","kne"];
 const STAT_MASK_ALL = STAT_MASK_VER + "&" + STAT_EXTRA.map(f => "updateMask.fieldPaths=" + f).join("&");
 /* Stempel pro Tag der letzten 35 Tage – damit Freunde „Diese Woche“ und „Dieser Monat“ rechnen können */
 function recentDays(d){
@@ -4011,7 +4028,7 @@ function decodeProfile(doc){
   let last = null;
   if (f.last && f.last.mapValue) { const m = f.last.mapValue.fields || {}; last = { set: v(m.set), n: v(m.n), name: v(m.name), date: v(m.date) }; }
   let recent = {}; try { recent = JSON.parse(v(f.recent) || "{}") || {}; } catch(e) { recent = {}; }
-  return { ver: v(f.ver) || 0, code: doc.name.split("/").pop(), uid: v(f.uid), name: v(f.name) || "?", hwn: v(f.hwn) || 0, hws: v(f.hws) || 0, tou: v(f.tou) || 0, tos: v(f.tos) || 0, tab: v(f.tab) || 0, sax: v(f.sax) || 0, bro: v(f.bro) || 0, wip: v(f.wip) || 0, dre: v(f.dre) || 0, nhv: v(f.nhv) || 0, recent, level: v(f.level) || "", updated: v(f.updated), last };
+  return { ver: v(f.ver) || 0, code: doc.name.split("/").pop(), uid: v(f.uid), name: v(f.name) || "?", hwn: v(f.hwn) || 0, hws: v(f.hws) || 0, tou: v(f.tou) || 0, tos: v(f.tos) || 0, tab: v(f.tab) || 0, sax: v(f.sax) || 0, bro: v(f.bro) || 0, wip: v(f.wip) || 0, dre: v(f.dre) || 0, nhv: v(f.nhv) || 0, kne: v(f.kne) || 0, recent, level: v(f.level) || "", updated: v(f.updated), last };
 }
 async function pushProfile(){
   if (!fb.ready() || !username) return;
@@ -4333,7 +4350,7 @@ function renderFriends(){
   const ms = board ? board.list.slice().sort((x, y) => key(y) - key(x) || totalOf(y) - totalOf(x) || x.name.localeCompare(y.name, "de")) : [];
   /* Alle Hefte – je Person nur die, in denen sie mindestens einen Stempel hat */
   const cols = [["Harz", "hwn", "var(--done)"], ["Touringen", "tou", "var(--route)"], ["Tabarz", "tab", "var(--digital)"], ["Brotterode", "bro", "#ee8350"],
-    ["Wippertal", "wip", "#d9a62e"], ["Dreiländereck", "dre", "#e06fa3"], ["Harzvorland", "nhv", "#8fb34a"], ["Sachsen", "sax", "var(--code)"]]
+    ["Wippertal", "wip", "#d9a62e"], ["Dreiländereck", "dre", "#e06fa3"], ["Harzvorland", "nhv", "#8fb34a"], ["Kneipp-Rallye", "kne", "#4fb3e8"], ["Sachsen", "sax", "var(--code)"]]
     .map(([t, k, col]) => [t, m => m[k] || 0, (stamps[k] || []).length || 1, col]);
   let rank = 0, prev = null, myRank = 0;
   const ranked = ms.map((m, i) => { if (key(m) !== prev) { rank = i + 1; prev = key(m); } if (mine(m.code)) myRank = rank; return { m, rank }; });
@@ -6204,7 +6221,7 @@ function pinsReached(){
   const nb = Object.keys(done.tab).length;
   for (const [n, name] of SETS.tab.levels) if (nb >= n) out.push({ id: "tab:" + n, title: name + "-Nadel Bad Tabarz", sub: `Bad Tabarzer Wandernadel · ${n} Stempel`, url: SETS.tab.url });
   if (Object.keys(done.sax).length >= 11) out.push({ id: "sax:11", title: "Wandernadel Sächsische Schweiz", sub: "Sächsische Schweiz Wanderpass · alle 11 Stempel", url: SETS.sax.url });
-  for (const st of ["bro", "wip", "nhv"]) for (const [n, name] of SETS[st].levels) if (Object.keys(done[st]).length >= n) out.push({ id: st + ":" + n, title: name + (st === "bro" ? " Brotterode" : ""), sub: `${SETS[st].title} · ${n} Stempel`, url: SETS[st].url });
+  for (const st of ["bro", "wip", "nhv", "kne"]) for (const [n, name] of SETS[st].levels) if (Object.keys(done[st]).length >= n) out.push({ id: st + ":" + n, title: name + (st === "bro" ? " Brotterode" : ""), sub: `${SETS[st].title} · ${n} Stempel`, url: SETS[st].url });
   const nt = Object.keys(done.tou).length;
   for (const [n, name] of SETS.tou.levels) if (nt >= n) out.push({ id: "tou:" + n, title: "Abzeichen " + name, sub: `Touringen · ${n === 430 ? "alle 430" : n} Stempel`, url: SETS.tou.pinsUrl });
   for (const { set, h } of fullHefte(done)) if (heftActive(h.id)) out.push({ id: set + ":" + h.id, title: h.title, sub: set === "hws" ? "Themenheft voll – Nadel abholen" : "Sonderedition komplett", url: h.url || "" });
@@ -6357,8 +6374,8 @@ function pinReminder(){
 }
 
 /* ---------- Freunde-Neuigkeiten ---------- */
-const SET_NAMES = { hwn: "Harz", hws: "Harz-Sonder", tou: "Touringen", tos: "Touringen-Sonder", tab: "Bad Tabarz", sax: "Sächs. Schweiz", wip: "Wippertal", dre: "Dreiländereck", nhv: "Nördl. Harzvorland", bro: "Brotterode" };
-const mTotal = m => m.hwn + m.tou + (m.tab || 0) + (m.sax || 0) + (m.bro || 0) + (m.wip || 0) + (m.dre || 0) + (m.nhv || 0);   // wie in der Rangliste: ohne Sonderstempel
+const SET_NAMES = { hwn: "Harz", hws: "Harz-Sonder", tou: "Touringen", tos: "Touringen-Sonder", tab: "Bad Tabarz", sax: "Sächs. Schweiz", wip: "Wippertal", dre: "Dreiländereck", nhv: "Nördl. Harzvorland", bro: "Brotterode" , kne: "Kneipp-Rallye" };
+const mTotal = m => m.hwn + m.tou + (m.tab || 0) + (m.sax || 0) + (m.bro || 0) + (m.wip || 0) + (m.dre || 0) + (m.nhv || 0) + (m.kne || 0);   // wie in der Rangliste: ohne Sonderstempel
 function feedHtml(list){
   const items = list.filter(m => m.code !== username.code && m.last && m.last.date && m.last.n)
     .sort((a, b) => b.last.date.localeCompare(a.last.date) || String(b.updated).localeCompare(String(a.updated))).slice(0, 8);
@@ -6634,6 +6651,7 @@ const HEFT_GET = [
   ["wip", "🚂", "In der Wipperliese, in teilnehmenden Gaststätten, an der Parkeisenbahn Vatterode, in der Tourist-Info Eisleben und im Büro der Mansfelder Bergwerksbahn – oder per Bestellformular (Versand 2 €).", SETS.wip.url, "Mansfelder Bergwerksbahn"],
   ["dre", "🗺️", "In den Tourist-Infos Pansfelde, Ballenstedt, Harzgerode, Meisdorf und Aschersleben, in Schulles Konsum Mehringen und bei der Seeland GmbH (Schadeleben). Heft 3 € Schutzgebühr, die Nadel nach allen 22 Stempeln 7,50 €.", "https://dreilaendereckpfad.de/vertriebsstellen/", "Vertriebsstellen"],
   ["nhv", "🌾", "Den Stempelpass kannst du beim Tourismusverband Nördliches Harzvorland herunterladen oder in den Samtgemeinden und Tourist-Infos mitnehmen.", SETS.nhv.url, "Nördliches Harzvorland"],
+  ["kne", "💧", "In der Tourist-Information Bad Lauterberg, Ritscherstraße 4 (Mo–Fr 9–17, Sa 9–13 Uhr; 1.11.–18.12. Mo–Fr 10–16 Uhr). Mit vollem Stempelheft gibt es dort das Abzeichen. Die Stationen sind Mitte Oktober bis Mitte April geschlossen.", "https://badlauterberg-urlaub.de/aktivitaeten/wandern/wander-challenges/", "Wander-Challenges"],
   ["sax", "🪨", "Infos zum Heft und wo es das gibt, findest du auf der Seite zum Wanderpass.", SETS.sax.url, "Zum Wanderpass"]];
 function openHefteGet(back){
   const mine = HEFT_GET.filter(([st]) => shownRegions.includes(REGION[st]));
@@ -6649,7 +6667,7 @@ function openHefteGet(back){
 function openHefteAll(){
   const sw = (attr, id, on) => `<label class="switch"><input type="checkbox" ${attr}="${esc(id)}" ${on ? "checked" : ""}><i></i></label>`;
   const regRow = ([r, t]) => { const c = regionCount(r);
-    return `<li><span class="hic">${{ harz: "⛰️", thue: "🌲", tab: "🏔️", bro: "🏠", sax: "🪨", nhv: "🌾", dre: "🗺️", wip: "🚂" }[r] || "📘"}</span><span class="t"><b>${esc(r === "sax" ? "Sächsische Schweiz" : t)}</b><small>${c.n} von ${c.total} gesammelt</small></span>${sw("data-areg", r, shownRegions.includes(r))}</li>`; };
+    return `<li><span class="hic">${{ harz: "⛰️", thue: "🌲", tab: "🏔️", bro: "🏠", sax: "🪨", nhv: "🌾", dre: "🗺️", wip: "🚂", kne: "💧" }[r] || "📘"}</span><span class="t"><b>${esc(r === "sax" ? "Sächsische Schweiz" : t)}</b><small>${c.n} von ${c.total} gesammelt</small></span>${sw("data-areg", r, shownRegions.includes(r))}</li>`; };
   const heftRows = set => SONDER[set].hefts.map(h => { const l = stamps[set].filter(x => x.heft === h.id), n = l.filter(x => isDone(set, x.k)).length;
     return `<li><span class="hic">${h.icon || "📘"}</span><span class="t"><b>${esc(h.title)}</b><small>${l.length} Stempel${n ? ` · ${n} gesammelt` : ""}</small></span>${sw("data-ahon", set + "|" + h.id, heftActive(h.id))}</li>`; }).join("");
   openSheet(`<div class="kicker">Einstellungen</div><h2>📚 Gebiete & Hefte</h2>
@@ -6742,7 +6760,7 @@ function pinsOf(d){
   const nb = Object.keys(d.tab || {}).length;
   for (const [n, name] of SETS.tab.levels) if (nb >= n) out.push(name + " Bad Tabarz");
   if (Object.keys(d.sax || {}).length >= 11) out.push("Wandernadel Sächs. Schweiz");
-  for (const st of ["bro", "wip", "nhv"]) for (const [n, name] of SETS[st].levels) if (Object.keys(d[st] || {}).length >= n) out.push(name + (st === "bro" ? " Brotterode" : ""));
+  for (const st of ["bro", "wip", "nhv", "kne"]) for (const [n, name] of SETS[st].levels) if (Object.keys(d[st] || {}).length >= n) out.push(name + (st === "bro" ? " Brotterode" : ""));
   for (const { h } of fullHefte(d)) out.push(h.short);
   return out;
 }
@@ -6933,8 +6951,8 @@ function shareLevel(lv, newTitle){
 }
 
 /* ---------- 🗺️ Stempelkarte im Profil: alle gestempelten Punkte als Punktewolke ---------- */
-const PM_COL = { hwn: "--pc-hwn", hws: "--pc-son", tou: "--pc-tou", tos: "--pc-son", tab: "--pc-tab", bro: "--pc-bro", sax: "--pc-sax", nhv: "--pc-vor", dre: "--pc-dre", wip: "--pc-wip" };
-const PM_NAME = { harz: "Harz", thue: "Thüringen", tab: "Tabarz", bro: "Brotterode", sax: "Sächs. Schweiz", nhv: "Harzvorland", dre: "Dreiländereck", wip: "Wippertal" };
+const PM_COL = { hwn: "--pc-hwn", hws: "--pc-son", tou: "--pc-tou", tos: "--pc-son", tab: "--pc-tab", bro: "--pc-bro", sax: "--pc-sax", nhv: "--pc-vor", dre: "--pc-dre", wip: "--pc-wip" , kne: "--pc-kne" };
+const PM_NAME = { harz: "Harz", thue: "Thüringen", tab: "Tabarz", bro: "Brotterode", sax: "Sächs. Schweiz", nhv: "Harzvorland", dre: "Dreiländereck", wip: "Wippertal" , kne: "Bad Lauterberg" };
 function profMapHtml(c){
   if (!c || !c.stamps) return "";
   const got = [];
@@ -7402,7 +7420,7 @@ function openStats(){
   const now = new Date();
   const months = [];
   for (let i = 11; i >= 0; i--) { const d = new Date(now.getFullYear(), now.getMonth() - i, 1); months.push(d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0")); }
-  const per = { hwn: {}, tou: {}, hws: {}, tos: {}, tab: {}, sax: {}, wip: {}, dre: {}, nhv: {}, bro: {} };
+  const per = { hwn: {}, tou: {}, hws: {}, tos: {}, tab: {}, sax: {}, wip: {}, dre: {}, nhv: {}, bro: {}, kne: {} };
   const all = [];
   for (const set of SET_KEYS) for (const d of Object.values(done[set])) { per[set][d.slice(0,7)] = (per[set][d.slice(0,7)] || 0) + 1; all.push(d); }
   all.sort();
@@ -8337,7 +8355,7 @@ function switchSet(set){
   showRoute(null);
   render(true);
 }
-const lastInRegion = Object.assign({ harz: "hwn", thue: "tou", tab: "tab", sax: "sax", nhv: "nhv", dre: "dre", wip: "wip", bro: "bro" }, load("sp.lastInRegion", {}));
+const lastInRegion = Object.assign({ harz: "hwn", thue: "tou", tab: "tab", sax: "sax", nhv: "nhv", dre: "dre", wip: "wip", bro: "bro", kne: "kne" }, load("sp.lastInRegion", {}));
 function renderTabs(){
   const box = document.querySelector(".tabs");
   box.classList.toggle("many", shownRegions.length > 3);
