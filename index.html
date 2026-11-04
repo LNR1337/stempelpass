@@ -1851,8 +1851,8 @@ SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", 
   levels: [[11, "Wandernadel"]],
   info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
   url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.51 Beta";
-const APP_CODE = 91;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.52 Beta";
+const APP_CODE = 92;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -2785,10 +2785,14 @@ function openRegionPick(){
     <div class="reglist">${REGIONS.filter(([r]) => shownRegions.includes(r)).map(([r, t]) => { const c = regionCount(r);
       return `<button data-reg="${r}" class="${REGION[current] === r ? "on" : ""}"><span class="ring" style="--p:${c.total ? Math.round(c.n / c.total * 100) : 0};background:conic-gradient(var(--gold) calc(var(--p) * 1%),var(--line) 0)"><span>${c.n}</span></span>
         <span><b>${r === "sax" ? "Sächsische Schweiz" : t}</b><small>${c.n} von ${c.total} ${r === "harz" || r === "thue" ? "im Hauptheft" : "Stempeln"}</small></span></button>`; }).join("")}</div>
-    <p style="margin-top:12px;font-size:.85rem">Welche Gebiete hier stehen, stellst du im Menü unter „Bereiche oben anzeigen“ ein.</p>
+    ${REGIONS.some(([r]) => !shownRegions.includes(r)) ? `<h3 style="margin-top:16px">Weitere Gebiete</h3><p class="hint" style="margin-top:-4px">Antippen blendet das Gebiet oben mit ein.</p>
+    <div class="reglist more">${REGIONS.filter(([r]) => !shownRegions.includes(r)).map(([r, t]) => { const c = regionCount(r);
+      return `<button data-reg="${r}" data-add="1"><span class="ring" style="--p:0;background:var(--line)"><span>＋</span></span><span><b>${r === "sax" ? "Sächsische Schweiz" : t}</b><small>${esc(SETS[REGIONS.find(x => x[0] === r)[2]].title)} · ${c.total} Stempel</small></span></button>`; }).join("")}</div>` : ""}
+    <p style="margin-top:12px;font-size:.85rem">Welche Gebiete hier oben stehen, stellst du unter 📚 Hefte → Gebiete ein.</p>
     <div class="actions"><button class="btn quiet" id="sClose">Schließen</button></div>`);
   $("#sheet").querySelectorAll("[data-reg]").forEach(b => b.onclick = () => {
     const r = b.dataset.reg; closeSheet();
+    if (b.dataset.add) { shownRegions = REGIONS.map(x => x[0]).filter(x => x === r || shownRegions.includes(x)); save("sp.regions", shownRegions); renderTabs(); toast(`${REGIONS.find(x => x[0] === r)[1]} oben eingeblendet`); }
     if (REGION[current] !== r) switchSet(lastInRegion[r] || REGIONS.find(x => x[0] === r)[2]);
   });
   bindClose();
