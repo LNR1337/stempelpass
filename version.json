@@ -1,6 +1,6 @@
 {
- "code": 93,
- "version": "0.9.53 Beta",
- "notes": "Neu: Postfach für Admins & Moderatoren, Fotos melden, Schreibverbot, Änderungsprotokoll, Defekte selbst markieren, Ankündigungen mit Ablaufdatum, Statistik für alle Hefte. Außerdem: Wanderschätze Wilde Heimat (mit Defektliste), Kneipp-Ringe im Profil, Gerade unterwegs & Touren nachwandern, neue Routen-Ansicht mit Vorschau und Gehzeit, Stempel in der Nähe pro Heft.",
+ "code": 94,
+ "version": "0.9.54 Beta",
+ "notes": "Neue untere Leiste mit Symbolen und Benachrichtigungs-Bubble bei Freunde. Karten-Quellenangabe ist jetzt ein kleines ⓘ zum Aufklappen.",
  "apk": "Stempelpass.apk"
 }

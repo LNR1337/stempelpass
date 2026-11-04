@@ -879,6 +879,10 @@ li.hoff{opacity:.75}
 .sv-opt{display:flex;align-items:center;gap:12px;text-align:left;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--fg);padding:12px 2px;font:inherit}
 .sv-opt i{font-style:normal;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:1.2rem;background:var(--bg);flex:none}
 .sv-opt b{display:block;font-size:.95rem}.sv-opt small{color:var(--muted);font-size:.8rem}
+.leaflet-control-attribution.attr-mini{position:relative;min-width:22px;height:22px;padding:0!important;margin:0 8px 8px 0!important;border-radius:11px;background:color-mix(in srgb,var(--surface) 85%,transparent)!important;color:var(--muted);font-size:0!important;line-height:22px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.18);white-space:nowrap;overflow:hidden;max-width:22px;transition:max-width .3s ease}
+.leaflet-control-attribution.attr-mini::before{content:"ⓘ";position:absolute;left:0;top:0;width:22px;text-align:center;font-size:14px}
+.leaflet-control-attribution.attr-mini.open{max-width:calc(100vw - 30px);padding:0 10px 0 26px!important;font-size:11px!important}
+.leaflet-control-attribution.attr-mini a{color:var(--code)}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
@@ -987,12 +991,20 @@ li.done .nm{color:var(--muted)}
 .rows li.rdone .nm::after{content:" ✓";color:var(--done)}
 .rstats .ok{color:var(--done);font-weight:600}
 
-nav.bottom{display:flex;gap:8px;background:var(--surface);border-top:1px solid var(--line);
-  padding:8px max(16px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
-nav.bottom button{flex:1;border:1px solid var(--line);background:transparent;border-radius:10px;padding:10px 4px;font-weight:600;font-size:.92rem}
-nav.bottom button.on{background:var(--forest);color:var(--forest-fg);border-color:var(--forest)}
-nav.bottom #locBtn{flex:0 0 48px;font-size:1.15rem;padding:8px 0}
-#locBtn.active{border-color:var(--me);color:var(--me)}
+nav.bottom{display:flex;align-items:center;gap:8px;background:var(--surface);border-top:1px solid var(--line);
+  padding:8px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
+nav.bottom .nseg{flex:1;display:flex;gap:2px;background:color-mix(in srgb,var(--fg) 7%,transparent);border-radius:16px;padding:4px;min-width:0}
+nav.bottom .nseg button{flex:1 1 0;min-width:0;border:0;background:none;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px;padding:9px 0;border-radius:12px;font:600 .85rem/1 var(--body);transition:flex-grow .25s ease,background .25s,color .25s}
+nav.bottom .nseg button i{position:relative;display:grid;place-items:center}
+nav.bottom .nseg button span{display:none;white-space:nowrap;overflow:hidden}
+nav.bottom .nseg button.on{flex-grow:2.2;background:var(--forest);color:var(--forest-fg);box-shadow:0 3px 10px color-mix(in srgb,var(--forest) 40%,transparent)}
+nav.bottom .nseg button.on span{display:inline}
+nav.bottom svg{width:21px;height:21px;flex:none}
+nav.bottom #locBtn{flex:0 0 46px;height:46px;border:1px solid var(--line);background:transparent;border-radius:14px;display:grid;place-items:center;padding:0;color:var(--forest)}
+nav.bottom #locBtn svg{width:22px;height:22px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) nav.bottom .nseg button.on{background:color-mix(in srgb,var(--done) 30%,var(--surface));color:#fff}:root:not([data-theme="light"]) nav.bottom #locBtn{color:var(--done)}}
+:root[data-theme="dark"] nav.bottom .nseg button.on{background:color-mix(in srgb,var(--done) 30%,var(--surface));color:#fff}:root[data-theme="dark"] nav.bottom #locBtn{color:var(--done)}
+#locBtn.active{border-color:var(--me);color:var(--me);background:color-mix(in srgb,var(--me) 10%,transparent)}
 
 .status{position:absolute;left:50%;top:12px;transform:translateX(-50%);z-index:10;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:99px;padding:7px 14px;font-size:.88rem;box-shadow:0 4px 14px rgba(0,0,0,.15);max-width:calc(100% - 32px);text-align:center}
 .status:empty{display:none}
@@ -1090,7 +1102,6 @@ a.near-ok{text-decoration:none;display:inline-block}
 details.more summary{cursor:pointer;color:var(--muted);font-size:.9rem;margin:6px 0}
 .status.click{cursor:pointer}
 
-nav.bottom button{font-size:.88rem}
 .fbody{padding:14px max(16px,env(safe-area-inset-right,0px)) 20px max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:12px}
 .fbody h2{font:700 1.25rem/1.2 var(--display);margin:0}
 .fbody p{margin:0;color:var(--muted);font-size:.92rem}
@@ -1291,7 +1302,9 @@ li.done.m-digital .chk{background:var(--digital);border-color:var(--digital)}
 .reqs:not(.sent){border-color:var(--gold);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 25%,transparent)}
 .reqs .mini{border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:9px;padding:8px 11px;font:600 .84rem var(--body);flex:none}
 .reqs .mini.primary,.mini.primary{background:var(--forest);color:var(--forest-fg);border-color:var(--forest)}
-#v-friends{position:relative}#v-friends[data-badge]:not([data-badge=""])::after{content:attr(data-badge);position:absolute;top:-6px;right:-4px;min-width:18px;height:18px;border-radius:9px;background:var(--bad);color:#fff;font:700 11px/18px var(--body);padding:0 4px}
+#v-friends{position:relative}#v-friends i[data-badge]:not([data-badge=""])::after{content:attr(data-badge);position:absolute;top:-7px;right:-10px;min-width:18px;height:18px;padding:0 4px;box-sizing:border-box;border-radius:9px;background:var(--bad);color:#fff;font:700 10px/1 var(--body);display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;border:2px solid var(--surface);box-shadow:0 1px 4px rgba(0,0,0,.25);animation:nbPop .35s ease}
+#v-friends.on i[data-badge]:not([data-badge=""])::after{border-color:var(--forest)}
+@keyframes nbPop{0%{transform:scale(0)}70%{transform:scale(1.2)}100%{transform:scale(1)}}
 /* Profil mit Ringen */
 /* Profil nutzt die Farben der App (wie Karte, Liste und Freunde) */
 :root{--pc-kne:#4fb3e8;--pc-swv:#b8804a;--pb1:color-mix(in srgb,var(--forest) 78%,#7fb08f);--pb2:var(--forest);--pc-acc:var(--gold);--pc-hwn:var(--done);--pc-tou:var(--route);--pc-tab:var(--digital);--pc-sax:var(--code);--pc-vor:var(--open);--pc-dre:#7a9a3a;--pc-bro:#b0663a;--pc-wip:#c98a2b;--pc-son:var(--gold)}
@@ -1668,11 +1681,13 @@ body.compact-hdr header .progress{max-height:0;opacity:0;margin-top:0}
 <input type="file" id="fileInput" accept=".json,application/json,text/plain" hidden>
 
 <nav class="bottom">
-  <button data-view="map" class="on" id="v-map">Karte</button>
-  <button data-view="list" id="v-list">Liste</button>
-  <button data-view="routes" id="v-routes">Routen</button>
-  <button data-view="friends" id="v-friends">Freunde</button>
-  <button id="locBtn" aria-label="Mein Standort">◎</button>
+  <div class="nseg">
+    <button data-view="map" class="on" id="v-map" aria-label="Karte"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z"/><path d="M9 4v14M15 6v14"/></svg></i><span>Karte</span></button>
+    <button data-view="list" id="v-list" aria-label="Liste"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg></i><span>Liste</span></button>
+    <button data-view="routes" id="v-routes" aria-label="Routen"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="5" r="2.2"/><path d="M8 19h7.5a3.5 3.5 0 0 0 0-7h-7a3.5 3.5 0 0 1 0-7H16"/></svg></i><span>Routen</span></button>
+    <button data-view="friends" id="v-friends" aria-label="Freunde"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c.6-3.4 3-5.4 6-5.4s5.4 2 6 5.4"/><circle cx="17" cy="9" r="2.5"/><path d="M16.5 14.6c2.4.2 4 1.9 4.5 5"/></svg></i><span>Freunde</span></button>
+  </div>
+  <button id="locBtn" aria-label="Mein Standort"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><circle cx="12" cy="12" r="7.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg></button>
 </nav>
 
 <div id="scrim" class="scrim" hidden></div>
@@ -1924,8 +1939,8 @@ SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", 
   levels: [[11, "Wandernadel"]],
   info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
   url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.53 Beta";
-const APP_CODE = 93;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.54 Beta";
+const APP_CODE = 94;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -2254,6 +2269,11 @@ map.createPane("labels");
 map.getPane("labels").style.zIndex = 350;
 map.getPane("labels").style.pointerEvents = "none";
 map.attributionControl.setPrefix(false);
+/* Quellenangabe klein als ⓘ – Tippen klappt sie auf (OSM-Lizenz verlangt sie, darf aber eingeklappt sein) */
+{ const ac = map.attributionControl.getContainer(); ac.classList.add("attr-mini", "open");
+  ac.addEventListener("click", e => { if (e.target.closest("a")) return; ac.classList.toggle("open"); clearTimeout(ac._t); if (ac.classList.contains("open")) ac._t = setTimeout(() => ac.classList.remove("open"), 6000); });
+  L.DomEvent.disableClickPropagation(ac);
+  ac._t = setTimeout(() => ac.classList.remove("open"), 5000); }
 L.control.zoom({ position: "topright" }).addTo(map);
 const LayerCtl = L.Control.extend({
   options: { position: "topright" },
@@ -4477,7 +4497,7 @@ async function loadRequests(friendSet){
 function updateFriendBadge(){
   const b = $("#v-friends"); if (!b) return;
   const n = friendReqs.length + invitesIn.filter(i => invFuture(i) && !i.reply).length;
-  b.dataset.badge = n ? String(n) : "";
+  const t = n ? (n > 9 ? "9+" : String(n)) : ""; b.dataset.badge = t; const i = b.querySelector("i"); if (i) i.dataset.badge = t;
 }
 async function acceptRequest(c){
   const rq = friendReqs.find(x => x.code === c);
