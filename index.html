@@ -764,7 +764,7 @@ body.cmping #routeChip{top:86px}
 .tips .tflag{padding:2px 7px;opacity:.6}
 .mstaff{display:flex;gap:8px;margin:8px 0 2px}
 .mstaff button{flex:1;display:flex;flex-direction:column;align-items:flex-start;gap:1px;text-align:left;border:1px solid color-mix(in srgb,var(--gold) 55%,var(--line));background:color-mix(in srgb,var(--gold) 10%,var(--surface));color:var(--fg);border-radius:14px;padding:10px 12px;font:inherit}
-.mstaff button span{font-size:1.3rem}.mstaff button b{font-size:.92rem}.mstaff button small{font-size:.72rem;color:var(--muted)}
+.mstaff button{position:relative}.mstaff button span{font-size:1.3rem}.mstaff button b{font-size:.92rem}.mstaff button small{font-size:.72rem;color:var(--muted)}
 .poilist{list-style:none;padding:0;margin:0}
 .poilist li{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line)}
 .poilist li>span:first-child{font-size:1.2rem;width:26px;text-align:center}
@@ -966,6 +966,12 @@ li.done .nm{color:var(--muted)}
 .chip.x{border-style:dashed;border-color:var(--bad);color:var(--bad)}
 .rcount{flex:none;font:700 1rem/1 var(--display);font-variant-numeric:tabular-nums;color:var(--muted)}
 .rcount.full{color:var(--done)}
+.rows li .rthb{flex:none;border:0;background:var(--bg);border-radius:12px;padding:0;width:58px;height:58px;margin-right:2px;border:1px solid var(--line);overflow:hidden}.rthumb{width:100%;height:100%;display:block}
+.rhero{position:relative;margin:-6px -4px 12px;border-radius:16px;overflow:hidden;border:1px solid var(--line)}.rmap{height:190px;background:var(--bg)}.rh-badge{position:absolute;left:10px;top:10px;z-index:500;background:rgba(15,28,21,.72);color:#fff;font:700 .75rem var(--body);padding:4px 10px;border-radius:99px;backdrop-filter:blur(4px)}
+.rnum{background:none;border:0;box-shadow:none;color:#fff;font:800 9px var(--body);padding:0}.rnum::before{display:none}
+.rtiles{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0 8px}.rtiles div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:9px 4px;text-align:center}.rtiles b{display:block;font:800 1.15rem/1.1 var(--display);font-variant-numeric:tabular-nums}.rtiles span{font-size:.7rem;color:var(--muted)}.rtiles .ok b{color:var(--done)}
+.rprog{height:6px;border-radius:9px;background:var(--line);overflow:hidden}.rprog i{display:block;height:100%;background:var(--done);border-radius:9px}
+.rmain{display:grid!important;grid-template-columns:1.2fr 1fr 1fr;gap:6px}.rmain .btn{margin:0;padding-left:6px;padding-right:6px;font-size:.85rem}
 .field label.badge{text-transform:none;letter-spacing:0;font-size:inherit;font-weight:400;color:var(--fg)}.field label.badge b{font-size:.85rem}
 .plcard{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:2px 12px;margin:8px 0 4px}
 .plrow{display:flex;flex-direction:column;gap:6px;padding:10px 0}.plrow+.plrow{border-top:1px solid var(--line)}
@@ -1232,6 +1238,7 @@ li.done.m-digital .chk{background:var(--digital);border-color:var(--digital)}
 .hefts button.x2on{border-color:color-mix(in srgb,var(--forest-fg) 55%,transparent);background:color-mix(in srgb,var(--forest-fg) 12%,transparent);color:var(--forest-fg);display:inline-flex;align-items:center;gap:6px}
 .x2ring{display:inline-block;width:18px;height:18px;border-radius:50%;border:4px solid;background:var(--open);vertical-align:middle}
 .x2dots{display:inline-flex}
+.fcard .fchip.walking,.fchip.walking{display:inline-flex;align-items:center;gap:7px;margin-top:8px;font:700 .78rem var(--body);border:1px solid color-mix(in srgb,var(--done) 55%,transparent);background:color-mix(in srgb,var(--done) 14%,transparent);color:var(--done);border-radius:99px;padding:4px 11px}.fchip.walking i{width:8px;height:8px;border-radius:50%;background:var(--done);animation:lsPulse 1.8s ease-out infinite}
 .invs{list-style:none;margin:6px 0 14px;padding:0;display:flex;flex-direction:column;gap:8px}.invrow{display:flex;flex-direction:column;gap:10px;background:var(--surface);border:1px solid color-mix(in srgb,var(--gold) 40%,var(--line));border-radius:14px;padding:12px}.iv-main{display:flex;align-items:center;gap:12px}
 .iv-d{flex:none;width:58px;text-align:center;border-right:1px solid var(--line);padding-right:10px}.iv-d b{display:block;font-size:.85rem;color:var(--gold)}.iv-d small{font-size:.78rem;color:var(--muted)}
 .iv-t{flex:1;min-width:0}.iv-t b{display:block;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.iv-t small{color:var(--muted);font-size:.78rem}.iv-t small.iv-n{display:block;font-style:italic;margin-top:2px}.iv-b{display:flex;gap:6px;flex-wrap:wrap}.ivb{flex:1;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:10px;padding:8px 10px;font:600 .85rem var(--body);white-space:nowrap}.ivb.go{background:var(--forest);border-color:var(--forest);color:var(--forest-fg)}
@@ -1287,7 +1294,7 @@ li.done.m-digital .chk{background:var(--digital);border-color:var(--digital)}
 #v-friends{position:relative}#v-friends[data-badge]:not([data-badge=""])::after{content:attr(data-badge);position:absolute;top:-6px;right:-4px;min-width:18px;height:18px;border-radius:9px;background:var(--bad);color:#fff;font:700 11px/18px var(--body);padding:0 4px}
 /* Profil mit Ringen */
 /* Profil nutzt die Farben der App (wie Karte, Liste und Freunde) */
-:root{--pc-kne:#4fb3e8;--pb1:color-mix(in srgb,var(--forest) 78%,#7fb08f);--pb2:var(--forest);--pc-acc:var(--gold);--pc-hwn:var(--done);--pc-tou:var(--route);--pc-tab:var(--digital);--pc-sax:var(--code);--pc-vor:var(--open);--pc-dre:#7a9a3a;--pc-bro:#b0663a;--pc-wip:#c98a2b;--pc-son:var(--gold)}
+:root{--pc-kne:#4fb3e8;--pc-swv:#b8804a;--pb1:color-mix(in srgb,var(--forest) 78%,#7fb08f);--pb2:var(--forest);--pc-acc:var(--gold);--pc-hwn:var(--done);--pc-tou:var(--route);--pc-tab:var(--digital);--pc-sax:var(--code);--pc-vor:var(--open);--pc-dre:#7a9a3a;--pc-bro:#b0663a;--pc-wip:#c98a2b;--pc-son:var(--gold)}
 .pkick{position:relative;z-index:2;color:#e8f0ea!important;opacity:.9;padding-right:118px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pbanner{height:96px;margin:-16px calc(-1 * max(18px,env(safe-area-inset-right,0px))) 0 calc(-1 * max(18px,env(safe-area-inset-left,0px)));background:linear-gradient(160deg,var(--pb1),var(--pb2) 70%);position:relative;height:126px}
 .sheet .pkick + .pbanner{margin-top:-34px}
@@ -1367,6 +1374,13 @@ li.done.m-digital .chk{background:var(--digital);border-color:var(--digital)}
 .mtiles button span{font-size:1.45rem;line-height:1}
 .mdot,.mcnt{position:absolute;top:6px;right:8px;font-style:normal;min-width:17px;height:17px;border-radius:9px;background:var(--bad);color:#fff;font:700 .65rem/17px var(--body);padding:0 4px}.mcnt{background:var(--gold);color:#1b2a21}
 .mlist{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+.mtiles button.wide{grid-column:1/-1;flex-direction:row;justify-content:center;gap:10px;padding:12px;font-size:.9rem;background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 16%,var(--surface)),var(--surface));border-color:color-mix(in srgb,var(--gold) 45%,var(--line))}
+.mtiles button.wide span{font-size:1.3rem}.mtiles button.wide .mdot{position:static;margin-left:4px}
+.ibrow{position:relative}.ibrow .mdot{position:static;margin-left:auto;margin-right:6px}.ib-ok{margin-left:auto;margin-right:6px;color:var(--ok,#5ec27a);font-weight:700}
+.mlogl{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden}
+.mlogl li{display:flex;gap:10px;padding:10px 12px;border-top:1px solid var(--line)}.mlogl li:first-child{border-top:0}
+.ml-ic{font-size:1.1rem;line-height:1.3}.ml-t{display:flex;flex-direction:column;gap:2px;min-width:0;font-size:.85rem}.ml-t small{color:var(--muted);font-weight:400}.ml-t span{color:var(--muted);overflow-wrap:anywhere}
+#ibBoxList figcaption span{display:flex;gap:6px;margin-top:4px}
 .mrow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;padding:11px 12px;color:var(--fg);font:inherit}
 .mrow+.mrow{border-top:1px solid var(--line)}a.mrow{text-decoration:none}
 .mr-ic{width:30px;height:30px;border-radius:9px;background:var(--bg);display:grid;place-items:center;flex:none;font-size:1rem}
@@ -1498,6 +1512,8 @@ body.hdr-ring header .progress{margin-top:4px}
 .frow{display:flex;gap:6px;align-items:center}
 .frow input[type=search]{flex:1;min-width:0;width:auto!important;padding:9px 10px!important}
 #list .frow{flex-wrap:wrap;row-gap:8px}#list .frow #q{flex:1 1 100%;font-size:1rem;padding:11px 14px 11px 38px!important;border-radius:12px;background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2393a39a' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4'/%3E%3C/svg%3E") no-repeat 13px center}
+#rfrow{flex-wrap:wrap;row-gap:8px}#rfrow input[type=search]{flex:1 1 100%;font-size:1rem;padding:11px 14px 11px 38px!important;border-radius:12px;background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2393a39a' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4'/%3E%3C/svg%3E") no-repeat 13px center}
+#rfrow select{flex:1 1 0;min-width:0}
 #list .frow select{flex:1 1 0;min-width:0;max-width:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#list .frow #sortSel{flex:0 1 92px}#list .frow .ficon{flex:none}#list .frow select:focus{outline:none;border-color:var(--gold)}
 .frow select{flex:none;max-width:118px;padding:9px 24px 9px 9px;border:1px solid var(--line);border-radius:10px;background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23889'/%3E%3C/svg%3E") no-repeat right 8px center;color:var(--fg);font:600 .85rem var(--body);-webkit-appearance:none;appearance:none}
 .frow select.act{border-color:var(--gold);background-color:color-mix(in srgb,var(--gold) 12%,var(--surface))}
@@ -1799,13 +1815,65 @@ const KNE_DATA = [
   [8, "Wassertretstelle „Grade“ Lutter", 51.65761, 10.45515, "Blaue Lagune – Parkplatz Lutterstraße 17"],
   [9, "Armbecken im Kurpark-Pavillon", 51.63207, 10.47807, "Überdachter Pavillon mit Armbecken – Parkplatz Ritscherstraße 4"]
 ];
-const VOR_SETS = ["bro", "nhv", "dre", "wip", "kne"];
-const SET_KEYS = ["hwn","hws","tou","tos","tab","bro","sax","wip","dre","nhv","kne"];
+const SWV_DATA = [
+  [1, "Bismarckturm", 51.985407, 9.522185],
+  [2, "Königszinne", 51.97783, 9.52614],
+  [3, "Weserhöhen", 51.969711, 9.505107],
+  [4, "Ottensteiner Hochebene", 51.975082, 9.359609],
+  [5, "Habichtstal", 51.90554, 9.37704],
+  [6, "Herzog-Wilhelm-Denkmal", 51.92983, 9.51429],
+  [7, "Bodoturm", 51.946597, 9.532397],
+  [8, "Ebersnacken", 51.92927, 9.56586],
+  [9, "Tretbecken Holenberg", 51.91161, 9.57978],
+  [10, "Kirschparadies", 51.908542, 9.539409],
+  [11, "Orchideenwiese", 51.878707, 9.528459],
+  [12, "Kloster Amelungsborn", 51.894768, 9.595045],
+  [13, "Burgruine Homburg", 51.901133, 9.647108],
+  [14, "Kellbergturm", 51.887439, 9.648715],
+  [15, "Hellental", 51.79213, 9.58215],
+  [16, "Rothesteinhöhle", 51.947722, 9.660833],
+  [17, "Ithwiesen", 51.954065, 9.658063],
+  [18, "Wilhelm-Raabe-Turm", 51.95325, 9.689251],
+  [19, "Feuerschneisenhütte", 51.965151, 9.700466],
+  [20, "Köhlerhütte", 51.91208, 9.81317],
+  [21, "Barbarabaude", 51.906501, 9.829921],
+  [22, "Moosberghütte", 51.86784, 9.73566],
+  [23, "Burgruine Hunnesrück", 51.82124, 9.68278],
+  [24, "Löwenburg", 51.766072, 9.755581],
+  [25, "Wichtelpfad", 51.763056, 9.636667],
+  [26, "Hasselbachtal", 51.816754, 9.509025],
+  [27, "Mecklenbruch", 51.778462, 9.548897],
+  [28, "Fohlenplackener Hütte", 51.7618, 9.51304],
+  [29, "Panoramaweg Silberborn", 51.76255, 9.55143],
+  [30, "Ahlequelle", 51.73203, 9.51238],
+  [31, "Vier-Wege-Hütte", 51.727893, 9.462531],
+  [32, "Lakenteich", 51.732472, 9.603861],
+  [33, "Rotes Land", 51.69107, 9.549],
+  [34, "Erlebniswald", 51.70825, 9.556],
+  [35, "Lunauquelle", 51.69715, 9.588387],
+  [36, "Sollingturm", 51.69259, 9.60535],
+  [37, "Jägeranger", 51.69175, 9.65297],
+  [38, "Meilerstelle", 51.69251, 9.74192],
+  [39, "Heimatblick", 51.68628, 9.74686],
+  [40, "Weperkamm", 51.69028, 9.81808],
+  [41, "Märchengrund", 51.65464, 9.80698],
+  [42, "Baumpfad", 51.64532, 9.80647],
+  [43, "Eselpanorama", 51.6435, 9.83276],
+  [44, "Friwoler Kirchenruine", 51.6222, 9.75263],
+  [45, "Hutewald", 51.67754, 9.50761],
+  [46, "Lug ins Land", 51.66084, 9.48425],
+  [47, "Sohnrey-Höhe", 51.6536, 9.45203],
+  [48, "Reinhardswaldblick", 51.60922, 9.5697],
+  [49, "Zur Hölle", 51.598893, 9.605056],
+  [50, "Wesertalblick", 51.584321, 9.610192]
+];
+const VOR_SETS = ["bro", "nhv", "dre", "wip", "kne", "swv"];
+const SET_KEYS = ["hwn","hws","tou","tos","tab","bro","sax","wip","dre","nhv","kne","swv"];
 const SONDER = { hws: HWS, tos: TOS };
 const isSonder = set => set === "hws" || set === "tos";
-const REGION = { hwn: "harz", hws: "harz", tou: "thue", tos: "thue", tab: "tab", sax: "sax", wip: "wip", dre: "dre", nhv: "nhv", bro: "bro", kne: "kne" };
+const REGION = { hwn: "harz", hws: "harz", tou: "thue", tos: "thue", tab: "tab", sax: "sax", wip: "wip", dre: "dre", nhv: "nhv", bro: "bro", kne: "kne", swv: "swv" };
 /* Bereiche oben in der Leiste (in den Einstellungen wählbar) */
-const REGIONS = [["harz", "Harz", "hwn"], ["thue", "Touringen", "tou"], ["tab", "Bad Tabarz", "tab"], ["bro", "Brotterode", "bro"], ["sax", "Sächs. Schweiz", "sax"], ["nhv", "Nördl. Harzvorland", "nhv"], ["dre", "Dreiländereck", "dre"], ["wip", "Wippertal", "wip"], ["kne", "Bad Lauterberg", "kne"]];
+const REGIONS = [["harz", "Harz", "hwn"], ["thue", "Touringen", "tou"], ["tab", "Bad Tabarz", "tab"], ["bro", "Brotterode", "bro"], ["sax", "Sächs. Schweiz", "sax"], ["nhv", "Nördl. Harzvorland", "nhv"], ["dre", "Dreiländereck", "dre"], ["wip", "Wippertal", "wip"], ["kne", "Bad Lauterberg", "kne"], ["swv", "Wilde Heimat", "swv"]];
 let shownRegions = load("sp.regions", ["harz", "thue", "tab"]).flatMap(r => r === "vor" ? ["nhv", "dre", "wip"] : [r]).filter(r => REGIONS.some(x => x[0] === r));
 if (!shownRegions.length) shownRegions = ["harz"];
 const HWN_BASE = "https://www.harzer-wandernadel.de/stempelstellen/uebersichtskarte/";
@@ -1827,6 +1895,11 @@ SETS.tab = { title: "Bad Tabarzer Wandernadel", short: "Bad Tabarz", sub: "Bad T
   levels: [[8, "Bronze"], [15, "Silber"], [23, "Gold"]],
   info: "24 Stempel auf 7 Rundwegen rund um Bad Tabarz und den Großen Inselsberg. Stempelheft (1,50 €) und Nadel (3 €) in der Touristinfo Bad Tabarz, Reinhardsbrunner Str. 39. Bronze ab 8, Silber ab 15, Gold ab 23 Stempeln.",
   url: "https://www.outdooractive.com/de/list/wandernadel-bad-tabarz/307849739/" };
+SETS.swv = { title: "Wanderschätze in der Wilden Heimat", short: "Wilde Heimat", sub: "Solling-Vogler · 50 Stempelstationen", center: [51.79, 9.62], zoom: 10, near: " Solling",
+  levels: [[10, "Neugieriges Lamm"], [20, "Mystisches Exmoor-Pony"], [30, "Starker Auerochse"], [40, "Stolzer Uhu"], [50, "Wilder Hirsch"]],
+  info: "50 Stempelstationen an Aussichtspunkten, Quellen und historischen Orten in der Solling-Vogler-Region im Weserbergland. Stempelheft in den Stempelservicestellen oder im Online-Shop. Wanderpins für 10, 20, 30, 40 und 50 Stempel (je 4 €). Sonder- und TO-GO-Stempel zählen nicht für die Pins.",
+  url: "https://www.solling-vogler-region.de/de/p/wanderschaetze-in-der-wilden-heimat/805674013/", linkLabel: "Wanderschätze – Solling-Vogler-Region",
+  defectUrl: "https://www.solling-vogler-region.de/de/p/wanderschaetze-in-der-wilden-heimat/805674013/" };
 SETS.kne = { title: "Wassertretstellen-Rallye Bad Lauterberg", short: "Kneipp-Rallye", sub: "Bad Lauterberg im Harz · 9 Stempelstellen", center: [51.636, 10.46], zoom: 13, near: " Bad Lauterberg",
   levels: [[9, "Kneipp-Abzeichen"]],
   info: "„Kneipp dich fit!“ – 8 Wassertretstellen und das Armbecken im Kurpark-Pavillon rund um Bad Lauterberg. An jeder Station gibt es einen Stempel. Das Stempelheft gibt es in der Tourist-Information (Ritscherstraße 4), mit vollem Heft gibt es dort das Abzeichen. Die Stationen sind von Mitte Oktober bis Mitte April geschlossen.",
@@ -1851,8 +1924,8 @@ SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", 
   levels: [[11, "Wandernadel"]],
   info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
   url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.52 Beta";
-const APP_CODE = 92;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.53 Beta";
+const APP_CODE = 93;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -1881,8 +1954,8 @@ const loadDone = pid => Object.fromEntries(SET_KEYS.map(st => [st, load(doneKey(
 let done = loadDone();
 const broken = Object.fromEntries(SET_KEYS.map(st => [st, load("sp.broken." + st, {})]));
 const notes  = Object.fromEntries(SET_KEYS.map(st => [st, load("sp.notes." + st, {})]));
-let official = { hwn: load("sp.official.hwn", null), tou: load("sp.official.tou", null), hws: null, tos: null };
-const photos = { hwn: {}, tou: {}, hws: {}, tos: {}, tab: {}, sax: {}, wip: {}, dre: {}, nhv: {}, bro: {}, kne: {} };
+let official = { hwn: load("sp.official.hwn", null), tou: load("sp.official.tou", null), swv: load("sp.official.swv", null), hws: null, tos: null };
+const photos = { hwn: {}, tou: {}, hws: {}, tos: {}, tab: {}, sax: {}, wip: {}, dre: {}, nhv: {}, bro: {}, kne: {}, swv: {} };
 /* Art des Stempels je Heft-Profil: { pid: { set: { k: { m: "code"|"digital", c: "Code" } } } }; fehlt = im Heft gestempelt */
 let methods = load("sp.methods", {});
 /* Per GPS vor Ort bestätigt (wie in der Harz-App: im Umkreis von ca. 50 m): { pid: { set: { k: 1 } } } */
@@ -1917,9 +1990,9 @@ function setMethod(set, k, m, code){
   if (!m || m === "stamp") delete p[set][k]; else p[set][k] = { m, c: String(code || "").trim().slice(0, 40) };
   save("sp.methods", methods);
 }
-const stamps = { hwn: [], tou: [], hws: [], tos: [], tab: [], sax: [], wip: [], dre: [], nhv: [], bro: [], kne: [] };
-const byKey = { hwn: new Map(), tou: new Map(), hws: new Map(), tos: new Map(), tab: new Map(), sax: new Map(), wip: new Map(), dre: new Map(), nhv: new Map(), bro: new Map(), kne: new Map() };
-const routes = { hwn: [], tou: [], hws: [], tos: [], tab: [], sax: [], wip: [], dre: [], nhv: [], bro: [], kne: [] };
+const stamps = { hwn: [], tou: [], hws: [], tos: [], tab: [], sax: [], wip: [], dre: [], nhv: [], bro: [], kne: [], swv: [] };
+const byKey = { hwn: new Map(), tou: new Map(), hws: new Map(), tos: new Map(), tab: new Map(), sax: new Map(), wip: new Map(), dre: new Map(), nhv: new Map(), bro: new Map(), kne: new Map(), swv: new Map() };
+const routes = { hwn: [], tou: [], hws: [], tos: [], tab: [], sax: [], wip: [], dre: [], nhv: [], bro: [], kne: [], swv: [] };
 let current = load("sp.set", "hwn"); if (!SETS[current]) current = "hwn";
 let view = "map", filter = "all", sortBy = "num", query = "";
 let rFilter = "all", rSort = "name", rQuery = "";
@@ -1961,10 +2034,11 @@ function distKm(a, b){
 const fmtKm = d => d < 1 ? Math.round(d*1000)+" m" : (d < 10 ? d.toFixed(1).replace(".",",") : Math.round(d))+" km";
 const km1 = k => (Math.round(k*10)/10).toFixed(1).replace(".",",");
 const fmtMB = b => (b/1048576).toFixed(b < 10485760 ? 1 : 0).replace(".",",") + " MB";
-function toast(msg){
+function toast(msg, ms, onClick){
   document.querySelectorAll(".toast").forEach(t => t.remove());
   const t = document.createElement("div"); t.className = "toast"; t.textContent = msg;
-  document.body.appendChild(t); setTimeout(() => t.remove(), 2800);
+  if (onClick) { t.style.pointerEvents = "auto"; t.style.cursor = "pointer"; t.onclick = () => { t.remove(); onClick(); }; }
+  document.body.appendChild(t); setTimeout(() => t.remove(), ms || 2800);
 }
 function setStatus(msg, onClick){
   const el = $("#status");
@@ -1978,7 +2052,9 @@ const officialDefect = (set, k) => {
     const t = byKey.tos.get(k), l = official.tou && official.tou.sonder;
     return t && l ? (l.find(x => sameName(x, t.name)) || null) : null;
   }
-  return official[set] && official[set].defects ? official[set].defects[k] : null;
+  if (official[set] && official[set].defects && official[set].defects[k]) return official[set].defects[k];
+  const md = modDefects[set + "_" + k];
+  return md ? "Von Moderator " + (md.by || "") + " als defekt markiert" + (md.note ? ": " + md.note : "") : null;
 };
 /* Toleranter Namensvergleich (z. B. „Obstpavillion“ vs. „Obstpavillon“) */
 function lev(a, b){
@@ -2011,7 +2087,7 @@ function initData(){
   stamps.tos = TOS.stamps.map(s => Object.assign({}, s));
   stamps.tab = TAB_DATA.map(([n, name, lat, lon, hint]) => ({ k: String(n), n, name, lat, lon, hint: hint || "" }));
   stamps.sax = SAX_DATA.map(([n, name, lat, lon, hint]) => ({ k: String(n), n, name, lat, lon, hint: hint || "" }));
-  for (const [set, D] of [["wip", WIP_DATA], ["dre", DRE_DATA], ["nhv", NHV_DATA], ["bro", BRO_DATA], ["kne", KNE_DATA]]) stamps[set] = D.map(([n, name, lat, lon, hint]) => ({ k: String(n), n, name, lat, lon, hint: hint || "" }));
+  for (const [set, D] of [["wip", WIP_DATA], ["dre", DRE_DATA], ["nhv", NHV_DATA], ["bro", BRO_DATA], ["kne", KNE_DATA], ["swv", SWV_DATA]]) stamps[set] = D.map(([n, name, lat, lon, hint]) => ({ k: String(n), n, name, lat, lon, hint: hint || "" }));
   { const h = stamps.hwn.find(x => x.n === 219), w = stamps.wip.find(x => x.n === 20); if (h && w) { w.lat = h.lat; w.lon = h.lon; } }
   for (const set of SET_KEYS) stamps[set].forEach(s => byKey[set].set(s.k, s));
   applyCustomHefte(load("sp.customHefte", []), true);
@@ -2673,6 +2749,25 @@ function hikeCardHtml(){
   const h = hikes[0], km = hikes.reduce((a, x) => a + x.km, 0);
   return `<button class="hikecard" id="rHike"><span class="ic">🥾</span><span><b>Meine Wanderungen · ${hikes.length}</b><small>Zuletzt ${fmtDate(isoDay(h.start))}: ${km1(h.km)} km${h.stamps.length ? " · " + h.stamps.length + " Stempel" : ""} · insgesamt ${km1(km)} km</small></span><span class="go">›</span></button>`;
 }
+/* Gehzeit nach DIN 33466: 4 km/h waagerecht, 300 Hm/h bergauf, 500 Hm/h bergab – größerer Wert + halber kleinerer */
+function routeTime(r){
+  const up = r.up || 0, down = r.loop ? up : (r.down != null ? r.down : up);
+  const h = r.km / 4, v = up / 300 + down / 500;
+  return (Math.max(h, v) + Math.min(h, v) / 2) * 3600000;
+}
+const fmtHM = ms => { const m = Math.round(ms / 60000 / 5) * 5; return Math.floor(m / 60) + ":" + String(m % 60).padStart(2, "0") + " h"; };
+/* Kleine Streckenvorschau als SVG (für die Liste) */
+function routeThumb(r, set){
+  const W = 64, H = 64, P = 6, pts = r.pts;
+  let a = 90, b = -90, c = 180, d = -180; for (const [la, lo] of pts) { a = Math.min(a, la); b = Math.max(b, la); c = Math.min(c, lo); d = Math.max(d, lo); }
+  const kx = Math.cos((a + b) / 2 * Math.PI / 180), sx = (d - c) * kx || 1e-6, sy = (b - a) || 1e-6, sc = Math.min((W - 2 * P) / sx, (H - 2 * P) / sy);
+  const ox = (W - sx * sc) / 2, oy = (H - sy * sc) / 2;
+  const X = lo => (ox + (lo - c) * kx * sc).toFixed(1), Y = la => (oy + (b - la) * sc).toFixed(1);
+  const step = Math.max(1, Math.floor(pts.length / 80));
+  const line = pts.filter((p, i) => i % step === 0 || i === pts.length - 1).map(p => X(p[1]) + "," + Y(p[0])).join(" ");
+  const dots = r.stamps.map(k => { const s = byKey[set].get(k); if (!s || !hasPos(s)) return ""; return `<circle cx="${X(s.lon)}" cy="${Y(s.lat)}" r="3.2" fill="${isDone(set, k) ? "var(--done)" : isBroken(set, k) ? "var(--bad)" : "var(--open)"}" stroke="var(--surface)" stroke-width="1.2"/>`; }).join("");
+  return `<svg class="rthumb" viewBox="0 0 ${W} ${H}" aria-hidden="true"><polyline points="${line}" fill="none" stroke="var(--route)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${X(pts[0][1])}" cy="${Y(pts[0][0])}" r="3" fill="var(--fg)"/>${dots}</svg>`;
+}
 function renderRoutes(){
   const list = routes[current];
   const sum = $("#rsum");
@@ -2709,6 +2804,7 @@ function renderRoutes(){
     const dd = p.n === p.total ? routeDoneDate(r) : "";
     if (dd) stats.push(`<span class="ok">Geschafft am ${fmtDate(dd)}</span>`);
     stats.push(km1(r.km) + " km");
+    stats.push("⏱ " + fmtHM(routeTime(r)));
     if (r.up) stats.push("↑ " + r.up + " m");
     stats.push(r.loop ? "Rundweg" : "Strecke");
     if (r.stamps.some(k => officialNotes(current, k).length)) stats.push("⚠ Hinweis");
@@ -2719,6 +2815,7 @@ function renderRoutes(){
       return `<span class="chip ${cls} ${officialNotes(current,k).length ? "w" : ""}">${k}</span>`;
     }).join("");
     return `<li data-r="${r.id}" class="${p.n === p.total ? "rdone" : ""}">
+      <button class="rthb" data-act="route" aria-label="Route ansehen">${routeThumb(r, current)}</button>
       <button class="info" data-act="route"><span class="nm">${esc(r.name)}</span><span class="rstats">${stats.join(" · ")}</span><span class="chips">${chips}</span></button>
       <span class="rcount ${p.n === p.total ? "full" : ""}">${p.n}/${p.total}</span>
     </li>`;
@@ -2816,7 +2913,7 @@ function openLayoutAdmin(){
 }
 
 /* Weitere Hefte: deren Stempel zusätzlich auf der Karte zeigen (Rand in der Heft-Farbe, Antippen öffnet sie im richtigen Heft) */
-const SET_COL = { hwn: "#3fbf6e", hws: "#8fd6a3", tou: "#c58ae8", tos: "#e3b4f5", tab: "#35c9d6", bro: "#ee8350", wip: "#d9a62e", dre: "#e06fa3", nhv: "#8fb34a", kne: "#4fb3e8", sax: "#6f8ff0" };
+const SET_COL = { hwn: "#3fbf6e", hws: "#8fd6a3", tou: "#c58ae8", tos: "#e3b4f5", tab: "#35c9d6", bro: "#ee8350", wip: "#d9a62e", dre: "#e06fa3", nhv: "#8fb34a", kne: "#4fb3e8", swv: "#b8804a", sax: "#6f8ff0" };
 let extraSets = (() => { const v = load("sp.extraSets", null); if (Array.isArray(v)) return v; const o = load("sp.extraSet", ""); return o ? [o] : []; })();
 function extraList(){ return extraSets.filter(st => st !== current && SETS[st] && stamps[st]); }
 function setExtras(l){ extraSets = l.filter((x, i, a) => a.indexOf(x) === i); save("sp.extraSets", extraSets); renderHefts(); drawMarkers(false); }
@@ -3247,7 +3344,15 @@ function openStampMore(k){
     ${fb.ready() && username && username.code && hasPos(s) ? menuRow("svInv", "👥", "Mit Freunden wandern", "Freunde einladen – Datum & Treffpunkt") : ""}
     ${menuRow("svProb2", "⚠️", "Problem melden", "kaputt, Position, Name …")}
     ${isStaff() ? menuRow("sFix", "🛠️", `Bearbeiten (${isAdmin ? "Admin" : "Moderator"})`, "Position, Name, Hinweis für alle") : ""}
+    ${isStaff() ? (modDefects[set + "_" + k] ? menuRow("sDefOff", "✅", "Ist repariert", "Defekt-Markierung für alle entfernen") : menuRow("sDefOn", "🔧", "Für alle als defekt markieren", "z. B. Kasten weg oder Stempel kaputt")) : ""}
   </div>`);
+  { const dn = $("#sDefOn"); if (dn) dn.onclick = () => {
+      svSub(k, "🔧 Als defekt markieren", `<p>Der Stempel wird bei allen Nutzern als <b>defekt</b> angezeigt, bis ein Moderator ihn wieder freigibt.</p>
+        <div class="field"><label for="dfNote">Was ist kaputt? (optional)</label><div class="inrow"><input id="dfNote" maxlength="140" placeholder="z. B. Kasten abgerissen"></div></div>
+        <div class="actions"><button class="btn primary" id="dfGo">Als defekt markieren</button></div>`);
+      $("#dfGo").onclick = async () => { try { await setModDefect(set, k, true, $("#dfNote").value.trim()); toast("Für alle als defekt markiert 🔧"); openStampIn(set, k); } catch(e) { toast("Fehlgeschlagen: " + e.message); } };
+    }; }
+  { const df = $("#sDefOff"); if (df) df.onclick = async () => { try { await setModDefect(set, k, false); toast("✅ Als repariert markiert"); openStampIn(set, k); } catch(e) { toast("Fehlgeschlagen: " + e.message); } }; }
   $("#svFav").onclick = () => { const v = set + "|" + k; myCard.fav = myCard.fav === v ? null : v; saveCard(); toast(myCard.fav ? "Lieblingsstempel gespeichert" : "Lieblingsstempel entfernt"); openStampMore(k); };
   const sm = $("#svShowMap"); if (sm) sm.onclick = () => { closeSheet(); setView("map"); map.setView([s.lat, s.lon], 16); };
   $("#svProb2").onclick = () => openProblem(k);
@@ -3301,6 +3406,7 @@ async function loadBoxPhotos(set, k, force){
       list = list.concat(((j && j.documents) || []).map(d => ({ id: docId(d), path: x.set + "_" + x.k, uid: fv(d, "uid"), name: fv(d, "name") || "?", data: fv(d, "data"), ts: fv(d, "ts") || "" })));
     } catch(e) {}
   }
+  { const hid = load("sp.boxHidden", {}); list = list.filter(p => !hid[p.path + "|" + p.id]); }   // selbst gemeldete Fotos ausblenden
   list.sort((a, b) => String(b.ts).localeCompare(String(a.ts)));
   boxCache[key] = { at: Date.now(), list };
   drawBoxLine(set, k);
@@ -3318,16 +3424,23 @@ async function openBoxPhotos(k){
   const draw = () => {
     const l = (boxCache[key] && boxCache[key].list) || [];
     svSub(k, "📸 Kasten-Fotos", `<p class="hint" style="margin-top:-4px">So sieht der Stempelkasten aus – Fotos von anderen Wanderern. Hilft beim Suchen!</p>
-      ${l.length ? `<div class="bxgrid">${l.map(p => `<figure><img src="${p.data}" alt="" data-bxz="${esc(p.id)}"><figcaption>${esc(p.name)} · ${esc(ago(p.ts))}${p.uid === me || isStaff() ? ` <button class="mini" data-bxdel="${esc(p.path + "|" + p.id)}" aria-label="Foto löschen">🗑️</button>` : ""}</figcaption></figure>`).join("")}</div>` : '<p class="hint">Noch kein Foto – sei der Erste!</p>'}
+      ${l.length ? `<div class="bxgrid">${l.map(p => `<figure><img src="${p.data}" alt="" data-bxz="${esc(p.id)}"><figcaption>${esc(p.name)} · ${esc(ago(p.ts))}${p.uid === me || isStaff() ? ` <button class="mini" data-bxdel="${esc(p.path + "|" + p.id)}" aria-label="Foto löschen">🗑️</button>` : username && p.uid !== me ? ` <button class="mini" data-bxflag="${esc(p.path + "|" + p.id)}" aria-label="Foto melden">🚩</button>` : ""}</figcaption></figure>`).join("")}</div>` : '<p class="hint">Noch kein Foto – sei der Erste!</p>'}
       ${username && username.code ? '<div class="actions"><button class="btn primary" id="bxAdd">📷 Foto vom Kasten hinzufügen</button></div><p class="hint">Bitte nur den Stempelkasten und die Umgebung fotografieren – keine Personen.</p>' : '<p class="hint">Mit Benutzernamen kannst du selbst Fotos hinzufügen.</p>'}`);
     $("#sheet").querySelectorAll("[data-bxz]").forEach(im => im.onclick = () => im.closest("figure").classList.toggle("big"));
     $("#sheet").querySelectorAll("[data-bxdel]").forEach(b => b.onclick = async e => {
       e.stopPropagation();
       if (!b.dataset.sure) { b.dataset.sure = "1"; b.textContent = "Löschen?"; return; }
       const [path, id] = b.dataset.bxdel.split("|");
-      try { await fb.req("DELETE", `/boxphotos/${encodeURIComponent(path)}/list/${encodeURIComponent(id)}`); toast("Foto gelöscht"); await loadBoxPhotos(set, k, true); draw(); } catch(err) { toast("Löschen fehlgeschlagen"); }
+      try { await fb.req("DELETE", `/boxphotos/${encodeURIComponent(path)}/list/${encodeURIComponent(id)}`); toast("Foto gelöscht"); { const ph = l.find(x => x.id === id); if (ph && ph.uid !== me) logMod("Kasten-Foto gelöscht", `${path.replace("_", " Nr. ")} · von ${ph.name}`); } await loadBoxPhotos(set, k, true); draw(); } catch(err) { toast("Löschen fehlgeschlagen"); }
+    });
+    $("#sheet").querySelectorAll("[data-bxflag]").forEach(b => b.onclick = async e => {
+      e.stopPropagation(); const [path, id] = b.dataset.bxflag.split("|");
+      await flagTip("box:" + path, id);
+      const hid = load("sp.boxHidden", {}); hid[path + "|" + id] = 1; save("sp.boxHidden", hid);
+      boxCache[key].list = boxCache[key].list.filter(x => !(x.path === path && x.id === id)); draw();
     });
     const add = $("#bxAdd"); if (add) add.onclick = () => {
+      if (banGuard()) return;
       const inp = document.createElement("input"); inp.type = "file"; inp.accept = "image/*"; inp.capture = "environment";
       inp.onchange = async () => {
         const f = inp.files && inp.files[0]; if (!f) return;
@@ -3417,6 +3530,7 @@ function bindTips(set, k){
     go.disabled = true;
     try {
       const a = await fb.auth();
+      if (banGuard()) return;
       await fb.req("POST", `/tips/${encodeURIComponent(key)}/list`, { fields: { uid: fsStr(a.uid), name: fsStr(username.name), cat: fsStr(cat), text: fsStr(text.slice(0, 200)), ts: { timestampValue: new Date().toISOString() } } });
       toast("Danke für deinen Tipp!"); loadTips(set, k, true);
     } catch(e) { go.disabled = false; toast("Senden hat nicht geklappt"); }
@@ -3464,22 +3578,41 @@ function openRoute(id, showOnMap){
     return `<li><button data-stamp="${k}"><span class="dot ${dn ? "d" + mCls(current, k) : (x ? "x" : "")}"></span><span class="t">Nr. ${k} · ${esc(s ? s.name : "unbekannt")}<small>${st}</small></span></button></li>`;
   }).join("");
   const hints = [...new Set(r.stamps.flatMap(k => officialNotes(current, k)))];
+  const pct = p.total ? Math.round(p.n / p.total * 100) : 0, near = myPos ? distKm(myPos, r.pts[0]) : null;
   openSheet(`
-    <div class="kicker">Touringen-Route · ${p.n} von ${p.total} gestempelt</div>
+    <div class="rhero"><div id="rMap" class="rmap"></div><span class="rh-badge">${r.loop ? "↻ Rundweg" : "→ Strecke"}</span></div>
+    <div class="kicker">${esc(SETS[current].short)} · Route</div>
     <h2>${esc(r.name)}</h2>
-    <div class="meta">${km1(r.km)} km${r.up ? " · ↑ " + r.up + " m" : ""} · ${r.loop ? "Rundweg" : "Strecke"}</div>
+    <div class="rtiles">
+      <div><b>${km1(r.km)}</b><span>km</span></div>
+      <div><b>${fmtHM(routeTime(r)).replace(" h", "")}</b><span>Std. Gehzeit</span></div>
+      <div><b>${r.up ? r.up : "–"}</b><span>Hm ↑</span></div>
+      <div class="${p.n === p.total ? "ok" : ""}"><b>${p.n}/${p.total}</b><span>Stempel</span></div>
+    </div>
+    <div class="rprog"><i style="width:${pct}%"></i></div>
+    <p class="hint" style="margin:6px 0 0">Gehzeit ohne Pausen (nach DIN 33466: 4 km/h, 300 Hm/h bergauf)${near != null ? ` · Start ${fmtKm(near)} von dir` : ""}</p>
+    <div class="actions rmain"><button class="btn primary" id="rStart">🧭 Zum Start</button><button class="btn" id="rShow2">🗺️ Auf der Karte</button><a class="btn" href="${navUrl(r.pts[0][0], r.pts[0][1])}" target="_blank" rel="noopener">🚗 Anfahrt</a></div>
     ${brokenNotice(current, r.stamps)}
     ${hints.length ? `<div class="notice warn"><b>Hinweise zu dieser Route</b><ul>${hints.map(h => `<li>${esc(h)}</li>`).join("")}</ul></div>` : ""}
+    <h3>Stempel unterwegs</h3>
     <ul class="slist">${items}</ul>
     <h3>Höhenprofil</h3><div class="elev" id="rElev">Wird geladen …</div>
     <h3>Wetter am Start</h3><div class="wx" id="rWx">Wetter wird geladen …</div>
     <div class="actions">
-      <a class="btn primary" href="${navUrl(r.pts[0][0], r.pts[0][1])}" target="_blank" rel="noopener">Zum Startpunkt navigieren</a>
-      <button class="btn" id="rShare">Mit Freunden teilen</button>
-      ${showOnMap ? "" : '<button class="btn" id="rShow">Auf der Karte zeigen</button>'}
-      ${hasNative("downloadTiles") ? '<button class="btn" id="rOffline">Karte für diese Route offline speichern</button>' : ""}
+      <button class="btn" id="rShare">📤 Mit Freunden teilen</button>
+      ${hasNative("downloadTiles") ? '<button class="btn" id="rOffline">📥 Karte offline speichern</button>' : ""}
       <button class="btn quiet" id="sClose">Schließen</button>
     </div>`);
+  { const mm = L.map($("#rMap"), { zoomControl: false, attributionControl: false, zoomSnap: 0.25, fadeAnimation: false, zoomAnimation: false, dragging: false, scrollWheelZoom: false, doubleClickZoom: false, touchZoom: false, boxZoom: false, keyboard: false, tap: false });
+    const b = BASES[baseId] || BASES.osm; L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc" }).addTo(mm);
+    L.polyline(r.pts, { color: "#fff", weight: 7, opacity: .85 }).addTo(mm);
+    L.polyline(r.pts, { color: css("--route"), weight: 4.5, opacity: 1, lineCap: "round" }).addTo(mm);
+    L.circleMarker(r.pts[0], { radius: 7, weight: 3, color: "#fff", fillColor: css("--fg"), fillOpacity: 1 }).addTo(mm);
+    r.stamps.forEach(k => { const s = byKey[current].get(k); if (s && hasPos(s)) L.circleMarker([s.lat, s.lon], { radius: 7, weight: 2.5, color: "#fff", fillColor: isDone(current, k) ? css("--done") : isBroken(current, k) ? css("--bad") : css("--open"), fillOpacity: 1 }).bindTooltip(String(k), { permanent: true, direction: "center", className: "rnum" }).addTo(mm); });
+    const fit = () => { if (!$("#rMap")) return; mm.invalidateSize(); mm.fitBounds(r.pts, { padding: [26, 26], animate: false }); }; fit(); [150, 400, 800].forEach(t => setTimeout(fit, t));
+    $("#rMap").onclick = () => { closeSheet(); setView("map"); showRoute(r, true); }; }
+  $("#rStart").onclick = () => startNavTo(r.pts[0], "Start: " + r.name);
+  $("#rShow2").onclick = () => { closeSheet(); setView("map"); showRoute(r, true); };
   $("#sheet").querySelectorAll("[data-stamp]").forEach(b => b.onclick = () => openStamp(b.dataset.stamp));
   const rs = $("#rShow"); if (rs) rs.onclick = () => { closeSheet(); setView("map"); showRoute(r, true); };
   const ro = $("#rOffline"); if (ro) ro.onclick = () => { closeSheet(); saveTilesFor(boundsOf(r.pts, 0.01), 10, 16, r.name); };
@@ -3582,6 +3715,7 @@ let nearShown = null;
 function checkNearby(){
   const bn = $("#nearBanner");
   if (!myPos) { bn.hidden = true; return; }
+  try { areaHint(); } catch(e) {}
   if (autoStamp && myAcc <= AUTO_ACC && Date.now() - myPosTs < 60000) {
     for (const set of SET_KEYS) for (const s of stamps[set]) {
       if (done[set][s.k] || !hasPos(s) || (isSonder(set) && !heftActive(s.heft))) continue;
@@ -3920,12 +4054,26 @@ function parseTouDefects(html){
   }
   return res;
 }
-const PARSERS = { hwn: parseHwnDefects, tou: parseTouDefects };
+/* Wilde Heimat: „Aktueller Hinweis – Aktuell sind folgende Stempelstationen defekt: 2 Königszinne …“ */
+function parseSwvDefects(html){
+  const lines = htmlLines(html), res = { defects: {}, notes: {}, ok: false };
+  const i = lines.findIndex(l => /folgende Stempelstationen defekt/i.test(l));
+  if (i >= 0) {
+    res.ok = true;
+    for (let j = i + 1; j < lines.length; j++) {
+      const m = lines[j].match(/^0*(\d{1,2})\s+(.+)/);
+      if (!m || +m[1] < 1 || +m[1] > 50) break;
+      res.defects[String(+m[1])] = lines[j];
+    }
+  } else if (/Wanderschätze/i.test(html) && !/defekt/i.test(html)) res.ok = true;   // kein Hinweis = nichts defekt
+  return res;
+}
+const PARSERS = { hwn: parseHwnDefects, tou: parseTouDefects, swv: parseSwvDefects };
 async function loadOfficial(manual){
   if (!hasNative("fetch")) { if (manual) toast("Abfrage geht nur in der Android-App"); return; }
   if (manual) toast("Frage offizielle Defektmeldungen ab …");
   const msgs = [], fails = [];
-  await Promise.all(["hwn","tou"].map(async set => {
+  await Promise.all(["hwn","tou","swv"].map(async set => {
     try {
       const res = PARSERS[set](await nativeFetch(SETS[set].defectUrl));
       if (!res.ok) throw new Error("Format");
@@ -4004,7 +4152,7 @@ function statsFields(){
     tab: { integerValue: String(Object.keys(d.tab || {}).length) }, sax: { integerValue: String(Object.keys(d.sax || {}).length) },
     bro: { integerValue: String(Object.keys(d.bro || {}).length) }, wip: { integerValue: String(Object.keys(d.wip || {}).length) },
     dre: { integerValue: String(Object.keys(d.dre || {}).length) }, nhv: { integerValue: String(Object.keys(d.nhv || {}).length) },
-    kne: { integerValue: String(Object.keys(d.kne || {}).length) },
+    kne: { integerValue: String(Object.keys(d.kne || {}).length) }, swv: { integerValue: String(Object.keys(d.swv || {}).length) },
     recent: { stringValue: JSON.stringify(recentDays(d)) }
   };
   const ls = load("sp.lastStamp.p0", null);
@@ -4018,7 +4166,7 @@ function statsFields(){
 const STAT_MASK_OLD = ["hwn","hws","tou","tos","level","last","updated"].map(f => "updateMask.fieldPaths=" + f).join("&");
 const STAT_MASK = STAT_MASK_OLD + "&" + ["tab","sax","recent"].map(f => "updateMask.fieldPaths=" + f).join("&");
 const STAT_MASK_VER = STAT_MASK + "&updateMask.fieldPaths=ver";
-const STAT_EXTRA = ["bro","wip","dre","nhv","kne"];
+const STAT_EXTRA = ["bro","wip","dre","nhv","kne","swv"];
 const STAT_MASK_ALL = STAT_MASK_VER + "&" + STAT_EXTRA.map(f => "updateMask.fieldPaths=" + f).join("&");
 /* Stempel pro Tag der letzten 35 Tage – damit Freunde „Diese Woche“ und „Dieser Monat“ rechnen können */
 function recentDays(d){
@@ -4032,7 +4180,7 @@ function decodeProfile(doc){
   let last = null;
   if (f.last && f.last.mapValue) { const m = f.last.mapValue.fields || {}; last = { set: v(m.set), n: v(m.n), name: v(m.name), date: v(m.date) }; }
   let recent = {}; try { recent = JSON.parse(v(f.recent) || "{}") || {}; } catch(e) { recent = {}; }
-  return { ver: v(f.ver) || 0, code: doc.name.split("/").pop(), uid: v(f.uid), name: v(f.name) || "?", hwn: v(f.hwn) || 0, hws: v(f.hws) || 0, tou: v(f.tou) || 0, tos: v(f.tos) || 0, tab: v(f.tab) || 0, sax: v(f.sax) || 0, bro: v(f.bro) || 0, wip: v(f.wip) || 0, dre: v(f.dre) || 0, nhv: v(f.nhv) || 0, kne: v(f.kne) || 0, recent, level: v(f.level) || "", updated: v(f.updated), last };
+  return { ver: v(f.ver) || 0, code: doc.name.split("/").pop(), uid: v(f.uid), name: v(f.name) || "?", hwn: v(f.hwn) || 0, hws: v(f.hws) || 0, tou: v(f.tou) || 0, tos: v(f.tos) || 0, tab: v(f.tab) || 0, sax: v(f.sax) || 0, bro: v(f.bro) || 0, wip: v(f.wip) || 0, dre: v(f.dre) || 0, nhv: v(f.nhv) || 0, kne: v(f.kne) || 0, swv: v(f.swv) || 0, recent, level: v(f.level) || "", updated: v(f.updated), last };
 }
 async function pushProfile(){
   if (!fb.ready() || !username) return;
@@ -4074,6 +4222,7 @@ async function refreshBoard(manual){
       const codes = await friendCodes(username.code);
       await loadRequests(new Set(codes)).catch(() => {});
       await loadInvites().catch(() => {});
+      await loadWalks(codes.filter(c => c !== username.code)).catch(() => {});
       const docs = await Promise.all([username.code, ...codes].map(c => fb.raw("GET", `/profiles/${c}`).then(r => r.ok ? r.json() : null).catch(() => null)));
       board = { ts: Date.now(), list: docs.filter(Boolean).map(decodeProfile) };
       await Promise.all(codes.map(c => loadCard(c).catch(() => null)));
@@ -4123,6 +4272,83 @@ async function addFriend(raw){
     const inp = $("#frCode"); if (inp) inp.value = "";
     renderFriends();
   } catch(e) { toast("Keine Verbindung – bitte später nochmal versuchen"); }
+}
+/* ---------- 🟢 Gerade unterwegs & 👣 Touren zum Nachwandern (walks/{code}, walks/{code}/tours/{id}) ---------- */
+let walksLive = {};          // code -> { on, km, n, start, lat, lon, ts }
+let walkPushed = { at: 0, km: -1 };
+const walkShareOn = () => load("sp.walkShare", true);
+async function pushWalk(on, force){
+  if (!fb.ready() || !username || !username.code || (!walkShareOn() && on)) return;
+  const km = trk ? Math.round(trackKm(trk.pts) * 10) / 10 : 0;
+  if (!force && on && Date.now() - walkPushed.at < 120000 && Math.abs(km - walkPushed.km) < 0.3) return;
+  walkPushed = { at: Date.now(), km };
+  const iso = isoDay(Date.now()); let n = 0;
+  if (on) for (const st of SET_KEYS) for (const d of Object.values(done[st])) if (d === iso) n++;
+  const p = on && myPos ? myPos : null;
+  try {
+    const a = await fb.auth();
+    await fb.req("PATCH", `/walks/${username.code}`, { fields: { uid: fsStr(a.uid), on: { booleanValue: !!on }, km: { doubleValue: km }, n: { integerValue: String(n) },
+      start: { timestampValue: new Date(trk ? trk.start : Date.now()).toISOString() }, lat: { doubleValue: p ? +p[0].toFixed(4) : 0 }, lon: { doubleValue: p ? +p[1].toFixed(4) : 0 },
+      ts: { timestampValue: new Date().toISOString() } } });
+  } catch(e) {}
+}
+async function loadWalks(codes){
+  const out = {};
+  await Promise.all(codes.map(async c => {
+    try { const r = await fb.raw("GET", `/walks/${c}`); if (!r.ok) return; const d = await r.json();
+      const w = { on: fv(d, "on") === true, km: +fv(d, "km") || 0, n: +fv(d, "n") || 0, start: fv(d, "start"), lat: +fv(d, "lat") || 0, lon: +fv(d, "lon") || 0, ts: fv(d, "ts") };
+      if (w.on && Date.now() - Date.parse(w.ts) < 45 * 60000) out[c] = w; } catch(e) {}
+  }));
+  walksLive = out;
+}
+function walkChip(code){
+  const w = walksLive[code]; if (!w) return "";
+  return `<button class="fchip walking" data-walk="${esc(code)}"><i></i>unterwegs · ${km1(w.km)} km${w.n ? " · " + w.n + " Stempel" : ""} · seit ${fmtDur(Date.now() - Date.parse(w.start))}</button>`;
+}
+function openWalk(code){
+  const w = walksLive[code], m = board && board.list.find(x => x.code === code); if (!w || !m) return;
+  openSheet(`<div class="kicker">🟢 Gerade unterwegs</div><h2>${esc(m.name)} wandert</h2>
+    <div class="stats"><div class="stat"><b>${km1(w.km)} km</b><span>bisher</span></div><div class="stat"><b>${fmtDur(Date.now() - Date.parse(w.start))}</b><span>unterwegs</span></div><div class="stat"><b>${w.n}</b><span>Stempel heute</span></div></div>
+    ${w.lat ? `<div class="fxmap" id="wkMap"></div><p class="hint">Ungefährer Standort, Stand ${esc(ago(w.ts))}${myPos ? " · " + fmtKm(distKm(myPos, [w.lat, w.lon])) + " von dir" : ""}.</p>` : ""}
+    <div class="actions">${w.lat ? '<button class="btn primary" id="wkGo">🧭 Dazustoßen</button>' : ""}<button class="btn quiet" id="sClose">Schließen</button></div>`);
+  if (w.lat) {
+    const b = BASES[baseId] || BASES.osm, mm = L.map($("#wkMap"), { zoomControl: false, attributionControl: false });
+    L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc" }).addTo(mm);
+    L.circleMarker([w.lat, w.lon], { radius: 11, weight: 3, color: "#fff", fillColor: css("--done"), fillOpacity: 1 }).bindTooltip(m.name, { permanent: true, direction: "top", offset: [0, -8], className: "fxtip" }).addTo(mm);
+    mm.setView([w.lat, w.lon], 14); setTimeout(() => mm.invalidateSize(), 200);
+    $("#wkGo").onclick = () => startNavTo([w.lat, w.lon], m.name);
+  }
+  bindClose();
+}
+/* Touren teilen: Wanderung für Freunde freigeben */
+const encPts = pts => { const o = []; let a = 0, b = 0; for (const p of pts) { const x = Math.round(p[0] * 1e5), y = Math.round(p[1] * 1e5); o.push(x - a, y - b); a = x; b = y; } return JSON.stringify(o); };
+const decPts = s => { const r = JSON.parse(s), o = []; let a = 0, b = 0; for (let i = 0; i < r.length; i += 2) { a += r[i]; b += r[i + 1]; o.push([a / 1e5, b / 1e5]); } return o; };
+async function shareHike(h, on){
+  const a = await fb.auth();
+  if (!on) { await fb.req("DELETE", `/walks/${username.code}/tours/${h.id}`); return; }
+  const step = Math.max(1, Math.ceil(h.pts.length / 400)), pts = h.pts.filter((p, i) => i % step === 0 || i === h.pts.length - 1);
+  const st = h.stamps.slice(0, 20).map(x => { const [set, k] = x.split("|"), t = byKey[set] && byKey[set].get(k); return t ? [set, k, String(t.n), t.name.slice(0, 40)] : null; }).filter(Boolean);
+  await fb.req("PATCH", `/walks/${username.code}/tours/${h.id}`, { fields: { uid: fsStr(a.uid), name: fsStr((h.name || "Wanderung am " + fmtDate(isoDay(h.start))).slice(0, 60)), d: fsStr(isoDay(h.start)),
+    km: { doubleValue: h.km }, dur: { integerValue: String(Math.round(h.dur)) }, up: { integerValue: String(h.up || 0) }, pts: fsStr(encPts(pts)), st: fsStr(JSON.stringify(st)), ts: { timestampValue: new Date().toISOString() } } });
+}
+async function loadTours(code){
+  try { const j = await fb.req("GET", `/walks/${code}/tours?pageSize=10&orderBy=d%20desc`);
+    return ((j && j.documents) || []).map(d => ({ id: docId(d), name: fv(d, "name"), d: fv(d, "d"), km: +fv(d, "km") || 0, dur: +fv(d, "dur") || 0, up: +fv(d, "up") || 0, pts: fv(d, "pts"), st: JSON.parse(fv(d, "st") || "[]") }));
+  } catch(e) { return []; }
+}
+function openTour(t, who, back){
+  const pts = decPts(t.pts);
+  setView("map"); showRoute({ id: -4, name: "👣 " + who + ": " + t.name, stamps: [], pts }, true);
+  const ds = myPos ? distKm(myPos, pts[0]) : null;
+  openSheet(`<div class="kicker">👣 Tour von ${esc(who)}</div><h2>${esc(t.name)}</h2>
+    <div class="stats"><div class="stat"><b>${km1(t.km)} km</b><span>Länge</span></div><div class="stat"><b>${fmtDur(t.dur)}</b><span>Dauer bei ${esc(who)}</span></div><div class="stat"><b>${t.up ? "↑ " + t.up + " m" : "–"}</b><span>Anstieg</span></div></div>
+    ${t.st.length ? `<h3>Stempel unterwegs (${t.st.length})</h3><ul class="slist">${t.st.map(([st, k, n, name]) => `<li><button data-goto="${esc(st + "|" + k)}"><span class="dot" style="background:${isDone(st, k) ? css("--done") : css("--open")}"></span><span class="t">Nr. ${esc(n)} ${esc(name)}<small>${esc(SETS[st] ? SETS[st].short : st)}${isDone(st, k) ? " · hast du schon" : " · fehlt dir noch"}</small></span></button></li>`).join("")}</ul>` : ""}
+    <p class="hint">Die Tour bleibt auf der Karte eingeblendet – einfach der Linie folgen.${ds != null ? " Start ist " + fmtKm(ds) + " von dir entfernt." : ""}</p>
+    <div class="actions"><button class="btn primary" id="toStart">🧭 Zum Start führen</button><a class="btn" href="${navUrl(pts[0][0], pts[0][1])}" target="_blank" rel="noopener">🚗 Anfahrt</a></div>
+    <div class="actions"><button class="btn quiet" id="toBack">Zurück</button></div>`);
+  $("#toStart").onclick = () => startNavTo(pts[0], "Start der Tour");
+  $("#toBack").onclick = back;
+  $("#sheet").querySelectorAll("[data-goto]").forEach(b => b.onclick = () => { const [st, kk] = b.dataset.goto.split("|"); openStampIn(st, kk); });
 }
 /* ---------- 🥾 Gemeinsam wandern: Einladungen /invites/{an}/list/{vonCode_id} ---------- */
 let invitesIn = load("sp.invitesIn", []);    // [{ id, from, name, set, k, title, date, time, note, lat, lon, reply }]
@@ -4354,7 +4580,7 @@ function renderFriends(){
   const ms = board ? board.list.slice().sort((x, y) => key(y) - key(x) || totalOf(y) - totalOf(x) || x.name.localeCompare(y.name, "de")) : [];
   /* Alle Hefte – je Person nur die, in denen sie mindestens einen Stempel hat */
   const cols = [["Harz", "hwn", "var(--done)"], ["Touringen", "tou", "var(--route)"], ["Tabarz", "tab", "var(--digital)"], ["Brotterode", "bro", "#ee8350"],
-    ["Wippertal", "wip", "#d9a62e"], ["Dreiländereck", "dre", "#e06fa3"], ["Harzvorland", "nhv", "#8fb34a"], ["Kneipp-Rallye", "kne", "#4fb3e8"], ["Sachsen", "sax", "var(--code)"]]
+    ["Wippertal", "wip", "#d9a62e"], ["Dreiländereck", "dre", "#e06fa3"], ["Harzvorland", "nhv", "#8fb34a"], ["Kneipp-Rallye", "kne", "#4fb3e8"], ["Wilde Heimat", "swv", "#b8804a"], ["Sachsen", "sax", "var(--code)"]]
     .map(([t, k, col]) => [t, m => m[k] || 0, (stamps[k] || []).length || 1, col]);
   let rank = 0, prev = null, myRank = 0;
   const ranked = ms.map((m, i) => { if (key(m) !== prev) { rank = i + 1; prev = key(m); } if (mine(m.code)) myRank = rank; return { m, rank }; });
@@ -4386,7 +4612,7 @@ function renderFriends(){
         <span class="bavb ${on ? "is-on" : ""}">${avatarHtml(c, "bav")}</span>
         <span class="who"><b>${esc(m.name)}${me ? " (du)" : ""}${RANKS[roles[m.code]] ? ` <i class="rk" title="${RANKS[roles[m.code]][1]}">${RANKS[roles[m.code]][0]}</i>` : ""}</b><small class="${!me && isOnline(m.updated) ? "online" : ""}">${esc(sub)}${!me && lvl ? " · " + esc(lvl) : ""}${loc}</small></span>
         <span class="tot"><b>${key(m)}</b>${trend}</span></div>
-      ${minis}${hike}</li>`;
+      ${walksLive[m.code] ? walkChip(m.code) : ""}${minis}${hike}</li>`;
   }).join("");
   const friends = ms.filter(m => m.code !== username.code).length;
   const sortLbl = { all: "Gesamt", week: "Diese Woche", month: "Dieser Monat" };
@@ -4433,6 +4659,7 @@ function renderFriends(){
   $("#frCode").addEventListener("keydown", e => { if (e.key === "Enter") addFriend(e.target.value); });
   $("#frRefresh").onclick = () => refreshBoard(true);
   bindInvites(el);
+  el.querySelectorAll("[data-walk]").forEach(b => b.onclick = e => { e.stopPropagation(); openWalk(b.dataset.walk); });
   $("#bSort").onclick = e => { const v = e.target.dataset.v; if (!v) return; boardSort = v; renderFriends(); };
   $("#fbOnline").onchange = e => { showOnline = e.target.checked; save("sp.showOnline", showOnline); if (showOnline) pushSeen(true); renderFriends(); };
   $("#fbLast").onchange = e => { shareLast = e.target.checked; save("sp.shareLast", shareLast); refreshBoard(); };
@@ -5121,8 +5348,8 @@ async function listAll(path){
 }
 let adminCache = null;
 async function loadAdmin(){
-  const [users, profs, , mods] = await Promise.all([listAll("/users"), listAll("/profiles"), loadPosReports(), listAll("/moderators").catch(() => [])]);
-  adminCache = { users, profs, mods: new Set(mods.map(docId)) };
+  const [users, profs, , mods, bans] = await Promise.all([listAll("/users"), listAll("/profiles"), loadPosReports(), listAll("/moderators").catch(() => []), listAll("/banned").catch(() => [])]);
+  adminCache = { users, profs, mods: new Set(mods.map(docId)), banned: new Set(bans.map(docId)) };
 }
 /* App-Version eines Nutzers (Profilfeld ver: Nummer, +10000 = Web-App/iPhone) */
 function verInfo(v){
@@ -5150,8 +5377,8 @@ async function openStatsAdmin(){
   const created = users.map(u => Date.parse(fv(u, "created") || u.createTime || "")).filter(x => !isNaN(x));
   const act = d => users.filter(u => { const s = seenOf(u); return s && now - Date.parse(s) < d * day; }).length;
   const sum = f => profs.reduce((a, p) => a + (p[f] || 0), 0);
-  const tot = { hwn: sum("hwn"), tou: sum("tou"), tab: sum("tab"), sax: sum("sax"), son: sum("hws") + sum("tos") };
-  const all = tot.hwn + tot.tou + tot.tab + tot.sax + tot.son;
+  const tot = { hwn: sum("hwn"), tou: sum("tou"), tab: sum("tab"), sax: sum("sax"), son: sum("hws") + sum("tos"), bro: sum("bro"), wip: sum("wip"), dre: sum("dre"), nhv: sum("nhv"), kne: sum("kne"), swv: sum("swv") };
+  const all = Object.values(tot).reduce((a, b) => a + b, 0);
   /* neue Nutzer je Woche (10 Wochen) */
   const wk = Array(10).fill(0), wl = [];
   for (let i = 0; i < 10; i++) { const t = new Date(now - (9 - i) * 7 * day); wl.push(i % 3 === 0 || i === 9 ? `${t.getDate()}.${t.getMonth() + 1}.` : ""); }
@@ -5183,6 +5410,7 @@ async function openStatsAdmin(){
     <h3>Gestempelt pro Tag <small class="pcount">letzte 30 Tage</small></h3>${barsSvg(dd, dl, "var(--gold)")}
     <h3>Gebiete</h3>
     ${hbar("⛰️ Harz", tot.hwn, rmax, "var(--pc-hwn)")}${hbar("🌲 Touringen", tot.tou, rmax, "var(--pc-tou)")}${hbar("🏔️ Tabarz", tot.tab, rmax, "var(--pc-tab)")}${hbar("🪨 Sachsen", tot.sax, rmax, "var(--pc-sax)")}${hbar("📘 Sonder", tot.son, rmax, "var(--pc-son)")}
+    ${hbar("🏠 Brotterode", tot.bro, rmax, "var(--pc-bro)")}${hbar("🚂 Wippertal", tot.wip, rmax, "var(--pc-wip)")}${hbar("🗺️ Dreiländereck", tot.dre, rmax, "var(--pc-dre)")}${hbar("🌾 Harzvorland", tot.nhv, rmax, "var(--pc-vor)")}${hbar("💧 Kneipp-Rallye", tot.kne, rmax, "var(--pc-kne)")}${hbar("🦌 Wilde Heimat", tot.swv, rmax, "var(--pc-swv)")}
     <h3>App-Versionen <small class="pcount">veröffentlicht: Nr. ${pub}</small></h3>
     ${vlist.map(([v, n]) => hbar(v === "alt" ? "älter" : verInfo(+v).txt, n, vmax, v !== "alt" && (+v >= 10000 || +v >= pub) ? "var(--done)" : "var(--open)", " Nutzer")).join("")}
     <p class="hint">„älter“ = Versionen, die ihre Nummer noch nicht mitschicken (vor 0.9.35).</p>
@@ -5242,6 +5470,7 @@ async function openAdmin(){
     </div>
     <h3>Werkzeuge</h3>
     <div class="mtiles">
+      <button id="adInbox" class="wide"><span>📥</span>Postfach${inboxCount ? `<i class="mdot">${inboxCount}</i>` : ""}</button>
       <button id="adStats"><span>📊</span>Statistik</button>
       <button id="adCm"><span>💬</span>Kommentare</button>
       <button id="adPos"><span>📍</span>Positionen${posReports.length ? `<i class="mdot">${posReports.length}</i>` : ""}</button>
@@ -5259,6 +5488,7 @@ async function openAdmin(){
     <p class="hint" style="margin-top:8px">Tippe auf einen Nutzer für Stempel, Umbenennen, Übertragen oder Löschen. Stempelzahlen kommen aus den Apps der Nutzer.</p>
     <div class="actions"><button class="btn quiet" id="sClose">Schließen</button></div>`);
   $("#adPub").onclick = () => openPublish(false);
+  $("#adInbox").onclick = openInbox;
   $("#adStats").onclick = openStatsAdmin;
   $("#adPos").onclick = openPosAdmin;
   $("#adCm").onclick = () => openCommentsAdmin();
@@ -5281,7 +5511,7 @@ async function openAdmin(){
           <span class="au-t"><b>${esc(x.name)}${x.uid === load("sp.fbAuth", {}).uid ? " (du)" : ""}${adminCache.mods && adminCache.mods.has(x.uid) ? ' <i class="rank mod">🛡️ Mod</i>' : roles[x.code] === "admin" ? ' <i class="rank admin">👑 Admin</i>' : ""}</b><small>${x.code ? fmtCode(x.code) : "kein Code"} · ${esc(seenText(x.seen) || "noch nie online")}</small>
             ${x.p ? `<span class="au-ch"><span>⛰️ ${x.p.hwn}</span><span>🌲 ${x.p.tou}</span>${x.p.tab ? `<span>🏔️ ${x.p.tab}</span>` : ""}${x.p.hws + x.p.tos ? `<span>📘 ${x.p.hws + x.p.tos}</span>` : ""}</span>` : ""}${x.p ? verChip(x.p.ver) : ""}</span>
           <span class="au-tot">${x.total}<small>Stempel</small></span></button>
-        <div class="ubtns" hidden><button class="mini" data-ustamp="${esc(x.uid)}">📋 Stempel</button><button class="mini" data-uren="${esc(x.uid)}">✏️ Umbenennen</button><button class="mini" data-umove="${esc(x.uid)}">🔁 Übertragen</button><button class="mini" data-umod="${esc(x.uid)}">${adminCache.mods && adminCache.mods.has(x.uid) ? "🛡️ Moderator entfernen" : "🛡️ Zum Moderator"}</button><button class="mini" data-udel="${esc(x.uid)}">🗑️ Löschen</button></div></li>`;
+        <div class="ubtns" hidden><button class="mini" data-ustamp="${esc(x.uid)}">📋 Stempel</button><button class="mini" data-uren="${esc(x.uid)}">✏️ Umbenennen</button><button class="mini" data-umove="${esc(x.uid)}">🔁 Übertragen</button><button class="mini" data-umod="${esc(x.uid)}">${adminCache.mods && adminCache.mods.has(x.uid) ? "🛡️ Moderator entfernen" : "🛡️ Zum Moderator"}</button><button class="mini" data-uban="${esc(x.uid)}">${adminCache.banned && adminCache.banned.has(x.uid) ? "✅ Schreibverbot aufheben" : "🚫 Schreibverbot"}</button><button class="mini" data-udel="${esc(x.uid)}">🗑️ Löschen</button></div></li>`;
     }).join("") : '<li class="empty">Kein Nutzer passt zur Suche.</li>';
     $("#auList").querySelectorAll("[data-auopen]").forEach(b => b.onclick = () => {
       const box = b.parentElement.querySelector(".ubtns"), open = box.hidden;
@@ -5296,6 +5526,16 @@ async function openAdmin(){
   const sure = (b, label) => { if (b.dataset.sure) return true; b.dataset.sure = "1"; b.textContent = label; b.style.color = "var(--bad)"; return false; };
   const busy = async (fn, ok) => { try { await fn(); toast(ok); } catch(e) { toast("Fehlgeschlagen: " + e.message); } adminCache = null; await loadAdmin().catch(() => {}); };
   function bindUsers(){
+  $("#sheet").querySelectorAll("[data-uban]").forEach(b => b.onclick = async () => {
+    const x = all.find(y => y.uid === b.dataset.uban), on = !(adminCache.banned && adminCache.banned.has(x.uid));
+    if (!sure(b, on ? `${x.name} Schreibverbot geben? Nochmal tippen` : `Schreibverbot für ${x.name} aufheben? Nochmal tippen`)) return;
+    await busy(async () => {
+      if (on) await fb.req("PATCH", `/banned/${x.uid}`, { fields: { name: fsStr(x.name), by: fsStr(username ? username.name : ""), why: fsStr(""), ts: { timestampValue: new Date().toISOString() } } });
+      else await fb.req("DELETE", `/banned/${x.uid}`);
+      logMod(on ? "Schreibverbot" : "Schreibverbot aufgehoben", x.name);
+    }, on ? `🚫 ${x.name} hat jetzt Schreibverbot` : `${x.name} darf wieder schreiben`);
+    openAdmin();
+  });
   $("#sheet").querySelectorAll("[data-umod]").forEach(b => b.onclick = async () => {
     const x = all.find(y => y.uid === b.dataset.umod), on = !(adminCache.mods && adminCache.mods.has(x.uid));
     if (!sure(b, on ? `${x.name} zum Moderator machen? Nochmal tippen` : `${x.name} als Moderator entfernen? Nochmal tippen`)) return;
@@ -5318,6 +5558,7 @@ async function openAdmin(){
         await fb.req("PATCH", `/users/${uid}`, { fields: Object.assign({}, u.fields, { name: fsStr(v), key: fsStr(unameKey(v)), updated: { timestampValue: new Date().toISOString() } }) });
         const code = fv(u, "code");
         if (code) await fb.req("PATCH", `/profiles/${code}?updateMask.fieldPaths=name&updateMask.fieldPaths=key`, { fields: { name: fsStr(v), key: fsStr(unameKey(v)) } });
+        logMod("Umbenannt", (fv(u, "name") || "?") + " → " + v);
       }, "Umbenannt in " + v);
       openAdmin();
     };
@@ -5499,7 +5740,7 @@ async function loadTipList(key, id){
 async function openCommentsAdmin(filter){
   openSheet(`<div class="kicker">${isAdmin ? "Admin" : "Moderator"}</div><h2>💬 Kommentare</h2><p>Wird geladen …</p>`);
   let flags = [], tips = [], err = "";
-  try { flags = (await listAll("/flags")).map(d => ({ doc: docId(d), key: fv(d, "key"), id: fv(d, "id"), ts: fv(d, "ts") })); } catch(e) {}
+  try { flags = (await listAll("/flags")).map(d => ({ doc: docId(d), key: fv(d, "key"), id: fv(d, "id"), ts: fv(d, "ts") })).filter(f => !String(f.key).startsWith("box:")); } catch(e) {}
   if (isAdmin) { try { tips = await loadAllTips(); } catch(e) { err = "Alle Kommentare konnten nicht geladen werden (neue Firestore-Regeln eingefügt?)."; } }
   /* gemeldete Tipps, die (noch) nicht in der Liste sind, einzeln holen */
   const fcount = {};
@@ -5525,7 +5766,7 @@ async function openCommentsAdmin(filter){
   $("#sheet").querySelectorAll("[data-cmdel]").forEach(b => b.onclick = async () => {
     if (!b.dataset.sure) { b.dataset.sure = "1"; b.textContent = "Wirklich löschen?"; b.style.color = "var(--bad)"; return; }
     const id = b.dataset.cmdel, i = id.lastIndexOf("/");
-    try { await fb.req("DELETE", `/tips/${encodeURIComponent(id.slice(0, i))}/list/${id.slice(i + 1)}`); await dropFlags(id); delete tipCache[id.slice(0, i)]; toast("Kommentar gelöscht"); }
+    try { const tt = list.find(x => x.key + "/" + x.id === id); await fb.req("DELETE", `/tips/${encodeURIComponent(id.slice(0, i))}/list/${id.slice(i + 1)}`); await dropFlags(id); delete tipCache[id.slice(0, i)]; toast("Kommentar gelöscht"); logMod("Kommentar gelöscht", tt ? tt.name + ": „" + tt.text.slice(0, 80) + "“" : id); }
     catch(e) { toast("Fehlgeschlagen: " + e.message); }
     openCommentsAdmin(f);
   });
@@ -5558,12 +5799,97 @@ async function ensureAdminRank(){
   try { await saveRoles(c => { c[username.code] = "admin"; }); } catch(e) {}
 }
 const staffHome = () => isAdmin ? openAdmin() : openModArea();
+/* ---------- 📥 Postfach: alles Offene an einem Ort ---------- */
+let inboxCount = load("sp.inboxN", 0);
+async function loadInbox(){
+  const out = { pos: [], rep: [], tipFlags: 0, box: [], defects: Object.keys(modDefects).length };
+  try { out.pos = await loadPosReports(); } catch(e) {}
+  try { await loadReports(); } catch(e) {}
+  out.rep = Object.entries(reports || {}).filter(([, r]) => r && r.state === "broken");
+  let flags = [];
+  try { flags = (await listAll("/flags")).map(d => ({ doc: docId(d), key: fv(d, "key"), id: fv(d, "id"), ts: fv(d, "ts") })); } catch(e) {}
+  const tf = new Set(flags.filter(f => !String(f.key).startsWith("box:")).map(f => f.key + "/" + f.id)); out.tipFlags = tf.size;
+  const bx = {}; for (const f of flags.filter(f => String(f.key).startsWith("box:"))) { const k = f.key.slice(4) + "|" + f.id; (bx[k] = bx[k] || { path: f.key.slice(4), id: f.id, n: 0, docs: [] }).n++; bx[k].docs.push(f.doc); }
+  out.box = Object.values(bx);
+  inboxCount = out.pos.length + out.rep.length + out.tipFlags + out.box.length; save("sp.inboxN", inboxCount);
+  return out;
+}
+async function openInbox(){
+  if (!isStaff()) return;
+  openSheet(`<div class="kicker">${isAdmin ? "Admin" : "Moderator"}</div><h2>📥 Postfach</h2><p>Wird geladen …</p>`);
+  const ib = await loadInbox();
+  const row = (id, ic, t, n, sub) => `<button class="mrow ibrow" id="${id}"><span class="mr-ic">${ic}</span><span class="mr-t">${t}<small>${sub}</small></span>${n === null ? "" : n ? `<i class="mdot">${n}</i>` : '<span class="ib-ok">✓</span>'}<span class="mr-go">›</span></button>`;
+  const stampOf = path => { const i = path.indexOf("_"), st = path.slice(0, i), k = path.slice(i + 1), x = byKey[st] && byKey[st].get(k); return x ? `${SETS[st].short} · ${stampTitle(st, x)}` : path; };
+  openSheet(`<div class="kicker">${isAdmin ? "Admin" : "Moderator"}</div><h2>📥 Postfach</h2>
+    <p class="hint" style="margin-top:-4px">${inboxCount ? `${inboxCount} offene Aufgabe${inboxCount > 1 ? "n" : ""}` : "Alles erledigt 🎉"}</p>
+    <div class="mlist">
+      ${row("ibPos", "📍", "Positions-Meldungen", ib.pos.length, ib.pos.length ? "Stempel stehen woanders" : "nichts offen")}
+      ${row("ibRep", "⚠️", "Kaputt-Meldungen", ib.rep.length, ib.rep.length ? "von Wanderern gemeldet" : "nichts offen")}
+      ${row("ibTip", "💬", "Gemeldete Kommentare", ib.tipFlags, ib.tipFlags ? "🚩 von Nutzern gemeldet" : "nichts offen")}
+      ${row("ibBox", "📸", "Gemeldete Kasten-Fotos", ib.box.length, ib.box.length ? "🚩 von Nutzern gemeldet" : "nichts offen")}
+    </div>
+    <div id="ibBoxList"></div>
+    <h3>Weitere Werkzeuge</h3>
+    <div class="mlist">
+      ${row("ibDef", "🔧", "Als defekt markiert", null, ib.defects ? ib.defects + " Stempel" : "keine")}
+      ${row("ibLog", "📝", "Änderungsprotokoll", null, "wer hat wann was geändert")}
+      ${isAdmin ? row("ibBan", "🚫", "Schreibverbote", null, "Nutzer ohne Schreibrechte") : ""}
+    </div>
+    <div class="actions"><button class="btn quiet" id="ibBack">Zurück</button></div>`);
+  $("#ibBack").onclick = staffHome;
+  $("#ibPos").onclick = openPosAdmin; $("#ibRep").onclick = openReportsAdmin; $("#ibTip").onclick = () => openCommentsAdmin("flag");
+  $("#ibDef").onclick = openDefectsAdmin; $("#ibLog").onclick = openModLog;
+  const bb = $("#ibBan"); if (bb) bb.onclick = openBansAdmin;
+  $("#ibBox").onclick = () => {
+    const box = $("#ibBoxList");
+    box.innerHTML = ib.box.length ? `<div class="bxgrid">${ib.box.map((x, i) => `<figure data-ibi="${i}"><img alt="" data-ibimg="${i}"><figcaption>${esc(stampOf(x.path))} · 🚩 ${x.n}× <span><button class="mini" data-ibdel="${i}">🗑️</button> <button class="mini" data-ibok="${i}">✓ ok</button></span></figcaption></figure>`).join("")}</div>` : '<p class="hint">Keine gemeldeten Fotos.</p>';
+    ib.box.forEach(async (x, i) => { try { const r = await fb.raw("GET", `/boxphotos/${encodeURIComponent(x.path)}/list/${encodeURIComponent(x.id)}`); const im = box.querySelector(`[data-ibimg="${i}"]`); if (!im) return; if (r.ok) { const d = await r.json(); im.src = fv(d, "data"); x.name = fv(d, "name"); } else { im.remove(); im.closest && 0; box.querySelector(`[data-ibi="${i}"] figcaption`).insertAdjacentText("beforeend", " (schon gelöscht)"); } } catch(e) {} });
+    const drop = x => Promise.all(x.docs.map(d => fb.req("DELETE", `/flags/${encodeURIComponent(d)}`).catch(() => {})));
+    box.querySelectorAll("[data-ibdel]").forEach(b => b.onclick = async () => { const x = ib.box[+b.dataset.ibdel]; try { await fb.req("DELETE", `/boxphotos/${encodeURIComponent(x.path)}/list/${encodeURIComponent(x.id)}`).catch(() => {}); await drop(x); logMod("Kasten-Foto gelöscht", stampOf(x.path) + (x.name ? " · von " + x.name : "") + " (gemeldet)"); toast("Foto gelöscht"); } catch(e) {} openInbox(); });
+    box.querySelectorAll("[data-ibok]").forEach(b => b.onclick = async () => { const x = ib.box[+b.dataset.ibok]; await drop(x); logMod("Foto-Meldung verworfen", stampOf(x.path)); toast("Meldung verworfen"); openInbox(); });
+  };
+  bindClose();
+}
+async function openModLog(){
+  openSheet(`<div class="kicker">Moderation</div><h2>📝 Änderungsprotokoll</h2><p>Wird geladen …</p>`);
+  let l = [];
+  try { const j = await fb.req("GET", "/modlog?pageSize=100&orderBy=ts%20desc"); l = ((j && j.documents) || []).map(d => ({ by: fv(d, "by"), act: fv(d, "act"), what: fv(d, "what"), ts: fv(d, "ts") })); } catch(e) {}
+  const ic = a => /Position|bearbeitet|Korrektur/.test(a) ? "📍" : /Kommentar/.test(a) ? "💬" : /Foto/.test(a) ? "📸" : /Defekt|Repariert/.test(a) ? "🔧" : /Moderator/.test(a) ? "🛡️" : /Umbenannt/.test(a) ? "✏️" : /Schreibverbot/.test(a) ? "🚫" : /Ankündigung/.test(a) ? "📣" : /Meldung/.test(a) ? "⚠️" : "•";
+  openSheet(`<div class="kicker">Moderation</div><h2>📝 Änderungsprotokoll</h2>
+    <p class="hint" style="margin-top:-4px">Die letzten 100 Änderungen von Admins und Moderatoren.</p>
+    ${l.length ? `<ul class="mlogl">${l.map(x => `<li><span class="ml-ic">${ic(x.act)}</span><span class="ml-t"><b>${esc(x.act)}</b> <small>${esc(ago(x.ts))} · ${esc(x.by)}</small><span>${esc(x.what)}</span></span></li>`).join("")}</ul>` : '<p class="hint">Noch keine Einträge (oder neue Firestore-Regeln fehlen).</p>'}
+    <div class="actions"><button class="btn quiet" id="mlBack">Zurück</button></div>`);
+  $("#mlBack").onclick = openInbox;
+}
+function openDefectsAdmin(){
+  const l = Object.entries(modDefects).sort((a, b) => String(b[1].ts).localeCompare(String(a[1].ts)));
+  openSheet(`<div class="kicker">Moderation</div><h2>🔧 Als defekt markiert</h2>
+    <p class="hint" style="margin-top:-4px">Für Hefte ohne offizielle Defektliste. Markieren geht im Stempel unter „⋯ Mehr“.</p>
+    ${l.length ? `<ul class="slist">${l.map(([id, d]) => { const i = id.indexOf("_"), st = id.slice(0, i), k = id.slice(i + 1), x = byKey[st] && byKey[st].get(k);
+      return `<li><button data-dfgo="${esc(id)}"><span class="dot x"></span><span class="t">${x ? esc(SETS[st].short + " · " + stampTitle(st, x)) : esc(id)}<small>${esc(d.note || "ohne Notiz")} · ${esc(d.by)} · ${esc(ago(d.ts))}</small></span></button></li>`; }).join("")}</ul>` : '<p class="hint">Keine Stempel markiert.</p>'}
+    <div class="actions"><button class="btn quiet" id="dfBack">Zurück</button></div>`);
+  $("#dfBack").onclick = openInbox;
+  $("#sheet").querySelectorAll("[data-dfgo]").forEach(b => b.onclick = () => { const id = b.dataset.dfgo, i = id.indexOf("_"); openStampIn(id.slice(0, i), id.slice(i + 1)); });
+}
+async function openBansAdmin(){
+  openSheet(`<div class="kicker">Admin</div><h2>🚫 Schreibverbote</h2><p>Wird geladen …</p>`);
+  let l = [];
+  try { l = (await listAll("/banned")).map(d => ({ uid: docId(d), name: fv(d, "name"), by: fv(d, "by"), ts: fv(d, "ts"), why: fv(d, "why") })); } catch(e) {}
+  openSheet(`<div class="kicker">Admin</div><h2>🚫 Schreibverbote</h2>
+    <p class="hint" style="margin-top:-4px">Gesperrte Nutzer können keine Kommentare, Kasten-Fotos, Meldungen oder Einladungen mehr schreiben. Stempeln und Rangliste gehen weiter. Sperren geht in der Nutzerliste.</p>
+    ${l.length ? `<ul class="slist">${l.map(x => `<li style="display:flex;align-items:center"><span class="t" style="padding:10px 12px;display:block;flex:1"><b>${esc(x.name || x.uid)}</b><small>${esc(x.why || "ohne Grund")} · von ${esc(x.by)} · ${esc(ago(x.ts))}</small></span><button class="mini" data-unban="${esc(x.uid)}" style="margin-right:10px">Aufheben</button></li>`).join("")}</ul>` : '<p class="hint">Niemand gesperrt.</p>'}
+    <div class="actions"><button class="btn quiet" id="bnBack">Zurück</button></div>`);
+  $("#bnBack").onclick = openInbox;
+  $("#sheet").querySelectorAll("[data-unban]").forEach(b => b.onclick = async () => { const x = l.find(y => y.uid === b.dataset.unban); try { await fb.req("DELETE", `/banned/${x.uid}`); logMod("Schreibverbot aufgehoben", x.name); toast("Schreibverbot aufgehoben"); } catch(e) { toast("Fehlgeschlagen: " + e.message); } openBansAdmin(); });
+}
+
 function openModArea(){
   if (!isStaff()) return;
   const openRep = Object.values(reports || {}).filter(r => r && r.state === "broken").length;
   openSheet(`<div class="kicker">${isAdmin ? "Admin" : "Moderator"}</div><h2>🛡️ Moderator-Bereich</h2>
     <p>Hier verwaltest du Stempel und Meldungen. Alles, was du änderst, gilt sofort für alle.</p>
     <div class="mtiles">
+      <button id="moInbox" class="wide"><span>📥</span>Postfach${inboxCount ? `<i class="mdot">${inboxCount}</i>` : ""}</button>
       <button id="moPos"><span>📍</span>Positionen${posReports.length ? `<i class="mdot">${posReports.length}</i>` : ""}</button>
       <button id="moRep"><span>⚠️</span>Kaputt-Meldungen${openRep ? `<i class="mdot">${openRep}</i>` : ""}</button>
       <button id="moChk"><span>💧</span>Stempel-Status</button>
@@ -5572,6 +5898,8 @@ function openModArea(){
     <p class="hint">Einzelne Stempel (Position, Name, Hinweis) änderst du direkt im Stempel über „🛠️ Bearbeiten“. Tipps von Wanderern kannst du dort mit ✕ löschen.</p>
     <div class="actions">${isAdmin ? '<button class="btn" id="moAdm">Zum Admin-Bereich</button>' : ""}<button class="btn quiet" id="sClose">Schließen</button></div>`);
   $("#moPos").onclick = openPosAdmin;
+  $("#moInbox").onclick = openInbox;
+  loadInbox().then(() => { const b = $("#moInbox"); if (b) { b.querySelectorAll(".mdot").forEach(x => x.remove()); if (inboxCount) b.insertAdjacentHTML("beforeend", `<i class="mdot">${inboxCount}</i>`); } }).catch(() => {});
   $("#moRep").onclick = openReportsAdmin;
   $("#moChk").onclick = openChecksAdmin;
   $("#moCm").onclick = () => openCommentsAdmin();
@@ -5597,9 +5925,33 @@ async function openChecksAdmin(){
 }
 /* Admin: Moderator ernennen oder abberufen */
 async function setModerator(uid, code, name, on){
+  logMod(on ? "Moderator ernannt" : "Moderator entfernt", name);
   if (on) await fb.req("PATCH", `/moderators/${uid}`, { fields: { name: fsStr(name), code: fsStr(code || ""), since: { timestampValue: new Date().toISOString() } } });
   else await fb.req("DELETE", `/moderators/${uid}`);
   if (code) await saveRoles(c => { if (on) c[code] = "mod"; else if (c[code] === "mod") delete c[code]; });
+}
+/* ---------- 📝 Änderungsprotokoll (modlog) · 🚫 Schreibverbot (banned) · 🔧 Defekte von Moderatoren (defects) ---------- */
+async function logMod(act, what){
+  if (!isStaff() || !fb.ready()) return;
+  try { const a = await fb.auth(); await fb.req("POST", "/modlog", { fields: { uid: fsStr(a.uid), by: fsStr(username ? username.name : "?"), act: fsStr(act.slice(0, 40)), what: fsStr(String(what || "").slice(0, 160)), ts: { timestampValue: new Date().toISOString() } } }); } catch(e) {}
+}
+let amBanned = load("sp.banned", false);
+async function checkBan(){
+  if (!fb.ready() || !username) return;
+  try { const a = await fb.auth(); const r = await fb.raw("GET", `/banned/${a.uid}`); if (r.status === 404) amBanned = false; else if (r.ok) amBanned = true; else return; save("sp.banned", amBanned); } catch(e) {}
+}
+function banGuard(){ if (amBanned) { toast("🚫 Du hast gerade Schreibverbot – melde dich bei einem Admin, wenn das ein Irrtum ist."); return true; } return false; }
+let modDefects = load("sp.modDefects", {});   // "set_k" -> { note, by, ts }
+async function loadModDefects(){
+  if (!fb.ready()) return;
+  try { const docs = await listAll("/defects"); modDefects = Object.fromEntries(docs.map(d => [docId(d), { note: fv(d, "note") || "", by: fv(d, "by") || "", ts: fv(d, "ts") || "" }])); save("sp.modDefects", modDefects); refreshViews(); } catch(e) {}
+}
+async function setModDefect(set, k, on, note){
+  const id = set + "_" + k, s = byKey[set].get(k), what = `${SETS[set].short} ${stampTitle(set, s)}`;
+  if (on) { await fb.req("PATCH", `/defects/${encodeURIComponent(id)}`, { fields: { set: fsStr(set), k: fsStr(k), note: fsStr((note || "").slice(0, 140)), by: fsStr(username ? username.name : ""), ts: { timestampValue: new Date().toISOString() } } }); modDefects[id] = { note: note || "", by: username ? username.name : "", ts: new Date().toISOString() }; }
+  else { await fb.req("DELETE", `/defects/${encodeURIComponent(id)}`); delete modDefects[id]; }
+  save("sp.modDefects", modDefects); refreshViews();
+  logMod(on ? "Defekt markiert" : "Repariert", what + (note ? " – " + note : ""));
 }
 /* ---------- 📍 Stempel-Positionen: Nutzer melden, Admin korrigiert für alle (Firestore config/fixes, ohne neue App) ---------- */
 var stampFixes = {};   // "set|k" -> { lat, lon, name?, hint?, ts }
@@ -5643,6 +5995,7 @@ async function loadFixes(){
   } catch(e) {}
 }
 async function saveFix(set, k, fix){
+  { const s0 = byKey[set] && byKey[set].get(k); logMod(fix ? (fix.lat != null ? "Position geändert" : "Stempel bearbeitet") : "Korrektur zurückgesetzt", `${SETS[set].short} ${s0 ? stampTitle(set, s0) : k}`); }
   /* frisch laden, damit nichts von einem anderen Admin verloren geht */
   let cur = {};
   try { const r = await fb.raw("GET", "/config/fixes"); if (r.ok) cur = JSON.parse(fv(await r.json(), "data") || "{}"); } catch(e) { cur = Object.assign({}, stampFixes); }
@@ -6152,6 +6505,9 @@ const BADGES = [
   ["tab8", "🌿", "Tabarzer Bronze", "8 Stempel der Bad Tabarzer Wandernadel", c => c.tab >= 8],
   ["tab23", "⛰️", "Tabarzer Gold", "23 Stempel der Bad Tabarzer Wandernadel", c => c.tab >= 23],
   ["bro5", "🏠", "Brotteröder Wanderabzeichen", "5 Stempelhäuschen in Brotterode-Trusetal", c => c.bro >= 5],
+  ["kne9", "💧", "Kneipp dich fit!", "Alle 9 Wassertretstellen in Bad Lauterberg", c => c.kne >= 9],
+  ["swv10", "🐑", "Neugieriges Lamm", "10 Wanderschätze in der Wilden Heimat", c => c.swv >= 10],
+  ["swv50", "🦌", "Wilder Hirsch", "Alle 50 Wanderschätze in der Wilden Heimat", c => c.swv >= 50],
   ["sax11", "🪨", "Sächsische Schweiz", "Alle 11 Stempel im Wanderpass", c => c.sax >= 11],
   ["nhv15", "🌾", "Freizeitnadel", "15 Freizeitstempel im Nördlichen Harzvorland", c => c.nhv >= 15],
   ["wip20", "🚂", "Wippertaler Wandernadel", "20 Stempel im Wippertaler Stempel(S)pass", c => c.wip >= 20],
@@ -6184,7 +6540,7 @@ function badgeCtx(d){
     total: dates.length, maxDay: Math.max(0, ...Object.values(perDay)), streak,
     harz: cnt("hwn") + cnt("hws") > 0, thue: cnt("tou") + cnt("tos") + cnt("tab") + cnt("bro") > 0,
     regions: [cnt("hwn") + cnt("hws"), cnt("tou") + cnt("tos"), cnt("tab"), cnt("bro"), cnt("sax"), cnt("wip") + cnt("dre") + cnt("nhv")].filter(n => n > 0).length,
-    tab: cnt("tab"), sax: cnt("sax"), nhv: cnt("nhv"), wip: cnt("wip"), bro: cnt("bro"),
+    tab: cnt("tab"), sax: cnt("sax"), nhv: cnt("nhv"), wip: cnt("wip"), bro: cnt("bro"), kne: cnt("kne"), swv: cnt("swv"),
     winter: [12, 1, 2].some(m => months.has(m)), seasons: new Set([...months].map(season)).size,
     hwn: cnt("hwn"), tou: cnt("tou"), hefte: fullHefte(d).length,
     routes: routes.tou.filter(r => r.stamps.every(k => d.tou[k])).length,
@@ -6225,7 +6581,7 @@ function pinsReached(){
   const nb = Object.keys(done.tab).length;
   for (const [n, name] of SETS.tab.levels) if (nb >= n) out.push({ id: "tab:" + n, title: name + "-Nadel Bad Tabarz", sub: `Bad Tabarzer Wandernadel · ${n} Stempel`, url: SETS.tab.url });
   if (Object.keys(done.sax).length >= 11) out.push({ id: "sax:11", title: "Wandernadel Sächsische Schweiz", sub: "Sächsische Schweiz Wanderpass · alle 11 Stempel", url: SETS.sax.url });
-  for (const st of ["bro", "wip", "nhv", "kne"]) for (const [n, name] of SETS[st].levels) if (Object.keys(done[st]).length >= n) out.push({ id: st + ":" + n, title: name + (st === "bro" ? " Brotterode" : ""), sub: `${SETS[st].title} · ${n} Stempel`, url: SETS[st].url });
+  for (const st of ["bro", "wip", "nhv", "kne", "swv"]) for (const [n, name] of SETS[st].levels) if (Object.keys(done[st]).length >= n) out.push({ id: st + ":" + n, title: name + (st === "bro" ? " Brotterode" : ""), sub: `${SETS[st].title} · ${n} Stempel`, url: SETS[st].url });
   const nt = Object.keys(done.tou).length;
   for (const [n, name] of SETS.tou.levels) if (nt >= n) out.push({ id: "tou:" + n, title: "Abzeichen " + name, sub: `Touringen · ${n === 430 ? "alle 430" : n} Stempel`, url: SETS.tou.pinsUrl });
   for (const { set, h } of fullHefte(done)) if (heftActive(h.id)) out.push({ id: set + ":" + h.id, title: h.title, sub: set === "hws" ? "Themenheft voll – Nadel abholen" : "Sonderedition komplett", url: h.url || "" });
@@ -6378,8 +6734,8 @@ function pinReminder(){
 }
 
 /* ---------- Freunde-Neuigkeiten ---------- */
-const SET_NAMES = { hwn: "Harz", hws: "Harz-Sonder", tou: "Touringen", tos: "Touringen-Sonder", tab: "Bad Tabarz", sax: "Sächs. Schweiz", wip: "Wippertal", dre: "Dreiländereck", nhv: "Nördl. Harzvorland", bro: "Brotterode" , kne: "Kneipp-Rallye" };
-const mTotal = m => m.hwn + m.tou + (m.tab || 0) + (m.sax || 0) + (m.bro || 0) + (m.wip || 0) + (m.dre || 0) + (m.nhv || 0) + (m.kne || 0);   // wie in der Rangliste: ohne Sonderstempel
+const SET_NAMES = { hwn: "Harz", hws: "Harz-Sonder", tou: "Touringen", tos: "Touringen-Sonder", tab: "Bad Tabarz", sax: "Sächs. Schweiz", wip: "Wippertal", dre: "Dreiländereck", nhv: "Nördl. Harzvorland", bro: "Brotterode" , kne: "Kneipp-Rallye" , swv: "Wilde Heimat" };
+const mTotal = m => m.hwn + m.tou + (m.tab || 0) + (m.sax || 0) + (m.bro || 0) + (m.wip || 0) + (m.dre || 0) + (m.nhv || 0) + (m.kne || 0) + (m.swv || 0);   // wie in der Rangliste: ohne Sonderstempel
 function feedHtml(list){
   const items = list.filter(m => m.code !== username.code && m.last && m.last.date && m.last.n)
     .sort((a, b) => b.last.date.localeCompare(a.last.date) || String(b.updated).localeCompare(String(a.updated))).slice(0, 8);
@@ -6656,6 +7012,7 @@ const HEFT_GET = [
   ["dre", "🗺️", "In den Tourist-Infos Pansfelde, Ballenstedt, Harzgerode, Meisdorf und Aschersleben, in Schulles Konsum Mehringen und bei der Seeland GmbH (Schadeleben). Heft 3 € Schutzgebühr, die Nadel nach allen 22 Stempeln 7,50 €.", "https://dreilaendereckpfad.de/vertriebsstellen/", "Vertriebsstellen"],
   ["nhv", "🌾", "Den Stempelpass kannst du beim Tourismusverband Nördliches Harzvorland herunterladen oder in den Samtgemeinden und Tourist-Infos mitnehmen.", SETS.nhv.url, "Nördliches Harzvorland"],
   ["kne", "💧", "In der Tourist-Information Bad Lauterberg, Ritscherstraße 4 (Mo–Fr 9–17, Sa 9–13 Uhr; 1.11.–18.12. Mo–Fr 10–16 Uhr). Mit vollem Stempelheft gibt es dort das Abzeichen. Die Stationen sind Mitte Oktober bis Mitte April geschlossen.", "https://badlauterberg-urlaub.de/aktivitaeten/wandern/wander-challenges/", "Wander-Challenges"],
+  ["swv", "🦌", "In den Stempelservicestellen der Solling-Vogler-Region (u. a. Tourist-Infos) oder im Online-Shop. Die Wanderpins (10, 20, 30, 40, 50 Stempel) kosten je 4 €.", "https://www.solling-vogler-region.de/s/IiPV3i", "Stempelservicestellen"],
   ["sax", "🪨", "Infos zum Heft und wo es das gibt, findest du auf der Seite zum Wanderpass.", SETS.sax.url, "Zum Wanderpass"]];
 function openHefteGet(back){
   const mine = HEFT_GET.filter(([st]) => shownRegions.includes(REGION[st]));
@@ -6671,7 +7028,7 @@ function openHefteGet(back){
 function openHefteAll(){
   const sw = (attr, id, on) => `<label class="switch"><input type="checkbox" ${attr}="${esc(id)}" ${on ? "checked" : ""}><i></i></label>`;
   const regRow = ([r, t]) => { const c = regionCount(r);
-    return `<li><span class="hic">${{ harz: "⛰️", thue: "🌲", tab: "🏔️", bro: "🏠", sax: "🪨", nhv: "🌾", dre: "🗺️", wip: "🚂", kne: "💧" }[r] || "📘"}</span><span class="t"><b>${esc(r === "sax" ? "Sächsische Schweiz" : t)}</b><small>${c.n} von ${c.total} gesammelt</small></span>${sw("data-areg", r, shownRegions.includes(r))}</li>`; };
+    return `<li><span class="hic">${{ harz: "⛰️", thue: "🌲", tab: "🏔️", bro: "🏠", sax: "🪨", nhv: "🌾", dre: "🗺️", wip: "🚂", kne: "💧", swv: "🦌" }[r] || "📘"}</span><span class="t"><b>${esc(r === "sax" ? "Sächsische Schweiz" : t)}</b><small>${c.n} von ${c.total} gesammelt</small></span>${sw("data-areg", r, shownRegions.includes(r))}</li>`; };
   const heftRows = set => SONDER[set].hefts.map(h => { const l = stamps[set].filter(x => x.heft === h.id), n = l.filter(x => isDone(set, x.k)).length;
     return `<li><span class="hic">${h.icon || "📘"}</span><span class="t"><b>${esc(h.title)}</b><small>${l.length} Stempel${n ? ` · ${n} gesammelt` : ""}</small></span>${sw("data-ahon", set + "|" + h.id, heftActive(h.id))}</li>`; }).join("");
   openSheet(`<div class="kicker">Einstellungen</div><h2>📚 Gebiete & Hefte</h2>
@@ -6764,7 +7121,7 @@ function pinsOf(d){
   const nb = Object.keys(d.tab || {}).length;
   for (const [n, name] of SETS.tab.levels) if (nb >= n) out.push(name + " Bad Tabarz");
   if (Object.keys(d.sax || {}).length >= 11) out.push("Wandernadel Sächs. Schweiz");
-  for (const st of ["bro", "wip", "nhv", "kne"]) for (const [n, name] of SETS[st].levels) if (Object.keys(d[st] || {}).length >= n) out.push(name + (st === "bro" ? " Brotterode" : ""));
+  for (const st of ["bro", "wip", "nhv", "kne", "swv"]) for (const [n, name] of SETS[st].levels) if (Object.keys(d[st] || {}).length >= n) out.push(name + (st === "bro" ? " Brotterode" : ""));
   for (const { h } of fullHefte(d)) out.push(h.short);
   return out;
 }
@@ -6955,8 +7312,8 @@ function shareLevel(lv, newTitle){
 }
 
 /* ---------- 🗺️ Stempelkarte im Profil: alle gestempelten Punkte als Punktewolke ---------- */
-const PM_COL = { hwn: "--pc-hwn", hws: "--pc-son", tou: "--pc-tou", tos: "--pc-son", tab: "--pc-tab", bro: "--pc-bro", sax: "--pc-sax", nhv: "--pc-vor", dre: "--pc-dre", wip: "--pc-wip" , kne: "--pc-kne" };
-const PM_NAME = { harz: "Harz", thue: "Thüringen", tab: "Tabarz", bro: "Brotterode", sax: "Sächs. Schweiz", nhv: "Harzvorland", dre: "Dreiländereck", wip: "Wippertal" , kne: "Bad Lauterberg" };
+const PM_COL = { hwn: "--pc-hwn", hws: "--pc-son", tou: "--pc-tou", tos: "--pc-son", tab: "--pc-tab", bro: "--pc-bro", sax: "--pc-sax", nhv: "--pc-vor", dre: "--pc-dre", wip: "--pc-wip" , kne: "--pc-kne" , swv: "--pc-swv" };
+const PM_NAME = { harz: "Harz", thue: "Thüringen", tab: "Tabarz", bro: "Brotterode", sax: "Sächs. Schweiz", nhv: "Harzvorland", dre: "Dreiländereck", wip: "Wippertal" , kne: "Bad Lauterberg" , swv: "Wilde Heimat" };
 function profMapHtml(c){
   if (!c || !c.stamps) return "";
   const got = [];
@@ -7001,7 +7358,7 @@ function profRingData(m, c, me){
     { id: "tou", t: "Touringen", long: "Touringen", n: m.tou, total: 430, col: "var(--pc-tou)", lv: SETS.tou.levels, show: true },
     { id: "tab", t: "Tabarz", long: "Bad Tabarzer Wandernadel", n: m.tab || 0, total: 24, col: "var(--pc-tab)", lv: SETS.tab.levels, show: (m.tab || 0) > 0 || (me && shownRegions.includes("tab")) },
     { id: "sax", t: "Sachsen", long: "Sächsische Schweiz", n: m.sax || 0, total: 11, col: "var(--pc-sax)", lv: SETS.sax.levels, show: (m.sax || 0) > 0 || (me && shownRegions.includes("sax")) },
-    ...[["bro", "Brotterode", "var(--pc-bro)"], ["nhv", "Nördl. Harzv.", "var(--pc-vor)"], ["dre", "Dreiländereck", "var(--pc-dre)"], ["wip", "Wippertal", "var(--pc-wip)"]].map(([st, t, col]) => {
+    ...[["bro", "Brotterode", "var(--pc-bro)"], ["nhv", "Nördl. Harzv.", "var(--pc-vor)"], ["dre", "Dreiländereck", "var(--pc-dre)"], ["wip", "Wippertal", "var(--pc-wip)"], ["kne", "Kneipp", "var(--pc-kne)"], ["swv", "Wilde Heimat", "var(--pc-swv)"]].map(([st, t, col]) => {
       const n = me ? Object.keys((profile === "p0" ? done : loadDone("p0"))[st] || {}).length : (c.stamps ? (c.stamps[st] || []).length : 0);
       return { id: st, t, long: SETS[st].title, n, total: stamps[st].length, col, lv: SETS[st].levels, show: n > 0 || (me && shownRegions.includes(st)) };
     }),
@@ -7172,7 +7529,7 @@ async function openFriendProfile(code){
       <button data-cmp="me"><b>${b}</b><span>hast du, ${esc(m.name)} fehlen sie</span></button></div>`;
     ccmp = { name: m.name, r };
   } else cmp = `<p style="font-size:.85rem">${esc(m.name)} teilt keinen Stempelvergleich.</p>`;
-  openSheet(`<div class="kicker pkick">Profil · Code ${fmtCode(code)}</div>${profileHtml(m, c, false)}${cmp}
+  openSheet(`<div class="kicker pkick">Profil · Code ${fmtCode(code)}</div>${walksLive[code] ? `<div style="margin:-4px 0 8px">${walkChip(code).replace("data-walk", 'id="fpWalk" data-x')}</div>` : ""}${profileHtml(m, c, false)}${cmp}<div id="fpTours"></div>
     <div class="actions">${c.stamps ? '<button class="btn" id="fpMap">🗺️ Auf der Karte vergleichen</button>' : ""}${friendLocs[code] ? '<button class="btn" id="fpLoc">📍 Standort auf der Karte</button>' : ""}<button class="btn warn" id="fpRemove">Freund entfernen …</button><button class="btn quiet" id="sClose">Schließen</button></div>`);
   bindProfRings(false);
   { const pl = $("#pLevel"); if (pl) pl.onclick = () => openLevelInfo(m, c, () => openFriendProfile(code)); }
@@ -7187,7 +7544,14 @@ async function openFriendProfile(code){
   $("#sheet").querySelectorAll("[data-goto]").forEach(b => b.onclick = () => { const [st, kk] = b.dataset.goto.split("|"); openStampIn(st, kk); });
   const fl = $("#fpLoc"); if (fl) fl.onclick = () => openLocations(code);
   const fm = $("#fpMap"); if (fm) fm.onclick = () => startCmpMap(code, m.name);
+  const fw = $("#fpWalk"); if (fw) fw.onclick = () => openWalk(code);
   bindClose();
+  /* Touren zum Nachwandern nachladen */
+  loadTours(code).then(tl => {
+    const box = $("#fpTours"); if (!box || !tl.length) return;
+    box.innerHTML = `<h3>👣 Touren zum Nachwandern (${tl.length})</h3><ul class="slist">${tl.map((t, i) => `<li><button data-tour="${i}"><span class="dot" style="background:var(--route)"></span><span class="t">${esc(t.name)}<small>${km1(t.km)} km · ${fmtDur(t.dur)}${t.up ? " · ↑ " + t.up + " m" : ""}${t.st.length ? " · " + t.st.length + " Stempel" : ""}</small></span></button></li>`).join("")}</ul>`;
+    box.querySelectorAll("[data-tour]").forEach(b => b.onclick = () => openTour(tl[+b.dataset.tour], m.name, () => openFriendProfile(code)));
+  });
 }
 let ccmp = null;
 function myBoardEntry(){
@@ -7281,6 +7645,7 @@ async function sendReport(set, k, state, note, photo){
   const a = await fb.auth();
   const ts = new Date().toISOString();
   if (photo) await fb.req("PATCH", `/reportPhotos/${reportId(set, k)}`, { fields: { uid: fsStr(a.uid), data: fsStr(photo), ts: { timestampValue: ts } } });
+  if (banGuard()) throw new Error("Schreibverbot");
   await fb.req("PATCH", `/reports/${reportId(set, k)}`, { fields: { set: fsStr(set), k: fsStr(k), state: fsStr(state), name: fsStr(username.name), uid: fsStr(a.uid), note: fsStr(String(note || "").slice(0, 140)), photo: fsStr(photo ? "1" : "0"), ts: { timestampValue: ts } } });
   if (photo) reportPhotoCache[set + "|" + k] = photo; else delete reportPhotoCache[set + "|" + k];
   reports[set + "|" + k] = { state, name: username.name, note: String(note || "").slice(0, 140), ts, uid: a.uid, photo: !!photo };
@@ -7364,7 +7729,7 @@ async function openReportsAdmin(){
   $("#sheet").querySelectorAll("[data-rdel]").forEach(b => b.onclick = async () => {
     if (!b.dataset.sure) { b.dataset.sure = "1"; b.textContent = "Sicher?"; b.style.color = "var(--bad)"; return; }
     const [set, k] = b.dataset.rdel.split("|");
-    try { await fb.req("DELETE", `/reports/${reportId(set, k)}`); try { await fb.req("DELETE", `/reportPhotos/${reportId(set, k)}`); } catch(e) {} delete reports[b.dataset.rdel]; save("sp.reports", reports); refreshViews(); toast("Meldung gelöscht"); }
+    try { logMod("Meldung gelöscht", `${SETS[set] ? SETS[set].short : set} Nr. ${k}`); await fb.req("DELETE", `/reports/${reportId(set, k)}`); try { await fb.req("DELETE", `/reportPhotos/${reportId(set, k)}`); } catch(e) {} delete reports[b.dataset.rdel]; save("sp.reports", reports); refreshViews(); toast("Meldung gelöscht"); }
     catch(e) { toast("Fehlgeschlagen: " + e.message); }
     openReportsAdmin();
   });
@@ -7377,14 +7742,14 @@ async function loadNews(){
   try {
     const r = await fb.raw("GET", "/config/news");
     if (r.status === 404) news = null;
-    else if (r.ok) { const d = await r.json(); news = { id: fv(d, "ts") || "", text: fv(d, "text") || "", link: fv(d, "link") || "", by: fv(d, "by") || "" }; }
+    else if (r.ok) { const d = await r.json(); news = { id: fv(d, "ts") || "", text: fv(d, "text") || "", link: fv(d, "link") || "", by: fv(d, "by") || "", until: fv(d, "until") || "" }; }
     else return;
     save("sp.news", news); showNews();
   } catch(e) {}
 }
 function showNews(){
   const bn = $("#newsBanner");
-  if (!news || !news.text || load("sp.newsSeen", "") === news.id) { bn.hidden = true; return; }
+  if (!news || !news.text || load("sp.newsSeen", "") === news.id || (news.until && news.until < today())) { bn.hidden = true; return; }
   $("#newsText").textContent = news.text;
   $("#newsFrom").textContent = "Ankündigung" + (news.by ? " von " + news.by : "");
   const a = $("#newsGo");
@@ -7395,9 +7760,10 @@ $("#newsX").onclick = () => { if (news) save("sp.newsSeen", news.id); $("#newsBa
 function openNewsAdmin(){
   openSheet(`<div class="kicker">Admin-Bereich</div><h2>Ankündigung an alle</h2>
     <p>Erscheint bei allen Nutzern oben in der App, bis sie sie wegtippen. Eine neue Ankündigung ersetzt die alte.</p>
-    ${news && news.text ? `<div class="notice facts"><b>Aktuell</b>${esc(news.text)}${news.id ? `<small>seit ${fmtTs(news.id)}</small>` : ""}</div>` : ""}
+    ${news && news.text ? `<div class="notice facts"><b>Aktuell</b>${esc(news.text)}${news.id ? `<small>seit ${fmtTs(news.id)}${news.until ? " · bis " + fmtDate(news.until) : ""}</small>` : ""}</div>` : ""}
     <div class="field"><label for="nwText">Text (max. 200 Zeichen)</label><textarea class="note" id="nwText" maxlength="200" placeholder="z. B. Der wandernde Stempelkasten steht ab heute in Ilsenburg!"></textarea></div>
     <div class="field"><label for="nwLink">Link (optional)</label><div class="inrow"><input id="nwLink" placeholder="https://…"></div></div>
+    <div class="field"><label for="nwUntil">Anzeigen bis (optional)</label><div class="inrow"><input id="nwUntil" type="date" min="${today()}"></div><small class="hint">Danach verschwindet die Ankündigung automatisch.</small></div>
     <p id="nwMsg" style="color:var(--bad)"></p>
     <div class="actions"><button class="btn primary" id="nwGo">Veröffentlichen</button>${news && news.text ? '<button class="btn warn" id="nwDel">Aktuelle Ankündigung entfernen</button>' : ""}<button class="btn quiet" id="nwBack">Zurück</button></div>`);
   $("#nwBack").onclick = () => openAdmin();
@@ -7407,8 +7773,10 @@ function openNewsAdmin(){
     if (link && !/^https:\/\//.test(link)) { $("#nwMsg").textContent = "Der Link muss mit https:// beginnen."; return; }
     const ts = new Date().toISOString();
     try {
-      await fb.req("PATCH", "/config/news", { fields: { text: fsStr(text.slice(0, 200)), link: fsStr(link), by: fsStr(username ? username.name : ""), ts: fsStr(ts) } });
-      news = { id: ts, text: text.slice(0, 200), link, by: username ? username.name : "" }; save("sp.news", news);
+      const until = $("#nwUntil").value || "";
+      await fb.req("PATCH", "/config/news", { fields: { text: fsStr(text.slice(0, 200)), link: fsStr(link), by: fsStr(username ? username.name : ""), ts: fsStr(ts), until: fsStr(until) } });
+      news = { id: ts, text: text.slice(0, 200), link, by: username ? username.name : "", until }; save("sp.news", news);
+      logMod("Ankündigung", text.slice(0, 120) + (until ? " (bis " + fmtDate(until) + ")" : ""));
       toast("Ankündigung veröffentlicht"); openAdmin(); showNews();
     } catch(e) { $("#nwMsg").textContent = "Fehlgeschlagen: " + e.message; }
   };
@@ -7424,7 +7792,7 @@ function openStats(){
   const now = new Date();
   const months = [];
   for (let i = 11; i >= 0; i--) { const d = new Date(now.getFullYear(), now.getMonth() - i, 1); months.push(d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0")); }
-  const per = { hwn: {}, tou: {}, hws: {}, tos: {}, tab: {}, sax: {}, wip: {}, dre: {}, nhv: {}, bro: {}, kne: {} };
+  const per = { hwn: {}, tou: {}, hws: {}, tos: {}, tab: {}, sax: {}, wip: {}, dre: {}, nhv: {}, bro: {}, kne: {}, swv: {} };
   const all = [];
   for (const set of SET_KEYS) for (const d of Object.values(done[set])) { per[set][d.slice(0,7)] = (per[set][d.slice(0,7)] || 0) + 1; all.push(d); }
   all.sort();
@@ -7616,8 +7984,8 @@ function openMenu(){
     <h2 style="margin-bottom:10px">Menü</h2>
     ${storageOk ? "" : '<div class="notice bad"><b>Speichern nicht möglich</b>Sichere deine Stempel über Daten → Backup.</div>'}
     <button class="macc" id="mProfile">${avatarHtml(myCard, "pav sm")}<span class="ma-t"><b>${esc(username ? username.name : profileName())}</b><small>${isAdmin ? "👑 Admin · " : isMod ? "🛡️ Moderator · " : ""}Profil ansehen</small></span><span class="mr-go">›</span></button>
-    ${isAdmin ? `<div class="mstaff"><button id="mAdmin"><span>🛠️</span><b>Admin-Bereich</b><small>Nutzer, Statistik, Updates</small></button><button id="mMod"><span>🛡️</span><b>Moderation</b><small>Kommentare, Positionen, Meldungen</small></button></div>`
-      : isMod ? `<div class="mstaff"><button id="mMod" class="wide"><span>🛡️</span><b>Moderator-Bereich</b><small>Kommentare, Positionen, Meldungen</small></button></div>` : ""}
+    ${isAdmin ? `<div class="mstaff"><button id="mAdmin"><span>🛠️</span><b>Admin-Bereich</b><small>Nutzer, Statistik, Updates</small></button><button id="mMod"><span>🛡️</span>${inboxCount ? `<i class="mdot">${inboxCount}</i>` : ""}<b>Moderation</b><small>Kommentare, Positionen, Meldungen</small></button></div>`
+      : isMod ? `<div class="mstaff"><button id="mMod" class="wide"><span>🛡️</span>${inboxCount ? `<i class="mdot">${inboxCount}</i>` : ""}<b>Moderator-Bereich</b><small>Kommentare, Positionen, Meldungen</small></button></div>` : ""}
     ${needPw ? `<button class="mwarn" id="mPw2">🔑 <span><b>Passwort festlegen</b><small>Ohne Passwort ist dein Konto nach einer Neuinstallation weg.</small></span></button>` : ""}
     <div class="mtiles">
       <button id="mOverview"><span>▦</span>Übersicht</button>
@@ -8290,7 +8658,7 @@ $("#locPill").onclick = () => {
   $("#slOff").onclick = () => { closeSheet(); setShareLoc(false); if (view === "friends") renderFriends(); };
   bindClose();
 };
-window.__openPending = () => { if (!hasNative("pendingOpen")) return; let v = ""; try { v = NATIVE.pendingOpen(); } catch(e) {} if (v && v.includes("|")) { const [st, k] = v.split("|"); if (byKey[st] && byKey[st].get(k)) { setView("map"); openStampIn(st, k); } } };
+window.__openPending = () => { if (!hasNative("pendingOpen")) return; let v = ""; try { v = NATIVE.pendingOpen(); } catch(e) {} if (v === "area") { openAreaList(); return; } if (v && v.includes("|")) { const [st, k] = v.split("|"); if (byKey[st] && byKey[st].get(k)) { setView("map"); openStampIn(st, k); } } };
 document.addEventListener("visibilitychange", () => { if (!document.hidden) { pushSeen(true); syncBg(); takeAutoStamps(); window.__openPending(); if (trk) pollTrack(); if (shareLoc) { startLocate(true); pushLoc(true); } } });
 
 /* Standorte der Freunde auf der Karte */
@@ -8359,7 +8727,7 @@ function switchSet(set){
   showRoute(null);
   render(true);
 }
-const lastInRegion = Object.assign({ harz: "hwn", thue: "tou", tab: "tab", sax: "sax", nhv: "nhv", dre: "dre", wip: "wip", bro: "bro", kne: "kne" }, load("sp.lastInRegion", {}));
+const lastInRegion = Object.assign({ harz: "hwn", thue: "tou", tab: "tab", sax: "sax", nhv: "nhv", dre: "dre", wip: "wip", bro: "bro", kne: "kne", swv: "swv" }, load("sp.lastInRegion", {}));
 function renderTabs(){
   const box = document.querySelector(".tabs");
   box.classList.toggle("many", shownRegions.length > 3);
@@ -8374,7 +8742,7 @@ document.querySelector(".tabs").onclick = e => {
   if (REGION[current] !== r) switchSet(lastInRegion[r] || REGIONS.find(x => x[0] === r)[2]);
 };
 function setShownRegions(list){
-  shownRegions = list; save("sp.regions", list);
+  shownRegions = list; save("sp.regions", list); scheduleNearbyList();
   if (!list.includes(REGION[current])) switchSet(lastInRegion[list[0]] || REGIONS.find(x => x[0] === list[0])[2]);
   renderTabs(); render(false);
 }
@@ -8533,15 +8901,51 @@ function pushNearbyList(){
   const out = [];
   for (const set of SET_KEYS) for (const s of stamps[set]) {
     if (!hasPos(s) || isDone(set, s.k) || (isSonder(set) && !heftActive(s.heft))) continue;
-    out.push([+s.lat.toFixed(5), +s.lon.toFixed(5), `${isSonder(set) ? heftOf(s.heft).short + " " : SETS[set].short + " "}Nr. ${s.n} ${s.name}`, set + "|" + s.k]);
+    out.push([+s.lat.toFixed(5), +s.lon.toFixed(5), `${isSonder(set) ? heftOf(s.heft).short + " " : SETS[set].short + " "}Nr. ${s.n} ${s.name}`, set + "|" + s.k,
+      isSonder(set) ? heftOf(s.heft).short : SETS[set].short, shownRegions.includes(REGION[set]) ? 1 : 0]);
   }
   try { NATIVE.setNearbyStamps(JSON.stringify(out)); } catch(e) {}
+}
+/* 🗺️ Offene Stempel im Umkreis von 3 km – nach Heft gruppiert, auch ausgeblendete Hefte */
+function areaGroups(pos, km){
+  const g = {};
+  for (const set of SET_KEYS) for (const s of stamps[set]) {
+    if (!hasPos(s) || isDone(set, s.k) || (isSonder(set) && !heftActive(s.heft))) continue;
+    const d = distKm(pos, [s.lat, s.lon]); if (d > km) continue;
+    const key = isSonder(set) ? set + ":" + s.heft : set;
+    (g[key] = g[key] || { set, title: isSonder(set) ? heftOf(s.heft).title : SETS[set].title, shown: shownRegions.includes(REGION[set]), l: [] }).l.push({ s, d });
+  }
+  return Object.values(g).map(x => (x.l.sort((a, b) => a.d - b.d), x)).sort((a, b) => b.l.length - a.l.length);
+}
+async function openAreaList(){
+  setView("map"); startLocate(true);
+  if (!(await waitForPos(15000))) { toast("Standort nicht gefunden"); return; }
+  const gs = areaGroups(myPos, 3);
+  openSheet(`<div class="kicker">🗺️ In der Nähe · 3 km</div><h2>${gs.reduce((a, x) => a + x.l.length, 0)} offene Stempel</h2>
+    ${gs.length ? gs.map((x, i) => `<h3>${esc(x.title)} <small class="pcount">${x.l.length}${x.shown ? "" : " · ausgeblendet"}</small></h3>
+      ${x.shown ? "" : `<div class="actions" style="margin-top:-2px"><button class="btn" data-arshow="${i}">📘 Heft einblenden</button></div>`}
+      <ul class="slist">${x.l.slice(0, 6).map(({ s, d }) => `<li><button data-argo="${esc(x.set + "|" + s.k)}"><span class="dot"></span><span class="t">${isSonder(x.set) ? "" : "Nr. " + esc(String(s.n)) + " "}${esc(s.name)}<small>${fmtKm(d)} entfernt</small></span></button></li>`).join("")}</ul>`).join("") : '<p class="hint">Gerade keine offenen Stempel in der Nähe.</p>'}
+    <div class="actions"><button class="btn quiet" id="sClose">Schließen</button></div>`);
+  $("#sheet").querySelectorAll("[data-argo]").forEach(b => b.onclick = () => { const [st, k] = b.dataset.argo.split("|"); openStampIn(st, k); });
+  $("#sheet").querySelectorAll("[data-arshow]").forEach(b => b.onclick = () => { const x = gs[+b.dataset.arshow]; setShownRegions(REGIONS.map(r => r[0]).filter(r => r === REGION[x.set] || shownRegions.includes(r))); switchSet(x.set); closeSheet(); toast(`${SETS[x.set].short} eingeblendet`); });
+  bindClose();
+}
+/* In der App: einmal pro Tag und Heft kurz Bescheid geben, wenn ein ausgeblendetes Heft Stempel in der Nähe hat */
+let areaHintAt = 0;
+function areaHint(){
+  if (!myPos || Date.now() - areaHintAt < 120000) return; areaHintAt = Date.now();
+  const seen = load("sp.areaHint", {}), day = isoDay(Date.now());
+  const x = areaGroups(myPos, 3).find(g => !g.shown && seen[g.set] !== day);
+  if (!x) return;
+  seen[x.set] = day; save("sp.areaHint", seen);
+  toast(`🗺️ ${x.l.length} Stempel vom Heft „${SETS[x.set].short}“ in der Nähe – tippen zum Anzeigen`, 6000, () => openAreaList());
 }
 function scheduleNearbyList(){ if (!nearAlerts || !hasNative("setNearbyStamps")) return; clearTimeout(nearbyTimer); nearbyTimer = setTimeout(pushNearbyList, 3000); }
 function openAlerts(){
   const sharing = shareLoc && shareBg !== "off";
   openSheet(`<div class="kicker">Benachrichtigung</div><h2>🔔 Stempel-Alarm</h2>
     <p>Kommst du an einer <b>offenen</b> Stempelstelle vorbei, meldet sich das Handy – auch wenn die App zu ist. Pro Stempel höchstens alle 6 Stunden.</p>
+    <p style="font-size:.85rem">🗺️ Zusätzlich bekommst du eine Übersicht, wenn in der Gegend (3 km) offene Stempel liegen – z. B. „4 Stempel vom Heft „Wilde Heimat“ in der Nähe“. Das gilt auch für Hefte, die du ausgeblendet hast.</p>
     <label class="checkline"><input type="checkbox" id="alOn" ${nearAlerts ? "checked" : ""}> Stempel-Alarm einschalten</label>
     <label class="checkline"><input type="checkbox" id="alAuto" ${autoStamp ? "checked" : ""}> Beim Vorbeilaufen automatisch <b style="color:var(--digital)">digital</b> stempeln</label>
     <p style="font-size:.85rem;margin-top:-4px">Bist du näher als ca. 60 m an einem offenen Stempel, wird er digital (türkis) abgehakt und du bekommst eine Nachricht. Hast du ihn auch im Heft, tippst du auf „Überstempeln“ – dann wird er grün. Bei offener App klappt das immer, bei geschlossener App am zuverlässigsten mit „Genau“.</p>
@@ -8605,6 +9009,7 @@ function pollTrack(){
     } catch(e) {}
   }
   renderTrackChip();
+  pushWalk(true);
 }
 /* 🎒 Beim Start einer Wanderung: Welche Hefte haben offene Stempel in der Nähe? */
 function heftReminder(pos){
@@ -8642,6 +9047,7 @@ function startTrack(){
   }
   save("sp.trackOn", { start: trk.start, web: trk.web });
   trk.timer = setInterval(pollTrack, 4000);
+  setTimeout(() => pushWalk(true, true), 8000);
   renderTrackChip();
 }
 function trackWebPoint(){
@@ -8655,12 +9061,14 @@ function openTrackSheet(){
   const km = trackKm(trk.pts);
   openSheet(`<div class="kicker">Aufzeichnung läuft</div><h2>🥾 ${km1(km)} km · ${fmtDur(Date.now() - trk.start)}</h2>
     <p>${trk.web ? "Die Aufzeichnung läuft, solange die App geöffnet ist." : "Die Aufzeichnung läuft weiter, auch wenn du das Handy wegsteckst – oben siehst du die Benachrichtigung."}</p>
+    ${fb.ready() && username && username.code ? `<label class="checkline"><input type="checkbox" id="tkShare" ${walkShareOn() ? "checked" : ""}><span>🟢 Freunde sehen, dass ich unterwegs bin<small>mit Kilometern und ungefährem Standort</small></span></label>` : ""}
     <div class="actions"><button class="btn primary" id="tkStop">Wanderung beenden und speichern</button><button class="btn warn" id="tkDrop">Verwerfen …</button><button class="btn quiet" id="sClose">Weiter aufzeichnen</button></div>`);
   $("#tkStop").onclick = () => { closeSheet(); finishTrack(false); };
+  { const sh = $("#tkShare"); if (sh) sh.onchange = () => { save("sp.walkShare", sh.checked); if (sh.checked) pushWalk(true, true); else pushWalk(false, true); toast(sh.checked ? "Freunde sehen jetzt, dass du unterwegs bist" : "Nicht mehr sichtbar für Freunde"); }; }
   $("#tkDrop").onclick = () => {
     const b = $("#tkDrop");
     if (!b.dataset.sure) { b.dataset.sure = "1"; b.textContent = "Wirklich verwerfen? Nochmal tippen"; return; }
-    closeSheet(); endTrackNative(); trk = null; save("sp.trackOn", null); trackLayer.clearLayers(); renderTrackChip(); toast("Aufzeichnung verworfen");
+    closeSheet(); endTrackNative(); trk = null; save("sp.trackOn", null); trackLayer.clearLayers(); renderTrackChip(); pushWalk(false, true); toast("Aufzeichnung verworfen");
   };
   bindClose();
 }
@@ -8673,7 +9081,7 @@ async function finishTrack(fromNotif){
   endTrackNative();
   if (!trk.web) { try { trk.pts = JSON.parse(NATIVE.trackPoints(0)); } catch(e) {} }
   const pts = trk.pts, start = Math.min(trk.start, (pts[0] && pts[0][3]) || trk.start);
-  trk = null; save("sp.trackOn", null); renderTrackChip();
+  trk = null; save("sp.trackOn", null); renderTrackChip(); pushWalk(false, true);
   if (hasNative("trackClear")) { try { NATIVE.trackClear(); } catch(e) {} }
   if (pts.length < 2) { trackLayer.clearLayers(); toast("Zu wenig GPS-Punkte – nichts gespeichert"); return; }
   const end = pts[pts.length - 1][3] || Date.now();
@@ -8717,7 +9125,9 @@ function openHike(id){
     </div>
     ${h.elev ? `<h3>Höhenprofil</h3><div class="elev">${elevHtml(h.elev)}</div>` : ""}
     ${h.stamps.length ? `<h3>Stempel unterwegs (${h.stamps.length})</h3><ul class="slist">${h.stamps.map(x => { const [st, k] = x.split("|"); return stampLine(st, k); }).join("")}</ul>` : ""}
+    ${fb.ready() && username && username.code ? `<div class="actions"><button class="btn ${h.shared ? "" : "primary"}" id="hkShare">${h.shared ? "👣 Für Freunde freigegeben ✓ – zurückziehen" : "👣 Für Freunde zum Nachwandern freigeben"}</button></div>` : ""}
     <div class="actions"><button class="btn" id="hkList">Alle Wanderungen</button><button class="btn warn" id="hkDel">Löschen …</button><button class="btn quiet" id="sClose">Schließen</button></div>`);
+  { const hs = $("#hkShare"); if (hs) hs.onclick = async () => { try { await shareHike(h, !h.shared); h.shared = !h.shared; save("sp.hikes", hikes); toast(h.shared ? "Deine Freunde können die Tour jetzt nachwandern 👣" : "Freigabe zurückgezogen"); openHike(id); } catch(e) { toast("Hat nicht geklappt – Internet?"); } }; }
   $("#sheet").querySelectorAll("[data-goto]").forEach(b => b.onclick = () => { const [st, kk] = b.dataset.goto.split("|"); openStampIn(st, kk); });
   $("#hkList").onclick = openHikes;
   $("#hkDel").onclick = () => {
@@ -8786,7 +9196,7 @@ loadPhotos().then(() => { if (view === "list") renderList(); });
 setTimeout(() => loadOfficial(false), 300);
 setTimeout(async () => {
   showNews();
-  if (fb.ready()) { loadNews(); loadReports(); await loadCustomHefte(); await loadFixes(); loadRoles(); loadGoogleCfg(); setTimeout(() => window.__google(), 500); try { await syncUsername(); } catch(e) {} try { await pullStamps(); } catch(e) {} await checkAdmin(); checkUpdate();
+  if (fb.ready()) { loadNews(); loadReports(); loadModDefects(); checkBan(); setTimeout(() => { if (isStaff()) loadInbox().catch(() => {}); }, 4000); await loadCustomHefte(); await loadFixes(); loadRoles(); loadGoogleCfg(); setTimeout(() => window.__google(), 500); try { await syncUsername(); } catch(e) {} try { await pullStamps(); } catch(e) {} await checkAdmin(); checkUpdate();
     /* neue App-Version einmal ans Profil melden, damit Admins sie sehen */
     const vs = (NATIVE ? 0 : 10000) + APP_CODE;
     if ((load("sp.verSent", 0) !== vs || load("sp.statLvl", -1) !== 0) && username && username.code) pushProfile().then(() => save("sp.verSent", vs)).catch(() => {}); }

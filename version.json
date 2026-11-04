@@ -1,6 +1,6 @@
 {
- "code": 92,
- "version": "0.9.52 Beta",
- "notes": "Gebiets-Auswahl zeigt alle Hefte – neue Gebiete mit einem Tipp einblenden",
+ "code": 93,
+ "version": "0.9.53 Beta",
+ "notes": "Neu: Postfach für Admins & Moderatoren, Fotos melden, Schreibverbot, Änderungsprotokoll, Defekte selbst markieren, Ankündigungen mit Ablaufdatum, Statistik für alle Hefte. Außerdem: Wanderschätze Wilde Heimat (mit Defektliste), Kneipp-Ringe im Profil, Gerade unterwegs & Touren nachwandern, neue Routen-Ansicht mit Vorschau und Gehzeit, Stempel in der Nähe pro Heft.",
  "apk": "Stempelpass.apk"
 }
