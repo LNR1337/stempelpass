@@ -1,6 +1,6 @@
 {
- "code": 101,
- "version": "0.9.61 Beta",
- "notes": "Stempel-Gruppen auf der Karte beim Rauszoomen, großer Stempel-Knopf, Fortschritts-Ring bei Freunden, Heft-komplett-Anzeige, Tour selbst planen bei leeren Gebieten.",
+ "code": 102,
+ "version": "0.9.62 Beta",
+ "notes": "Aufgeräumtes Karten-Menü mit Schaltern, Touren-Linien für alle Hefte (auch Sachsen), Stempel-Gruppen abschaltbar, Stempel-Knopf korrigiert.",
  "apk": "Stempelpass.apk"
 }

@@ -843,8 +843,8 @@ details.pubmore{margin:4px 0 8px;font-size:.9rem}details.pubmore summary{color:v
 @keyframes lsPulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--done) 60%,transparent)}100%{box-shadow:0 0 0 8px transparent}}
 .sv-last[hidden]{display:none}
 .sv-main{margin-top:12px}.sv-main .btn{width:100%}
-.btn.sv-big{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 14px;font-size:1.05rem;border-radius:16px;box-shadow:0 6px 18px color-mix(in srgb,var(--forest) 35%,transparent)}
-.sv-big .svb-ic{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.18);font-size:1rem}
+.btn.sv-cta{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 14px;font-size:1.05rem;border-radius:16px;box-shadow:0 6px 18px color-mix(in srgb,var(--forest) 35%,transparent)}
+.sv-cta .svb-ic{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.18);font-size:1rem}
 .sheet .btn.sv-code,.btn.primary.sv-code{background:var(--code);border-color:var(--code);color:#fff}
 .sv-row{display:flex;gap:8px;margin-top:8px}.sv-row .btn{flex:1;padding:10px 6px;font-size:.9rem;text-align:center;text-decoration:none}
 .sv-alert{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;margin-top:10px;border-radius:12px;padding:9px 12px;font-size:.86rem;border:1px solid}
@@ -1327,8 +1327,21 @@ li.sel .chk svg{opacity:1}
 .layerctl .lc-menu button{border:0;background:transparent;color:var(--fg);text-align:left;padding:11px 14px;font:600 .95rem var(--body)}
 .layerctl .lc-menu button + button{border-top:1px solid var(--line)}
 .layerctl .lc-menu button.on{background:var(--forest);color:var(--forest-fg)}
-.layerctl .lc-menu button.lc-bgr{border-top:2px solid var(--line);background:transparent;color:var(--fg)}
-.lc-bgr::before{content:"☐  "}.lc-bgr.on::before{content:"☑  ";color:var(--done)}.lc-bgr.lc-act::before{content:""}
+/* Ebenen-Menü: aufgeräumt in Abschnitte */
+.layerctl .lc-menu{width:236px;max-height:min(70vh,520px);overflow-y:auto;padding:4px 10px 10px}
+.layerctl .lc-menu .lc-h{font:700 .68rem var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:10px 4px 6px}
+.layerctl .lc-menu .lc-h:empty{padding:4px 0;border-top:1px solid var(--line);margin-top:8px}
+.layerctl .lc-menu .lc-seg{display:flex;gap:3px;padding:3px;border-radius:12px;background:color-mix(in srgb,var(--fg) 7%,transparent)}
+.layerctl .lc-menu .lc-seg button{flex:1;border:0!important;border-radius:9px;padding:8px 4px;text-align:center;font:600 .8rem var(--body);background:transparent;color:var(--fg)}
+.layerctl .lc-menu .lc-seg button.on{background:var(--forest);color:var(--forest-fg)}
+.layerctl .lc-menu .lc-tg,.layerctl .lc-menu .lc-go{display:flex!important;align-items:center;justify-content:space-between;gap:8px;width:100%;border:0!important;background:transparent!important;color:var(--fg)!important;padding:9px 4px!important;font:600 .86rem var(--body)!important;text-align:left}
+.layerctl .lc-menu .lc-tg i{flex:none;position:relative;width:36px;height:21px;border-radius:11px;background:color-mix(in srgb,var(--fg) 18%,transparent);transition:background .2s}
+.layerctl .lc-menu .lc-tg i::after{content:"";position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:left .2s}
+.layerctl .lc-menu .lc-tg.on i{background:var(--done)}.layerctl .lc-menu .lc-tg.on i::after{left:17px}
+.layerctl .lc-menu .lc-go b{color:var(--muted);font-size:1.1rem}
+.layerctl .lc-menu .lc-dk{margin-bottom:2px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .layerctl .lc-menu .lc-seg button.on{background:color-mix(in srgb,var(--done) 40%,var(--surface));color:#fff}}
+:root[data-theme="dark"] .layerctl .lc-menu .lc-seg button.on{background:color-mix(in srgb,var(--done) 40%,var(--surface));color:#fff}
 .wx{color:var(--muted);font-size:.9rem}
 .wxrow{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .wxd{display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 2px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--fg)}
@@ -2098,8 +2111,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.61 Beta";
-const APP_CODE = 101;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.62 Beta";
+const APP_CODE = 102;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -2464,26 +2477,46 @@ const LayerCtl = L.Control.extend({
   onAdd(){
     const d = L.DomUtil.create("div", "layerctl leaflet-bar");
     d.innerHTML = `<button class="lc-btn" type="button" aria-label="Kartenansicht wechseln" title="Kartenansicht"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></button>
-      <div class="lc-menu" hidden>${Object.entries(BASES).map(([k, b]) => `<button type="button" data-base="${k}">${b.name}</button>`).join("")}<button type="button" data-bgr="1" class="lc-bgr">Touringen-Routen</button><button type="button" data-dark="1" class="lc-bgr lc-dark">🌙 Dunkle Karte</button><button type="button" data-dstyle="1" class="lc-bgr lc-dstyle">🎨 Stil der dunklen Karte</button><button type="button" data-heat="1" class="lc-bgr">Fortschritts-Karte</button><button type="button" data-poi="1" class="lc-bgr lc-poi">🅿️ Parken · Einkehr · Bus</button><button type="button" data-cmp="1" class="lc-bgr lc-act">👥 Mit Freund vergleichen</button></div>`;
+      <div class="lc-menu" hidden>
+        <div class="lc-h">Kartenart</div>
+        <div class="lc-seg">${Object.entries(BASES).map(([k, b]) => `<button type="button" data-base="${k}">${b.name}</button>`).join("")}</div>
+        <div class="lc-h">Anzeigen</div>
+        <button type="button" data-bgr="1" class="lc-tg lc-routes"><span>🥾 Touren-Linien</span><i></i></button>
+        <button type="button" data-clu="1" class="lc-tg lc-clu"><span>🔢 Stempel gruppieren</span><i></i></button>
+        <button type="button" data-poi="1" class="lc-tg lc-poi"><span>🅿️ Parken · Einkehr · Bus</span><i></i></button>
+        <button type="button" data-heat="1" class="lc-tg lc-heat"><span>🟩 Fortschritts-Karte</span><i></i></button>
+        <div class="lc-h">Dunkle Karte</div>
+        <div class="lc-seg lc-dk"><button type="button" data-darkset="auto">Auto</button><button type="button" data-darkset="on">An</button><button type="button" data-darkset="off">Aus</button></div>
+        <button type="button" data-dstyle="1" class="lc-go"><span>🎨 Stil wählen</span><b>›</b></button>
+        <div class="lc-h"></div>
+        <button type="button" data-cmp="1" class="lc-go"><span>👥 Mit Freund vergleichen</span><b>›</b></button>
+      </div>`;
     L.DomEvent.disableClickPropagation(d);
     const menu = d.querySelector(".lc-menu");
     d.querySelector(".lc-btn").onclick = () => {
-      menu.hidden = !menu.hidden;
+      menu.hidden = !menu.hidden; if (!menu.hidden) syncLc();
       /* Menü nie unter den Kartenrand laufen lassen – sonst scrollen */
       if (!menu.hidden) { const mr = map.getContainer().getBoundingClientRect(), br = menu.getBoundingClientRect(); menu.style.setProperty("--lcmax", Math.max(160, mr.bottom - br.top - 44) + "px"); }
     };
-    menu.onclick = e => {
-      if (e.target.dataset.poi) { showPoi = !showPoi; save("sp.poi", showPoi); menu.hidden = true; drawPoi(); toast(showPoi ? (map.getZoom() < POI_ZOOM ? "Parken & Einkehr an – näher ranzoomen, dann erscheinen sie" : "Parkplätze, Einkehr und Haltestellen werden geladen") : "Parken & Einkehr ausgeblendet"); return; }
+    menu.onclick = e0 => { const e = { target: e0.target.closest("button") || e0.target }; if (!e.target.dataset) return;
+      if (e.target.dataset.darkset) { darkMap = e.target.dataset.darkset; save("sp.darkMap", darkMap); document.body.classList.remove("map-dark"); applyDarkMap(); return; }
+      if (e.target.dataset.poi) { showPoi = !showPoi; save("sp.poi", showPoi); drawPoi(); syncLc(); toast(showPoi ? (map.getZoom() < POI_ZOOM ? "Parken & Einkehr an – näher ranzoomen, dann erscheinen sie" : "Parkplätze, Einkehr und Haltestellen werden geladen") : "Parken & Einkehr ausgeblendet"); return; }
       if (e.target.dataset.cmp) { menu.hidden = true; openCmpPick(); return; }
+      if (e.target.dataset.clu) { useClusters = !useClusters; save("sp.clusters", useClusters); updateClusters(); syncLc(); toast(useClusters ? "Stempel werden beim Rauszoomen gruppiert" : "Alle Stempel einzeln – wie vorher"); return; }
       if (e.target.dataset.dstyle) { menu.hidden = true; openDarkStyles(); return; }
       if (e.target.dataset.dark) { const nx = { auto: "on", on: "off", off: "auto" }[darkMap] || "auto"; darkMap = nx; save("sp.darkMap", nx); applyDarkMap(); toast(nx === "on" ? "🌙 Dunkle Karte immer an" : nx === "off" ? "☀️ Karte immer hell" : "🌗 Dunkle Karte automatisch (im dunklen Modus)"); return; }
-      if (e.target.dataset.heat) { showHeat = !showHeat; save("sp.heat", showHeat); drawHeat(); menu.hidden = true; toast(showHeat ? "Fortschritts-Karte an – grün = viel gestempelt, orange = weiße Flecken" : "Fortschritts-Karte aus"); return; }
-      if (e.target.dataset.bgr) { showBgRoutes = !showBgRoutes; save("sp.bgRoutes", showBgRoutes); bgKey = ""; drawBgRoutes(); menu.hidden = true; toast(showBgRoutes ? "Touringen-Routen werden angezeigt" : "Touringen-Routen ausgeblendet"); return; }
+      if (e.target.dataset.heat) { showHeat = !showHeat; save("sp.heat", showHeat); drawHeat(); syncLc(); toast(showHeat ? "Fortschritts-Karte an – grün = viel gestempelt, orange = weiße Flecken" : "Fortschritts-Karte aus"); return; }
+      if (e.target.dataset.bgr) { showBgRoutes = !showBgRoutes; save("sp.bgRoutes", showBgRoutes); bgKey = ""; drawBgRoutes(); syncLc(); toast(showBgRoutes ? "Routen werden angezeigt" : "Routen ausgeblendet"); return; }
       const k = e.target.dataset.base; if (!k) return; setBase(k); menu.hidden = true; toast("Kartenansicht: " + BASES[k].name); };
     return d;
   }
 });
 new LayerCtl().addTo(map);
+function syncLc(){
+  const t = (c, v) => { const b = document.querySelector(".lc-menu ." + c); if (b) b.classList.toggle("on", !!v); };
+  t("lc-routes", showBgRoutes); t("lc-clu", useClusters); t("lc-poi", showPoi); t("lc-heat", showHeat);
+  document.querySelectorAll(".lc-menu [data-darkset]").forEach(b => b.classList.toggle("on", b.dataset.darkset === darkMap));
+}
 map.on("click", () => { const m = document.querySelector(".lc-menu"); if (m) m.hidden = true; });
 setBase(baseId);
 /* Alle Touringen-Routen ganz blass im Hintergrund (unter den Stempeln) */
@@ -2491,19 +2524,21 @@ map.createPane("routesBg"); map.getPane("routesBg").style.zIndex = 395;
 const bgLayer = L.layerGroup().addTo(map);
 let showBgRoutes = load("sp.bgRoutes", true), bgKey = "";
 function drawBgRoutes(){
-  const on = showBgRoutes && REGION[current] === "thue" && !activeRoute;
-  const key = on ? "on|" + Object.keys(done.tou).length + "|" + profile : "off";
-  const b = document.querySelector(".lc-bgr"); if (b) b.classList.toggle("on", showBgRoutes);
+  /* Routen des aktuellen Hefts (+ eingeblendete Hefte); in Thüringen wie bisher immer die Touringen-Routen */
+  const sets = [...new Set([...(REGION[current] === "thue" ? ["tou"] : []), current, ...extraList()])].filter(st => routes[st] && routes[st].length);
+  const on = showBgRoutes && !activeRoute && sets.length > 0;
+  const key = on ? "on|" + sets.map(st => st + Object.keys(done[st]).length).join(",") + "|" + profile : "off";
+  if (typeof syncLc === "function") syncLc();
   if (key === bgKey) return;
   bgKey = key; bgLayer.clearLayers();
   if (!on) return;
   const col = "#ff4d4d", dcol = "#2ee66b";   // offen: hellrot, komplett: hellgrün
-  for (const r of routes.tou) {
-    const full = r.stamps.every(k => done.tou[k]);
+  for (const st of sets) for (const r of routes[st]) {
+    const full = r.stamps.every(k => done[st][k]);
     L.polyline(r.pts, { pane: "routesBg", color: "#fff", weight: 6, opacity: 0.45, lineCap: "round", smoothFactor: 1.5, interactive: false }).addTo(bgLayer);
     L.polyline(r.pts, { pane: "routesBg", color: full ? dcol : col, weight: 4, opacity: 0.75, lineCap: "round", smoothFactor: 1.5 })
-      .on("click", () => { if (current !== "tou") switchSet("tou"); openRoute(r.id, true); })
-      .bindTooltip(r.name, { sticky: true })
+      .on("click", () => { if (current !== st) switchSet(st); openRoute(r.id, true); })
+      .bindTooltip(r.name + (r.src ? " (inoffiziell)" : ""), { sticky: true })
       .addTo(bgLayer);
   }
 }
@@ -2515,6 +2550,7 @@ const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).
 
 /* ---------- 🗺️ Fortschritts-Karte: Raster, gefärbt nach Anteil gestempelt ---------- */
 let showHeat = load("sp.heat", false);
+let useClusters = load("sp.clusters", true);   // Stempel beim Rauszoomen gruppieren (Ebenen-Menü)
 const heatLayer = L.layerGroup();
 function drawHeat(){
   heatLayer.clearLayers();
@@ -2818,7 +2854,7 @@ map.on("zoomend", () => updateClusters());
 let clusterLayer = null;
 function updateClusters(){
   if (!clusterLayer) clusterLayer = L.layerGroup();
-  const z = map.getZoom(), on = z <= 10 && !showHeat && !cmpMap && !activeRoute && !legFilter;
+  const z = map.getZoom(), on = useClusters && z <= 10 && !showHeat && !cmpMap && !activeRoute && !legFilter;
   if (!on) { if (map.hasLayer(clusterLayer)) map.removeLayer(clusterLayer); if (!map.hasLayer(layer)) layer.addTo(map); return; }
   if (map.hasLayer(layer)) map.removeLayer(layer);
   clusterLayer.clearLayers(); if (!map.hasLayer(clusterLayer)) clusterLayer.addTo(map);
@@ -3523,7 +3559,7 @@ function openStamp(k){
     : bad ? `<span class="sv-st bad">⚠️ kaputt gemeldet</span>` : `<span class="sv-st open">● noch offen</span>`;
   const sub = [distKmV != null ? "📍 " + wd(myPos, [s.lat, s.lon]) + " Weg" : "", ele ? "⛰️ " + ele + " m" : "", esc(stampPlace(set, s))].filter(Boolean).join(" · ");
   const mainBtn = d ? `<button class="btn stamped${mCls(set, k)}" id="sToggle">✓ ${m === "code" ? "Per Code abgehakt" : m === "digital" ? "Digital gestempelt" : "Gestempelt"} am ${fmtDate(d)} – entfernen …</button>`
-    : bad ? `<button class="btn primary sv-code" id="sCode">🔢 Per Code abhaken</button>` : `<button class="btn primary sv-big" id="sToggle"><span class="svb-ic">✓</span>Als gestempelt markieren</button>`;
+    : bad ? `<button class="btn primary sv-code" id="sCode">🔢 Per Code abhaken</button>` : `<button class="btn primary sv-cta" id="sToggle"><span class="svb-ic">✓</span>Als gestempelt markieren</button>`;
   const navBtn = hasPos(s) ? `<button class="btn ib" id="sNav">${ico("nav")}Hinführen</button>` : `<a class="btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name + " " + (SETS[set].near || (REGION[set] === "thue" ? "Thüringen" : "Harz")))}" target="_blank" rel="noopener">🗺️ Suchen</a>`;
   const row = d ? `${navBtn}${m === "digital" ? '<button class="btn" id="sOver">✍️ Ins Heft</button>' : ""}<button class="btn" id="sMethod">Art ändern</button>`
     : bad ? `${navBtn}<button class="btn ib" id="sDig">${ico("phone")}Digital</button>` : `${navBtn}<button class="btn ib" id="sCode">${ico("hash")}Code</button><button class="btn ib" id="sDig">${ico("phone")}Digital</button>`;
@@ -9507,7 +9543,7 @@ function applyDarkMap(){
   document.body.classList.toggle("map-dark", on);
   for (const k of Object.keys(DARK_STYLES)) document.body.classList.toggle("md-" + k, on && darkStyle === k);
   if (was !== on && typeof map !== "undefined") { setBase(baseId); rovKey = ""; if (rovMap && rovMap._base) { rovMap.removeLayer(rovMap._base); const b = curBase(); rovMap._base = L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc" }).addTo(rovMap); } if (view === "routes") renderRoutes(); }
-  const b = document.querySelector(".lc-dark"); if (b) { b.classList.toggle("on", on); b.textContent = "🌙 Dunkle Karte: " + ({ auto: "Auto", on: "An", off: "Aus" })[darkMap]; }
+  if (typeof syncLc === "function") syncLc();
 }
 function setTheme(t){ themePref = t; save("sp.theme", t); applyTheme(); toast(t === "auto" ? "Darstellung wie am Handy" : t === "dark" ? "Dunkler Modus an" : "Heller Modus an"); }
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", e => { document.documentElement.dataset.sysTheme = e.matches ? "dark" : "light"; if (themePref === "auto") applyTheme(); });
