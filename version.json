@@ -1,6 +1,6 @@
 {
- "code": 102,
- "version": "0.9.62 Beta",
- "notes": "Aufgeräumtes Karten-Menü mit Schaltern, Touren-Linien für alle Hefte (auch Sachsen), Stempel-Gruppen abschaltbar, Stempel-Knopf korrigiert.",
+ "code": 103,
+ "version": "0.9.63 Beta",
+ "notes": "Karten-Menü aufgeräumt: Dunkle Karte direkt unter Kartenart, Menü scrollt richtig, Fortschritts-Karte und Stil-Auswahl entfernt.",
  "apk": "Stempelpass.apk"
 }

@@ -1328,7 +1328,7 @@ li.sel .chk svg{opacity:1}
 .layerctl .lc-menu button + button{border-top:1px solid var(--line)}
 .layerctl .lc-menu button.on{background:var(--forest);color:var(--forest-fg)}
 /* Ebenen-Menü: aufgeräumt in Abschnitte */
-.layerctl .lc-menu{width:236px;max-height:min(70vh,520px);overflow-y:auto;padding:4px 10px 10px}
+.layerctl .lc-menu{width:236px;max-height:var(--lcmax,60vh);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:4px 10px 10px}
 .layerctl .lc-menu .lc-h{font:700 .68rem var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:10px 4px 6px}
 .layerctl .lc-menu .lc-h:empty{padding:4px 0;border-top:1px solid var(--line);margin-top:8px}
 .layerctl .lc-menu .lc-seg{display:flex;gap:3px;padding:3px;border-radius:12px;background:color-mix(in srgb,var(--fg) 7%,transparent)}
@@ -1340,6 +1340,11 @@ li.sel .chk svg{opacity:1}
 .layerctl .lc-menu .lc-tg.on i{background:var(--done)}.layerctl .lc-menu .lc-tg.on i::after{left:17px}
 .layerctl .lc-menu .lc-go b{color:var(--muted);font-size:1.1rem}
 .layerctl .lc-menu .lc-dk{margin-bottom:2px}
+.layerctl .lc-menu .lc-vert{display:flex;flex-direction:column;gap:4px}
+.layerctl .lc-menu .lc-vert button{display:flex!important;align-items:center;justify-content:space-between;border:1px solid var(--line)!important;border-radius:11px!important;padding:9px 10px!important;background:var(--surface)!important;color:var(--fg)!important;font:600 .86rem var(--body)!important}
+.layerctl .lc-menu .lc-vert button i{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none}
+.layerctl .lc-menu .lc-vert button.on{border-color:var(--forest)!important;background:color-mix(in srgb,var(--forest) 10%,var(--surface))!important}
+.layerctl .lc-menu .lc-vert button.on i{border-color:var(--forest);background:radial-gradient(circle,var(--forest) 0 45%,transparent 50%)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .layerctl .lc-menu .lc-seg button.on{background:color-mix(in srgb,var(--done) 40%,var(--surface));color:#fff}}
 :root[data-theme="dark"] .layerctl .lc-menu .lc-seg button.on{background:color-mix(in srgb,var(--done) 40%,var(--surface));color:#fff}
 .wx{color:var(--muted);font-size:.9rem}
@@ -2111,8 +2116,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.62 Beta";
-const APP_CODE = 102;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.63 Beta";
+const APP_CODE = 103;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -2480,18 +2485,17 @@ const LayerCtl = L.Control.extend({
       <div class="lc-menu" hidden>
         <div class="lc-h">Kartenart</div>
         <div class="lc-seg">${Object.entries(BASES).map(([k, b]) => `<button type="button" data-base="${k}">${b.name}</button>`).join("")}</div>
+        <div class="lc-h">Dunkle Karte</div>
+        <div class="lc-seg lc-dk"><button type="button" data-darkset="auto">Auto</button><button type="button" data-darkset="on">An</button><button type="button" data-darkset="off">Aus</button></div>
         <div class="lc-h">Anzeigen</div>
         <button type="button" data-bgr="1" class="lc-tg lc-routes"><span>🥾 Touren-Linien</span><i></i></button>
         <button type="button" data-clu="1" class="lc-tg lc-clu"><span>🔢 Stempel gruppieren</span><i></i></button>
         <button type="button" data-poi="1" class="lc-tg lc-poi"><span>🅿️ Parken · Einkehr · Bus</span><i></i></button>
-        <button type="button" data-heat="1" class="lc-tg lc-heat"><span>🟩 Fortschritts-Karte</span><i></i></button>
-        <div class="lc-h">Dunkle Karte</div>
-        <div class="lc-seg lc-dk"><button type="button" data-darkset="auto">Auto</button><button type="button" data-darkset="on">An</button><button type="button" data-darkset="off">Aus</button></div>
-        <button type="button" data-dstyle="1" class="lc-go"><span>🎨 Stil wählen</span><b>›</b></button>
         <div class="lc-h"></div>
         <button type="button" data-cmp="1" class="lc-go"><span>👥 Mit Freund vergleichen</span><b>›</b></button>
       </div>`;
-    L.DomEvent.disableClickPropagation(d);
+    L.DomEvent.disableClickPropagation(d); L.DomEvent.disableScrollPropagation(d);
+    ["touchstart", "touchmove", "pointerdown", "wheel"].forEach(ev => d.querySelector(".lc-menu").addEventListener(ev, x => x.stopPropagation(), { passive: true }));
     const menu = d.querySelector(".lc-menu");
     d.querySelector(".lc-btn").onclick = () => {
       menu.hidden = !menu.hidden; if (!menu.hidden) syncLc();
@@ -2549,7 +2553,7 @@ let meMarker = null;
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 
 /* ---------- 🗺️ Fortschritts-Karte: Raster, gefärbt nach Anteil gestempelt ---------- */
-let showHeat = load("sp.heat", false);
+let showHeat = false;   // Fortschritts-Karte: aus dem Menü genommen
 let useClusters = load("sp.clusters", true);   // Stempel beim Rauszoomen gruppieren (Ebenen-Menü)
 const heatLayer = L.layerGroup();
 function drawHeat(){
