@@ -1,6 +1,6 @@
 {
- "code": 94,
- "version": "0.9.54 Beta",
- "notes": "Neue untere Leiste mit Symbolen und Benachrichtigungs-Bubble bei Freunde. Karten-Quellenangabe ist jetzt ein kleines ⓘ zum Aufklappen.",
+ "code": 95,
+ "version": "0.9.55 Beta",
+ "notes": "Neues Design: Symbole bei Routen und Stempeln, Menü mit „In der Nähe“ und „Freunde einladen“, schönere Freunde-Seite, Kopf klappt beim Scrollen in der Liste ein.",
  "apk": "Stempelpass.apk"
 }

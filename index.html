@@ -883,6 +883,17 @@ li.hoff{opacity:.75}
 .leaflet-control-attribution.attr-mini::before{content:"ⓘ";position:absolute;left:0;top:0;width:22px;text-align:center;font-size:14px}
 .leaflet-control-attribution.attr-mini.open{max-width:calc(100vw - 30px);padding:0 10px 0 26px!important;font-size:11px!important}
 .leaflet-control-attribution.attr-mini a{color:var(--code)}
+.racts.nw{display:flex;gap:8px}.racts.nw .btn{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:16px;padding:12px 0;font-weight:700;margin:0}
+.racts.nw .btn:not(.primary){background:color-mix(in srgb,var(--fg) 7%,transparent);border-color:transparent;color:var(--fg)}
+.racts.nw #hikesBtn .ico{color:var(--bad)}.racts.nw #hikesBtn.rec-on .ico{animation:recBlink 1.2s ease-in-out infinite}
+@keyframes recBlink{50%{opacity:.3}}
+.btn.ib{display:inline-flex;align-items:center;justify-content:center;gap:6px}.btn.ib .ico{color:var(--forest);flex:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.ib .ico{color:var(--done)}}:root[data-theme="dark"] .btn.ib .ico{color:var(--done)}
+.frhero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:18px 4px 8px}
+.frhero .fh-ic{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;font-size:2.2rem;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--gold) 40%,var(--surface)),color-mix(in srgb,var(--forest) 18%,var(--surface)))}
+.frhero h2{margin:4px 0 0}.frhero p{margin:0;color:var(--muted)}
+.fh-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;margin:8px 0}
+.fh-list div{border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:10px;text-align:left;font-size:.82rem;color:var(--muted)}.fh-list b{display:block;color:var(--fg);font-size:.9rem;margin-top:2px}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
@@ -1012,7 +1023,7 @@ nav.bottom #locBtn svg{width:22px;height:22px}
 .routechip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 .routechip button{flex:none;border:0;background:var(--route);color:#fff;border-radius:99px;width:28px;height:28px;font-weight:700;padding:0}
 .routechip span{cursor:pointer}
-.legend{position:absolute;left:6px;right:70px;bottom:18px;z-index:6;display:flex;flex-wrap:wrap;gap:3px;padding:0;pointer-events:none}.legend button{pointer-events:auto}
+.legend{position:absolute;left:8px;right:38px;bottom:9px;z-index:6;display:flex;flex-wrap:wrap;gap:3px;padding:0;pointer-events:none}.legend button{pointer-events:auto}
 .legend button{flex:none;display:flex;align-items:center;gap:3px;border:1px solid var(--line);background:color-mix(in srgb,var(--surface) 90%,transparent);color:var(--fg);border-radius:99px;padding:1px 6px 1px 4px;font:600 .64rem/1.5 var(--body);white-space:nowrap}
 .legend button b{font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
 .legend button.on{border-color:var(--fg);background:var(--fg);color:var(--surface)}.legend button.on b{color:var(--surface);opacity:.8}
@@ -1532,9 +1543,9 @@ body.hdr-ring header .progress{margin-top:4px}
 .frow select.act{border-color:var(--gold);background-color:color-mix(in srgb,var(--gold) 12%,var(--surface))}
 .ficon{flex:none;width:38px;height:38px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--fg);font-size:1.05rem;padding:0}
 .ficon.on{background:var(--forest);color:var(--forest-fg)}
-/* Beim Scrollen der Liste klappt der Fortschritt im Kopf ein */
-header .progress{transition:max-height .2s ease,opacity .2s ease,margin .2s ease;max-height:140px;overflow:hidden}
-body.compact-hdr header .progress{max-height:0;opacity:0;margin-top:0}
+/* Beim Scrollen der Liste klappen Gebiet- und Heft-Reihe ein, der Fortschritt bleibt */
+header .tabs,header .hefts{transition:max-height .22s ease,opacity .2s ease,margin .22s ease,padding .22s ease;max-height:120px}
+body.compact-hdr header .tabs,body.compact-hdr header .hefts{max-height:0;opacity:0;margin-top:0!important;margin-bottom:0!important;padding-top:0!important;padding-bottom:0!important;overflow:hidden;pointer-events:none}
 .rpprev{border:2px dashed var(--line);border-radius:12px;min-height:90px;display:flex;align-items:center;justify-content:center;padding:10px;color:var(--muted);font-size:.85rem;text-align:center;background:var(--bg)}
 .rpprev img{max-width:100%;max-height:260px;border-radius:8px;display:block}
 .rphoto{margin-top:6px;border:1px solid currentColor!important;background:transparent;color:inherit;border-radius:8px;padding:4px 9px;font:600 .8rem var(--body)}
@@ -1641,7 +1652,7 @@ body.compact-hdr header .progress{max-height:0;opacity:0;margin-top:0}
 
   <section id="routes" class="panel" hidden>
     <div class="filters">
-      <div class="racts"><button class="btn primary" id="planBtn">🧭 Tour planen</button><button class="btn" id="hikesBtn">⏺ Aufzeichnen</button></div>
+      <div class="racts nw"><button class="btn primary" id="planBtn">Tour planen</button><button class="btn" id="hikesBtn">Aufzeichnen</button></div>
       <div class="frow" id="rfrow">
         <input id="rq" type="search" placeholder="Suchen …" autocomplete="off">
         <select id="rfiltSel" aria-label="Filter"><option value="all">Alle</option><option value="open">Offen</option><option value="done">✓ Geschafft</option></select>
@@ -1939,8 +1950,8 @@ SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", 
   levels: [[11, "Wandernadel"]],
   info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
   url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.54 Beta";
-const APP_CODE = 94;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.55 Beta";
+const APP_CODE = 95;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -2792,7 +2803,8 @@ function renderRoutes(){
   const list = routes[current];
   const sum = $("#rsum");
   const hk = () => { const b = $("#rHike"); if (b) b.onclick = () => trk ? openTrackSheet() : openHikes(); };
-  $("#hikesBtn").textContent = trk ? "⏺ Läuft …" : "⏺ Aufzeichnen";
+  $("#hikesBtn").innerHTML = ico("rec") + (trk ? "Läuft …" : "Aufzeichnen"); $("#hikesBtn").classList.toggle("rec-on", !!trk);
+  $("#planBtn").innerHTML = ico("compass") + "Tour planen";
   $("#rfrow").hidden = !list.length;
   if (!list.length) {
     sum.innerHTML = hikeCardHtml(); hk();
@@ -3191,9 +3203,9 @@ function openStamp(k){
   const sub = [distKmV != null ? "📍 " + fmtKm(distKmV) : "", ele ? "⛰️ " + ele + " m" : "", esc(stampPlace(set, s))].filter(Boolean).join(" · ");
   const mainBtn = d ? `<button class="btn stamped${mCls(set, k)}" id="sToggle">✓ ${m === "code" ? "Per Code abgehakt" : m === "digital" ? "Digital gestempelt" : "Gestempelt"} am ${fmtDate(d)} – entfernen …</button>`
     : bad ? `<button class="btn primary sv-code" id="sCode">🔢 Per Code abhaken</button>` : `<button class="btn primary" id="sToggle">Als gestempelt markieren</button>`;
-  const navBtn = hasPos(s) ? `<button class="btn" id="sNav">🧭 Hinführen</button>` : `<a class="btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name + " " + (SETS[set].near || (REGION[set] === "thue" ? "Thüringen" : "Harz")))}" target="_blank" rel="noopener">🗺️ Suchen</a>`;
+  const navBtn = hasPos(s) ? `<button class="btn ib" id="sNav">${ico("nav")}Hinführen</button>` : `<a class="btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name + " " + (SETS[set].near || (REGION[set] === "thue" ? "Thüringen" : "Harz")))}" target="_blank" rel="noopener">🗺️ Suchen</a>`;
   const row = d ? `${navBtn}${m === "digital" ? '<button class="btn" id="sOver">✍️ Ins Heft</button>' : ""}<button class="btn" id="sMethod">Art ändern</button>`
-    : bad ? `${navBtn}<button class="btn" id="sDig">📱 Digital</button>` : `${navBtn}<button class="btn" id="sCode">🔢 Code</button><button class="btn" id="sDig">📱 Digital</button>`;
+    : bad ? `${navBtn}<button class="btn ib" id="sDig">${ico("phone")}Digital</button>` : `${navBtn}<button class="btn ib" id="sCode">${ico("hash")}Code</button><button class="btn ib" id="sDig">${ico("phone")}Digital</button>`;
   const hOpen = hefte.filter(x => !done[x.set][x.k]).length;
   const hName = x => heftTitle(x.set, byKey[x.set].get(x.k), true);
   openSheet(`
@@ -4579,7 +4591,9 @@ function renderFriends(){
   const credit = MADE_BY ? `<p class="credit">Stempeljagd von ${esc(MADE_BY)}</p>` : "";
   if (!fb.ready()) { el.innerHTML = `<h2>Freunde</h2><p>Die Freunde-Funktion ist in dieser Version nicht eingerichtet.</p>${credit}`; return; }
   if (!username) {
-    el.innerHTML = `<h2>Freunde</h2><p>Lege zuerst deinen Benutzernamen fest.</p><button class="btn primary" id="frName">Benutzernamen festlegen</button>${credit}`;
+    el.innerHTML = `<div class="frhero"><div class="fh-ic">🥾</div><h2>Zusammen wandern</h2><p>Leg einen Benutzernamen fest und finde deine Freunde.</p>
+      <div class="fh-list"><div>🏆<b>Rangliste</b>Wer hat die meisten Stempel?</div><div>🟢<b>Gerade unterwegs</b>Sieh, wer gerade wandert</div><div>🥾<b>Einladen</b>Gemeinsam auf Tour gehen</div><div>🗺️<b>Touren teilen</b>Nachwandern mit Freunden</div></div>
+      <button class="btn primary" id="frName" style="width:100%">Benutzernamen festlegen</button></div>${credit}`;
     $("#frName").onclick = () => openWelcome(false);
     return;
   }
@@ -8015,6 +8029,8 @@ function openMenu(){
       <button id="mHefte"><span>📚</span>Gebiete & Hefte</button>
       <button id="mDiary"><span>📄</span>Tagebuch (PDF)</button>
       <button id="mPinReq"><span>📝</span>Nadel-Antrag</button>
+      <button id="mNear"><span>📍</span>In der Nähe</button>
+      <button id="mInvite"><span>💌</span>Freunde einladen</button>
     </div>
     <h3>Einstellungen</h3>
     <div class="mlist">
@@ -8044,6 +8060,11 @@ function openMenu(){
   $("#mHefte").onclick = openHefteAll;
   $("#mDiary").onclick = openDiary;
   $("#mPinReq").onclick = () => openPinRequest(openMenu);
+  $("#mNear").onclick = () => openAreaList();
+  $("#mInvite").onclick = () => {
+    const t = username && username.code ? `Komm mit auf Stempeljagd! 🥾 Lade dir die App Stempeljagd und füg mich als Freund hinzu – mein Name: ${username.name}, mein Code: ${fmtCode(username.code)}` : "Komm mit auf Stempeljagd! 🥾 Mit der App Stempeljagd sammelst du Wanderstempel im Harz und in Thüringen – digital, mit Karte, Routen und Rangliste.";
+    shareText("Stempeljagd", t);
+  };
   $("#mProfiles").onclick = openProfiles;
   $("#mBackup").onclick = openBackupMenu;
   $("#mDefects").onclick = openDefectsMenu;
@@ -8726,6 +8747,8 @@ async function openLocations(focusCode){
 $("#locChipX").onclick = () => { clearInterval(locTimer); locTimer = null; locLayer.clearLayers(); $("#locChip").hidden = true; };
 
 /* ---------- Ansicht & Ereignisse ---------- */
+const ICO = {compass:'<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z"/>',rec:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/>',hash:'<path d="M5 9h14M5 15h14M10 4 8 20M16 4l-2 16"/>',phone:'<rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18h2"/>',nav:'<path d="M3 11 21 3l-8 18-2-8-8-2Z"/>'};
+const ico = (k, sz = 19) => `<svg viewBox="0 0 24 24" width="${sz}" height="${sz}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="ico">${ICO[k]}</svg>`;
 function setView(v){
   if (v !== "list" && selMode) { selMode = false; sel.clear(); }
   view = v;
