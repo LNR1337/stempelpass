@@ -1147,7 +1147,7 @@ nav.bottom #locBtn svg{width:22px;height:22px}
 .notice.bad{border-color:var(--bad)}
 .notice.bad b{color:var(--bad)}
 .notice small{display:block;color:var(--muted);margin-top:4px}
-.actions{display:flex;flex-direction:column;gap:8px}
+.actions{display:flex;flex-direction:column;gap:10px;margin-top:16px}
 .btn{display:block;width:100%;text-align:center;text-decoration:none;border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:12px;padding:12px;font-weight:600}
 .btn.primary{background:var(--forest);color:var(--forest-fg);border-color:var(--forest)}
 .btn.stamped{background:var(--done);border-color:var(--done);color:#fff}
@@ -2085,8 +2085,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.57 Beta";
-const APP_CODE = 97;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.58 Beta";
+const APP_CODE = 98;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -6411,9 +6411,29 @@ async function loadFixes(){
     if (r.status === 404) { if (Object.keys(stampFixes).length) applyFixes({}); return; }
     if (!r.ok) return;
     const txt = fv(await r.json(), "data") || "{}";
-    if (txt !== JSON.stringify(stampFixes)) applyFixes(JSON.parse(txt));
+    if (txt !== JSON.stringify(stampFixes)) { applyFixes(JSON.parse(txt)); return true; }
   } catch(e) {}
+  return false;
 }
+/* ---------- 🔄 Live-Abgleich: Änderungen von Admins/Moderatoren (Positionen, Namen, Defekte, Ankündigungen) erscheinen ohne Neustart ---------- */
+let liveTick = 0;
+async function liveSync(){
+  if (!fb.ready() || document.hidden) return;
+  const before = JSON.stringify(modDefects);
+  const fixed = await loadFixes();
+  try { await loadModDefects(); } catch(e) {}
+  const defChanged = JSON.stringify(modDefects) !== before;
+  if (defChanged && !fixed) { try { refreshViews(); } catch(e) {} }
+  if ((fixed || defChanged) && Date.now() - liveTick > 5000) {
+    liveTick = Date.now();
+    const sh = $("#sheet"), k = !sh.hidden && sh.querySelector(".sv-head") ? selectedKey : null;
+    if (k && byKey[current].get(k) && !sh.classList.contains("peek") && !sh.querySelector("input:focus,textarea:focus")) openStamp(k);   // offenes Stempel-Fenster auffrischen
+    toast(fixed ? "🔄 Stempel wurden gerade von einem Moderator aktualisiert" : "🔄 Defekt-Meldungen aktualisiert");
+  }
+  try { loadNews(); } catch(e) {}
+}
+setInterval(liveSync, 60000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) setTimeout(liveSync, 1500); });
 async function saveFix(set, k, fix){
   { const s0 = byKey[set] && byKey[set].get(k); logMod(fix ? (fix.lat != null ? "Position geändert" : "Stempel bearbeitet") : "Korrektur zurückgesetzt", `${SETS[set].short} ${s0 ? stampTitle(set, s0) : k}`); }
   /* frisch laden, damit nichts von einem anderen Admin verloren geht */

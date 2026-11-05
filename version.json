@@ -1,6 +1,6 @@
 {
- "code": 97,
- "version": "0.9.57 Beta",
- "notes": "Nach Updates suchen (Menü → Über), Update-Suche beim Zurückholen der App, Touren-Karte rutscht nicht mehr über die Suche, Ring wird bei 100 % ganz grün.",
+ "code": 98,
+ "version": "0.9.58 Beta",
+ "notes": "Änderungen von Admins und Moderatoren erscheinen jetzt fast live ohne Neustart. Mehr Abstand über allen Knöpfen.",
  "apk": "Stempelpass.apk"
 }
