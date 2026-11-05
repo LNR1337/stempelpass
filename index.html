@@ -843,6 +843,8 @@ details.pubmore{margin:4px 0 8px;font-size:.9rem}details.pubmore summary{color:v
 @keyframes lsPulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--done) 60%,transparent)}100%{box-shadow:0 0 0 8px transparent}}
 .sv-last[hidden]{display:none}
 .sv-main{margin-top:12px}.sv-main .btn{width:100%}
+.btn.sv-big{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 14px;font-size:1.05rem;border-radius:16px;box-shadow:0 6px 18px color-mix(in srgb,var(--forest) 35%,transparent)}
+.sv-big .svb-ic{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.18);font-size:1rem}
 .sheet .btn.sv-code,.btn.primary.sv-code{background:var(--code);border-color:var(--code);color:#fff}
 .sv-row{display:flex;gap:8px;margin-top:8px}.sv-row .btn{flex:1;padding:10px 6px;font-size:.9rem;text-align:center;text-decoration:none}
 .sv-alert{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;margin-top:10px;border-radius:12px;padding:9px 12px;font-size:.86rem;border:1px solid}
@@ -1001,6 +1003,10 @@ body.map-dark .leaflet-container{background:#1b2420}
 .rnote{margin:6px 0 10px;padding:8px 10px;border-radius:12px;background:color-mix(in srgb,var(--gold) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--gold) 35%,var(--line));font-size:.8rem;color:var(--muted)}.rnote a{color:var(--forest);font-weight:700;white-space:nowrap}
 .inoff{display:inline-block;vertical-align:middle;margin-left:6px;padding:2px 7px;border-radius:99px;font:700 .62rem/1.3 var(--body);font-style:normal;letter-spacing:.03em;text-transform:uppercase;color:#8a6410;background:color-mix(in srgb,var(--gold) 22%,var(--surface));border:1px solid color-mix(in srgb,var(--gold) 45%,var(--line))}
 h2 .inoff{font-size:.6rem;vertical-align:4px}
+.bavb.fring{padding:3px;border-radius:50%;background:conic-gradient(var(--done) calc(var(--fp,0)*1%),color-mix(in srgb,var(--fg) 12%,transparent) 0)}
+.bavb.fring>*{box-shadow:0 0 0 2px var(--surface)}
+.mclu span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:conic-gradient(var(--done) var(--cp),var(--open) 0);box-shadow:0 2px 8px rgba(0,0,0,.3);padding:4px;box-sizing:border-box}
+.mclu b{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:var(--surface);color:var(--fg);font:800 .8rem var(--body)}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
@@ -2092,8 +2098,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.60 Beta";
-const APP_CODE = 100;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.61 Beta";
+const APP_CODE = 101;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -2615,6 +2621,7 @@ function drawMarkers(fit){
   }
   renderLegend(legCnt);
   if (typeof drawStampSyms === "function") drawStampSyms(true);
+  if (typeof updateClusters === "function") updateClusters();
   renderCmpBar(cmpCnt);
   drawStampLabels();
   if (fit && pts.length && !activeRoute) map.fitBounds(pts, { padding: [24, 24], maxZoom: 12 });
@@ -2806,6 +2813,34 @@ function drawPoi(){
   }, 500);
 }
 map.on("moveend", () => { if (showPoi) drawPoi(); drawStampLabels(); drawStampSyms(); });
+map.on("zoomend", () => updateClusters());
+/* Herausgezoomt: nahe Stempel zu Gruppen mit Zahl zusammenfassen (Ring = Anteil gestempelt); antippen zoomt hinein */
+let clusterLayer = null;
+function updateClusters(){
+  if (!clusterLayer) clusterLayer = L.layerGroup();
+  const z = map.getZoom(), on = z <= 10 && !showHeat && !cmpMap && !activeRoute && !legFilter;
+  if (!on) { if (map.hasLayer(clusterLayer)) map.removeLayer(clusterLayer); if (!map.hasLayer(layer)) layer.addTo(map); return; }
+  if (map.hasLayer(layer)) map.removeLayer(layer);
+  clusterLayer.clearLayers(); if (!map.hasLayer(clusterLayer)) clusterLayer.addTo(map);
+  const G = 52, cells = {};
+  for (const s of visible()) { if (!hasPos(s)) continue; const p = map.project([s.lat, s.lon], z); const key = Math.floor(p.x / G) + "," + Math.floor(p.y / G); (cells[key] = cells[key] || []).push(s); }
+  const c = { done: css("--done"), open: css("--open"), bad: css("--bad") };
+  for (const list of Object.values(cells)) {
+    const lat = list.reduce((a, s) => a + s.lat, 0) / list.length, lon = list.reduce((a, s) => a + s.lon, 0) / list.length;
+    const nd = list.filter(s => isDone(current, s.k)).length;
+    if (list.length === 1) {
+      const s = list[0], d = nd === 1;
+      L.circleMarker([s.lat, s.lon], { radius: 7, weight: 2, color: "#fff", fillColor: d ? c.done : isBroken(current, s.k) ? c.broken || c.bad : c.open, fillOpacity: .95 })
+        .on("click", () => openStamp(s.k)).bindTooltip(s.n + " · " + s.name, { direction: "top", offset: [0, -8] }).addTo(clusterLayer);
+      continue;
+    }
+    const pct = Math.round(nd / list.length * 100), sz = list.length > 50 ? 46 : list.length > 15 ? 40 : 34;
+    L.marker([lat, lon], { icon: L.divIcon({ className: "mclu", iconSize: [sz, sz], iconAnchor: [sz / 2, sz / 2],
+      html: `<span style="--cp:${pct}%"><b>${list.length}</b></span>` }) })
+      .on("click", () => map.flyToBounds(L.latLngBounds(list.map(s => [s.lat, s.lon])).pad(0.2), { maxZoom: 13, duration: .6 }))
+      .bindTooltip(`${list.length} Stempel · ${nd} gestempelt`, { direction: "top" }).addTo(clusterLayer);
+  }
+}
 /* Symbole auf den Kartenpunkten: ✓ gestempelt, ✕ kaputt, # per Code, ★ gemerkt */
 var symLayer = null, symKey = "";
 function drawStampSyms(force){
@@ -3043,7 +3078,8 @@ function renderRoutes(){
   $("#rfrow").hidden = !list.length;
   if (!list.length) {
     sum.innerHTML = hikeCardHtml(); hk();
-    $("#ritems").innerHTML = `<li class="empty">Für die ${esc(SETS[current].title)} gibt es keine fertigen Routen. Mit „🧭 Tour planen“ stellt dir die App eine Tour aus offenen Stempeln zusammen – und mit 🥾 kannst du sie aufzeichnen.</li>`;
+    $("#ritems").innerHTML = `<li class="empty bigempty"><div class="be-ic">🧭</div><b>Noch keine fertigen Touren</b><span>Für „${esc(SETS[current].title)}“ gibt es keine fertigen Routen. Die App stellt dir aber eine Tour aus deinen offenen Stempeln zusammen.</span><button class="btn primary" id="reGo">🧭 Tour selbst planen</button></li>`;
+    $("#reGo").onclick = () => $("#planBtn").click();
     return;
   }
   drawRouteOverview(list);
@@ -3138,6 +3174,7 @@ function renderProgress(){
     $("#rRing").dataset.medal = rc ? LV_ICON(rc[1]) : "";
     if (rc) $("#rL1").innerHTML = `${count}/${total} · <b>${LV_ICON(rc[1])} ${esc(rc[1].replace(/^Touringen /, ""))}</b>` + (profiles.length > 1 ? ` · ${esc(profileName())}` : "");
     if (nx) $("#rL2").textContent = `Noch ${nx[0] - count} bis ${LV_ICON(nx[1])} ${nx[1].replace(/^Touringen /, "")}`;
+    if (total && count >= total) { $("#rL1").innerHTML = `<b>🏆 Heft komplett!</b>` + (profiles.length > 1 ? ` · ${esc(profileName())}` : ""); $("#rL2").textContent = rc ? `${LV_ICON(rc[1])} ${rc[1].replace(/^Touringen /, "")} · alle ${total} Stempel` : `alle ${total} Stempel gesammelt`; }
     const p = nx ? (count - prevN) / (nx[0] - prevN) : (total ? count / total : 0);
     $("#rBarW").hidden = !total; $("#rBar").style.width = Math.round(Math.max(0, Math.min(1, p)) * 100) + "%"; }
   updateNearChip();
@@ -3486,7 +3523,7 @@ function openStamp(k){
     : bad ? `<span class="sv-st bad">⚠️ kaputt gemeldet</span>` : `<span class="sv-st open">● noch offen</span>`;
   const sub = [distKmV != null ? "📍 " + wd(myPos, [s.lat, s.lon]) + " Weg" : "", ele ? "⛰️ " + ele + " m" : "", esc(stampPlace(set, s))].filter(Boolean).join(" · ");
   const mainBtn = d ? `<button class="btn stamped${mCls(set, k)}" id="sToggle">✓ ${m === "code" ? "Per Code abgehakt" : m === "digital" ? "Digital gestempelt" : "Gestempelt"} am ${fmtDate(d)} – entfernen …</button>`
-    : bad ? `<button class="btn primary sv-code" id="sCode">🔢 Per Code abhaken</button>` : `<button class="btn primary" id="sToggle">Als gestempelt markieren</button>`;
+    : bad ? `<button class="btn primary sv-code" id="sCode">🔢 Per Code abhaken</button>` : `<button class="btn primary sv-big" id="sToggle"><span class="svb-ic">✓</span>Als gestempelt markieren</button>`;
   const navBtn = hasPos(s) ? `<button class="btn ib" id="sNav">${ico("nav")}Hinführen</button>` : `<a class="btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name + " " + (SETS[set].near || (REGION[set] === "thue" ? "Thüringen" : "Harz")))}" target="_blank" rel="noopener">🗺️ Suchen</a>`;
   const row = d ? `${navBtn}${m === "digital" ? '<button class="btn" id="sOver">✍️ Ins Heft</button>' : ""}<button class="btn" id="sMethod">Art ändern</button>`
     : bad ? `${navBtn}<button class="btn ib" id="sDig">${ico("phone")}Digital</button>` : `${navBtn}<button class="btn ib" id="sCode">${ico("hash")}Code</button><button class="btn ib" id="sDig">${ico("phone")}Digital</button>`;
@@ -5050,7 +5087,7 @@ function renderFriends(){
     const hike = full && h && hDays <= 3 ? `<span class="fchip">🥾 ${hDays === 0 ? "heute" : hDays === 1 ? "gestern" : "vor " + hDays + " Tagen"} ${km1(h.km)} km${h.n ? " · " + h.n + " Stempel" : ""}</span>` : "";
     return `<li class="fcard ${me ? "me" : ""} ${full ? "" : "compact"}" data-prof="${esc(m.code)}">
       <div class="ftop"><span class="medal">${medal}</span>
-        <span class="bavb ${on ? "is-on" : ""}">${avatarHtml(c, "bav")}</span>
+        <span class="bavb fring ${on ? "is-on" : ""}" style="--fp:${(() => { const tot = stamps[current] ? stamps[current].length : 0, v = +(m[current] || 0); return tot ? Math.min(100, Math.round(v / tot * 100)) : 0; })()}" title="${esc(SETS[current].short)}: ${+(m[current] || 0)} Stempel">${avatarHtml(c, "bav")}</span>
         <span class="who"><b>${esc(m.name)}${me ? " (du)" : ""}${RANKS[roles[m.code]] ? ` <i class="rk" title="${RANKS[roles[m.code]][1]}">${RANKS[roles[m.code]][0]}</i>` : ""}</b><small class="${!me && isOnline(m.updated) ? "online" : ""}">${esc(sub)}${!me && lvl ? " · " + esc(lvl) : ""}${loc}</small></span>
         <span class="tot"><b>${key(m)}</b>${trend}</span></div>
       ${walksLive[m.code] ? walkChip(m.code) : ""}${minis}${hike}</li>`;
