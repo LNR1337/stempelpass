@@ -1,6 +1,6 @@
 {
- "code": 99,
- "version": "0.9.59 Beta",
- "notes": "Dunkle Karte: 5 Stile zum Ausprobieren (Karten-Ebenen → Stil der dunklen Karte). Standard ist jetzt Gedimmt.",
+ "code": 100,
+ "version": "0.9.60 Beta",
+ "notes": "Sächsische Schweiz: offizielle Namen, Tour-Infos und Stempelstellen, dazu 8 inoffizielle Touren von komoot. Dunkle Karte: 5 Stile.",
  "apk": "Stempelpass.apk"
 }
