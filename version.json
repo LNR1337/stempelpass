@@ -1,6 +1,6 @@
 {
- "code": 98,
- "version": "0.9.58 Beta",
- "notes": "Änderungen von Admins und Moderatoren erscheinen jetzt fast live ohne Neustart. Mehr Abstand über allen Knöpfen.",
+ "code": 99,
+ "version": "0.9.59 Beta",
+ "notes": "Dunkle Karte: 5 Stile zum Ausprobieren (Karten-Ebenen → Stil der dunklen Karte). Standard ist jetzt Gedimmt.",
  "apk": "Stempelpass.apk"
 }

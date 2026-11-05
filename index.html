@@ -987,10 +987,13 @@ body.compact-hdr header .nchip{display:none}
 :root[data-theme="dark"] .rthumb image{filter:brightness(.72) contrast(1.15) saturate(.7)}
 /* Dunkle Karte: Farben umdrehen und Farbton zurückdrehen → dunkler Grund, helle Straßen, Wasser/Wald behalten ihre Farbe */
 /* Dunkle Karte: OSM-Kacheln umgedreht – heller Grund wird dunkel, Wege/Pfade bleiben farbig und gut sichtbar */
-body.map-dark .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(1) contrast(.9) saturate(1.25)!important}
-body.map-dark .leaflet-pane.leaflet-labels-pane{filter:brightness(1.15) saturate(1.2)}
+body.map-dark .leaflet-tile-pane{filter:none!important}
+body.md-dim .leaflet-tile-pane{filter:brightness(.62) contrast(1.12) saturate(.8)!important}
+body.md-topo .leaflet-tile-pane{filter:brightness(.55) contrast(1.2) saturate(.75)!important}
+body.md-invert .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.95) contrast(.85) saturate(.9)!important}
+body.md-night .leaflet-pane.leaflet-labels-pane,body.md-gray .leaflet-pane.leaflet-labels-pane{filter:brightness(1.1) saturate(1.2)}
 body.map-dark #map.base-sat .leaflet-tile-pane,body.map-dark .minimap.base-sat .leaflet-tile-pane{filter:brightness(.8)!important}
-body.map-dark .rthumb image{filter:invert(1) hue-rotate(180deg) brightness(1) contrast(.9) saturate(1.25)}
+body.md-dim .rthumb image,body.md-topo .rthumb image{filter:brightness(.62) contrast(1.12) saturate(.8)}body.md-invert .rthumb image{filter:invert(1) hue-rotate(180deg) brightness(.95) contrast(.85) saturate(.9)}body.md-night .rthumb image,body.md-gray .rthumb image{filter:none}
 body.map-dark .leaflet-container{background:#1b2420}
 .btn.tkhome{display:flex;flex-direction:column;align-items:center;gap:2px;margin:4px 0 12px;border-color:color-mix(in srgb,var(--forest) 40%,var(--line));font-weight:700}.btn.tkhome small{font-weight:500;font-size:.75rem;color:var(--muted)}
 .wd{font-variant-numeric:tabular-nums}
@@ -2085,8 +2088,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.58 Beta";
-const APP_CODE = 98;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.59 Beta";
+const APP_CODE = 99;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -2404,7 +2407,20 @@ const DARK_OSM = { name: "Karte", url: "https://{s}.basemaps.cartocdn.com/dark_a
   attr: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a>' };
 let darkMap = load("sp.darkMap", "auto");   // auto = im dunklen Modus | on | off
 const darkMapOn = () => (darkMap === "on" || (darkMap === "auto" && document.documentElement.dataset.theme === "dark"));
-const curBase = id => { const k = id || baseId; return BASES[k] || BASES.osm; };   // dunkle Karte = dieselben Kacheln, per CSS umgefärbt (so bleiben alle Wege sichtbar)
+/* Stile der dunklen Karte – zum Ausprobieren in der App wählbar */
+const DARK_STYLES = {
+  dim:    { name: "Gedimmt",      desc: "Normale Karte, nur dunkler – alle Wege wie gewohnt" },
+  night:  { name: "Nacht",        desc: "Dunkelgrau wie Google Maps, Wanderwege farbig darüber", tiles: DARK_OSM },
+  gray:   { name: "Anthrazit",    desc: "Ruhiges Dunkelgrau (Esri), Wanderwege farbig darüber",
+            tiles: { name: "Karte", url: "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}", native: 16,
+              labels: "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}", attr: "© Esri, HERE, Garmin, © OpenStreetMap" } },
+  topo:   { name: "Nacht-Topo",   desc: "Topokarte mit Höhenlinien, abgedunkelt", tiles: null, base: "topo" },
+  invert: { name: "Umgekehrt",    desc: "Farben umgedreht – Wege hell auf dunkel" }
+};
+let darkStyle = load("sp.darkStyle", "dim"); if (!DARK_STYLES[darkStyle]) darkStyle = "dim";
+const curBase = id => { const k = id || baseId, b = BASES[k] || BASES.osm;
+  if (k === "osm" && darkMapOn()) { const st = DARK_STYLES[darkStyle]; if (st.tiles) return st.tiles; if (st.base) return BASES[st.base] || b; }
+  return b; };   // dunkle Karte = dieselben Kacheln, per CSS umgefärbt (so bleiben alle Wege sichtbar)
 let baseLayers = [];
 function setBase(id){
   baseId = id; save("sp.base", id);
@@ -2413,7 +2429,7 @@ function setBase(id){
   const credit = MADE_BY ? 'Stempeljagd von ' + esc(MADE_BY) + ' · ' : '';
   baseLayers = [L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc", attribution: credit + b.attr })];
   if (b.labels) baseLayers.push(L.tileLayer(b.labels, { maxZoom: 19, maxNativeZoom: b.native, pane: "labels", opacity: 0.9 }));
-  if (darkMapOn() && (id === "osm" || id === "topo")) {
+  if (darkMapOn() && id === "osm" && (darkStyle === "night" || darkStyle === "gray")) {
     /* Auf der dunklen Karte: markierte Wanderwege farbig darüber legen (Waymarked Trails), damit man die Wege gut sieht */
     baseLayers.push(L.tileLayer("https://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png", { maxZoom: 19, maxNativeZoom: 18, pane: "labels", opacity: 0.85,
       attribution: 'Wanderwege © <a href="https://hiking.waymarkedtrails.org">waymarkedtrails.org</a>' }));
@@ -2437,7 +2453,7 @@ const LayerCtl = L.Control.extend({
   onAdd(){
     const d = L.DomUtil.create("div", "layerctl leaflet-bar");
     d.innerHTML = `<button class="lc-btn" type="button" aria-label="Kartenansicht wechseln" title="Kartenansicht"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></button>
-      <div class="lc-menu" hidden>${Object.entries(BASES).map(([k, b]) => `<button type="button" data-base="${k}">${b.name}</button>`).join("")}<button type="button" data-bgr="1" class="lc-bgr">Touringen-Routen</button><button type="button" data-dark="1" class="lc-bgr lc-dark">🌙 Dunkle Karte</button><button type="button" data-heat="1" class="lc-bgr">Fortschritts-Karte</button><button type="button" data-poi="1" class="lc-bgr lc-poi">🅿️ Parken · Einkehr · Bus</button><button type="button" data-cmp="1" class="lc-bgr lc-act">👥 Mit Freund vergleichen</button></div>`;
+      <div class="lc-menu" hidden>${Object.entries(BASES).map(([k, b]) => `<button type="button" data-base="${k}">${b.name}</button>`).join("")}<button type="button" data-bgr="1" class="lc-bgr">Touringen-Routen</button><button type="button" data-dark="1" class="lc-bgr lc-dark">🌙 Dunkle Karte</button><button type="button" data-dstyle="1" class="lc-bgr lc-dstyle">🎨 Stil der dunklen Karte</button><button type="button" data-heat="1" class="lc-bgr">Fortschritts-Karte</button><button type="button" data-poi="1" class="lc-bgr lc-poi">🅿️ Parken · Einkehr · Bus</button><button type="button" data-cmp="1" class="lc-bgr lc-act">👥 Mit Freund vergleichen</button></div>`;
     L.DomEvent.disableClickPropagation(d);
     const menu = d.querySelector(".lc-menu");
     d.querySelector(".lc-btn").onclick = () => {
@@ -2448,6 +2464,7 @@ const LayerCtl = L.Control.extend({
     menu.onclick = e => {
       if (e.target.dataset.poi) { showPoi = !showPoi; save("sp.poi", showPoi); menu.hidden = true; drawPoi(); toast(showPoi ? (map.getZoom() < POI_ZOOM ? "Parken & Einkehr an – näher ranzoomen, dann erscheinen sie" : "Parkplätze, Einkehr und Haltestellen werden geladen") : "Parken & Einkehr ausgeblendet"); return; }
       if (e.target.dataset.cmp) { menu.hidden = true; openCmpPick(); return; }
+      if (e.target.dataset.dstyle) { menu.hidden = true; openDarkStyles(); return; }
       if (e.target.dataset.dark) { const nx = { auto: "on", on: "off", off: "auto" }[darkMap] || "auto"; darkMap = nx; save("sp.darkMap", nx); applyDarkMap(); toast(nx === "on" ? "🌙 Dunkle Karte immer an" : nx === "off" ? "☀️ Karte immer hell" : "🌗 Dunkle Karte automatisch (im dunklen Modus)"); return; }
       if (e.target.dataset.heat) { showHeat = !showHeat; save("sp.heat", showHeat); drawHeat(); menu.hidden = true; toast(showHeat ? "Fortschritts-Karte an – grün = viel gestempelt, orange = weiße Flecken" : "Fortschritts-Karte aus"); return; }
       if (e.target.dataset.bgr) { showBgRoutes = !showBgRoutes; save("sp.bgRoutes", showBgRoutes); bgKey = ""; drawBgRoutes(); menu.hidden = true; toast(showBgRoutes ? "Touringen-Routen werden angezeigt" : "Touringen-Routen ausgeblendet"); return; }
@@ -9427,10 +9444,25 @@ function applyTheme(){
   if (typeof applyDarkMap === "function") applyDarkMap();
 }
 /* ---------- 🌙 Dunkle Karte (wie bei Google Maps): Kacheln invertiert, Wasser bleibt blau, Wald grün ---------- */
+function openDarkStyles(){
+  if (view !== "map") setView("map");
+  openSheet(`<div class="kicker">Karte</div><h2>🌙 Stil der dunklen Karte</h2>
+    <p>Probier aus, was dir nachts am besten gefällt. Die Karte wechselt sofort.</p>
+    <div class="bgmodes">${Object.entries(DARK_STYLES).map(([k, v]) => `<label class="checkline bgm"><input type="radio" name="dst" value="${k}" ${k === darkStyle ? "checked" : ""}><span><b>${v.name}</b><small>${v.desc}</small></span></label>`).join("")}</div>
+    <div class="actions"><button class="btn quiet" id="dsClose">Fertig</button></div>`);
+  $("#dsClose").onclick = closeSheet;
+  $("#scrim").classList.add("peek");   // Karte oben sichtbar lassen, damit man den Unterschied sofort sieht
+  $("#sheet").querySelectorAll('[name="dst"]').forEach(r => r.onchange = () => {
+    darkStyle = r.value; save("sp.darkStyle", darkStyle);
+    if (darkMap === "off" || !darkMapOn()) { darkMap = "on"; save("sp.darkMap", "on"); }
+    document.body.classList.remove("map-dark"); applyDarkMap(); toast("🌙 " + DARK_STYLES[darkStyle].name);
+  });
+}
 function applyDarkMap(){
   const on = darkMap === "on" || (darkMap === "auto" && document.documentElement.dataset.theme === "dark");
   const was = document.body.classList.contains("map-dark");
   document.body.classList.toggle("map-dark", on);
+  for (const k of Object.keys(DARK_STYLES)) document.body.classList.toggle("md-" + k, on && darkStyle === k);
   if (was !== on && typeof map !== "undefined") { setBase(baseId); rovKey = ""; if (rovMap && rovMap._base) { rovMap.removeLayer(rovMap._base); const b = curBase(); rovMap._base = L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc" }).addTo(rovMap); } if (view === "routes") renderRoutes(); }
   const b = document.querySelector(".lc-dark"); if (b) { b.classList.toggle("on", on); b.textContent = "🌙 Dunkle Karte: " + ({ auto: "Auto", on: "An", off: "Aus" })[darkMap]; }
 }
