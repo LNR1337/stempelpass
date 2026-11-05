@@ -881,7 +881,7 @@ li.hoff{opacity:.75}
 .sv-opt b{display:block;font-size:.95rem}.sv-opt small{color:var(--muted);font-size:.8rem}
 .leaflet-control-attribution.attr-mini{position:relative;min-width:22px;height:22px;padding:0!important;margin:0 8px 8px 0!important;border-radius:11px;background:color-mix(in srgb,var(--surface) 85%,transparent)!important;color:var(--muted);font-size:0!important;line-height:22px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.18);white-space:nowrap;overflow:hidden;max-width:22px;transition:max-width .3s ease}
 .leaflet-control-attribution.attr-mini::before{content:"ⓘ";position:absolute;left:0;top:0;width:22px;text-align:center;font-size:14px}
-.leaflet-control-attribution.attr-mini.open{max-width:calc(100vw - 30px);padding:0 10px 0 26px!important;font-size:11px!important}
+.leaflet-control-attribution.attr-mini.open{background:var(--surface)!important;max-width:calc(100vw - 30px);padding:0 10px 0 26px!important;font-size:11px!important}
 .leaflet-control-attribution.attr-mini a{color:var(--code)}
 .racts.nw{display:flex;gap:8px}.racts.nw .btn{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:16px;padding:12px 0;font-weight:700;margin:0}
 .racts.nw .btn:not(.primary){background:color-mix(in srgb,var(--fg) 7%,transparent);border-color:transparent;color:var(--fg)}
@@ -894,6 +894,106 @@ li.hoff{opacity:.75}
 .frhero h2{margin:4px 0 0}.frhero p{margin:0;color:var(--muted)}
 .fh-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;margin:8px 0}
 .fh-list div{border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:10px;text-align:left;font-size:.82rem;color:var(--muted)}.fh-list b{display:block;color:var(--fg);font-size:.9rem;margin-top:2px}
+.boom{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;background:rgba(10,20,14,.62);animation:bmFade .2s ease;transition:opacity .4s}
+.boom.out{opacity:0}
+.boom-in{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;color:#fff;text-align:center}
+.boom-st{width:210px;height:210px;color:#2f8f57;background:radial-gradient(circle,#fbfaf3 0 62%,#f1ecd9 70%);border-radius:50%;filter:drop-shadow(0 0 18px rgba(63,191,110,.55));animation:bmHit .5s cubic-bezier(.2,1.6,.4,1) both;transform-origin:center}
+.boom-in b{font:700 1.4rem var(--display);text-shadow:0 2px 8px #000;margin-top:6px;animation:bmUp .4s .35s both}.boom-in small{opacity:.85;animation:bmUp .4s .45s both}
+.boom-in span{position:absolute;font-size:1.6rem;animation:bmSpark 1s .3s both}
+.boom-in .sp1{top:10px;right:-10px}.boom-in .sp2{top:120px;left:-24px;animation-delay:.42s}.boom-in .sp3{top:-6px;left:20px;font-size:1.1rem;animation-delay:.5s}
+@keyframes bmFade{from{opacity:0}}
+@keyframes bmHit{0%{transform:scale(2.4) rotate(-30deg);opacity:0}60%{transform:scale(.92) rotate(-10deg);opacity:1}100%{transform:scale(1) rotate(-12deg)}}
+@keyframes bmUp{from{opacity:0;transform:translateY(10px)}}
+@keyframes bmSpark{0%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1.3)}100%{opacity:.9;transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.boom-st,.boom-in b,.boom-in small,.boom-in span{animation:none}}
+#items li.bigempty,#ritems li.bigempty,.bigempty{display:flex!important;text-align:center;flex-direction:column;align-items:center;gap:10px;padding:46px 22px!important}
+.bigempty .be-ic{width:110px;height:110px;border-radius:50%;display:grid;place-items:center;font-size:3.2rem;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--gold) 45%,var(--surface)),color-mix(in srgb,var(--gold) 12%,var(--surface)))}
+.bigempty b{font:700 1.3rem var(--display);color:var(--fg)}.bigempty span{max-width:300px;line-height:1.4}.bigempty .btn{width:auto;padding:12px 22px;margin-top:4px}
+#sheet{transition:max-height .28s ease}
+#sheet.peek{max-height:min(52%,430px);overflow:hidden;border-radius:22px 22px 0 0;padding-top:4px}
+#sheet.peek .sv-map{display:none}
+#sheet .pgrip{display:none}
+#sheet.peek .pgrip{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0 8px;cursor:grab}
+.pgrip i{width:42px;height:5px;border-radius:3px;background:var(--line)}.pgrip small{font-size:.72rem;color:var(--muted)}
+#sheet.peek::after{content:"";position:sticky;display:block;bottom:-20px;height:46px;margin-top:-46px;background:linear-gradient(transparent,var(--surface));pointer-events:none}
+#sheet.peek .sv-x{display:none}
+.scrim.peek{background:transparent;pointer-events:none}
+.msym{display:grid!important;place-items:center;color:#fff;font:900 11px/1 var(--body);text-shadow:0 0 2px rgba(0,0,0,.35);pointer-events:none}
+.msym.st{color:#fff;font-size:10px}.msym.x{font-size:10px}.msym.sel{font-size:14px}
+.wxd.best{border-color:var(--done);background:color-mix(in srgb,var(--done) 10%,var(--surface));box-shadow:0 2px 10px color-mix(in srgb,var(--done) 25%,transparent)}
+.wxtip{margin-top:8px;font-size:.85rem;font-weight:600;color:var(--muted)}.wxtip.ok{color:var(--done)}
+.sv-hours{display:flex;flex-direction:column;gap:2px;width:100%;text-align:left;margin:10px 0 0;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:inherit}
+.sv-hours b{font-size:.92rem}.sv-hours span{font-size:.85rem;color:var(--muted)}.sv-hours small{font-size:.72rem;color:var(--muted)}
+.sv-hours.ok{border-color:color-mix(in srgb,var(--done) 45%,var(--line));background:color-mix(in srgb,var(--done) 8%,var(--surface))}.sv-hours.ok b{color:var(--done)}
+.sv-hours.bad{border-color:color-mix(in srgb,var(--bad) 45%,var(--line));background:color-mix(in srgb,var(--bad) 8%,var(--surface))}.sv-hours.bad b{color:var(--bad)}
+.sv-hours.soon b{color:var(--gold)}
+.hgrid{display:flex;flex-direction:column;gap:6px}.hrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;border:1px solid var(--line);border-radius:12px;padding:6px 10px;background:var(--surface)}
+.hrow b{width:26px}.hrow select,.hrow input{border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);padding:6px;font:inherit;font-size:.85rem}
+.hti{display:flex;align-items:center;gap:4px}.hti[hidden]{display:none}
+.myear{display:flex;align-items:center;gap:12px;width:100%;margin:12px 0 12px;padding:12px 14px;border:0;border-radius:16px;text-align:left;color:#fff;background:linear-gradient(120deg,#1d4a33,#0d2419 60%,#5a4210);font:inherit;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.myear>span:first-child{font-size:1.6rem}.myear b{display:block;color:#f3d98a;font:700 1rem var(--display)}.myear small{font-size:.78rem;opacity:.8}.myear .mr-go{margin-left:auto;color:#f3d98a}
+.yr{position:relative;margin:-16px -18px -18px;padding:34px 22px 26px;color:#fff;text-align:center;background:linear-gradient(160deg,#1d4a33,#0d2419 60%,#3a2a08);min-height:100%}
+.yr .sv-x{position:absolute;top:12px;right:12px}
+.yr-k{letter-spacing:.22em;font-size:.75rem;font-weight:700;color:#f3d98a}.yr-y{font:700 4rem/1.05 var(--display);color:#f3d98a;margin:4px 0 16px}
+.yr-g{display:grid;grid-template-columns:1fr 1fr;gap:10px}.yr-g div{background:rgba(255,255,255,.08);border-radius:16px;padding:14px 6px}
+.yr-g b{display:block;font:700 2rem var(--display)}.yr-g small{opacity:.8;font-size:.8rem}
+.yr-m{display:flex;align-items:flex-end;gap:5px;height:90px;margin:16px 4px 4px;padding-bottom:16px}
+.yr-m i{position:relative;flex:1;height:var(--h);min-height:4px;border-radius:4px 4px 0 0;background:#f3d98a}.yr-m i[style*="--h:0%"]{background:rgba(255,255,255,.18)}
+.yr-m span{position:absolute;bottom:-16px;left:0;right:0;font:600 .65rem var(--body);color:rgba(255,255,255,.6);font-style:normal}
+.yr-l{margin-top:12px;background:rgba(255,255,255,.08);border-radius:16px;padding:12px 14px;text-align:left;font-size:.9rem;line-height:1.8}
+.yr-share{margin-top:16px;background:#f3d98a!important;color:#1d2a22!important;border:0!important;font-weight:700}.yr-empty{color:rgba(255,255,255,.8)!important;margin-top:20px!important}
+.hbrand{display:flex;align-items:center;gap:8px;min-width:0}.hbrand h1{min-width:0}.hbrand h1 small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.08em}.hlogo{width:34px;height:34px;flex:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
+#heftsBtn,#heftsBtn2{display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.hefts{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 34px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 34px),transparent);padding-right:30px}
+.hefts.end{-webkit-mask-image:none;mask-image:none}
+.mstaff button{background:var(--surface)!important;border-color:var(--line)!important}
+.mstaff button span{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:color-mix(in srgb,var(--gold) 18%,transparent);font-size:1.1rem!important;margin-bottom:4px}
+.mstaff #mMod span{background:color-mix(in srgb,var(--forest) 15%,transparent)}
+/* Kompakt-Kopf: Ring mit Verlauf + Medaille, Balken bis zur nächsten Nadel */
+#rRing{width:60px;height:60px;position:relative;background:conic-gradient(from -90deg,#f2c14e,#3fbf6e calc(var(--p)*1%),color-mix(in srgb,var(--forest-fg) 16%,transparent) 0)!important;box-shadow:0 0 18px rgba(242,193,78,.22)}
+#rRing span{width:48px;height:48px;font-size:1.1rem}
+#rRing[data-medal]:not([data-medal=""])::after{content:attr(data-medal);position:absolute;right:-6px;bottom:-4px;width:24px;height:24px;display:grid;place-items:center;font-size:.95rem;border-radius:50%;background:var(--forest);border:2px solid #f2c14e}
+.rh-l2{opacity:.85!important}
+.rh-bar{height:5px;border-radius:3px;background:color-mix(in srgb,var(--forest-fg) 16%,transparent);margin-top:6px;overflow:hidden;max-width:220px}.rh-bar[hidden]{display:none}
+.rh-bar i{display:block;height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,#f2c14e,#ffe08a);transition:width .5s ease}
+.nchip{display:flex;align-items:center;gap:8px;width:100%;margin-top:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:8px 10px;color:#f3f7f2;font:inherit;font-size:.85rem;text-align:left}
+.nchip[hidden]{display:none}.nchip b{color:#f2c14e}.nchip span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nchip em{font-style:normal;background:#f2c14e;color:#1d2a22;border-radius:8px;padding:3px 8px;font-weight:700;font-size:.78rem}
+body.compact-hdr header .nchip{display:none}
+.hefts.bars button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:7px 12px 8px;border-radius:14px}
+.hefts.bars button[data-pick]::after{content:"";display:block;width:100%;min-width:70px;height:4px;border-radius:2px;background:linear-gradient(90deg,#f2c14e var(--hp,0%),rgba(255,255,255,.18) 0)}
+.hefts.bars button.on[data-pick]::after{background:linear-gradient(90deg,var(--forest) var(--hp,0%),rgba(0,0,0,.15) 0)}
+.hefts.bars .hsel,.hefts.bars .x2on{align-self:stretch;justify-content:center}
+.rovw{position:relative;height:190px;border-radius:18px;overflow:hidden;border:1px solid var(--line);margin:12px 16px 12px;box-shadow:0 2px 10px rgba(0,0,0,.06);background:var(--bg)}
+.rovw[hidden]{display:none}#rOvMap{position:absolute;inset:0}
+.rov-big{position:absolute;top:10px;right:10px;z-index:500;border:0;border-radius:99px;padding:6px 11px;font:700 .78rem var(--body);background:color-mix(in srgb,var(--surface) 92%,transparent);color:var(--fg);box-shadow:0 1px 6px rgba(0,0,0,.18)}
+.rov-hint{position:absolute;left:10px;bottom:10px;z-index:500;border-radius:99px;padding:4px 10px;font:600 .74rem var(--body);background:color-mix(in srgb,var(--surface) 90%,transparent);color:var(--muted);pointer-events:none}
+.ch.hf{display:inline-flex;align-items:center;gap:3px}
+.rgo{position:sticky;bottom:calc(-18px - env(safe-area-inset-bottom,0px));margin:16px -18px -18px;padding:10px 18px calc(14px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,var(--surface) 30%);z-index:5}
+.rgo .btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px;font-size:1rem;box-shadow:0 6px 18px color-mix(in srgb,var(--forest) 35%,transparent)}.rgo .btn small{font-weight:500;font-size:.75rem;opacity:.85}
+.rseg{display:flex;gap:2px;width:100%;max-width:220px;margin-top:2px}.rseg i{flex:1;height:7px;border-radius:2px;background:color-mix(in srgb,var(--open) 35%,var(--line))}
+.rseg i.d{background:var(--done)}.rseg i.d.m-code{background:var(--code)}.rseg i.d.m-digital{background:var(--digital)}.rseg i.x{background:var(--bad)}
+.rseg-t{display:block;width:100%;font-size:.75rem;color:var(--muted);margin-top:3px}
+.medals{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 8px}
+.medal{display:flex;flex-direction:column;align-items:center;gap:5px;border:0;background:none;padding:0;font:inherit;color:var(--muted)}
+.medal .mc{position:relative;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:1.6rem;background:var(--bg);border:2px dashed var(--line)}
+.medal .mc>span{filter:grayscale(1);opacity:.35}.medal .mc i{position:absolute;right:-2px;bottom:-2px;font-size:.75rem;font-style:normal;background:var(--surface);border-radius:50%;width:20px;height:20px;display:grid;place-items:center;border:1px solid var(--line)}
+.medal b{font-size:.68rem;line-height:1.15;text-align:center;font-weight:600}
+.medal.on{color:var(--fg)}.medal.on .mc{border:3px solid var(--gold);background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--gold) 35%,var(--surface)),color-mix(in srgb,var(--gold) 10%,var(--surface)));box-shadow:0 3px 10px color-mix(in srgb,var(--gold) 30%,transparent)}
+.medal.on .mc>span{filter:none;opacity:1}
+.skel{display:flex;flex-direction:column;gap:8px;padding:4px 0}.skel i{display:block;height:12px;border-radius:6px;background:linear-gradient(90deg,var(--line) 0,color-mix(in srgb,var(--line) 40%,var(--surface)) 50%,var(--line) 100%);background-size:200% 100%;animation:skel 1.2s linear infinite}
+@keyframes skel{from{background-position:200% 0}to{background-position:-200% 0}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .rthumb image{filter:brightness(.72) contrast(1.15) saturate(.7)}}
+:root[data-theme="dark"] .rthumb image{filter:brightness(.72) contrast(1.15) saturate(.7)}
+/* Dunkle Karte: Farben umdrehen und Farbton zurückdrehen → dunkler Grund, helle Straßen, Wasser/Wald behalten ihre Farbe */
+/* Dunkle Karte: OSM-Kacheln umgedreht – heller Grund wird dunkel, Wege/Pfade bleiben farbig und gut sichtbar */
+body.map-dark .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(1) contrast(.9) saturate(1.25)!important}
+body.map-dark .leaflet-pane.leaflet-labels-pane{filter:brightness(1.15) saturate(1.2)}
+body.map-dark #map.base-sat .leaflet-tile-pane,body.map-dark .minimap.base-sat .leaflet-tile-pane{filter:brightness(.8)!important}
+body.map-dark .rthumb image{filter:invert(1) hue-rotate(180deg) brightness(1) contrast(.9) saturate(1.25)}
+body.map-dark .leaflet-container{background:#1b2420}
+.btn.tkhome{display:flex;flex-direction:column;align-items:center;gap:2px;margin:4px 0 12px;border-color:color-mix(in srgb,var(--forest) 40%,var(--line));font-weight:700}.btn.tkhome small{font-weight:500;font-size:.75rem;color:var(--muted)}
+.wd{font-variant-numeric:tabular-nums}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
@@ -1591,15 +1691,15 @@ body.compact-hdr header .tabs,body.compact-hdr header .hefts{max-height:0;opacit
 </div>
 <header>
   <div class="top">
-    <h1>Stempeljagd<small id="subtitle">Harz · 222 Stempelstellen</small></h1>
-    <div class="hbtns"><button class="iconbtn hbtn" id="heftsBtn" aria-label="Gebiete und Hefte">📚 Hefte</button>
+    <div class="hbrand"><svg class="hlogo" viewBox="0 0 512 512" aria-hidden="true"><circle cx="256" cy="256" r="226" fill="#16382a" stroke="#e3b542" stroke-width="16"/><circle cx="256" cy="256" r="196" fill="none" stroke="#e3b542" stroke-width="7"/><path d="M256 440s-130-140-130-236a130 130 0 0 1 260 0c0 96-130 236-130 236z" fill="#16382a" stroke="#e3b542" stroke-width="16" stroke-linejoin="round" transform="translate(256 252) scale(.62) translate(-256 -240)"/><circle cx="256" cy="226" r="42" fill="#e3b542"/><path d="M237 227l14 14 29-32" fill="none" stroke="#16382a" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/></svg><h1>Stempeljagd<small id="subtitle">Harz · 222 Stempelstellen</small></h1></div>
+    <div class="hbtns"><button class="iconbtn hbtn" id="heftsBtn" aria-label="Gebiete und Hefte"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2Zm0 0A2 2 0 0 0 6 21.5h13"/><path d="M9 7h6"/></svg>Hefte</button>
     <button class="iconbtn" id="menuBtn" aria-label="Menü">⋯</button></div>
   </div>
   <div class="ringhead" id="ringHead" hidden>
     <div class="ring" id="rRing"><span id="rNum">0</span></div>
     <div class="rh-t"><button id="rRegion" class="rh-reg" aria-label="Gebiet wechseln"><span id="rRegName">Harz</span> <i>▾</i></button>
-      <div class="rh-l1" id="rL1"></div><div class="rh-l2" id="rL2"></div></div>
-    <div class="hbtns"><button class="iconbtn hbtn" id="heftsBtn2" aria-label="Gebiete und Hefte">📚</button>
+      <div class="rh-l1" id="rL1"></div><div class="rh-l2" id="rL2"></div><div class="rh-bar" id="rBarW"><i id="rBar"></i></div></div>
+    <div class="hbtns"><button class="iconbtn hbtn" id="heftsBtn2" aria-label="Gebiete und Hefte"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2Zm0 0A2 2 0 0 0 6 21.5h13"/><path d="M9 7h6"/></svg></button>
     <button class="iconbtn" id="menuBtn2" aria-label="Menü">⋯</button></div>
   </div>
   <div class="tabs" role="tablist">
@@ -1613,6 +1713,7 @@ body.compact-hdr header .tabs,body.compact-hdr header .hefts{max-height:0;opacit
     <button role="tab" data-region="wip" hidden>Wippertal</button>
     <button role="tab" data-region="kne" hidden>Kneipp-Rallye</button>
   </div>
+  <button class="nchip" id="rNear" hidden></button>
   <div class="hefts" id="heftBar"></div>
   <div class="progress">
     <div class="ptext"><b id="pCount">0</b><span>von <span id="pTotal">–</span> gestempelt</span><span id="pLevel" class="pill none">Noch keine Nadel</span></div>
@@ -1659,6 +1760,7 @@ body.compact-hdr header .tabs,body.compact-hdr header .hefts{max-height:0;opacit
         <select id="rsortSel" aria-label="Sortierung"><option value="name">Name</option><option value="km">Länge</option><option value="dist">Nähe</option></select>
       </div>
     </div>
+    <div class="rovw" id="rOvw" hidden><div id="rOvMap"></div><button class="rov-big" id="rOvBig">⤢ Große Karte</button><span class="rov-hint" id="rOvHint"></span></div>
     <div id="rsum"></div>
     <ul id="ritems" class="rows"></ul>
   </section>
@@ -1737,21 +1839,53 @@ const TAB_DATA = [
   [22, "Gesicht", 50.845442, 10.505515], [23, "Arno-Wiemann-Weg", 50.859104, 10.510217],
   [24, "Arno-Wiemann-Weg (Abzweig Neuer Weg)", 50.863756, 10.517727]
 ];
-/* Sächsische Schweiz Wanderpass (Urlaubsmagie, Sebnitz): 11 Stempel in Bauden, Gaststätten und Cafés. Nadel bei allen 11.
-   Positionen aus saechsische-schweiz.de / komoot bzw. Campingplatz-Adresse; Nr. 6, 8 und 11 sind ohne genauen Ort angegeben. */
+/* (alt) Sächsische Schweiz – siehe SAX_DATA unten.
+   */
+/* Urlaubsmagie-Wanderpass Sächsische Schweiz (urlaubsmagie.com/wanderpass): 25 Touren, je ein Stempel, 23 Stempelstellen
+   (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Positionen = Ziel der Tour, meist ungefähr. */
 const SAX_DATA = [
-  [1, "Papststein", 50.90096, 14.120361, "Stempel in der Bergwirtschaft auf dem Papststein."],
-  [2, "Brand-Baude", 50.956002, 14.126688, "Brand-Baude Bergwirtschaft, Brandstraße 27, Hohnstein."],
-  [3, "Gohrisch", 50.900726, 14.112593, "Position ungefähr (Tafelberg Gohrisch) – vor Ort nach dem Stempel fragen."],
-  [4, "Schrammsteine", 50.912396, 14.204324, "Position ungefähr (Schrammsteinaussicht) – vor Ort nach dem Stempel fragen."],
-  [5, "Bergwirtschaft Kuhstall", 50.925612, 14.257035, "Am Felsentor Kuhstall auf dem Neuen Wildenstein."],
-  [6, "Bad Schandau", null, null, "Genauer Ort ist nicht angegeben – in Bad Schandau nach dem Wanderpass-Stempel fragen."],
-  [7, "Ungerberg", 50.996985, 14.229527, "Berggasthof am Ungerberg bei Neustadt in Sachsen."],
-  [8, "Bachmühle im Kirnitzschtal", null, null, "Genauer Ort ist nicht angegeben – im Kirnitzschtal nach dem Stempel fragen."],
-  [9, "Museum Neumann-Mühle", 50.923484, 14.284329, "Technisches Denkmal Neumannmühle, Kirnitzschtalstraße, Sebnitz-Ottendorf."],
-  [10, "Gaststätte Panorama Camping Lichtenhain", 50.94395, 14.23244, "Panorama Camping, Neue Straße 21, Sebnitz-Lichtenhain."],
-  [11, "Sebnitz (Herausgeber)", null, null, "Beim Herausgeber des Wanderpasses in Sebnitz (Urlaubsmagie)."]
+  [1, "Bastei", 50.96204, 14.07353, "Tour 1 · Über die Basteibrücke · 6,3 km. Start am Wanderparkplatz Bastei. Stempel im Berghotel Bastei."],
+  [2, "Amselsee", 50.95905, 14.09060, "Tour 2 · Wanderung am Amselsee. Position ungefähr – Stempelstelle steht im Wanderpass."],
+  [3, "Brandstufen", 50.95600, 14.12669, "Tour 3 · Brandstufen. Position ungefähr (Brand-Aussicht) – Stempelstelle steht im Wanderpass."],
+  [4, "Großer und Kleiner Bärenstein", 50.92310, 14.03580, "Tour 4 · Auf den Kleinen Bärenstein. Position ungefähr – Stempelstelle steht im Wanderpass."],
+  [5, "Schloss Thürmsdorf", 50.93720, 14.04420, "Tour 5 · Schloss Thürmsdorf. Position ungefähr – Stempelstelle steht im Wanderpass."],
+  [6, "Felsenlabyrinth", 50.87960, 13.94740, "Tour 6 · Felsenlabyrinth Langenhennersdorf – die kürzeste Tour (2,4 km). Position ungefähr."],
+  [7, "Papststein", 50.90096, 14.12036, "Tour 7 · Papststein. Position ungefähr (Bergwirtschaft Papststein) – Stempelstelle steht im Wanderpass."],
+  [8, "Barbarine", 50.89640, 14.07090, "Tour 8 · Barbarine am Pfaffenstein. Position ungefähr – Stempelstelle steht im Wanderpass."],
+  [9, "Rund um den Lilienstein", 50.93300, 14.08690, "Tour 9 · Wanderung um den Lilienstein. Position ungefähr – Stempelstelle steht im Wanderpass."],
+  [10, "Katzstein", 50.87730, 14.15150, "Tour 10 · Wanderung zum Katzstein. Position ungefähr – Stempelstelle steht im Wanderpass."],
+  [11, "Herkulessäulen", 50.85370, 14.04620, "Tour 11 · Herkulessäulen im Bielatal – die längste Tour (23,6 km). Position ungefähr."],
+  [12, "Hoher Schneeberg", 50.79250, 14.11030, "Tour 12 · Hoher Schneeberg (Děčínský Sněžník, Tschechien). Position ungefähr – Stempelstelle steht im Wanderpass."],
+  [13, "Rund um Bad Schandau", 50.91750, 14.15360, "Tour 13 · Wanderung rund um Bad Schandau. Position ungefähr – Stempelstelle steht im Wanderpass."],
+  [14, "Hohe Liebe", 50.92390, 14.18280, "Tour 14 · Hohe Liebe. Position ungefähr – Stempelstelle steht im Wanderpass."],
+  [15, "Schrammsteine", 50.91240, 14.20432, "Tour 15 · Schrammstein-Gratwanderung. Position ungefähr – Stempel in der Schrammsteinbaude (hat 2 Stempel)."],
+  [16, "Zirkelstein", 50.88130, 14.20080, "Tour 16 · Zirkelstein. Position ungefähr – Stempelstelle steht im Wanderpass."],
+  [17, "Carolafelsen", 50.91800, 14.25830, "Tour 17 · Carolafelsen und Frienstein. Position ungefähr – Stempelstelle steht im Wanderpass."],
+  [18, "Kuhstall", 50.92561, 14.25704, "Tour 18 · Kuhstall. Am Felsentor Kuhstall auf dem Neuen Wildenstein."],
+  [19, "Panoramaweg", 50.93300, 14.18800, "Tour 19 · Wanderung auf dem Panoramaweg. Position ungefähr – Stempelstelle steht im Wanderpass."],
+  [20, "Kirnitzschtal", 50.93200, 14.24900, "Tour 20 · Kirnitzschtal. Position ungefähr – Stempelstelle steht im Wanderpass."],
+  [21, "Winterstein", 50.91800, 14.31100, "Tour 21 · Winterstein (Hinteres Raubschloss). Position ungefähr – Stempelstelle steht im Wanderpass."],
+  [22, "Arnstein und Kleinstein", 50.91200, 14.35700, "Tour 22 · Arnstein und Kleinsteinhöhle. Position ungefähr – Stempelstelle steht im Wanderpass."],
+  [23, "Obere Schleuse", 50.90400, 14.38900, "Tour 23 · Wanderung zur Oberen Schleuse bei Hinterhermsdorf. Position ungefähr – Stempelstelle steht im Wanderpass."],
+  [24, "Weifberg", 50.92700, 14.34300, "Tour 24 · Rund um die Kräuterbaude (Weifbergturm, Hinterhermsdorf). Position ungefähr."],
+  [25, "Ungerberg", 50.99699, 14.22953, "Tour 25 · Ungerberg bei Neustadt in Sachsen. Berggasthof am Ungerberg."]
 ];
+/* Alte 11er-Liste → neue Nummern (nur eindeutige Orte; der Rest wird gesichert und nicht mehr angezeigt) */
+(function migrateSax(){
+  try {
+    if (localStorage.getItem("sp.saxV2")) return;
+    const map = { "1": "7", "2": "3", "4": "15", "5": "18", "6": "13", "7": "25" };
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (!/^sp\.(p\d+\.)?done\.sax$/.test(key)) continue;
+      const old = JSON.parse(localStorage.getItem(key) || "{}"), neu = {}, rest = {};
+      for (const [k, v] of Object.entries(old)) (map[k] ? (neu[map[k]] = v) : (rest[k] = v));
+      if (Object.keys(rest).length) localStorage.setItem(key + ".alt11", JSON.stringify(rest));
+      localStorage.setItem(key, JSON.stringify(neu));
+    }
+    localStorage.setItem("sp.saxV2", "1");
+  } catch(e) {}
+})();
 /* ---------- Harzvorland: drei Stempelpässe ---------- */
 /* Wippertaler Stempel(S)pass (Mansfelder Bergwerksbahn e.V.): Positionen von der Vereinsseite; Nr. 20 = Harzer Wandernadel 219 */
 const WIP_DATA = [
@@ -1908,7 +2042,7 @@ const SETS = {
   hwn: { title: "Harzer Wandernadel", short: "Harz", sub: "Harz · 222 Stempelstellen", center: [51.70, 10.78], zoom: 10,
     levels: [[8,"Bronze"],[11,"Wanderprinz/-prinzessin"],[16,"Silber"],[24,"Gold"],[50,"Wanderkönig"],[100,"Kaiserrucksack"],[150,"Kaiserschuh"],[222,"Wanderkaiser"]],
     defectUrl: "https://www.harzer-wandernadel.de/defektmeldungen/" },
-  hws: { title: "Harzer Sonderstempel", short: "Harz-Sonder", sub: "Harz · Themenhefte & Sonderstempel", center: [51.70, 10.85], zoom: 9,
+  hws: { title: "Harzer Sonderstempel", short: "Harz-Sonder", sub: "Harz · Sonderstempel", center: [51.70, 10.85], zoom: 9,
     levels: [] },
   tos: { title: "Touringen-Sondereditionen", short: "Touringen-Sonder", sub: "Thüringen · Sondereditionen", center: [50.95, 10.5], zoom: 8,
     levels: [] },
@@ -1946,12 +2080,12 @@ SETS.nhv = { title: "Freizeitstempel Nördliches Harzvorland", short: "Nördl. H
   levels: [[15, "Freizeitnadel"]],
   info: "Über 40 Freizeitstempel-Stationen zwischen Salzgitter, Wolfenbüttel und Goslar. Der Pass ist kostenlos (Tourist-Informationen, Rathäuser, zum Herunterladen); nach 15 Stationen gibt es die Freizeitnadel.",
   url: "https://www.noerdliches-harzvorland.com/natur-aktiv/stempelstellen", linkLabel: "Infos zu den Stempelstellen" };
-SETS.sax = { title: "Sächsische Schweiz Wanderpass", short: "Sächs. Schweiz", sub: "Sächsische Schweiz · 11 Stempelstellen", center: [50.94, 14.19], zoom: 11,
-  levels: [[11, "Wandernadel"]],
-  info: "11 individuell gestaltete Stempel in Bauden, Gaststätten und Cafés der Sächsischen Schweiz – einfach vor Ort nach dem Stempel fragen. Mit allen 11 gibt es die Wandernadel Sächsische Schweiz. Lässt sich gut mit dem Malerweg verbinden.",
-  url: "https://hwktvp.webador.de/wandern-quer-durch-deutschland/3198608_saechsische-schweiz-wanderpass", linkLabel: "Infos zum Wanderpass" };
-const APP_VERSION = "0.9.55 Beta";
-const APP_CODE = 95;   // muss zur versionCode im AndroidManifest passen
+SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", sub: "Sächsische Schweiz · 25 Touren", center: [50.92, 14.18], zoom: 10,
+  levels: [[25, "Wandernadel"]],
+  info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
+  url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
+const APP_VERSION = "0.9.56 Beta";
+const APP_CODE = 96;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -2210,7 +2344,7 @@ function scanCandidates(q){
 }
 function drawScan(q){
   const list = scanCandidates(q);
-  $("#scanList").innerHTML = list.length ? list.map(x => `<li><button data-scan="${x.st}|${esc(x.s.k)}"><span class="dot"></span><span class="t">${isSonder(x.st) ? esc(heftOf(x.s.heft).short) + " · " : esc(SETS[x.st].short) + " · Nr. " + esc(x.s.n) + " · "}${esc(x.s.name)}<small>${x.d != null ? fmtKm(x.d) + " entfernt" : "Entfernung unbekannt"}${timeLimited(x.st, x.s) ? " · 🕒" : ""}</small></span></button></li>`).join("") : '<li class="empty">Kein offener Stempel passt.</li>';
+  $("#scanList").innerHTML = list.length ? list.map(x => `<li><button data-scan="${x.st}|${esc(x.s.k)}"><span class="dot"></span><span class="t">${isSonder(x.st) ? esc(heftOf(x.s.heft).short) + " · " : esc(SETS[x.st].short) + " · Nr. " + esc(x.s.n) + " · "}${esc(x.s.name)}<small>${x.d != null ? wd(myPos, [x.s.lat, x.s.lon]) + " entfernt" : "Entfernung unbekannt"}${timeLimited(x.st, x.s) ? " · 🕒" : ""}</small></span></button></li>`).join("") : '<li class="empty">Kein offener Stempel passt.</li>';
   $("#scanList").querySelectorAll("[data-scan]").forEach(b => b.onclick = async () => {
     const [st, k] = b.dataset.scan.split("|");
     stampDoneAt(st, k);
@@ -2264,16 +2398,27 @@ const BASES = {
           attr: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, SRTM · Darstellung © <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)' }
 };
 let baseId = load("sp.base", "osm"); if (!BASES[baseId]) baseId = "osm";
+/* Dunkle Karte: Standard-Karte → CARTO „Dark Matter“ (dunkel wie Google Maps), Topo → Farben umgedreht, Satellit → etwas abgedunkelt */
+const DARK_OSM = { name: "Karte", url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", native: 20, sub: "abcd",
+  attr: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a>' };
+let darkMap = load("sp.darkMap", "auto");   // auto = im dunklen Modus | on | off
+const darkMapOn = () => (darkMap === "on" || (darkMap === "auto" && document.documentElement.dataset.theme === "dark"));
+const curBase = id => { const k = id || baseId; return BASES[k] || BASES.osm; };   // dunkle Karte = dieselben Kacheln, per CSS umgefärbt (so bleiben alle Wege sichtbar)
 let baseLayers = [];
 function setBase(id){
   baseId = id; save("sp.base", id);
   baseLayers.forEach(l => map.removeLayer(l));
-  const b = BASES[id];
+  const b = curBase(id);
   const credit = MADE_BY ? 'Stempeljagd von ' + esc(MADE_BY) + ' · ' : '';
   baseLayers = [L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc", attribution: credit + b.attr })];
   if (b.labels) baseLayers.push(L.tileLayer(b.labels, { maxZoom: 19, maxNativeZoom: b.native, pane: "labels", opacity: 0.9 }));
+  if (darkMapOn() && (id === "osm" || id === "topo")) {
+    /* Auf der dunklen Karte: markierte Wanderwege farbig darüber legen (Waymarked Trails), damit man die Wege gut sieht */
+    baseLayers.push(L.tileLayer("https://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png", { maxZoom: 19, maxNativeZoom: 18, pane: "labels", opacity: 0.85,
+      attribution: 'Wanderwege © <a href="https://hiking.waymarkedtrails.org">waymarkedtrails.org</a>' }));
+  }
   baseLayers.forEach(l => l.addTo(map).bringToBack());
-  map.getContainer().classList.toggle("base-sat", id === "sat");
+  map.getContainer().classList.toggle("base-sat", id === "sat"); map.getContainer().classList.toggle("base-topo", id === "topo");
   document.querySelectorAll(".lc-menu [data-base]").forEach(x => x.classList.toggle("on", x.dataset.base === id));
 }
 map.createPane("labels");
@@ -2281,17 +2426,17 @@ map.getPane("labels").style.zIndex = 350;
 map.getPane("labels").style.pointerEvents = "none";
 map.attributionControl.setPrefix(false);
 /* Quellenangabe klein als ⓘ – Tippen klappt sie auf (OSM-Lizenz verlangt sie, darf aber eingeklappt sein) */
-{ const ac = map.attributionControl.getContainer(); ac.classList.add("attr-mini", "open");
+{ const ac = map.attributionControl.getContainer(); ac.classList.add("attr-mini");
   ac.addEventListener("click", e => { if (e.target.closest("a")) return; ac.classList.toggle("open"); clearTimeout(ac._t); if (ac.classList.contains("open")) ac._t = setTimeout(() => ac.classList.remove("open"), 6000); });
   L.DomEvent.disableClickPropagation(ac);
-  ac._t = setTimeout(() => ac.classList.remove("open"), 5000); }
+  }
 L.control.zoom({ position: "topright" }).addTo(map);
 const LayerCtl = L.Control.extend({
   options: { position: "topright" },
   onAdd(){
     const d = L.DomUtil.create("div", "layerctl leaflet-bar");
     d.innerHTML = `<button class="lc-btn" type="button" aria-label="Kartenansicht wechseln" title="Kartenansicht"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></button>
-      <div class="lc-menu" hidden>${Object.entries(BASES).map(([k, b]) => `<button type="button" data-base="${k}">${b.name}</button>`).join("")}<button type="button" data-bgr="1" class="lc-bgr">Touringen-Routen</button><button type="button" data-heat="1" class="lc-bgr">Fortschritts-Karte</button><button type="button" data-poi="1" class="lc-bgr lc-poi">🅿️ Parken · Einkehr · Bus</button><button type="button" data-cmp="1" class="lc-bgr lc-act">👥 Mit Freund vergleichen</button></div>`;
+      <div class="lc-menu" hidden>${Object.entries(BASES).map(([k, b]) => `<button type="button" data-base="${k}">${b.name}</button>`).join("")}<button type="button" data-bgr="1" class="lc-bgr">Touringen-Routen</button><button type="button" data-dark="1" class="lc-bgr lc-dark">🌙 Dunkle Karte</button><button type="button" data-heat="1" class="lc-bgr">Fortschritts-Karte</button><button type="button" data-poi="1" class="lc-bgr lc-poi">🅿️ Parken · Einkehr · Bus</button><button type="button" data-cmp="1" class="lc-bgr lc-act">👥 Mit Freund vergleichen</button></div>`;
     L.DomEvent.disableClickPropagation(d);
     const menu = d.querySelector(".lc-menu");
     d.querySelector(".lc-btn").onclick = () => {
@@ -2302,6 +2447,7 @@ const LayerCtl = L.Control.extend({
     menu.onclick = e => {
       if (e.target.dataset.poi) { showPoi = !showPoi; save("sp.poi", showPoi); menu.hidden = true; drawPoi(); toast(showPoi ? (map.getZoom() < POI_ZOOM ? "Parken & Einkehr an – näher ranzoomen, dann erscheinen sie" : "Parkplätze, Einkehr und Haltestellen werden geladen") : "Parken & Einkehr ausgeblendet"); return; }
       if (e.target.dataset.cmp) { menu.hidden = true; openCmpPick(); return; }
+      if (e.target.dataset.dark) { const nx = { auto: "on", on: "off", off: "auto" }[darkMap] || "auto"; darkMap = nx; save("sp.darkMap", nx); applyDarkMap(); toast(nx === "on" ? "🌙 Dunkle Karte immer an" : nx === "off" ? "☀️ Karte immer hell" : "🌗 Dunkle Karte automatisch (im dunklen Modus)"); return; }
       if (e.target.dataset.heat) { showHeat = !showHeat; save("sp.heat", showHeat); drawHeat(); menu.hidden = true; toast(showHeat ? "Fortschritts-Karte an – grün = viel gestempelt, orange = weiße Flecken" : "Fortschritts-Karte aus"); return; }
       if (e.target.dataset.bgr) { showBgRoutes = !showBgRoutes; save("sp.bgRoutes", showBgRoutes); bgKey = ""; drawBgRoutes(); menu.hidden = true; toast(showBgRoutes ? "Touringen-Routen werden angezeigt" : "Touringen-Routen ausgeblendet"); return; }
       const k = e.target.dataset.base; if (!k) return; setBase(k); menu.hidden = true; toast("Kartenansicht: " + BASES[k].name); };
@@ -2386,7 +2532,7 @@ function renderLegend(cnt){
   if (legMin) { el.className = "legend min"; el.innerHTML = `<button data-leg="max" aria-label="Legende aufklappen">● ● ● Legende</button>`; }
   else {
     el.className = "legend" + (legFilter ? " filtering" : "");
-    el.innerHTML = LEG.map(([k, t, st]) => `<button data-leg="${k}" class="${legFilter === k ? "on" : ""}${cnt[k] ? "" : " zero"}"><i style="${st}"></i>${t}<b>${cnt[k]}</b></button>`).join("")
+    el.innerHTML = LEG.filter(([k]) => cnt[k] || k === "open" || legFilter === k).map(([k, t, st]) => `<button data-leg="${k}" class="${legFilter === k ? "on" : ""}${cnt[k] ? "" : " zero"}"><i style="${st}"></i>${t}<b>${cnt[k]}</b></button>`).join("")
       + `<button data-leg="min" class="lg-x" aria-label="Legende einklappen">–</button>`;
   }
   el.querySelectorAll("[data-leg]").forEach(b => b.onclick = e => {
@@ -2445,6 +2591,7 @@ function drawMarkers(fit){
     }
   }
   renderLegend(legCnt);
+  if (typeof drawStampSyms === "function") drawStampSyms(true);
   renderCmpBar(cmpCnt);
   drawStampLabels();
   if (fit && pts.length && !activeRoute) map.fitBounds(pts, { padding: [24, 24], maxZoom: 12 });
@@ -2635,7 +2782,22 @@ function drawPoi(){
     if (failed && !poiWarned) { poiWarned = true; toast("Parkplätze & Einkehr gerade nicht abrufbar (Internet?)"); }
   }, 500);
 }
-map.on("moveend", () => { if (showPoi) drawPoi(); drawStampLabels(); });
+map.on("moveend", () => { if (showPoi) drawPoi(); drawStampLabels(); drawStampSyms(); });
+/* Symbole auf den Kartenpunkten: ✓ gestempelt, ✕ kaputt, # per Code, ★ gemerkt */
+var symLayer = null, symKey = "";
+function drawStampSyms(force){
+  if (!symLayer) symLayer = L.layerGroup().addTo(map);
+  const z = map.getZoom(), on = z >= 11 && view === "map" && !showHeat;
+  const bd = map.getBounds().pad(0.1);
+  const list = on ? visible().filter(s => hasPos(s) && bd.contains([s.lat, s.lon])).slice(0, 400) : [];
+  const sym = s => { const d = isDone(current, s.k); if (d) { const m = methodOf(current, s.k); return m === "code" ? "#" : m === "digital" ? "▯" : "✓"; } if (isBroken(current, s.k)) return "✕"; if (isWatched(current, s.k)) return "★"; return ""; };
+  const items = list.map(s => [s, sym(s)]).filter(x => x[1]);
+  const key = on ? z + "|" + current + "|" + (selectedKey || "") + "|" + items.map(([s, y]) => s.k + y).join(",") : "off";
+  if (key === symKey && !force) return;
+  symKey = key; symLayer.clearLayers();
+  for (const [s, y] of items) L.marker([s.lat, s.lon], { interactive: false, keyboard: false, zIndexOffset: 500,
+    icon: L.divIcon({ className: "msym" + (y === "★" ? " st" : y === "✕" ? " x" : "") + (s.k === selectedKey ? " sel" : ""), html: y, iconSize: [16, 16], iconAnchor: [8, 8] }) }).addTo(symLayer);
+}
 /* Ganz nah rangezoomt: Name der Stempel direkt an den Punkten anzeigen */
 var STAMP_LABEL_ZOOM = 15;
 var stampLabelLayer = null, labelKey = "";
@@ -2663,7 +2825,7 @@ async function fillNearPoi(el, s, force){
     const pick = (kinds, n) => l.filter(p => kinds.includes(p.kind)).slice(0, n);
     const rows = [...pick(["park"], 3), ...pick(["food", "cafe", "pub", "hut"], 3), ...pick(["bus", "train"], 2)];
     if (!rows.length) { el.innerHTML = '<p class="hint">Im Umkreis von 1,5 km nichts eingetragen.</p>'; return; }
-    el.innerHTML = `<ul class="poilist">${rows.map(p => `<li><span>${POI_IC[p.kind] === "P" ? "🅿️" : POI_IC[p.kind]}</span><div><b>${esc(p.name || POI_NAME[p.kind])}</b><small>${fmtKm(p.d)} Luftlinie · ${esc(POI_NAME[p.kind])}${poiInfo(p) ? " · " + esc(poiInfo(p)) : ""}</small>${ohBadge(p)}</div>
+    el.innerHTML = `<ul class="poilist">${rows.map(p => `<li><span>${POI_IC[p.kind] === "P" ? "🅿️" : POI_IC[p.kind]}</span><div><b>${esc(p.name || POI_NAME[p.kind])}</b><small>${wd([p.lat, p.lon], [s.lat, s.lon])} zu Fuß · ${esc(POI_NAME[p.kind])}${poiInfo(p) ? " · " + esc(poiInfo(p)) : ""}</small>${ohBadge(p)}</div>
       <a href="${gmapsTo(p.lat, p.lon, p.kind === "park" ? "driving" : p.kind === "bus" || p.kind === "train" ? "transit" : "walking")}" target="_blank" rel="noopener">${p.kind === "park" ? "🚗 Hin" : p.kind === "bus" || p.kind === "train" ? "🚌 Fahrplan" : "🚶 Hin"}</a></li>`).join("")}</ul><small class="src">Daten: © OpenStreetMap-Mitwirkende</small>`;
   } catch(e) {
     if (!el.isConnected) return;
@@ -2717,7 +2879,7 @@ function renderList(){
     if (!q) return true;
     return norm(s.name).includes(q) || String(s.n).toLowerCase() === q || norm(notes[current][s.k]).includes(q) || norm(placeOf(s)).includes(q);
   });
-  if (sortBy === "dist" && myPos) rows = rows.map(s => ({ s, d: hasPos(s) ? distKm(myPos, [s.lat, s.lon]) : 1e9 })).sort((a,b) => a.d - b.d).map(x => x.s);
+  if (sortBy === "dist" && myPos) rows = rows.map(s => ({ s, d: hasPos(s) ? (walkKm(myPos, [s.lat, s.lon]) ?? distKm(myPos, [s.lat, s.lon]) * 1.35) : 1e9 })).sort((a,b) => a.d - b.d).map(x => x.s);   // nach Weg-Entfernung
   if (sortBy === "place") rows = rows.slice().sort((a, b) => placeOf(a).localeCompare(placeOf(b), "de") || (parseFloat(a.n) || 0) - (parseFloat(b.n) || 0));
   const row = s => {
     const d = done[current][s.k], m = d ? methodOf(current, s.k) : null;
@@ -2729,13 +2891,13 @@ function renderList(){
     if (d && isGps(current, s.k)) chips.push('<span class="ch gps">📍 vor Ort gestempelt</span>');
     if (isWatched(current, s.k)) chips.push('<span class="ch star">⭐ gemerkt</span>');
     if (!d && timeLimited(current, s)) chips.push('<span class="ch warn">🕒 nur zeitweise</span>');
-    const gmN = groupMembers(current, s.k).length, heftCh = gmN > 1 ? `<span class="ch hf">📚 ${gmN}</span>` : "";
+    const gmN = groupMembers(current, s.k).length, heftCh = gmN > 1 ? `<span class="ch hf"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2Zm0 0A2 2 0 0 0 6 21.5h13"/></svg> ${gmN}</span>` : "";
     if (photos[current][s.k] && photos[current][s.k].length) chips.push(`<span class="ch">📷 ${photos[current][s.k].length}</span>`);
     if (notes[current][s.k]) chips.push('<span class="ch">✎ Notiz</span>');
     if (isSonder(current) && !hasPos(s)) chips.push('<span class="ch">ohne Kartenpunkt</span>');
     const place = sortBy === "place" && !isSonder(current) ? "" : placeOf(s);
     const right = d ? `<span class="rt done">${fmtDate(d).slice(0, 6)}<small>${d.slice(0, 4)}</small></span>`
-      : (myPos && hasPos(s) ? `<span class="rt">${fmtKm(distKm(myPos, [s.lat, s.lon]))}</span>` : "");
+      : (myPos && hasPos(s) ? `<span class="rt">${wd(myPos, [s.lat, s.lon])}</span>` : "");
     return `<li class="${d ? "done" + mCls(current, s.k) : ""}${selMode && sel.has(s.k) ? " sel" : ""}" data-k="${esc(s.k)}">
       <button class="chk" data-act="toggle" aria-label="${d ? "Stempel entfernen" : "Als gestempelt markieren"}">${CHECK}</button>
       <button class="info" data-act="open"><span class="nm"><span class="nr">${esc(s.n)}</span>${esc(s.name)}</span>${place || heftCh ? `<span class="sub sub2"><span class="pl">${esc(place)}</span>${heftCh}</span>` : ""}${chips.length ? `<span class="chips2">${chips.join("")}</span>` : ""}</button>
@@ -2756,13 +2918,16 @@ function renderList(){
     }
   } else html = rows.map(row).join("");
   const fh = $(".filters"); if (fh) document.documentElement.style.setProperty("--filtH", fh.offsetHeight + "px");
-  $("#items").innerHTML = rows.length ? html : `<li class="empty">${filter === "bad" ? "Keine Stempelstelle ist als kaputt markiert." : filter === "watch" ? "Noch nichts auf der Merkliste – im Stempel-Fenster auf „☆ Merken“ tippen." : filter === "dig" ? "Keine digitalen Stempel, die noch ins Heft müssen." : "Keine Stempelstelle passt zur Suche."}</li>`;
+  const allDone = !rows.length && filter === "open" && !(($("#q") || {}).value || "").trim() && stamps[current].length && stamps[current].every(x => isDone(current, x.k));
+  if (allDone) { $("#items").innerHTML = `<li class="empty bigempty"><div class="be-ic">🏅</div><b>Alles gestempelt!</b><span>In „${esc(SETS[current].title)}“ ist nichts mehr offen. Zeit für den Nadel-Antrag 🎉</span><button class="btn primary" id="beGo">Nadel-Antrag öffnen</button></li>`; $("#beGo").onclick = () => openPinRequest(); return; }
+  $("#items").innerHTML = rows.length ? html : `<li class="empty bigempty"><div class="be-ic">${filter === "bad" ? "🛠️" : filter === "watch" ? "⭐" : filter === "dig" ? "📱" : filter === "done" ? "🥾" : "🔍"}</div><span>${filter === "done" && !(($("#q") || {}).value || "").trim() ? "Noch nichts gestempelt – der erste Stempel wartet schon!" : ""}${filter === "bad" ? "Keine Stempelstelle ist als kaputt markiert." : filter === "watch" ? "Noch nichts auf der Merkliste – im Stempel-Fenster auf „☆ Merken“ tippen." : filter === "dig" ? "Keine digitalen Stempel, die noch ins Heft müssen." : (filter === "done" && !(($("#q") || {}).value || "").trim() ? "" : "Keine Stempelstelle passt zur Suche.")}</span></li>`;
 }
 
 /* ---------- Routen ---------- */
 function routeProgress(r){
   return { n: r.stamps.filter(k => isDone(current, k)).length, total: r.stamps.length };
 }
+function nearestPt(r){ let best = 1e9, bp = r.pts[0]; for (let i = 0; i < r.pts.length; i += 3) { const d = distKm(myPos, r.pts[i]); if (d < best) { best = d; bp = r.pts[i]; } } return bp; }
 function nearestDist(r){
   let best = 1e9;
   for (let i = 0; i < r.pts.length; i += 3) best = Math.min(best, distKm(myPos, r.pts[i]));
@@ -2789,16 +2954,63 @@ function routeTime(r){
 const fmtHM = ms => { const m = Math.round(ms / 60000 / 5) * 5; return Math.floor(m / 60) + ":" + String(m % 60).padStart(2, "0") + " h"; };
 /* Kleine Streckenvorschau als SVG (für die Liste) */
 function routeThumb(r, set){
-  const W = 64, H = 64, P = 6, pts = r.pts;
+  /* Mini-Karte: echte Kartenkacheln (Web-Mercator) unter der Route */
+  const W = 64, H = 64, P = 7, pts = r.pts;
   let a = 90, b = -90, c = 180, d = -180; for (const [la, lo] of pts) { a = Math.min(a, la); b = Math.max(b, la); c = Math.min(c, lo); d = Math.max(d, lo); }
-  const kx = Math.cos((a + b) / 2 * Math.PI / 180), sx = (d - c) * kx || 1e-6, sy = (b - a) || 1e-6, sc = Math.min((W - 2 * P) / sx, (H - 2 * P) / sy);
-  const ox = (W - sx * sc) / 2, oy = (H - sy * sc) / 2;
-  const X = lo => (ox + (lo - c) * kx * sc).toFixed(1), Y = la => (oy + (b - la) * sc).toFixed(1);
+  const mx = (lo, z) => (lo + 180) / 360 * 256 * 2 ** z;
+  const my = (la, z) => { const s = Math.sin(la * Math.PI / 180); return (0.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI)) * 256 * 2 ** z; };
+  let z = 15; while (z > 5 && (mx(d, z) - mx(c, z) > W - 2 * P || my(a, z) - my(b, z) > H - 2 * P)) z--;
+  const k = Math.min(1.9, (W - 2 * P) / Math.max(1, mx(d, z) - mx(c, z)), (H - 2 * P) / Math.max(1, my(a, z) - my(b, z)));   // Feinzoom zwischen den Stufen
+  const cx = (mx(c, z) + mx(d, z)) / 2 * k, cy = (my(a, z) + my(b, z)) / 2 * k, x0 = cx - W / 2, y0 = cy - H / 2, T = 256 * k;
+  const X = lo => (mx(lo, z) * k - x0).toFixed(1), Y = la => (my(la, z) * k - y0).toFixed(1);
+  const bs = curBase(), n = 2 ** z;
+  let tiles = "";
+  for (let tx = Math.floor(x0 / T); tx <= Math.floor((x0 + W) / T); tx++) for (let ty = Math.floor(y0 / T); ty <= Math.floor((y0 + H) / T); ty++) {
+    if (ty < 0 || ty >= n) continue;
+    const u = bs.url.replace("{z}", z).replace("{x}", ((tx % n) + n) % n).replace("{y}", ty).replace("{s}", (bs.sub || "abc")[(tx + ty) % (bs.sub || "abc").length]).replace("{r}", "");
+    tiles += `<image href="${u}" x="${(tx * T - x0).toFixed(1)}" y="${(ty * T - y0).toFixed(1)}" width="${T.toFixed(1)}" height="${T.toFixed(1)}" preserveAspectRatio="none"/>`;
+  }
   const step = Math.max(1, Math.floor(pts.length / 80));
   const line = pts.filter((p, i) => i % step === 0 || i === pts.length - 1).map(p => X(p[1]) + "," + Y(p[0])).join(" ");
-  const dots = r.stamps.map(k => { const s = byKey[set].get(k); if (!s || !hasPos(s)) return ""; return `<circle cx="${X(s.lon)}" cy="${Y(s.lat)}" r="3.2" fill="${isDone(set, k) ? "var(--done)" : isBroken(set, k) ? "var(--bad)" : "var(--open)"}" stroke="var(--surface)" stroke-width="1.2"/>`; }).join("");
-  return `<svg class="rthumb" viewBox="0 0 ${W} ${H}" aria-hidden="true"><polyline points="${line}" fill="none" stroke="var(--route)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${X(pts[0][1])}" cy="${Y(pts[0][0])}" r="3" fill="var(--fg)"/>${dots}</svg>`;
+  const dots = r.stamps.map(k => { const s = byKey[set].get(k); if (!s || !hasPos(s)) return ""; return `<circle cx="${X(s.lon)}" cy="${Y(s.lat)}" r="3.2" fill="${isDone(set, k) ? "var(--done)" : isBroken(set, k) ? "var(--bad)" : "var(--open)"}" stroke="#fff" stroke-width="1.2"/>`; }).join("");
+  const full = r.stamps.length && r.stamps.every(k => isDone(set, k));
+  return `<svg class="rthumb" viewBox="0 0 ${W} ${H}" aria-hidden="true">${tiles}<rect width="${W}" height="${H}" fill="var(--surface)" opacity=".18"/>
+    <polyline points="${line}" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".85"/>
+    <polyline points="${line}" fill="none" stroke="${full ? "var(--done)" : "var(--route)"}" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="${X(pts[0][1])}" cy="${Y(pts[0][0])}" r="3.4" fill="#1d2a22" stroke="#fff" stroke-width="1.4"/>${dots}</svg>`;
 }
+/* ---------- Übersichtskarte über der Routen-Liste: alle Touren des Gebiets, Antippen öffnet die Tour ---------- */
+let rovMap = null, rovKey = "", rovLayer = null;
+function drawRouteOverview(list){
+  const box = $("#rOvw"); if (!box) return;
+  if (!list.length) { box.hidden = true; return; }
+  box.hidden = false;
+  if (!$("#rOvMap").offsetWidth) { clearTimeout(drawRouteOverview._t); drawRouteOverview._t = setTimeout(() => { if (view === "routes") drawRouteOverview(routes[current]); }, 120); return; }
+  const key = current + "|" + baseId + "|" + list.map(r => r.id + (routeProgress(r).n === r.stamps.length ? "d" : "")).join(",");
+  if (!rovMap) {
+    const b = curBase();
+    rovMap = L.map("rOvMap", { zoomControl: false, attributionControl: false, scrollWheelZoom: false, doubleClickZoom: true, boxZoom: false, keyboard: false, zoomSnap: .25, preferCanvas: false });
+    rovMap._base = L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc" }).addTo(rovMap);
+    rovLayer = L.layerGroup().addTo(rovMap);
+    $("#rOvBig").onclick = () => { setView("map"); showBgRoutesFor(); bgKey = ""; drawBgRoutes(); if (rovMap._all && rovMap._all.length) setTimeout(() => map.fitBounds(L.latLngBounds(rovMap._all), { padding: [20, 20] }), 60); };
+  }
+  const refit = () => { if (!rovMap || !rovMap._all || !rovMap._all.length || !$("#rOvMap").offsetWidth) return; rovMap.invalidateSize(); rovMap.fitBounds(L.latLngBounds(rovMap._all), { padding: [16, 16], animate: false }); rovMap.fire("moveend"); };
+  if (key === rovKey) { if (rovMap._fitFor !== current + view) { rovMap._fitFor = current + view; [30, 200, 500].forEach(t => setTimeout(refit, t)); } return; }
+  rovKey = key; rovLayer.clearLayers();
+  const col = css("--route") || "#8a4fd0", dcol = css("--done");
+  const all = [];
+  for (const r of list) {
+    const full = routeProgress(r).n === r.stamps.length;
+    L.polyline(r.pts, { color: "#fff", weight: 6, opacity: .7, interactive: false, smoothFactor: 1.5 }).addTo(rovLayer);
+    L.polyline(r.pts, { color: full ? dcol : col, weight: 3.5, opacity: .9, smoothFactor: 1.5 })
+      .on("click", () => openRoute(r.id)).bindTooltip(r.name, { sticky: true }).addTo(rovLayer);
+    for (const p of r.pts) all.push(p);
+  }
+  rovMap._all = all;
+  $("#rOvHint").textContent = `${list.length} Touren · antippen für Details`;
+  rovMap._fitFor = current + view; [0, 120, 400, 900].forEach(t => setTimeout(refit, t));
+}
+const showBgRoutesFor = () => { try { if (!showBgRoutes && current === "tou") { showBgRoutes = true; save("sp.bgRoutes", true); drawBgRoutes(); } } catch(e) {} };
 function renderRoutes(){
   const list = routes[current];
   const sum = $("#rsum");
@@ -2811,6 +3023,7 @@ function renderRoutes(){
     $("#ritems").innerHTML = `<li class="empty">Für die ${esc(SETS[current].title)} gibt es keine fertigen Routen. Mit „🧭 Tour planen“ stellt dir die App eine Tour aus offenen Stempeln zusammen – und mit 🥾 kannst du sie aufzeichnen.</li>`;
     return;
   }
+  drawRouteOverview(list);
   const nDone = list.filter(r => routeProgress(r).n === r.stamps.length).length;
   sum.innerHTML = hikeCardHtml() + `<div class="rsum"><span><b style="color:var(--fg)">${nDone}</b> von ${list.length} Routen geschafft</span><span class="bar"><i style="width:${Math.round(nDone / list.length * 100)}%"></i></span></div>`;
   hk();
@@ -2841,8 +3054,10 @@ function renderRoutes(){
     stats.push(r.loop ? "Rundweg" : "Strecke");
     if (r.stamps.some(k => officialNotes(current, k).length)) stats.push("⚠ Hinweis");
     const nb = brokenOn(current, r.stamps).length; if (nb) stats.push(`⚠ ${nb} kaputt`);
-    if (myPos && rSort === "dist") stats.push(fmtKm(nearestDist(r)) + " entfernt");
-    const chips = r.stamps.map(k => {
+    if (myPos && rSort === "dist") stats.push(wd(myPos, nearestPt(r)) + " entfernt");
+    const chips = r.stamps.length > 9
+      ? `<span class="rseg">${r.stamps.map(k => `<i class="${isDone(current, k) ? "d" + mCls(current, k) : isBroken(current, k) ? "x" : ""}"></i>`).join("")}</span><span class="rseg-t">${r.stamps.length} Stempel · ${p.n} geschafft</span>`
+      : r.stamps.map(k => {
       const cls = isDone(current,k) ? "d" + mCls(current, k) : (isBroken(current,k) ? "x" : "");
       return `<span class="chip ${cls} ${officialNotes(current,k).length ? "w" : ""}">${k}</span>`;
     }).join("");
@@ -2885,7 +3100,7 @@ function renderProgress(){
   const pb = $("#pBroken");
   pb.hidden = !nBad;
   pb.textContent = nBad === 1 ? "1 Stempel kaputt" : nBad + " Stempel kaputt";
-  $("#subtitle").textContent = SETS[current].sub + (profiles.length > 1 ? " · Heft: " + profileName() + (isDog() ? " 🐾" : "") : "");
+  $("#subtitle").textContent = SETS[current].sub.split(" · ").pop() + (profiles.length > 1 ? " · Heft: " + profileName() + (isDog() ? " 🐾" : "") : "");
   renderHefts();
   /* Kopfzeile „Kompakt mit Ring“ */
   $("#rRing").style.setProperty("--p", total ? Math.round(count / total * 100) : 0);
@@ -2895,6 +3110,29 @@ function renderProgress(){
   $("#rRegion").querySelector("i").hidden = false;
   $("#rL1").innerHTML = `${count} von ${total}` + (!pill.hidden && !pill.classList.contains("none") ? ` · <b>${esc(pill.textContent)}</b>` : "") + (profiles.length > 1 ? ` · ${esc(profileName())}` : "");
   $("#rL2").textContent = $("#pNext").textContent;
+  { const lvl = lv && lv.length ? lv : null, rc = lvl && lvl.filter(([n]) => count >= n).pop(), nx = lvl && lvl.find(([n]) => count < n), prevN = rc ? rc[0] : 0;
+    $("#rRing").dataset.medal = rc ? LV_ICON(rc[1]) : "";
+    if (rc) $("#rL1").innerHTML = `${count}/${total} · <b>${LV_ICON(rc[1])} ${esc(rc[1].replace(/^Touringen /, ""))}</b>` + (profiles.length > 1 ? ` · ${esc(profileName())}` : "");
+    if (nx) $("#rL2").textContent = `Noch ${nx[0] - count} bis ${LV_ICON(nx[1])} ${nx[1].replace(/^Touringen /, "")}`;
+    const p = nx ? (count - prevN) / (nx[0] - prevN) : (total ? count / total : 0);
+    $("#rBarW").hidden = !total; $("#rBar").style.width = Math.round(Math.max(0, Math.min(1, p)) * 100) + "%"; }
+  updateNearChip();
+}
+/* ---------- Kopfzeilen-Extras: „Nächster Stempel“ und Fortschritt je Heft (Admin-Standard, jeder kann es ändern) ---------- */
+let hdrCfg = load("sp.hdrCfg", { near: false, bars: false });   // Standard vom Admin (config/app)
+let hdrMine = load("sp.hdrMine", {});                            // eigene Einstellung, überschreibt den Standard
+const HDR_USER = false;   // später: Nutzer dürfen die Kopfzeile selbst einstellen (Menü → Kopfzeile)
+const hdrOpt = k => (HDR_USER && k in hdrMine ? hdrMine[k] : hdrCfg[k]) === true;
+let nearChipT = 0;
+function updateNearChip(){
+  const el = $("#rNear"); if (!el) return;
+  if (!hdrOpt("near") || !myPos) { el.hidden = true; return; }
+  let best = null;
+  for (const s of visible()) { if (!hasPos(s) || isDone(current, s.k) || isBroken(current, s.k)) continue; const d = distKm(myPos, [s.lat, s.lon]); if (!best || d < best.d) best = { s, d }; }
+  if (!best || best.d > 40) { el.hidden = true; return; }
+  el.hidden = false;
+  el.innerHTML = `📍<span><b>${wd(myPos, [best.s.lat, best.s.lon])}</b> · ${isSonder(current) ? "" : "Nr. " + esc(best.s.n) + " "}${esc(best.s.name)} – nächster offener Stempel</span><em>Hin ›</em>`;
+  el.onclick = () => openStamp(best.s.k);
 }
 /* ---------- Kopfzeilen-Layout (stellt ein Admin für alle ein: config/app.layout) ---------- */
 let layout = load("sp.layout", "classic");
@@ -2926,19 +3164,37 @@ function openRegionPick(){
   });
   bindClose();
 }
+function openHdrPrefs(){
+  openSheet(`<div class="kicker">Einstellungen</div><h2>🧩 Kopfzeile</h2>
+    <p>Was soll oben unter dem Fortschrittsring stehen?</p>
+    <div class="bgmodes"><label class="checkline bgm"><input type="checkbox" id="hpNear" ${hdrOpt("near") ? "checked" : ""}><span><b>📍 Nächster Stempel</b><small>Entfernung zum nächsten offenen Stempel, mit „Hin“-Knopf (braucht den Standort)</small></span></label>
+    <label class="checkline bgm"><input type="checkbox" id="hpBars" ${hdrOpt("bars") ? "checked" : ""}><span><b>▬ Fortschritt je Heft</b><small>kleiner Balken unter jedem Heft</small></span></label></div>
+    ${Object.keys(hdrMine).length ? '<p class="hint">Du hast eigene Einstellungen – „Standard“ setzt sie auf die Vorgabe der App zurück.</p>' : ""}
+    <div class="actions" style="margin-top:12px"><button class="btn primary" id="hpOk">Speichern</button>${Object.keys(hdrMine).length ? '<button class="btn" id="hpStd">Standard benutzen</button>' : ""}<button class="btn quiet" id="hpBack">Zurück</button></div>`);
+  $("#hpBack").onclick = openMenu;
+  $("#hpOk").onclick = () => { hdrMine = { near: $("#hpNear").checked, bars: $("#hpBars").checked }; save("sp.hdrMine", hdrMine); render(false); toast("Kopfzeile gespeichert"); openMenu(); };
+  const sd = $("#hpStd"); if (sd) sd.onclick = () => { hdrMine = {}; save("sp.hdrMine", hdrMine); render(false); toast("Standard wird benutzt"); openMenu(); };
+}
 function openLayoutAdmin(){
   const opt = (v, t, d) => `<label class="checkline bgm"><input type="radio" name="lay" value="${v}" ${layout === v ? "checked" : ""}><span><b>${t}</b><small>${d}</small></span></label>`;
   openSheet(`<div class="kicker">Admin-Bereich</div><h2>Layout der Kopfzeile</h2>
     <p>Gilt für <b>alle</b> Nutzer – sie bekommen es beim nächsten Öffnen der App.</p>
     <div class="bgmodes">${opt("classic", "Klassisch", "Reiter für die Gebiete, darunter Hefte und Fortschrittsbalken.")}${opt("ring", "Kompakt mit Ring", "Fortschrittsring, Gebiet wechseln über „Harz ▾“, spart eine Zeile.")}</div>
+    <h3>Zusätze im kompakten Kopf (Standard für alle)</h3>
+    <div class="bgmodes"><label class="checkline bgm"><input type="checkbox" id="layNear" ${hdrCfg.near ? "checked" : ""}><span><b>📍 Nächster Stempel</b><small>Zeile mit dem nächsten offenen Stempel und „Hin“-Knopf</small></span></label>
+    <label class="checkline bgm"><input type="checkbox" id="layBars" ${hdrCfg.bars ? "checked" : ""}><span><b>▬ Fortschritt je Heft</b><small>kleiner Balken unter jedem Heft</small></span></label></div>
+    <p class="hint" style="margin-top:10px">Gilt für alle Nutzer – sie können es (noch) nicht selbst ändern.</p>
     <p id="layMsg" style="color:var(--bad)"></p>
     <div class="actions"><button class="btn primary" id="layGo">Für alle übernehmen</button><button class="btn quiet" id="layBack">Zurück</button></div>`);
   $("#layBack").onclick = () => openAdmin();
   $("#layGo").onclick = async () => {
     const v = (document.querySelector('input[name="lay"]:checked') || {}).value || "classic";
     try {
-      await fb.req("PATCH", "/config/app?updateMask.fieldPaths=layout", { fields: { layout: fsStr(v) } });
+      const hn = $("#layNear").checked, hb = $("#layBars").checked;
+      await fb.req("PATCH", "/config/app?updateMask.fieldPaths=layout&updateMask.fieldPaths=hdrNear&updateMask.fieldPaths=hdrBars", { fields: { layout: fsStr(v), hdrNear: { booleanValue: hn }, hdrBars: { booleanValue: hb } } });
       layout = v; save("sp.layout", v); applyLayout();
+      hdrCfg = { near: hn, bars: hb }; save("sp.hdrCfg", hdrCfg); render(false);
+      logMod("Layout geändert", `${v === "ring" ? "Kompakt" : "Klassisch"} · Nächster Stempel ${hn ? "an" : "aus"} · Heft-Balken ${hb ? "an" : "aus"}`);
       toast("Layout für alle gespeichert"); openAdmin();
     } catch(e) { $("#layMsg").textContent = "Fehlgeschlagen: " + e.message; }
   };
@@ -2954,7 +3210,9 @@ function renderHefts(){
   const reg = REGION[current];
   const cnt = (set, id) => { const l = stamps[set].filter(x => !id || (id === "all" ? heftActive(x.heft) : x.heft === id)); return `${l.filter(x => isDone(set, x.k)).length}/${l.length}`; };
   const on = (set, id) => current === set && (!id || H() === id);
-  const btn = (set, id, label) => `<button data-pick="${set}|${id || ""}" class="${on(set, id) ? "on" : ""}">${esc(label)} <small>${cnt(set, id)}</small></button>`;
+  const pct = (set, id) => { const l = stamps[set].filter(x => !id || (id === "all" ? heftActive(x.heft) : x.heft === id)); return l.length ? Math.round(l.filter(x => isDone(set, x.k)).length / l.length * 100) : 0; };
+  bar.classList.toggle("bars", hdrOpt("bars"));
+  const btn = (set, id, label) => `<button data-pick="${set}|${id || ""}" class="${on(set, id) ? "on" : ""}" style="--hp:${pct(set, id)}%">${hdrOpt("bars") ? `<span>${esc(label)}</span>` : esc(label)} <small>${cnt(set, id)}</small></button>`;
   const xl = extraList();
   const x2 = xl.length ? `<button data-x2c="1" class="x2on"><span class="x2dots">${xl.map(st => `<i style="background:${SET_COL[st]}"></i>`).join("")}</span>＋ ${xl.length === 1 ? esc(SETS[xl[0]].short) : xl.length + " Hefte"}</button>` : "";
   if (reg === "tab" || reg === "sax") { bar.innerHTML = btn(reg, "", SETS[reg].title) + x2; bar.hidden = false; return; }
@@ -3002,7 +3260,7 @@ function pushWidget(){
   const data = { title: SETS[set].title.toUpperCase(), n, total, level: reached ? LV_ICON(reached[1]) + " " + reached[1].replace(/^Touringen /, "") : "",
     prog: next ? (n - prevN) / (next[0] - prevN) : (total ? n / total : 0),
     next: next ? `Noch ${next[0] - n} bis ${next[1].replace(/^Touringen /, "")}` : (n >= total ? "Alles gesammelt 🎉" : `Noch ${total - n} offen`),
-    near: near ? `📍 Nr. ${near.s.n} ${near.s.name} · ${fmtKm(near.d)}` : "", nearKey: near ? set + "|" + near.s.k : "" };
+    near: near ? `📍 Nr. ${near.s.n} ${near.s.name} · ${(w => w != null ? fmtKm(w) : "ca. " + fmtKm(near.d * 1.35))(walkKm(myPos, [near.s.lat, near.s.lon]))}` : "", nearKey: near ? set + "|" + near.s.k : "" };
   try { NATIVE.setWidget(JSON.stringify(data)); } catch(e) {}
 }
 
@@ -3013,7 +3271,7 @@ let miniMap = null;
 function dropMiniMap(){ if (miniMap) { try { miniMap.remove(); } catch(e) {} miniMap = null; } }
 function mountMiniMap(s){
   const el = $("#sMini"); if (!el) return;
-  const b = BASES[baseId] || BASES.osm;
+  const b = curBase();
   const mm = L.map(el, { zoomControl: false, attributionControl: false, dragging: false, touchZoom: false, scrollWheelZoom: false,
     doubleClickZoom: false, boxZoom: false, keyboard: false, tap: false, preferCanvas: true });
   miniMap = mm;
@@ -3039,6 +3297,7 @@ function openSheet(html){
   setHdrH();
   dropMiniMap();
   $("#sheet").innerHTML = html;
+  $("#sheet").classList.remove("peek"); $("#scrim").classList.remove("peek");
   $("#sheet").hidden = false; $("#scrim").hidden = false;
   $("#sheet").scrollTop = 0;
   if (!history.state || !history.state.sheet) history.pushState({ sheet: 1 }, "");
@@ -3047,6 +3306,7 @@ function closeSheet(fromPop){
   if ($("#sheet").hidden) return;
   dropMiniMap();
   $("#sheet").hidden = true; $("#scrim").hidden = true;
+  $("#sheet").classList.remove("peek"); $("#scrim").classList.remove("peek");
   if (selectedKey) { selectedKey = null; drawMarkers(false); }
   if (!fromPop && history.state && history.state.sheet) history.back();
 }
@@ -3200,7 +3460,7 @@ function openStamp(k){
   const walk = distKmV != null && distKmV < 30 ? Math.max(1, Math.round(distKmV * 1.3 / 4 * 60)) : null;
   const stat = d ? `<span class="sv-st ok${mCls(set, k)}">✓ ${m === "code" ? "per Code" : m === "digital" ? "digital" : "gestempelt"} ${fmtDate(d).slice(0, 6)}</span>`
     : bad ? `<span class="sv-st bad">⚠️ kaputt gemeldet</span>` : `<span class="sv-st open">● noch offen</span>`;
-  const sub = [distKmV != null ? "📍 " + fmtKm(distKmV) : "", ele ? "⛰️ " + ele + " m" : "", esc(stampPlace(set, s))].filter(Boolean).join(" · ");
+  const sub = [distKmV != null ? "📍 " + wd(myPos, [s.lat, s.lon]) + " Weg" : "", ele ? "⛰️ " + ele + " m" : "", esc(stampPlace(set, s))].filter(Boolean).join(" · ");
   const mainBtn = d ? `<button class="btn stamped${mCls(set, k)}" id="sToggle">✓ ${m === "code" ? "Per Code abgehakt" : m === "digital" ? "Digital gestempelt" : "Gestempelt"} am ${fmtDate(d)} – entfernen …</button>`
     : bad ? `<button class="btn primary sv-code" id="sCode">🔢 Per Code abhaken</button>` : `<button class="btn primary" id="sToggle">Als gestempelt markieren</button>`;
   const navBtn = hasPos(s) ? `<button class="btn ib" id="sNav">${ico("nav")}Hinführen</button>` : `<a class="btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name + " " + (SETS[set].near || (REGION[set] === "thue" ? "Thüringen" : "Harz")))}" target="_blank" rel="noopener">🗺️ Suchen</a>`;
@@ -3211,11 +3471,12 @@ function openStamp(k){
   openSheet(`
     <div class="sv-map">${hasPos(s) ? `<div class="minimap" id="sMini" role="button" aria-label="Auf der großen Karte zeigen"></div>` : `<div class="sv-nomap">📍 Für diesen Stempel ist keine Position bekannt</div>`}
       <button class="sv-x" id="sClose" aria-label="Schließen">✕</button>${hasPos(s) ? '<span class="sv-big">⤢ Große Karte</span>' : ""}
-      ${walk ? `<span class="sv-walk">🥾 ca. ${walk < 60 ? walk + " min" : km1(walk / 60) + " h"} zu Fuß</span>` : ""}</div>
+      ${walk ? `<span class="sv-walk">🥾 ${wd(myPos, [s.lat, s.lon], "min")} zu Fuß</span>` : ""}</div>
     <div class="sv-head"><div class="sv-k"><span>${esc(stampKicker(set, s))}</span>${stat}</div>
       <h2>${esc(s.name)}</h2><div class="sv-sub">${sub}${profiles.length > 1 ? " · Heft: " + esc(profileName()) : ""}</div><div class="sv-last" id="sLast" hidden></div></div>
     <div class="sv-main">${mainBtn}</div>
     <div class="sv-row">${row}</div>
+    <div id="sHours"></div>
     ${alerts.map(([c, t, x, rp]) => `<div class="sv-alert ${c}"><b>${t}</b><span>${x}</span>${rp ? `<button class="mini rphoto" data-rphoto="${esc(rp)}">📷 Foto</button>` : ""}</div>`).join("")}
     ${hint ? `<button class="sv-hint" id="svInfo"><span>📌</span><span>${esc(hint.length > 110 ? hint.slice(0, 105) + "…" : hint)} <em>mehr</em></span></button>` : `<button class="sv-hint" id="svInfo"><span>ℹ️</span><span>Infos zum Stempel <em>mehr</em></span></button>`}
     ${hefte.length > 1 ? `<button class="sv-line" id="svHefte"><span class="ic">📚</span><span class="t"><b>In ${hefte.length} Heften <span class="dots">${hefte.map(x => `<i class="${done[x.set][x.k] ? "d" : ""}"></i>`).join("")}</span></b><small>${hefte.map(x => esc(hName(x)) + (done[x.set][x.k] ? " ✓" : !heftOn(x.set, byKey[x.set].get(x.k)) && !(x.set === set && x.k === k) ? " (aus)" : "")).join(" · ")}</small></span><span class="go">›</span></button>` : ""}
@@ -3260,14 +3521,32 @@ function openStamp(k){
     nearPoi(s).then(l => {
       const b = $("#svNearB"); if (!b) return;
       const park = l.find(p => p.kind === "park"), food = l.find(p => ["food", "cafe", "pub", "hut"].includes(p.kind)), bus = l.find(p => p.kind === "bus" || p.kind === "train");
-      b.textContent = park ? "🅿️ " + fmtKm(park.d) : food ? "🍽️ " + fmtKm(food.d) : "–";
+      b.innerHTML = park ? "🅿️ " + wd([park.lat, park.lon], [s.lat, s.lon]) : food ? "🍽️ " + wd([food.lat, food.lon], [s.lat, s.lon]) : "–";
       const fs = food && food.hours ? ohStatus(food.hours) : null;
       $("#svNearS").innerHTML = [food ? `🍽️ ${fs ? `<span class="oh-dot ${fs.cls}">●</span> ${fs.cls === "open" ? "offen" : fs.cls === "soon" ? "öffnet später" : "zu"}` : fmtKm(food.d)}` : "", bus ? (bus.kind === "train" ? "🚆 " : "🚏 ") + fmtKm(bus.d) : ""].filter(Boolean).join(" · ") || "nichts eingetragen";
     }).catch(() => { const b = $("#svNearB"); if (b) b.textContent = "🅿️ –"; });
   }
   if (fb.ready()) loadTips(set, k);
-  if (view === "map" && hasPos(s)) map.panTo([s.lat, s.lon]);
+  fillHours(set, k);
+  if (view === "map" && hasPos(s)) {
+    /* Halb geöffnet: oben bleibt die große Karte sichtbar, hochziehen zeigt alles */
+    const sh = $("#sheet"); sh.classList.add("peek"); $("#scrim").classList.add("peek");
+    if (!sh.querySelector(".pgrip")) sh.insertAdjacentHTML("afterbegin", '<div class="pgrip" id="pGrip" aria-label="Hochziehen für mehr"><i></i><small>hochziehen für Fotos, Kommentare & mehr</small></div>');
+    $("#pGrip").onclick = () => sheetExpand();
+    requestAnimationFrame(() => { map.panTo([s.lat, s.lon], { animate: false }); map.panBy([0, Math.round(sh.offsetHeight / 2)], { animate: true }); });
+  }
 }
+function sheetExpand(){ const sh = $("#sheet"); if (!sh.classList.contains("peek")) return; sh.classList.remove("peek"); $("#scrim").classList.remove("peek"); if (miniMap) setTimeout(() => miniMap.invalidateSize(), 260); }
+(function sheetDrag(){
+  const sh = $("#sheet"); let y0 = null, sc0 = 0;
+  sh.addEventListener("touchstart", e => { y0 = e.touches[0].clientY; sc0 = sh.scrollTop; }, { passive: true });
+  sh.addEventListener("touchmove", e => {
+    if (y0 == null) return; const dy = e.touches[0].clientY - y0;
+    if (sh.classList.contains("peek")) { if (dy < -28) { y0 = null; sheetExpand(); } else if (dy > 70) { y0 = null; closeSheet(); } }
+    else if (sc0 <= 0 && sh.scrollTop <= 0 && dy > 110 && sh.querySelector(".sv-head")) { y0 = null; closeSheet(); }
+  }, { passive: true });
+  sh.addEventListener("touchend", () => { y0 = null; }, { passive: true });
+})();
 const poiNearCache = {};
 /* Ergebnis je Stempel 30 Tage merken – Parkplätze & Gasthäuser ändern sich selten, und so klappt es auch ohne Netz */
 function nearPoi(s, force){
@@ -3302,7 +3581,7 @@ function openStampHefte(k){
 }
 function openStampWeather(k){
   const s = byKey[current].get(k), ss = sunsetAt(s.lat, s.lon);
-  svSub(k, "☁️ Wetter am Stempel", `<p>🌅 Sonnenuntergang heute um <b>${ss ? ss.getHours() + ":" + String(ss.getMinutes()).padStart(2, "0") : "–"}</b></p><div class="wx" id="sWx">Wetter wird geladen …</div>`);
+  svSub(k, "☁️ Wetter am Stempel", `<p>🌅 Sonnenuntergang heute um <b>${ss ? ss.getHours() + ":" + String(ss.getMinutes()).padStart(2, "0") : "–"}</b></p><div class="wx" id="sWx"><div class="skel"><i></i><i></i><i style="width:60%"></i></div></div>`);
   fillWeather($("#sWx"), s.lat, s.lon);
 }
 function openStampNear(k){
@@ -3374,6 +3653,7 @@ function openStampMore(k){
     ${hasPos(s) ? menuRow("svShowMap", "🗺️", "Auf der großen Karte zeigen", "") : ""}
     ${link ? `<a class="mrow" href="${esc(link)}" target="_blank" rel="noopener"><span class="mr-ic">🌐</span><span class="mr-t">Offizielle Seite</span><span class="mr-go">›</span></a>` : ""}
     ${fb.ready() && username && username.code && hasPos(s) ? menuRow("svInv", "👥", "Mit Freunden wandern", "Freunde einladen – Datum & Treffpunkt") : ""}
+    ${fb.ready() ? menuRow("svHours", "🕒", "Öffnungszeiten der Stempelstelle", hoursCache[set + "_" + k] && hoursCache[set + "_" + k].d ? "ansehen oder korrigieren" : "eintragen – hilft allen Wanderern") : ""}
     ${menuRow("svProb2", "⚠️", "Problem melden", "kaputt, Position, Name …")}
     ${isStaff() ? menuRow("sFix", "🛠️", `Bearbeiten (${isAdmin ? "Admin" : "Moderator"})`, "Position, Name, Hinweis für alle") : ""}
     ${isStaff() ? (modDefects[set + "_" + k] ? menuRow("sDefOff", "✅", "Ist repariert", "Defekt-Markierung für alle entfernen") : menuRow("sDefOn", "🔧", "Für alle als defekt markieren", "z. B. Kasten weg oder Stempel kaputt")) : ""}
@@ -3388,8 +3668,71 @@ function openStampMore(k){
   $("#svFav").onclick = () => { const v = set + "|" + k; myCard.fav = myCard.fav === v ? null : v; saveCard(); toast(myCard.fav ? "Lieblingsstempel gespeichert" : "Lieblingsstempel entfernt"); openStampMore(k); };
   const sm = $("#svShowMap"); if (sm) sm.onclick = () => { closeSheet(); setView("map"); map.setView([s.lat, s.lon], 16); };
   $("#svProb2").onclick = () => openProblem(k);
+  { const hb = $("#svHours"); if (hb) hb.onclick = () => openHoursEdit(set, k); }
   const iv = $("#svInv"); if (iv) iv.onclick = () => openInvite(set, k);
   const fx = $("#sFix"); if (fx) fx.onclick = () => openFixEdit(set, k, null, () => openStampIn(set, k));
+}
+
+/* ---------- 🕒 Öffnungszeiten der Stempelstelle (Firestore: hours/{set_k}) – von Wanderern eingetragen ---------- */
+const DAYS = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+let hoursCache = load("sp.hours", {});   // key -> { d: [7× "" | "zu" | "10:00-18:00"], by, ts, at }
+const parseHM = t => { const m = /^(\d{1,2})(?::(\d{2}))?$/.exec(t.trim()); return m ? +m[1] * 60 + +(m[2] || 0) : null; };
+function hoursState(h){
+  if (!h || !h.d) return null;
+  const now = new Date(), di = (now.getDay() + 6) % 7, v = h.d[di] || "", mins = now.getHours() * 60 + now.getMinutes();
+  const nextOpen = () => { for (let i = 1; i <= 7; i++) { const x = h.d[(di + i) % 7]; if (x && x !== "zu") return (i === 1 ? "morgen" : DAYS[(di + i) % 7]) + " ab " + x.split("-")[0]; } return ""; };
+  if (!v) return { cls: "unk", t: "🕒 Für heute keine Zeiten eingetragen" };
+  if (v === "zu") return { cls: "bad", t: "🚪 Heute Ruhetag", s: nextOpen() ? "Wieder geöffnet " + nextOpen() + " – vorher klappt kein Stempel." : "" };
+  const [a, b] = v.split("-").map(parseHM);
+  if (a == null || b == null) return { cls: "unk", t: "🕒 Heute: " + v };
+  if (mins < a) return { cls: "soon", t: `🕒 Heute ab ${v.split("-")[0]} Uhr geöffnet`, s: `bis ${v.split("-")[1]} Uhr` };
+  if (mins >= b) return { cls: "bad", t: "🚪 Heute schon geschlossen", s: nextOpen() ? "Wieder geöffnet " + nextOpen() : "" };
+  return { cls: "ok", t: `✅ Jetzt geöffnet · bis ${v.split("-")[1]} Uhr`, s: b - mins < 60 ? "⚠️ Schließt bald!" : "" };
+}
+function hoursHtml(set, k){
+  const h = hoursCache[set + "_" + k], st = hoursState(h); if (!st) return "";
+  return `<button class="sv-hours ${st.cls}" id="svHoursB"><b>${st.t}</b>${st.s ? `<span>${esc(st.s)}</span>` : ""}<small>Zeiten von Wanderern eingetragen${h.by ? " · " + esc(h.by) : ""}${h.ts ? " · " + esc(ago(h.ts)) : ""} · ansehen ›</small></button>`;
+}
+async function loadHours(set, k){
+  const key = set + "_" + k, c = hoursCache[key];
+  if (c && Date.now() - (c.at || 0) < 6 * 36e5) return c;
+  try {
+    const r = await fb.raw("GET", `/hours/${encodeURIComponent(key)}`);
+    const v = r.ok ? (d => ({ d: String(fv(d, "d") || "").split("|"), by: fv(d, "by"), ts: fv(d, "ts") }))(await r.json()) : {};
+    v.at = Date.now(); hoursCache[key] = v; save("sp.hours", hoursCache); return v;
+  } catch(e) { return c || null; }
+}
+function fillHours(set, k){
+  const box = $("#sHours"); if (!box) return;
+  const draw = () => { if (!box.isConnected) return; box.innerHTML = hoursHtml(set, k); const b = $("#svHoursB"); if (b) b.onclick = () => openHoursEdit(set, k); };
+  draw(); if (fb.ready()) loadHours(set, k).then(draw);
+}
+function openHoursEdit(set, k){
+  const key = set + "_" + k, h = hoursCache[key] || {}, s = byKey[set].get(k);
+  const d = (h.d && h.d.length === 7) ? h.d : ["", "", "", "", "", "", ""];
+  const row = (i) => { const v = d[i] || "", zu = v === "zu", [a, b] = !zu && v ? v.split("-") : ["", ""];
+    return `<div class="hrow" data-hd="${i}"><b>${DAYS[i]}</b><select data-hm="${i}"><option value="">unbekannt</option><option value="open" ${v && !zu ? "selected" : ""}>geöffnet</option><option value="zu" ${zu ? "selected" : ""}>Ruhetag</option></select>
+      <span class="hti" ${v && !zu ? "" : "hidden"}><input type="time" data-ha="${i}" value="${esc(a || "10:00")}"> – <input type="time" data-hb="${i}" value="${esc(b || "18:00")}"></span></div>`; };
+  svSub(k, "🕒 Öffnungszeiten", `<p>Wann ist die Stempelstelle von <b>${esc(s.name)}</b> geöffnet? Gerade bei Bauden und Gaststätten gibt es den Stempel oft nur zu den Öffnungszeiten. Alle Wanderer sehen deine Angaben.</p>
+    ${h.by ? `<p class="hint">Zuletzt eingetragen von ${esc(h.by)}${h.ts ? " · " + esc(ago(h.ts)) : ""}</p>` : ""}
+    <div class="hgrid">${DAYS.map((_, i) => row(i)).join("")}</div>
+    <div class="actions" style="margin-top:12px"><button class="btn primary" id="hSave">${h.d ? "Korrektur speichern" : "Speichern"}</button><button class="btn quiet" id="hCopy">Mo-Zeiten für alle Tage übernehmen</button></div>`);
+  const sh = $("#sheet");
+  sh.querySelectorAll("[data-hm]").forEach(sel => sel.onchange = () => { sh.querySelector(`[data-hd="${sel.dataset.hm}"] .hti`).hidden = sel.value !== "open"; });
+  $("#hCopy").onclick = () => { const m = sh.querySelector('[data-hm="0"]').value, a = sh.querySelector('[data-ha="0"]').value, b = sh.querySelector('[data-hb="0"]').value;
+    for (let i = 1; i < 7; i++) { sh.querySelector(`[data-hm="${i}"]`).value = m; sh.querySelector(`[data-ha="${i}"]`).value = a; sh.querySelector(`[data-hb="${i}"]`).value = b; sh.querySelector(`[data-hd="${i}"] .hti`).hidden = m !== "open"; } };
+  $("#hSave").onclick = async () => {
+    if (banGuard()) return;
+    if (!username) { toast("Dafür brauchst du einen Benutzernamen (Freunde-Tab)"); return; }
+    const out = DAYS.map((_, i) => { const m = sh.querySelector(`[data-hm="${i}"]`).value; if (m === "zu") return "zu"; if (m !== "open") return ""; const a = sh.querySelector(`[data-ha="${i}"]`).value, b = sh.querySelector(`[data-hb="${i}"]`).value; return a && b ? a + "-" + b : ""; });
+    if (out.every(x => !x)) { toast("Trag mindestens einen Tag ein"); return; }
+    try {
+      const a = await fb.auth();
+      await fb.req("PATCH", `/hours/${encodeURIComponent(key)}`, { fields: { d: fsStr(out.join("|")), by: fsStr(username.name), uid: fsStr(a.uid), ts: { timestampValue: new Date().toISOString() } } });
+      hoursCache[key] = { d: out, by: username.name, ts: new Date().toISOString(), at: Date.now() }; save("sp.hours", hoursCache);
+      toast("🕒 Öffnungszeiten gespeichert – danke!"); openStampIn(set, k);
+    } catch(e) { toast("Speichern fehlgeschlagen: " + e.message); }
+  };
 }
 
 /* ---------- 💬 Tipps zu Stempelstellen (Firestore: tips/{set_k}/list) ---------- */
@@ -3622,21 +3965,22 @@ function openRoute(id, showOnMap){
       <div class="${p.n === p.total ? "ok" : ""}"><b>${p.n}/${p.total}</b><span>Stempel</span></div>
     </div>
     <div class="rprog"><i style="width:${pct}%"></i></div>
-    <p class="hint" style="margin:6px 0 0">Gehzeit ohne Pausen (nach DIN 33466: 4 km/h, 300 Hm/h bergauf)${near != null ? ` · Start ${fmtKm(near)} von dir` : ""}</p>
+    <p class="hint" style="margin:6px 0 0">Gehzeit ohne Pausen (nach DIN 33466: 4 km/h, 300 Hm/h bergauf)${near != null ? ` · Start ${wd(myPos, r.pts[0])} von dir` : ""}</p>
     <div class="actions rmain"><button class="btn primary" id="rStart">🧭 Zum Start</button><button class="btn" id="rShow2">🗺️ Auf der Karte</button><a class="btn" href="${navUrl(r.pts[0][0], r.pts[0][1])}" target="_blank" rel="noopener">🚗 Anfahrt</a></div>
     ${brokenNotice(current, r.stamps)}
     ${hints.length ? `<div class="notice warn"><b>Hinweise zu dieser Route</b><ul>${hints.map(h => `<li>${esc(h)}</li>`).join("")}</ul></div>` : ""}
     <h3>Stempel unterwegs</h3>
     <ul class="slist">${items}</ul>
-    <h3>Höhenprofil</h3><div class="elev" id="rElev">Wird geladen …</div>
-    <h3>Wetter am Start</h3><div class="wx" id="rWx">Wetter wird geladen …</div>
+    <h3>Höhenprofil</h3><div class="elev" id="rElev"><div class="skel"><i></i><i></i><i style="width:60%"></i></div></div>
+    <h3>Wetter am Start</h3><div class="wx" id="rWx"><div class="skel"><i></i><i></i><i style="width:60%"></i></div></div>
     <div class="actions">
       <button class="btn" id="rShare">📤 Mit Freunden teilen</button>
       ${hasNative("downloadTiles") ? '<button class="btn" id="rOffline">📥 Karte offline speichern</button>' : ""}
       <button class="btn quiet" id="sClose">Schließen</button>
-    </div>`);
+    </div>
+    <div class="rgo"><button class="btn primary" id="rGo">▶ Tour starten<small>${near != null ? `Start ${wd(myPos, r.pts[0])} entfernt · ` : ""}Karte + Hinführen zum Start</small></button></div>`);
   { const mm = L.map($("#rMap"), { zoomControl: false, attributionControl: false, zoomSnap: 0.25, fadeAnimation: false, zoomAnimation: false, dragging: false, scrollWheelZoom: false, doubleClickZoom: false, touchZoom: false, boxZoom: false, keyboard: false, tap: false });
-    const b = BASES[baseId] || BASES.osm; L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc" }).addTo(mm);
+    const b = curBase(); L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc" }).addTo(mm);
     L.polyline(r.pts, { color: "#fff", weight: 7, opacity: .85 }).addTo(mm);
     L.polyline(r.pts, { color: css("--route"), weight: 4.5, opacity: 1, lineCap: "round" }).addTo(mm);
     L.circleMarker(r.pts[0], { radius: 7, weight: 3, color: "#fff", fillColor: css("--fg"), fillOpacity: 1 }).addTo(mm);
@@ -3644,6 +3988,7 @@ function openRoute(id, showOnMap){
     const fit = () => { if (!$("#rMap")) return; mm.invalidateSize(); mm.fitBounds(r.pts, { padding: [26, 26], animate: false }); }; fit(); [150, 400, 800].forEach(t => setTimeout(fit, t));
     $("#rMap").onclick = () => { closeSheet(); setView("map"); showRoute(r, true); }; }
   $("#rStart").onclick = () => startNavTo(r.pts[0], "Start: " + r.name);
+  $("#rGo").onclick = () => { closeSheet(); setView("map"); showRoute(r, true); setTimeout(() => startNavTo(r.pts[0], "Start: " + r.name), 300); };
   $("#rShow2").onclick = () => { closeSheet(); setView("map"); showRoute(r, true); };
   $("#sheet").querySelectorAll("[data-stamp]").forEach(b => b.onclick = () => openStamp(b.dataset.stamp));
   const rs = $("#rShow"); if (rs) rs.onclick = () => { closeSheet(); setView("map"); showRoute(r, true); };
@@ -3655,11 +4000,34 @@ function openRoute(id, showOnMap){
   bindClose();
 }
 
+/* ---------- Stempel-Knall: Animation beim Abhaken ---------- */
+function stampBoom(set, k){
+  try {
+    const s = byKey[set].get(k); if (!s) return;
+    const old = document.querySelector(".boom"); if (old) old.remove();
+    const name = String(s.name).toUpperCase().slice(0, 26), d = new Date(), dt = `${String(d.getDate()).padStart(2, "0")}.${String(d.getMonth() + 1).padStart(2, "0")}.${d.getFullYear()}`;
+    const n = Object.keys(done[set]).length, lv = set === "hwn" ? hwnLevels() : (SETS[set].levels || []), nx = lv.find(([x]) => n < x);
+    const el = document.createElement("div"); el.className = "boom";
+    el.innerHTML = `<div class="boom-in"><svg viewBox="0 0 200 200" class="boom-st"><g fill="none" stroke="currentColor" stroke-width="5"><circle cx="100" cy="100" r="88"/><circle cx="100" cy="100" r="74" stroke-width="2"/></g>
+      <path id="bmT" d="M100 100m-62 0a62 62 0 1 1 124 0" fill="none"/><text font-family="Georgia,serif" font-weight="700" font-size="${name.length > 16 ? 13 : 17}" fill="currentColor" letter-spacing="2"><textPath href="#bmT" startOffset="50%" text-anchor="middle">${esc(name)}</textPath></text>
+      <text x="100" y="114" text-anchor="middle" font-family="Georgia,serif" font-size="${String(s.n).length > 3 ? 26 : 40}" font-weight="700" fill="currentColor">${esc(String(s.n))}</text>
+      <text x="100" y="148" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">${dt}</text></svg>
+      <span class="sp1">✨</span><span class="sp2">✨</span><span class="sp3">✨</span>
+      <b>Gestempelt!</b><small>${nx ? `Noch ${nx[0] - n} bis ${esc(String(nx[1]).replace(/^Touringen /, ""))}` : `${n} Stempel gesammelt`}</small></div>`;
+    el.onclick = () => el.remove();
+    document.body.appendChild(el);
+    vibrate(35); setTimeout(() => vibrate(60), 380);
+    setTimeout(() => el.classList.add("out"), 1700); setTimeout(() => el.remove(), 2150);
+  } catch(e) {}
+}
+
+{ const hb = document.getElementById("heftBar"); const upd = () => hb.classList.toggle("end", hb.scrollLeft + hb.clientWidth >= hb.scrollWidth - 4);
+  hb.addEventListener("scroll", upd, { passive: true }); new MutationObserver(() => setTimeout(upd, 0)).observe(hb, { childList: true }); addEventListener("resize", upd); setTimeout(upd, 300); }
 let changesSinceBackup = load("sp.changes", 0);
 function toggle(k){
   const prev = done[current][k];
   if (done[current][k]) { delete done[current][k]; setMethod(current, k, null); setGps(current, k, false); }
-  else { done[current][k] = today(); save("sp.lastStamp." + profile, { set: current, k, date: done[current][k] }); if (checkGpsAt(current, k)) { setTimeout(() => toast("📍 Vor Ort bestätigt"), 900); sendLastStamp(current, k); } }
+  else { done[current][k] = today(); stampBoom(current, k); save("sp.lastStamp." + profile, { set: current, k, date: done[current][k] }); if (checkGpsAt(current, k)) { setTimeout(() => toast("📍 Vor Ort bestätigt"), 900); sendLastStamp(current, k); } }
   save(doneKey(current), done[current]);
   linkNote(syncGroup(current, k, prev));
   if (!prev && isWatched(current, k)) setWatched(current, k, false);
@@ -3892,7 +4260,7 @@ function openPlan(){
     <div class="meta">${km1(p.km)} km Luftlinie · zu Fuß etwa ${km1(walk)} km · ca. ${h < 1 ? Math.round(h*60) + " min" : km1(h) + " h"}</div>
     ${brokenNotice(p.set, p.stamps)}
     <ul class="slist">${items}</ul>
-    <h3>Wetter</h3><div class="wx" id="plWx">Wetter wird geladen …</div>
+    <h3>Wetter</h3><div class="wx" id="plWx"><div class="skel"><i></i><i></i><i style="width:60%"></i></div></div>
     <p>Die Strecke ist eine Schätzung. Den genauen Weg zeigt Google Maps.</p>
     <div class="actions">
       <button class="btn primary" id="plNav">🧭 Tour in der App navigieren</button>
@@ -3965,6 +4333,18 @@ function startTiles(raw, label){
   NATIVE.downloadTiles(JSON.stringify(list));
   toast(`${label} (${BASES[baseId].name}): ${list.length} Kartenteile werden geladen`);
 }
+/* 📶 Offline-Hinweis: Vor einer Tour fragen, ob die Karte für die Gegend schon gespeichert ist (im Harz gibt es viele Funklöcher) */
+let offAreas = load("sp.offAreas", []), tilesArea = null;   // [{ s, w, n, e, base, ts }]
+function offlineCovered(lat, lon){ return offAreas.some(a => a.base === baseId && lat >= a.s && lat <= a.n && lon >= a.w && lon <= a.e); }
+function offlineHint(p, what){
+  try {
+    if (!p || !hasNative("downloadTiles") || tilesRunning || offlineCovered(p[0], p[1])) return;
+    const asked = load("sp.offAsked", {}), key = p[0].toFixed(2) + "," + p[1].toFixed(2);
+    if (asked[key] && Date.now() - asked[key] < 7 * 864e5) return;
+    asked[key] = Date.now(); save("sp.offAsked", asked);
+    toast(`📶 Funkloch-Gefahr: Karte für ${what} offline speichern? Hier tippen`, 9000, () => { const bb = L.latLng(p).toBounds(6000); saveTilesFor({ s: bb.getSouth(), w: bb.getWest(), n: bb.getNorth(), e: bb.getEast() }, 11, 16, "Umgebung " + what); });
+  } catch(e) {}
+}
 function saveTilesFor(b, zmin, zmax, label){
   if (!hasNative("downloadTiles")) { toast("Offline-Karten gehen nur in der Android-App"); return; }
   if (tilesRunning) { toast("Es wird bereits eine Karte gespeichert"); return; }
@@ -3975,6 +4355,7 @@ function saveTilesFor(b, zmin, zmax, label){
   while (list.length > TILE_CAP && zmax > zmin) list = make(--zmax);
   if (list.length > TILE_CAP) { toast("Bereich zu groß – bitte näher heranzoomen"); return; }
   label = label + " (" + BASES[baseId].name + ")";
+  tilesArea = { s: b.s, w: b.w, n: b.n, e: b.e, base: baseId, ts: Date.now() };
   tilesRunning = true;
   setStatus(`Karte wird gespeichert … 0/${list.length} (tippen zum Abbrechen)`, () => NATIVE.cancelTiles());
   NATIVE.downloadTiles(JSON.stringify(list));
@@ -3992,7 +4373,8 @@ window.__native = (type, data) => {
     tilesRunning = false; setStatus("");
     if (data.cancelled) toast("Speichern abgebrochen");
     else if (data.failed) toast(`Gespeichert, ${data.failed} Kartenteile fehlen (Internet?)`);
-    else toast("Karte offline gespeichert");
+    else { toast("Karte offline gespeichert"); if (tilesArea) { offAreas.push(tilesArea); offAreas = offAreas.slice(-40); save("sp.offAreas", offAreas); } }
+    tilesArea = null;
   } else if (type === "tileinfo") {
     tileInfo = data;
     const el = $("#tileInfo");
@@ -4344,7 +4726,7 @@ function openWalk(code){
     ${w.lat ? `<div class="fxmap" id="wkMap"></div><p class="hint">Ungefährer Standort, Stand ${esc(ago(w.ts))}${myPos ? " · " + fmtKm(distKm(myPos, [w.lat, w.lon])) + " von dir" : ""}.</p>` : ""}
     <div class="actions">${w.lat ? '<button class="btn primary" id="wkGo">🧭 Dazustoßen</button>' : ""}<button class="btn quiet" id="sClose">Schließen</button></div>`);
   if (w.lat) {
-    const b = BASES[baseId] || BASES.osm, mm = L.map($("#wkMap"), { zoomControl: false, attributionControl: false });
+    const b = curBase(), mm = L.map($("#wkMap"), { zoomControl: false, attributionControl: false });
     L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc" }).addTo(mm);
     L.circleMarker([w.lat, w.lon], { radius: 11, weight: 3, color: "#fff", fillColor: css("--done"), fillOpacity: 1 }).bindTooltip(m.name, { permanent: true, direction: "top", offset: [0, -8], className: "fxtip" }).addTo(mm);
     mm.setView([w.lat, w.lon], 14); setTimeout(() => mm.invalidateSize(), 200);
@@ -4375,7 +4757,7 @@ function openTour(t, who, back){
   openSheet(`<div class="kicker">👣 Tour von ${esc(who)}</div><h2>${esc(t.name)}</h2>
     <div class="stats"><div class="stat"><b>${km1(t.km)} km</b><span>Länge</span></div><div class="stat"><b>${fmtDur(t.dur)}</b><span>Dauer bei ${esc(who)}</span></div><div class="stat"><b>${t.up ? "↑ " + t.up + " m" : "–"}</b><span>Anstieg</span></div></div>
     ${t.st.length ? `<h3>Stempel unterwegs (${t.st.length})</h3><ul class="slist">${t.st.map(([st, k, n, name]) => `<li><button data-goto="${esc(st + "|" + k)}"><span class="dot" style="background:${isDone(st, k) ? css("--done") : css("--open")}"></span><span class="t">Nr. ${esc(n)} ${esc(name)}<small>${esc(SETS[st] ? SETS[st].short : st)}${isDone(st, k) ? " · hast du schon" : " · fehlt dir noch"}</small></span></button></li>`).join("")}</ul>` : ""}
-    <p class="hint">Die Tour bleibt auf der Karte eingeblendet – einfach der Linie folgen.${ds != null ? " Start ist " + fmtKm(ds) + " von dir entfernt." : ""}</p>
+    <p class="hint">Die Tour bleibt auf der Karte eingeblendet – einfach der Linie folgen.${ds != null ? " Start ist " + wd(myPos, pts[0]) + " von dir entfernt." : ""}</p>
     <div class="actions"><button class="btn primary" id="toStart">🧭 Zum Start führen</button><a class="btn" href="${navUrl(pts[0][0], pts[0][1])}" target="_blank" rel="noopener">🚗 Anfahrt</a></div>
     <div class="actions"><button class="btn quiet" id="toBack">Zurück</button></div>`);
   $("#toStart").onclick = () => startNavTo(pts[0], "Start der Tour");
@@ -4440,7 +4822,7 @@ function openMeetPoint(i){
     <div class="actions"><button class="btn primary" id="mpNav">🧭 Hinführen</button><a class="btn" href="${navUrl(i.lat, i.lon)}" target="_blank" rel="noopener">🚗 Google Maps</a></div>
     ${i.set && byKey[i.set] && byKey[i.set].get(i.k) ? '<div class="actions"><button class="btn" id="mpStamp">Stempel öffnen</button></div>' : ""}
     <div class="actions"><button class="btn quiet" id="sClose">Schließen</button></div>`);
-  const b = BASES[baseId] || BASES.osm, mm = L.map($("#mpMap"), { zoomControl: false, attributionControl: false });
+  const b = curBase(), mm = L.map($("#mpMap"), { zoomControl: false, attributionControl: false });
   L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc" }).addTo(mm);
   L.circleMarker([i.lat, i.lon], { radius: 11, weight: 3, color: "#fff", fillColor: css("--gold"), fillOpacity: 1 }).addTo(mm);
   mm.setView([i.lat, i.lon], 15); setTimeout(() => mm.invalidateSize(), 200);
@@ -4714,7 +5096,7 @@ const unameKey = n => norm(n).trim().replace(/\s+/g, "_");
 const nameOk = n => /^[\p{L}\p{N} _.\-]{3,20}$/u.test(n) && unameKey(n).replace(/_/g, "").length >= 3 && !badText(n);
 const fsStr = v => ({ stringValue: v });
 const docId = d => d.name.split("/").pop();
-const fv = (d, k) => { const x = d.fields && d.fields[k]; return x ? (x.stringValue ?? (x.integerValue != null ? +x.integerValue : x.timestampValue)) : null; };
+const fv = (d, k) => { const x = d.fields && d.fields[k]; return x ? (x.stringValue ?? (x.integerValue != null ? +x.integerValue : x.booleanValue != null ? x.booleanValue : x.doubleValue != null ? +x.doubleValue : x.timestampValue)) : null; };
 async function reserveName(name, forUid){
   // "ok" | "taken" | "offline"
   if (!fb.ready()) return "offline";
@@ -4828,6 +5210,8 @@ async function checkUpdate(){
         if (g && g.code > updInfo.code) Object.assign(updInfo, g);
       } catch(e) {}
     }
+    { const hn = fv(d, "hdrNear"), hb = fv(d, "hdrBars");
+      if (hn != null || hb != null) { const c = { near: hn === true, bars: hb === true }; if (JSON.stringify(c) !== JSON.stringify(hdrCfg)) { hdrCfg = c; save("sp.hdrCfg", c); render(false); } } }
     const lay = fv(d, "layout");
     if ((lay === "classic" || lay === "ring") && lay !== layout) { layout = lay; save("sp.layout", lay); applyLayout(); }
     showUpdate();
@@ -5191,7 +5575,7 @@ const GOOGLE_G = '<svg viewBox="0 0 48 48" width="18" height="18" style="vertica
 
 /* ---------- 🚪 Abmelden: Stempel sichern, Konto-Daten vom Handy entfernen, neu starten ---------- */
 /* Diese Einstellungen gehören zum Handy, nicht zum Konto – sie bleiben beim Abmelden */
-const KEEP_KEYS = ["sp.theme", "sp.base", "sp.legMin", "sp.regions", "sp.layout", "sp.gcfg", "sp.fixes", "sp.roles", "sp.navVoice", "sp.navEco",
+const KEEP_KEYS = ["sp.theme", "sp.base", "sp.legMin", "sp.regions", "sp.layout", "sp.hdrCfg", "sp.hdrMine", "sp.gcfg", "sp.fixes", "sp.roles", "sp.navVoice", "sp.navEco",
   "sp.poi", "sp.heat", "sp.bgRoutes", "sp.lastCode", "sp.installHint", "sp.updSkip", "sp.official", "sp.customHefte", "sp.news", "sp.newsSeen", "sp.reports", "sp.set", "sp.hefteOn", "sp.heftSel"];
 function openLogout(){
   const hasPw = username && username.hasPw, g = load("sp.google", null);
@@ -6049,7 +6433,7 @@ const stampTitle = (st, s) => (isSonder(st) ? "" : "Nr. " + s.n + " ") + s.name;
 /* Karte mit fester Nadel in der Mitte: Karte verschieben, bis die Nadel am richtigen Ort ist */
 let posMap = null;
 function mountPosPicker(el, start, ref){
-  const b = BASES[baseId] || BASES.osm;
+  const b = curBase();
   if (posMap) { try { posMap.remove(); } catch(e) {} }
   const pm = posMap = L.map(el, { zoomControl: true, attributionControl: false, preferCanvas: true }).setView(start, 17);
   L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc" }).addTo(pm);
@@ -6216,7 +6600,7 @@ function openFixInfo(key, back){
   $("#fiBack").onclick = back;
   $("#fiEdit").onclick = () => openFixEdit(st, k, null, () => openFixInfo(key, back));
   if (pts.length) {
-    const b = BASES[baseId] || BASES.osm;
+    const b = curBase();
     const mm = L.map($("#fxMap"), { zoomControl: false, attributionControl: false });
     L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc" }).addTo(mm);
     const ll = pts.map(p => [p[1], p[2]]);
@@ -6413,7 +6797,7 @@ async function loadWeather(lat, lon){
   const c = wxCache.get(key);
   if (c && Date.now() - c.ts < 36e5) return c.d;
   const d = await getJson(`https://api.open-meteo.com/v1/forecast?latitude=${lat.toFixed(4)}&longitude=${lon.toFixed(4)}` +
-    `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max&timezone=Europe%2FBerlin&forecast_days=4`);
+    `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max,sunset&timezone=Europe%2FBerlin&forecast_days=4`);
   wxCache.set(key, { ts: Date.now(), d });
   return d;
 }
@@ -6422,9 +6806,21 @@ function weatherHtml(d){
   return `<div class="wxrow">${y.time.map((t, i) => {
     const [ic, txt] = wmo(y.weather_code[i]);
     const label = i === 0 ? "Heute" : i === 1 ? "Morgen" : WEEKDAYS[new Date(t + "T12:00").getDay()];
-    return `<div class="wxd"><small>${label}</small><span class="ic" title="${txt}">${ic}</span><b>${Math.round(y.temperature_2m_max[i])}°</b><small>${Math.round(y.temperature_2m_min[i])}°</small>` +
+    return `<div class="wxd${i === wxBest(y) ? " best" : ""}"><small>${label}</small><span class="ic" title="${txt}">${ic}</span><b>${Math.round(y.temperature_2m_max[i])}°</b><small>${Math.round(y.temperature_2m_min[i])}°</small>` +
       `<small>💧 ${y.precipitation_probability_max[i] ?? "–"} %</small><small>💨 ${Math.round(y.wind_speed_10m_max[i])} km/h</small></div>`;
-  }).join("")}</div><small class="src">Wetter: Open-Meteo.com</small>`;
+  }).join("")}</div>${wxTip(y)}<small class="src">Wetter: Open-Meteo.com</small>`;
+}
+/* Bester Wandertag in den nächsten Tagen: wenig Regen, wenig Wind, angenehme Temperatur */
+function wxBest(y){ try { const sc = i => (y.precipitation_probability_max[i] ?? 50) + Math.max(0, y.wind_speed_10m_max[i] - 25) * 1.5 + Math.abs(y.temperature_2m_max[i] - 17) * 1.2 + (y.weather_code[i] >= 95 ? 60 : 0); let b = 0; for (let i = 1; i < y.time.length; i++) if (sc(i) < sc(b) - 3) b = i; return (y.precipitation_probability_max[b] ?? 100) <= 30 ? b : -1; } catch(e) { return -1; } }
+function wxTip(y){
+  try {
+    const sc = i => (y.precipitation_probability_max[i] ?? 50) + Math.max(0, y.wind_speed_10m_max[i] - 25) * 1.5 + Math.abs(y.temperature_2m_max[i] - 17) * 1.2 + (y.weather_code[i] >= 95 ? 60 : 0);
+    let b = 0; for (let i = 1; i < y.time.length; i++) if (sc(i) < sc(b) - 3) b = i;
+    const lbl = b === 0 ? "Heute" : b === 1 ? "Morgen" : WEEKDAYS[new Date(y.time[b] + "T12:00").getDay()];
+    const good = (y.precipitation_probability_max[b] ?? 100) <= 30;
+    const ss = y.sunset && y.sunset[b] ? " · Sonnenuntergang " + y.sunset[b].slice(11, 16) : "";
+    return `<div class="wxtip ${good ? "ok" : ""}">${good ? `👍 ${lbl} ist ideal zum Wandern` : `☔ Die nächsten Tage eher nass – am besten noch ${lbl.toLowerCase() === "heute" ? "heute" : lbl}`}${ss}</div>`;
+  } catch(e) { return ""; }
 }
 function fillWeather(el, lat, lon){
   loadWeather(lat, lon).then(d => { if (el.isConnected) el.innerHTML = weatherHtml(d); })
@@ -6542,7 +6938,7 @@ const BADGES = [
   ["kne9", "💧", "Kneipp dich fit!", "Alle 9 Wassertretstellen in Bad Lauterberg", c => c.kne >= 9],
   ["swv10", "🐑", "Neugieriges Lamm", "10 Wanderschätze in der Wilden Heimat", c => c.swv >= 10],
   ["swv50", "🦌", "Wilder Hirsch", "Alle 50 Wanderschätze in der Wilden Heimat", c => c.swv >= 50],
-  ["sax11", "🪨", "Sächsische Schweiz", "Alle 11 Stempel im Wanderpass", c => c.sax >= 11],
+  ["sax11", "🪨", "Sächsische Schweiz", "Alle 25 Stempel im Wanderpass", c => c.sax >= 25],
   ["nhv15", "🌾", "Freizeitnadel", "15 Freizeitstempel im Nördlichen Harzvorland", c => c.nhv >= 15],
   ["wip20", "🚂", "Wippertaler Wandernadel", "20 Stempel im Wippertaler Stempel(S)pass", c => c.wip >= 20],
   ["heft", "📘", "Heft voll", "Ein Sonderheft komplett gesammelt", c => c.hefte >= 1],
@@ -6603,8 +6999,9 @@ function earnedNow(pid){
 function badgesHtml(){
   const earned = earnedNow(profile);
   const n = BADGES.filter(b => earned[b[0]]).length;
-  return `<h3>Abzeichen (${n} von ${BADGES.length})</h3><div class="badges">${BADGES.map(([id, ic, name, desc]) =>
-    `<div class="badge ${earned[id] ? "on" : ""}"><span class="ic">${ic}</span><b>${esc(name)}</b><small>${esc(desc)}${earned[id] ? " · " + fmtDate(earned[id]) : ""}</small></div>`).join("")}</div>`;
+  setTimeout(() => document.querySelectorAll("[data-medal]").forEach(b => b.onclick = () => { const x = BADGES.find(y => y[0] === b.dataset.medal); if (x) toast(`${x[1]} ${x[2]} – ${x[3]}${earned[x[0]] ? " · seit " + fmtDate(earned[x[0]]) : " · noch nicht geschafft"}`, 4000); }), 0);
+  return `<h3>Abzeichen <small class="pcount">${n} von ${BADGES.length}</small></h3><div class="medals">${BADGES.map(([id, ic, name]) =>
+    `<button class="medal ${earned[id] ? "on" : ""}" data-medal="${id}"><span class="mc"><span>${ic}</span>${earned[id] ? "" : '<i>🔒</i>'}</span><b>${esc(name)}</b></button>`).join("")}</div>`;
 }
 
 /* ---------- Nadeln abholen ---------- */
@@ -6614,7 +7011,7 @@ function pinsReached(){
   else for (const [n, name] of SETS.hwn.levels) if (nh >= n) out.push({ id: "hwn:" + n, title: ["Bronze","Silber","Gold"].includes(name) ? name + "-Nadel" : "Abzeichen " + name, sub: `Harzer Wandernadel · ${n} Stempel`, url: "https://www.harzer-wandernadel.de/" });
   const nb = Object.keys(done.tab).length;
   for (const [n, name] of SETS.tab.levels) if (nb >= n) out.push({ id: "tab:" + n, title: name + "-Nadel Bad Tabarz", sub: `Bad Tabarzer Wandernadel · ${n} Stempel`, url: SETS.tab.url });
-  if (Object.keys(done.sax).length >= 11) out.push({ id: "sax:11", title: "Wandernadel Sächsische Schweiz", sub: "Sächsische Schweiz Wanderpass · alle 11 Stempel", url: SETS.sax.url });
+  if (Object.keys(done.sax).length >= 25) out.push({ id: "sax:11", title: "Wandernadel Sächsische Schweiz", sub: "Urlaubsmagie-Wanderpass · alle 25 Stempel", url: SETS.sax.url });
   for (const st of ["bro", "wip", "nhv", "kne", "swv"]) for (const [n, name] of SETS[st].levels) if (Object.keys(done[st]).length >= n) out.push({ id: st + ":" + n, title: name + (st === "bro" ? " Brotterode" : ""), sub: `${SETS[st].title} · ${n} Stempel`, url: SETS[st].url });
   const nt = Object.keys(done.tou).length;
   for (const [n, name] of SETS.tou.levels) if (nt >= n) out.push({ id: "tou:" + n, title: "Abzeichen " + name, sub: `Touringen · ${n === 430 ? "alle 430" : n} Stempel`, url: SETS.tou.pinsUrl });
@@ -6673,6 +7070,93 @@ function shareStory(pin){
   const url = storyImage(pin), text = `🎉 ${pin.title} geschafft! #Stempeljagd #Wandern`;
   if (hasNative("shareImage")) { NATIVE.shareImage(url, text); return; }
   const a = document.createElement("a"); a.href = url; a.download = "stempelpass-" + pin.id.replace(/[^a-z0-9]/gi, "-") + ".png"; document.body.appendChild(a); a.click(); a.remove();
+}
+/* ---------- 📅 Jahresrückblick: dein Wanderjahr zum Teilen ---------- */
+const reviewYear = () => { const d = new Date(); return d.getMonth() === 0 ? d.getFullYear() - 1 : d.getFullYear(); };
+function yearStats(Y){
+  const pre = String(Y), days = {}, per = {}; let n = 0, high = null;
+  for (const st of SET_KEYS) for (const [k, v] of Object.entries(done[st] || {})) {
+    if (typeof v !== "string" || !v.startsWith(pre)) continue;
+    n++; days[v] = (days[v] || 0) + 1;
+    const reg = REGION[st] || st; per[reg] = (per[reg] || 0) + 1;
+    if (st === "hwn") { const s = byKey.hwn.get(k), e = s && stampEle("hwn", s); if (e && (!high || e > high.e)) high = { e, name: s.name }; }
+  }
+  const hk = hikes.filter(h => new Date(h.start).getFullYear() === Y);
+  const km = hk.reduce((a, h) => a + (h.km || 0), 0), up = hk.reduce((a, h) => a + (h.up || 0), 0);
+  const hd = {}; hk.forEach(h => { const d = isoDay(h.start); hd[d] = (hd[d] || 0) + (h.km || 0); });
+  const best = Object.entries(days).sort((a, b) => b[1] - a[1])[0];
+  const longest = Object.entries(hd).sort((a, b) => b[1] - a[1])[0];
+  const fav = Object.entries(per).sort((a, b) => b[1] - a[1])[0];
+  const regName = r => { const x = REGIONS.find(q => q[0] === r); return x ? (r === "sax" ? "Sächsische Schweiz" : x[1]) : r; };
+  const lv = hwnLevels().filter(([x]) => Object.keys(done.hwn).length >= x).pop();
+  const months = Array.from({ length: 12 }, (_, m) => Object.entries(days).filter(([d]) => +d.slice(5, 7) === m + 1).reduce((a, [, c]) => a + c, 0));
+  return { Y, n, days: new Set([...Object.keys(days), ...Object.keys(hd)]).size, km, up, hikes: hk.length, best, longest, fav: fav ? [regName(fav[0]), fav[1]] : null, high, lv, months };
+}
+function openYearReview(){
+  const y = yearStats(reviewYear());
+  const mx = Math.max(1, ...y.months);
+  openSheet(`<div class="yr">
+    <button class="sv-x" id="sClose" aria-label="Schließen">✕</button>
+    <div class="yr-k">DEIN WANDERJAHR</div><div class="yr-y">${y.Y}</div>
+    ${y.n || y.km ? `<div class="yr-g">
+      <div><b>${y.n}</b><small>Stempel</small></div><div><b>${km1(y.km)}</b><small>Kilometer</small></div>
+      <div><b>${y.days}</b><small>Wandertage</small></div><div><b>${y.lv ? LV_ICON(y.lv[1]) : "🥾"}</b><small>${y.lv ? esc(y.lv[1]) + " erreicht" : y.hikes + " Wanderungen"}</small></div></div>
+    <div class="yr-m">${y.months.map((c, i) => `<i style="--h:${Math.round(c / mx * 100)}%" title="${c}"><span>${"JFMAMJJASOND"[i]}</span></i>`).join("")}</div>
+    <div class="yr-l">
+      ${y.fav ? `<div>🗺️ Lieblingsgebiet: <b>${esc(y.fav[0])}</b> · ${y.fav[1]} Stempel</div>` : ""}
+      ${y.best ? `<div>🔥 Stärkster Tag: <b>${y.best[1]} Stempel</b> am ${fmtDate(y.best[0]).slice(0, 6)}</div>` : ""}
+      ${y.longest ? `<div>🥾 Längste Wanderung: <b>${km1(y.longest[1])} km</b> am ${fmtDate(y.longest[0]).slice(0, 6)}</div>` : ""}
+      ${y.high ? `<div>⛰️ Höchster Stempel: <b>${esc(y.high.name)}</b>, ${y.high.e} m</div>` : ""}
+      ${y.up ? `<div>📈 ${Math.round(y.up).toLocaleString("de-DE")} Höhenmeter bergauf</div>` : ""}
+    </div>
+    <button class="btn yr-share" id="yrShare">Als Bild teilen</button>` : `<p class="yr-empty">In ${y.Y} hast du noch keine Stempel gesammelt – raus in die Natur! 🌲</p>`}
+  </div>`);
+  bindClose();
+  const b = $("#yrShare"); if (b) b.onclick = () => { const url = yearImage(y), text = `Mein Wanderjahr ${y.Y}: ${y.n} Stempel${y.km ? ", " + km1(y.km) + " km" : ""} 🥾 #Stempeljagd`;
+    if (hasNative("shareImage")) { NATIVE.shareImage(url, text); return; }
+    const a = document.createElement("a"); a.href = url; a.download = `wanderjahr-${y.Y}.png`; document.body.appendChild(a); a.click(); a.remove(); };
+}
+function yearImage(y){
+  const W = 1080, H = 1920, c = document.createElement("canvas"); c.width = W; c.height = H; const g = c.getContext("2d");
+  const bg = g.createLinearGradient(0, 0, W * .6, H); bg.addColorStop(0, "#1d4a33"); bg.addColorStop(.6, "#0d2419"); bg.addColorStop(1, "#3a2a08"); g.fillStyle = bg; g.fillRect(0, 0, W, H);
+  g.textAlign = "center"; g.fillStyle = "#f3d98a"; g.font = "700 40px 'Source Sans 3', system-ui, sans-serif"; g.fillText("D E I N   W A N D E R J A H R", W / 2, 260);
+  g.font = "700 230px Bitter, Georgia, serif"; g.fillText(String(y.Y), W / 2, 480);
+  const tiles = [[y.n, "Stempel"], [km1(y.km), "Kilometer"], [y.days, "Wandertage"], [y.lv ? y.lv[1] : y.hikes, y.lv ? "erreicht" : "Wanderungen"]];
+  tiles.forEach(([v, l], i) => { const x = 90 + (i % 2) * 465, yy = 580 + Math.floor(i / 2) * 300;
+    g.fillStyle = "rgba(255,255,255,.09)"; g.beginPath(); g.roundRect ? g.roundRect(x, yy, 435, 270, 36) : g.rect(x, yy, 435, 270); g.fill();
+    g.fillStyle = "#fff"; g.font = `700 ${String(v).length > 6 ? 70 : 110}px Bitter, Georgia, serif`; g.fillText(String(v), x + 217, yy + 150);
+    g.fillStyle = "rgba(255,255,255,.7)"; g.font = "600 40px 'Source Sans 3', system-ui, sans-serif"; g.fillText(l, x + 217, yy + 220); });
+  const mx = Math.max(1, ...y.months); y.months.forEach((m, i) => { const h = Math.max(8, m / mx * 220), x = 110 + i * 74;
+    g.fillStyle = m ? "#f3d98a" : "rgba(255,255,255,.18)"; g.fillRect(x, 1440 - h, 46, h);
+    g.fillStyle = "rgba(255,255,255,.6)"; g.font = "600 30px system-ui"; g.fillText("JFMAMJJASOND"[i], x + 23, 1490); });
+  g.fillStyle = "#fff"; g.font = "600 42px 'Source Sans 3', system-ui, sans-serif";
+  const lines = [y.fav && `Lieblingsgebiet: ${y.fav[0]}`, y.high && `Höchster Stempel: ${y.high.name} (${y.high.e} m)`].filter(Boolean);
+  lines.forEach((t, i) => g.fillText(t, W / 2, 1600 + i * 64));
+  g.fillStyle = "rgba(243,247,242,.6)"; g.font = "600 36px 'Source Sans 3', system-ui, sans-serif"; g.fillText((username ? username.name + "  ·  " : "") + "Stempeljagd", W / 2, 1820);
+  return c.toDataURL("image/png");
+}
+/* ---------- 🖼️ Stempel-Pass als Bild: alle Stempel eines Hefts als Raster (Vorschau) ---------- */
+function passImage(set){
+  const list = stamps[set].filter(s => !isSonder(set) || heftActive(s.heft)), N = list.length, W = 1080;
+  const cols = N > 300 ? 20 : N > 150 ? 15 : N > 60 ? 10 : N > 24 ? 7 : 5, cell = Math.floor((W - 120) / cols), rows = Math.ceil(N / cols);
+  const H = 330 + rows * cell + 170, c = document.createElement("canvas"); c.width = W; c.height = H; const g = c.getContext("2d");
+  const bg = g.createLinearGradient(0, 0, 0, H); bg.addColorStop(0, "#1d4a33"); bg.addColorStop(1, "#0f2a1d"); g.fillStyle = bg; g.fillRect(0, 0, W, H);
+  g.strokeStyle = "rgba(242,193,78,.55)"; g.lineWidth = 4; g.strokeRect(24, 24, W - 48, H - 48); g.lineWidth = 1.5; g.strokeRect(36, 36, W - 72, H - 72);
+  const n = list.filter(s => isDone(set, s.k)).length, lv = set === "hwn" ? hwnLevels() : (SETS[set].levels || []), rc = lv.filter(([x]) => n >= x).pop();
+  g.textAlign = "center"; g.fillStyle = "#f2c14e"; g.font = "700 34px 'Source Sans 3', system-ui, sans-serif"; g.fillText("M E I N   S T E M P E L P A S S", W / 2, 110);
+  g.fillStyle = "#f3f7f2"; g.font = `700 ${SETS[set].title.length > 26 ? 50 : 62}px Bitter, Georgia, serif`; g.fillText(SETS[set].title, W / 2, 185);
+  g.fillStyle = "rgba(243,247,242,.75)"; g.font = "600 38px 'Source Sans 3', system-ui, sans-serif"; g.fillText(`${n} von ${N} gestempelt${rc ? "  ·  " + LV_ICON(rc[1]) + " " + rc[1] : ""}`, W / 2, 245);
+  const x0 = (W - cols * cell) / 2, y0 = 300, r = cell * 0.42;
+  list.forEach((s, i) => { const cx = x0 + (i % cols) * cell + cell / 2, cy = y0 + Math.floor(i / cols) * cell + cell / 2, d = isDone(set, s.k);
+    g.beginPath(); g.arc(cx, cy, r, 0, Math.PI * 2);
+    if (d) { const m = methodOf(set, s.k); g.fillStyle = m === "code" ? "#5b7fe0" : m === "digital" ? "#2bb3c0" : "#3fbf6e"; g.fill(); g.strokeStyle = "#f2c14e"; g.lineWidth = Math.max(2, cell * .05); g.stroke(); }
+    else { g.strokeStyle = "rgba(243,247,242,.22)"; g.lineWidth = Math.max(1.5, cell * .03); g.setLineDash([cell * .08, cell * .06]); g.stroke(); g.setLineDash([]); }
+    g.fillStyle = d ? "#fff" : "rgba(243,247,242,.35)"; g.font = `700 ${Math.round(r * (String(s.n).length > 2 ? .62 : .78))}px 'Source Sans 3', system-ui, sans-serif`; g.textBaseline = "middle";
+    g.fillText(isSonder(set) ? String(i + 1) : String(s.n), cx, cy + 1); g.textBaseline = "alphabetic"; });
+  const yb = y0 + rows * cell + 70;
+  g.fillStyle = "rgba(243,247,242,.7)"; g.font = "600 34px 'Source Sans 3', system-ui, sans-serif";
+  g.fillText((username ? username.name + "  ·  " : "") + new Date().toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" }) + "  ·  Stempeljagd", W / 2, yb);
+  return c.toDataURL("image/png");
 }
 /* ---------- 📝 Nadel-Antrag: fertige Stempelliste zum Kopieren, Teilen oder als PDF ---------- */
 let pinReqSet = "";
@@ -6869,7 +7353,7 @@ async function diaryHtml(withPhotos){
     .badges{color:#3d4a40;font-size:10pt}.foot{margin-top:10mm;color:#8a978d;font-size:8.5pt;text-align:center}
   </style></head><body>
     <h1>Wandertagebuch</h1><p class="sub">${esc(who)} · erstellt am ${fmtDate(today())}${entries.length ? ` · ${fmtDate(entries[0].d)} bis ${fmtDate(entries[entries.length - 1].d)}` : ""}</p>
-    <div class="sum"><div><b>${cnt("hwn")}/222</b>Harzer Wandernadel</div><div><b>${cnt("tou")}/430</b>Touringen</div><div><b>${cnt("hws") + cnt("tos")}</b>Sonderstempel</div>${cnt("tab") ? `<div><b>${cnt("tab")}/24</b>Bad Tabarz</div>` : ""}${cnt("sax") ? `<div><b>${cnt("sax")}/11</b>Sächs. Schweiz</div>` : ""}${VOR_SETS.map(st => cnt(st) ? `<div><b>${cnt(st)}/${stamps[st].length}</b>${esc(SETS[st].short)}</div>` : "").join("")}<div><b>${days.length}</b>Wandertage</div></div>
+    <div class="sum"><div><b>${cnt("hwn")}/222</b>Harzer Wandernadel</div><div><b>${cnt("tou")}/430</b>Touringen</div><div><b>${cnt("hws") + cnt("tos")}</b>Sonderstempel</div>${cnt("tab") ? `<div><b>${cnt("tab")}/24</b>Bad Tabarz</div>` : ""}${cnt("sax") ? `<div><b>${cnt("sax")}/25</b>Sächs. Schweiz</div>` : ""}${VOR_SETS.map(st => cnt(st) ? `<div><b>${cnt(st)}/${stamps[st].length}</b>${esc(SETS[st].short)}</div>` : "").join("")}<div><b>${days.length}</b>Wandertage</div></div>
     ${Object.keys(earned).length ? `<p class="badges"><b>Abzeichen:</b> ${BADGES.filter(b => earned[b[0]]).map(b => b[1] + " " + esc(b[2])).join(" · ")}</p>` : ""}
     ${body || "<p>Noch keine Stempel eingetragen.</p>"}
     <p class="foot">Erstellt mit Stempeljagd${MADE_BY ? " von " + esc(MADE_BY) : ""}</p></body></html>`;
@@ -7154,7 +7638,7 @@ function pinsOf(d){
   for (const [n, name] of SETS.tou.levels) if (nt >= n) out.push(name);
   const nb = Object.keys(d.tab || {}).length;
   for (const [n, name] of SETS.tab.levels) if (nb >= n) out.push(name + " Bad Tabarz");
-  if (Object.keys(d.sax || {}).length >= 11) out.push("Wandernadel Sächs. Schweiz");
+  if (Object.keys(d.sax || {}).length >= 25) out.push("Wandernadel Sächs. Schweiz");
   for (const st of ["bro", "wip", "nhv", "kne", "swv"]) for (const [n, name] of SETS[st].levels) if (Object.keys(d[st] || {}).length >= n) out.push(name + (st === "bro" ? " Brotterode" : ""));
   for (const { h } of fullHefte(d)) out.push(h.short);
   return out;
@@ -7391,7 +7875,7 @@ function profRingData(m, c, me){
     { id: "hwn", t: "Harz", long: "Harzer Wandernadel", n: m.hwn, total: 222, col: "var(--pc-hwn)", lv: me ? hwnLevels() : SETS.hwn.levels, show: true },
     { id: "tou", t: "Touringen", long: "Touringen", n: m.tou, total: 430, col: "var(--pc-tou)", lv: SETS.tou.levels, show: true },
     { id: "tab", t: "Tabarz", long: "Bad Tabarzer Wandernadel", n: m.tab || 0, total: 24, col: "var(--pc-tab)", lv: SETS.tab.levels, show: (m.tab || 0) > 0 || (me && shownRegions.includes("tab")) },
-    { id: "sax", t: "Sachsen", long: "Sächsische Schweiz", n: m.sax || 0, total: 11, col: "var(--pc-sax)", lv: SETS.sax.levels, show: (m.sax || 0) > 0 || (me && shownRegions.includes("sax")) },
+    { id: "sax", t: "Sachsen", long: "Sächsische Schweiz", n: m.sax || 0, total: 25, col: "var(--pc-sax)", lv: SETS.sax.levels, show: (m.sax || 0) > 0 || (me && shownRegions.includes("sax")) },
     ...[["bro", "Brotterode", "var(--pc-bro)"], ["nhv", "Nördl. Harzv.", "var(--pc-vor)"], ["dre", "Dreiländereck", "var(--pc-dre)"], ["wip", "Wippertal", "var(--pc-wip)"], ["kne", "Kneipp", "var(--pc-kne)"], ["swv", "Wilde Heimat", "var(--pc-swv)"]].map(([st, t, col]) => {
       const n = me ? Object.keys((profile === "p0" ? done : loadDone("p0"))[st] || {}).length : (c.stamps ? (c.stamps[st] || []).length : 0);
       return { id: st, t, long: SETS[st].title, n, total: stamps[st].length, col, lv: SETS[st].levels, show: n > 0 || (me && shownRegions.includes(st)) };
@@ -7431,7 +7915,7 @@ function profDetailHtml(r, me){
     <div class="pd-top"><b>${esc(r.long)}</b><span>${r.n}${r.total ? " / " + r.total : ""}</span></div>
     <div class="pd-bar"><i style="width:${Math.max(r.pct, r.n ? 2 : 0)}%;background:${r.col}"></i></div>
     ${lv ? `<div class="pd-lv">${lv}</div>` : ""}
-    ${near ? `<button class="pd-near" data-goto="${near.st}|${esc(near.s.k)}">Am nächsten offen: <b>${isSonder(near.st) ? "" : "Nr. " + esc(near.s.n) + " "}${esc(near.s.name)}</b> · ${fmtKm(near.d)} ›</button>` : ""}
+    ${near ? `<button class="pd-near" data-goto="${near.st}|${esc(near.s.k)}">Am nächsten offen: <b>${isSonder(near.st) ? "" : "Nr. " + esc(near.s.n) + " "}${esc(near.s.name)}</b> · ${wd(myPos, [near.s.lat, near.s.lon])} ›</button>` : ""}
   </div>`;
 }
 function bindProfRings(me){
@@ -7460,7 +7944,7 @@ function openProfileMap(c, name, back){
     <div class="pm-leg" style="margin-top:8px"><span><i class="pmdot" style="background:var(--pc-hwn)"></i>gestempelt</span><span><i class="pmdot" style="background:var(--muted);opacity:.5"></i>noch offen</span><span>🔍 reinzoomen für Namen</span></div>
     <div class="actions"><button class="btn quiet" id="pbBack2">Zurück</button></div>`);
   $("#pbBack").onclick = $("#pbBack2").onclick = () => { if (pmBig) { pmBig.remove(); pmBig = null; } back(); };
-  const b = BASES[baseId] || BASES.osm;
+  const b = curBase();
   const pm = pmBig = L.map($("#pmBig"), { zoomControl: true, attributionControl: false, preferCanvas: true });
   L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc" }).addTo(pm);
   if (b.labels) L.tileLayer(b.labels, { maxZoom: 19, maxNativeZoom: b.native }).addTo(pm);
@@ -7851,7 +8335,7 @@ function openStats(){
       <div class="stat"><b>${cnt("tos")}<small style="font-size:.9rem;color:var(--muted)"> / ${stamps.tos.length}</small></b><span>Touringen-Sondereditionen</span></div>
       <div class="stat"><b>${cnt("hws")}<small style="font-size:.9rem;color:var(--muted)"> / ${stamps.hws.length}</small></b><span>Harzer Sonderstempel${(n => n ? `, ${n} ${n === 1 ? "Themenheft" : "Themenhefte"} voll` : "")(HWS.hefts.filter(h => h.id !== "einzel" && stamps.hws.filter(x => x.heft === h.id).every(x => done.hws[x.k])).length)}</span></div>
       ${shownRegions.includes("tab") || cnt("tab") ? `<div class="stat"><b>${cnt("tab")}<small style="font-size:.9rem;color:var(--muted)"> / 24</small></b><span>Bad Tabarz${(l => l ? " · " + l[1] : "")(SETS.tab.levels.filter(([n]) => cnt("tab") >= n).pop())}</span></div>` : ""}
-      ${shownRegions.includes("sax") || cnt("sax") ? `<div class="stat"><b>${cnt("sax")}<small style="font-size:.9rem;color:var(--muted)"> / 11</small></b><span>Sächs. Schweiz${cnt("sax") >= 11 ? " · Nadel" : ""}</span></div>` : ""}
+      ${shownRegions.includes("sax") || cnt("sax") ? `<div class="stat"><b>${cnt("sax")}<small style="font-size:.9rem;color:var(--muted)"> / 25</small></b><span>Sächs. Schweiz${cnt("sax") >= 25 ? " · Nadel" : ""}</span></div>` : ""}
       ${VOR_SETS.filter(st => shownRegions.includes(st) || cnt(st)).map(st => `<div class="stat"><b>${cnt(st)}<small style="font-size:.9rem;color:var(--muted)"> / ${stamps[st].length}</small></b><span>${esc(SETS[st].short)}${(l => l ? " · " + esc(l[1]) : "")(SETS[st].levels.filter(([n]) => cnt(st) >= n).pop())}</span></div>`).join("")}
       <div class="stat"><b>${rDone}<small style="font-size:.9rem;color:var(--muted)"> / ${routes.tou.length}</small></b><span>Touringen-Routen komplett${rDone ? ` (${km1(rKm)} km)` : ""}, ${rStarted} angefangen</span></div>
       <div class="stat"><b>${ph}</b><span>Fotos</span></div>
@@ -8021,6 +8505,7 @@ function openMenu(){
     ${isAdmin ? `<div class="mstaff"><button id="mAdmin"><span>🛠️</span><b>Admin-Bereich</b><small>Nutzer, Statistik, Updates</small></button><button id="mMod"><span>🛡️</span>${inboxCount ? `<i class="mdot">${inboxCount}</i>` : ""}<b>Moderation</b><small>Kommentare, Positionen, Meldungen</small></button></div>`
       : isMod ? `<div class="mstaff"><button id="mMod" class="wide"><span>🛡️</span>${inboxCount ? `<i class="mdot">${inboxCount}</i>` : ""}<b>Moderator-Bereich</b><small>Kommentare, Positionen, Meldungen</small></button></div>` : ""}
     ${needPw ? `<button class="mwarn" id="mPw2">🔑 <span><b>Passwort festlegen</b><small>Ohne Passwort ist dein Konto nach einer Neuinstallation weg.</small></span></button>` : ""}
+    <button class="myear" id="mYear"><span>📅</span><span><b>Dein Wanderjahr ${reviewYear()}</b><small>Stempel, Kilometer & Highlights – zum Teilen</small></span><span class="mr-go">›</span></button>
     <div class="mtiles">
       <button id="mOverview"><span>▦</span>Übersicht</button>
       <button id="mStats"><span>🏅</span>Statistik${pins ? '<i class="mdot">' + pins + '</i>' : ""}</button>
@@ -8038,6 +8523,7 @@ function openMenu(){
         <span class="seg mseg" id="mTheme"><button data-v="auto" class="${themePref === "auto" ? "on" : ""}">Auto</button><button data-v="light" class="${themePref === "light" ? "on" : ""}">☀️</button><button data-v="dark" class="${themePref === "dark" ? "on" : ""}">🌙</button></span></div>
       ${hasBg() ? menuRow("mAlerts", "🔔", "Stempel-Alarm", nearAlerts ? "an" + (autoStamp ? " · automatisch digital stempeln" : "") : "aus") : ""}
       ${fb.ready() && username ? menuRow("mLoc", "📍", "Standort mit Freunden", shareLoc ? "wird geteilt – antippen zum Beenden" : "aus") : ""}
+      ${HDR_USER && layout === "ring" ? menuRow("mHdr", "🧩", "Kopfzeile", [hdrOpt("near") ? "Nächster Stempel" : "", hdrOpt("bars") ? "Heft-Balken" : ""].filter(Boolean).join(" · ") || "schlicht") : ""}
       ${menuRow("mProfiles", "👥", "Stempelhefte (Personen)", `aktuell: ${esc(profileName())}${profiles.length > 1 ? ` · ${profiles.length} Hefte` : ""}`)}
       ${fb.ready() && username && username.reserved ? menuRow("mPw", "🔑", username.hasPw ? "Passwort ändern" : "Passwort festlegen", "") : ""}
       ${fb.ready() && username && username.reserved ? menuRow("mLogout", "🚪", "Abmelden", "anderes Konto nutzen oder Handy weitergeben") : ""}
@@ -8054,6 +8540,7 @@ function openMenu(){
   $("#mTheme").onclick = e => { e.stopPropagation(); const v = e.target.dataset.v; if (!v) return; $("#mTheme").querySelectorAll("button").forEach(b => b.classList.toggle("on", b === e.target)); setTheme(v); };
   $("#mProfile").onclick = openMyProfile;
   $("#mOverview").onclick = openOverview;
+  $("#mYear").onclick = openYearReview;
   $("#mStats").onclick = openStats;
   $("#mWatch").onclick = openWatchlist;
   $("#mHikes").onclick = openHikes;
@@ -8066,6 +8553,7 @@ function openMenu(){
     shareText("Stempeljagd", t);
   };
   $("#mProfiles").onclick = openProfiles;
+  { const mh = $("#mHdr"); if (mh) mh.onclick = openHdrPrefs; }
   $("#mBackup").onclick = openBackupMenu;
   $("#mDefects").onclick = openDefectsMenu;
   $("#mAbout").onclick = openAboutMenu;
@@ -8174,6 +8662,7 @@ function startLocate(quiet){
   let first = true;
   watchId = navigator.geolocation.watchPosition(p => {
     myPos = [p.coords.latitude, p.coords.longitude]; myPosTs = Date.now(); myAcc = p.coords.accuracy || 9999;
+    if (Date.now() - nearChipT > 15000) { nearChipT = Date.now(); updateNearChip(); }
     myHead = p.coords.heading != null && !isNaN(p.coords.heading) ? p.coords.heading : null; mySpeed = p.coords.speed || 0; myAlt = p.coords.altitude != null && !isNaN(p.coords.altitude) ? p.coords.altitude : null;
     if (!meMarker) meMarker = L.circleMarker(myPos, { radius: 8, color: "#fff", weight: 3, fillColor: css("--me"), fillOpacity: 1 }).addTo(map);
     else meMarker.setLatLng(myPos);
@@ -8221,6 +8710,50 @@ async function routeFootFull(from, to){
   return { pts: r.geometry.coordinates.map(([lo, la]) => [la, lo]), steps: (r.legs || []).flatMap(l => l.steps || []) };
 }
 async function routeFoot(from, to){ return (await routeFootFull(from, to)).pts; }
+/* ---------- 🥾 Entfernungen immer über Wanderwege (OSRM-Fuß-Tabelle), nicht Luftlinie – mit Zwischenspeicher ---------- */
+const wkCache = new Map();                 // Schlüssel -> { km } oder { km: null, fail: ts }
+const wkQueue = new Map(); let wkTimer = 0;
+const wkKey = (a, b) => (+a[0]).toFixed(3) + "," + (+a[1]).toFixed(3) + ">" + (+b[0]).toFixed(4) + "," + (+b[1]).toFixed(4);
+const WALK_MAX = 30;                       // weiter weg: nur grob schätzen
+function walkKm(from, to){                 // Wert sofort (falls bekannt) und im Hintergrund nachladen
+  if (!from || !to) return null;
+  const k = wkKey(from, to), c = wkCache.get(k);
+  if (c && c.km != null) return c.km;
+  if (distKm(from, to) > WALK_MAX) return null;
+  if (!c || (c.fail && Date.now() - c.fail > 120000)) { if (!wkQueue.has(k)) wkQueue.set(k, { from, to }); clearTimeout(wkTimer); wkTimer = setTimeout(flushWalk, 200); }
+  return null;
+}
+async function flushWalk(){
+  const items = [...wkQueue.values()]; wkQueue.clear();
+  const groups = {};
+  for (const it of items) { const fk = (+it.from[0]).toFixed(3) + "," + (+it.from[1]).toFixed(3); (groups[fk] = groups[fk] || { from: it.from, to: [] }).to.push(it.to); }
+  for (const g of Object.values(groups)) for (let i = 0; i < g.to.length; i += 50) {
+    const part = g.to.slice(i, i + 50);
+    try {
+      const co = [g.from, ...part].map(p => (+p[1]).toFixed(5) + "," + (+p[0]).toFixed(5)).join(";");
+      const jj = await getJson(`https://routing.openstreetmap.de/routed-foot/table/v1/foot/${co}?sources=0&annotations=distance`);
+      const row = jj && jj.distances && jj.distances[0];
+      if (!row) throw new Error("leer");
+      part.forEach((t, x) => { const d = row[x + 1]; wkCache.set(wkKey(g.from, t), d != null ? { km: d / 1000 } : { km: null, fail: Date.now() }); });
+    } catch(e) { part.forEach(t => wkCache.set(wkKey(g.from, t), { km: null, fail: Date.now() })); }
+  }
+  document.querySelectorAll(".wd[data-wd]").forEach(el => { const c = wkCache.get(el.dataset.wd); if (c) el.innerHTML = wdText(c, +el.dataset.air, el.dataset.mode); });
+  if (typeof updateNearChip === "function") updateNearChip();
+  if (view === "list" && sortBy === "dist" && !document.querySelector("#sheet:not([hidden])")) { clearTimeout(flushWalk._r); flushWalk._r = setTimeout(renderList, 300); }
+}
+const walkMin = km => Math.max(1, Math.round(km / 4 * 60));          // DIN: 4 km/h
+const fmtMin = m => m < 60 ? m + " min" : km1(m / 60) + " h";
+function wdText(c, air, mode){
+  const km = c && c.km != null ? c.km : null, est = air * 1.35;
+  if (mode === "min") return km != null ? fmtMin(walkMin(km)) : c && c.fail || air > WALK_MAX ? "ca. " + fmtMin(walkMin(est)) : "…";
+  return km != null ? fmtKm(km) : c && c.fail || air > WALK_MAX ? "ca. " + fmtKm(est) : "…";
+}
+/* HTML-Baustein: Weg-Entfernung (füllt sich selbst, sobald die Route berechnet ist) */
+function wd(from, to, mode){
+  if (!from || !to) return "";
+  const air = distKm(from, to), k = wkKey(from, to); walkKm(from, to);
+  return `<span class="wd" data-wd="${k}" data-air="${air.toFixed(4)}"${mode ? ` data-mode="${mode}"` : ""}>${wdText(wkCache.get(k), air, mode)}</span>`;
+}
 function waitForPos(ms){
   return new Promise(res => {
     if (myPos && Date.now() - myPosTs < 120000) return res(true);
@@ -8308,6 +8841,7 @@ async function startNav(set, k, queue){
 /* Zu einem beliebigen Punkt führen (z. B. zurück zum Ausgangspunkt) */
 async function startNavTo(p, name){
   closeSheet(); setView("map"); startLocate(true);
+  if (!/^Zurück/.test(name)) setTimeout(() => offlineHint(p, name.replace(/^Start: /, "")), 1500);
   if (!(await waitForPos(20000))) { toast("Standort nicht gefunden – bitte GPS einschalten"); return; }
   nav = { set: null, k: null, home: true, name, sayName: name, target: p.slice(), follow: true, lastRoute: 0,
     queue: [], ms: {}, off: 0, arrived: false, up: null, eco: load("sp.navEco", false) && hasNative("navBg"), kmh: 0, backWarned: true };
@@ -8858,6 +9392,15 @@ function applyTheme(){
   document.documentElement.dataset.theme = t;
   const mc = document.querySelector('meta[name="theme-color"]'); if (mc) mc.content = t === "dark" ? "#16382a" : "#1d4a33";
   bgKey = ""; drawMarkers(false); if (activeRoute) showRoute(activeRoute, false);
+  if (typeof applyDarkMap === "function") applyDarkMap();
+}
+/* ---------- 🌙 Dunkle Karte (wie bei Google Maps): Kacheln invertiert, Wasser bleibt blau, Wald grün ---------- */
+function applyDarkMap(){
+  const on = darkMap === "on" || (darkMap === "auto" && document.documentElement.dataset.theme === "dark");
+  const was = document.body.classList.contains("map-dark");
+  document.body.classList.toggle("map-dark", on);
+  if (was !== on && typeof map !== "undefined") { setBase(baseId); rovKey = ""; if (rovMap && rovMap._base) { rovMap.removeLayer(rovMap._base); const b = curBase(); rovMap._base = L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc" }).addTo(rovMap); } if (view === "routes") renderRoutes(); }
+  const b = document.querySelector(".lc-dark"); if (b) { b.classList.toggle("on", on); b.textContent = "🌙 Dunkle Karte: " + ({ auto: "Auto", on: "An", off: "Aus" })[darkMap]; }
 }
 function setTheme(t){ themePref = t; save("sp.theme", t); applyTheme(); toast(t === "auto" ? "Darstellung wie am Handy" : t === "dark" ? "Dunkler Modus an" : "Heller Modus an"); }
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", e => { document.documentElement.dataset.sysTheme = e.matches ? "dark" : "light"; if (themePref === "auto") applyTheme(); });
@@ -8967,7 +9510,7 @@ async function openAreaList(){
   openSheet(`<div class="kicker">🗺️ In der Nähe · 3 km</div><h2>${gs.reduce((a, x) => a + x.l.length, 0)} offene Stempel</h2>
     ${gs.length ? gs.map((x, i) => `<h3>${esc(x.title)} <small class="pcount">${x.l.length}${x.shown ? "" : " · ausgeblendet"}</small></h3>
       ${x.shown ? "" : `<div class="actions" style="margin-top:-2px"><button class="btn" data-arshow="${i}">📘 Heft einblenden</button></div>`}
-      <ul class="slist">${x.l.slice(0, 6).map(({ s, d }) => `<li><button data-argo="${esc(x.set + "|" + s.k)}"><span class="dot"></span><span class="t">${isSonder(x.set) ? "" : "Nr. " + esc(String(s.n)) + " "}${esc(s.name)}<small>${fmtKm(d)} entfernt</small></span></button></li>`).join("")}</ul>`).join("") : '<p class="hint">Gerade keine offenen Stempel in der Nähe.</p>'}
+      <ul class="slist">${x.l.slice(0, 6).map(({ s, d }) => `<li><button data-argo="${esc(x.set + "|" + s.k)}"><span class="dot"></span><span class="t">${isSonder(x.set) ? "" : "Nr. " + esc(String(s.n)) + " "}${esc(s.name)}<small>${myPos ? wd(myPos, [s.lat, s.lon]) : fmtKm(d)} entfernt</small></span></button></li>`).join("")}</ul>`).join("") : '<p class="hint">Gerade keine offenen Stempel in der Nähe.</p>'}
     <div class="actions"><button class="btn quiet" id="sClose">Schließen</button></div>`);
   $("#sheet").querySelectorAll("[data-argo]").forEach(b => b.onclick = () => { const [st, k] = b.dataset.argo.split("|"); openStampIn(st, k); });
   $("#sheet").querySelectorAll("[data-arshow]").forEach(b => b.onclick = () => { const x = gs[+b.dataset.arshow]; setShownRegions(REGIONS.map(r => r[0]).filter(r => r === REGION[x.set] || shownRegions.includes(r))); switchSet(x.set); closeSheet(); toast(`${SETS[x.set].short} eingeblendet`); });
@@ -9053,6 +9596,23 @@ function pollTrack(){
   }
   renderTrackChip();
   pushWalk(true);
+  stampProximity();
+}
+/* 🔊 Beim Aufzeichnen: Ansage, wenn ein offener Stempel näher kommt (nur ohne laufende Navigation – die sagt selbst an) */
+const proxSaid = {};
+function stampProximity(){
+  if (!trk || nav || !navVoice || !canSpeak()) return;
+  const last = trk.pts && trk.pts[trk.pts.length - 1];
+  const pos = myPos && Date.now() - myPosTs < 30000 ? myPos : last ? [last[0], last[1]] : null; if (!pos) return;
+  let best = null;
+  for (const st of [current, ...extraList()]) for (const s of stamps[st]) {
+    if (!hasPos(s) || isDone(st, s.k) || isBroken(st, s.k)) continue;
+    const d = distKm(pos, [s.lat, s.lon]); if (d < 0.32 && (!best || d < best.d)) best = { st, s, d };
+  }
+  if (!best) return;
+  const key = best.st + "_" + best.s.k, st = proxSaid[key] || 0, nm = (isSonder(best.st) ? "" : "Nummer " + best.s.n + ", ") + best.s.name;
+  if (best.d <= 0.05 && st < 2) { proxSaid[key] = 2; say(`Du bist am Stempel ${nm}. Nicht vergessen zu stempeln!`); vibrate(120); setTimeout(() => vibrate(120), 260); }
+  else if (best.d <= 0.25 && best.d > 0.08 && st < 1) { proxSaid[key] = 1; say(`Noch ${Math.round(best.d * 20) * 50} Meter bis Stempel ${nm}.`); }
 }
 /* 🎒 Beim Start einer Wanderung: Welche Hefte haben offene Stempel in der Nähe? */
 function heftReminder(pos){
@@ -9088,8 +9648,10 @@ function startTrack(){
     startLocate(true);
     toast("Aufzeichnung läuft, solange die App offen ist");
   }
-  save("sp.trackOn", { start: trk.start, web: trk.web });
+  if (myPos && Date.now() - myPosTs < 600000) trk.home = myPos.slice();
+  save("sp.trackOn", { start: trk.start, web: trk.web, home: trk.home || null });
   trk.timer = setInterval(pollTrack, 4000);
+  setTimeout(() => offlineHint(myPos, "deine Wanderung"), 2500);
   setTimeout(() => pushWalk(true, true), 8000);
   renderTrackChip();
 }
@@ -9105,8 +9667,10 @@ function openTrackSheet(){
   openSheet(`<div class="kicker">Aufzeichnung läuft</div><h2>🥾 ${km1(km)} km · ${fmtDur(Date.now() - trk.start)}</h2>
     <p>${trk.web ? "Die Aufzeichnung läuft, solange die App geöffnet ist." : "Die Aufzeichnung läuft weiter, auch wenn du das Handy wegsteckst – oben siehst du die Benachrichtigung."}</p>
     ${fb.ready() && username && username.code ? `<label class="checkline"><input type="checkbox" id="tkShare" ${walkShareOn() ? "checked" : ""}><span>🟢 Freunde sehen, dass ich unterwegs bin<small>mit Kilometern und ungefährem Standort</small></span></label>` : ""}
+    ${trackHome() ? `<button class="btn tkhome" id="tkHome">🚗 Zurück zum Start<small>${myPos ? wd(myPos, trackHome()) + " Weg · " : ""}führt dich zum Startpunkt der Wanderung</small></button>` : ""}
     <div class="actions"><button class="btn primary" id="tkStop">Wanderung beenden und speichern</button><button class="btn warn" id="tkDrop">Verwerfen …</button><button class="btn quiet" id="sClose">Weiter aufzeichnen</button></div>`);
   $("#tkStop").onclick = () => { closeSheet(); finishTrack(false); };
+  { const th = $("#tkHome"); if (th) th.onclick = () => startNavTo(trackHome(), "Zurück zum Start"); }
   { const sh = $("#tkShare"); if (sh) sh.onchange = () => { save("sp.walkShare", sh.checked); if (sh.checked) pushWalk(true, true); else pushWalk(false, true); toast(sh.checked ? "Freunde sehen jetzt, dass du unterwegs bist" : "Nicht mehr sichtbar für Freunde"); }; }
   $("#tkDrop").onclick = () => {
     const b = $("#tkDrop");
@@ -9114,6 +9678,12 @@ function openTrackSheet(){
     closeSheet(); endTrackNative(); trk = null; save("sp.trackOn", null); trackLayer.clearLayers(); renderTrackChip(); pushWalk(false, true); toast("Aufzeichnung verworfen");
   };
   bindClose();
+}
+function trackHome(){
+  if (!trk) return null;
+  if (trk.home) return trk.home;
+  const p = trk.pts && trk.pts[0]; if (p) { trk.home = [p[0], p[1]]; const o = load("sp.trackOn", null); if (o) { o.home = trk.home; save("sp.trackOn", o); } return trk.home; }
+  return null;
 }
 function endTrackNative(){
   if (trk && trk.timer) clearInterval(trk.timer);

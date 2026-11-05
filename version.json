@@ -1,6 +1,6 @@
 {
- "code": 95,
- "version": "0.9.55 Beta",
- "notes": "Neues Design: Symbole bei Routen und Stempeln, Menü mit „In der Nähe“ und „Freunde einladen“, schönere Freunde-Seite, Kopf klappt beim Scrollen in der Liste ein.",
+ "code": 96,
+ "version": "0.9.56 Beta",
+ "notes": "Neu: Stempel-Knall beim Abhaken, Öffnungszeiten der Stempelstellen, Jahresrückblick, dunkle Karte mit Wanderwegen, Entfernungen über Wanderwege statt Luftlinie, Touren-Karte und Mini-Karten, neuer Kopf mit Medaille, Zurück zum Start, Offline-Hinweis, Sprachansage beim Aufzeichnen, Sächsische Schweiz mit 25 Touren und vieles mehr.",
  "apk": "Stempelpass.apk"
 }
