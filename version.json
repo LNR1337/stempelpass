@@ -1,6 +1,6 @@
 {
- "code": 96,
- "version": "0.9.56 Beta",
- "notes": "Neu: Stempel-Knall beim Abhaken, Öffnungszeiten der Stempelstellen, Jahresrückblick, dunkle Karte mit Wanderwegen, Entfernungen über Wanderwege statt Luftlinie, Touren-Karte und Mini-Karten, neuer Kopf mit Medaille, Zurück zum Start, Offline-Hinweis, Sprachansage beim Aufzeichnen, Sächsische Schweiz mit 25 Touren und vieles mehr.",
+ "code": 97,
+ "version": "0.9.57 Beta",
+ "notes": "Nach Updates suchen (Menü → Über), Update-Suche beim Zurückholen der App, Touren-Karte rutscht nicht mehr über die Suche, Ring wird bei 100 % ganz grün.",
  "apk": "Stempelpass.apk"
 }

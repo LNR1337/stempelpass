@@ -964,7 +964,7 @@ body.compact-hdr header .nchip{display:none}
 .hefts.bars button[data-pick]::after{content:"";display:block;width:100%;min-width:70px;height:4px;border-radius:2px;background:linear-gradient(90deg,#f2c14e var(--hp,0%),rgba(255,255,255,.18) 0)}
 .hefts.bars button.on[data-pick]::after{background:linear-gradient(90deg,var(--forest) var(--hp,0%),rgba(0,0,0,.15) 0)}
 .hefts.bars .hsel,.hefts.bars .x2on{align-self:stretch;justify-content:center}
-.rovw{position:relative;height:190px;border-radius:18px;overflow:hidden;border:1px solid var(--line);margin:12px 16px 12px;box-shadow:0 2px 10px rgba(0,0,0,.06);background:var(--bg)}
+.rovw{position:relative;z-index:0;isolation:isolate;height:190px;border-radius:18px;overflow:hidden;border:1px solid var(--line);margin:12px 16px 12px;box-shadow:0 2px 10px rgba(0,0,0,.06);background:var(--bg)}
 .rovw[hidden]{display:none}#rOvMap{position:absolute;inset:0}
 .rov-big{position:absolute;top:10px;right:10px;z-index:500;border:0;border-radius:99px;padding:6px 11px;font:700 .78rem var(--body);background:color-mix(in srgb,var(--surface) 92%,transparent);color:var(--fg);box-shadow:0 1px 6px rgba(0,0,0,.18)}
 .rov-hint{position:absolute;left:10px;bottom:10px;z-index:500;border-radius:99px;padding:4px 10px;font:600 .74rem var(--body);background:color-mix(in srgb,var(--surface) 90%,transparent);color:var(--muted);pointer-events:none}
@@ -994,6 +994,7 @@ body.map-dark .rthumb image{filter:invert(1) hue-rotate(180deg) brightness(1) co
 body.map-dark .leaflet-container{background:#1b2420}
 .btn.tkhome{display:flex;flex-direction:column;align-items:center;gap:2px;margin:4px 0 12px;border-color:color-mix(in srgb,var(--forest) 40%,var(--line));font-weight:700}.btn.tkhome small{font-weight:500;font-size:.75rem;color:var(--muted)}
 .wd{font-variant-numeric:tabular-nums}
+#rRing[data-full="1"]{background:conic-gradient(#3fbf6e 0 100%)!important;box-shadow:0 0 18px rgba(63,191,110,.45)}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
@@ -2084,8 +2085,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.56 Beta";
-const APP_CODE = 96;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.57 Beta";
+const APP_CODE = 97;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -3104,6 +3105,7 @@ function renderProgress(){
   renderHefts();
   /* Kopfzeile „Kompakt mit Ring“ */
   $("#rRing").style.setProperty("--p", total ? Math.round(count / total * 100) : 0);
+  $("#rRing").dataset.full = total && count >= total ? "1" : "";
   $("#rNum").textContent = count;
   const rl = REGIONS.find(x => x[0] === REGION[current]);
   $("#rRegName").textContent = rl ? (rl[0] === "sax" ? "Sächsische Schweiz" : rl[1]) : SETS[current].short;
@@ -5222,7 +5224,7 @@ async function checkUpdate(){
 async function ghLatest(repo){
   /* 1) version.json im Repo (lädt Claude direkt hoch), 2) sonst das neueste Release */
   try {
-    const v = await getJson(`https://raw.githubusercontent.com/${repo}/main/version.json?t=${Math.floor(Date.now() / 300000)}`);
+    const v = await getJson(`https://raw.githubusercontent.com/${repo}/main/version.json?t=${checkUpdate._fresh ? Date.now() : Math.floor(Date.now() / 300000)}`);
     if (v && v.code > 0) return { code: +v.code, version: v.version || String(v.code), url: `https://raw.githubusercontent.com/${repo}/main/${v.apk || "Stempelpass.apk"}`, notes: String(v.notes || "").slice(0, 80) };
   } catch(e) {}
   const r = await getJson(`https://api.github.com/repos/${repo}/releases/latest`);
@@ -8646,11 +8648,21 @@ function openAboutMenu(){
   openSheet(`${subHead("Info", "ℹ️ Über Stempeljagd")}
     <div class="about"><b>Stempeljagd ${APP_VERSION}</b>${MADE_BY ? `<span>Hergestellt von ${esc(MADE_BY)}</span>` : ""}
       <a class="ig" href="https://www.instagram.com/tino_b8/" target="_blank" rel="noopener"><span class="ig-at">@</span>Tino_b8 auf Instagram</a></div>
+    ${NATIVE ? `<div class="actions" style="margin-top:12px"><button class="btn primary" id="mUpd">🔄 Nach Updates suchen</button></div><p class="hint" id="mUpdMsg" style="margin-top:6px"></p>` : ""}
     ${a ? `<h3>Dein Konto</h3><div class="notice facts"><b>Benutzername:</b> ${esc(username ? username.name : "noch keiner")} <small style="margin:0">(ändern kann ihn nur ein Admin)</small><br><b>Nutzer-ID:</b> <span id="myUid" style="font-family:ui-monospace,monospace;font-size:.85rem;overflow-wrap:anywhere">${esc(a.uid)}</span>${isAdmin ? "<br><b>Rang:</b> 👑 Admin" : isMod ? "<br><b>Rang:</b> 🛡️ Moderator" : ""}</div>
       <div class="actions"><button class="btn" id="mUid">Nutzer-ID kopieren</button></div>` : ""}
     <h3>Daten</h3>
     <p>Stempelstellen und Routen aus den offiziellen GPX-Dateien. Karte © OpenStreetMap-Mitwirkende. Wetter und Höhen: Open-Meteo.com. Wegberechnung: FOSSGIS-Routing (OSRM, OpenStreetMap). Stempeljagd ist eine private App und gehört nicht zur Harzer Wandernadel oder zu Touringen.</p>`);
   $("#mBack").onclick = openMenu;
+  { const ub = $("#mUpd"); if (ub) ub.onclick = async () => {
+      const msg = $("#mUpdMsg"); ub.disabled = true; ub.textContent = "🔄 Suche …"; msg.textContent = "";
+      checkUpdate._fresh = true; checkUpdate._t = Date.now();
+      try { await checkUpdate(); } catch(e) {}
+      checkUpdate._fresh = false; ub.disabled = false; ub.textContent = "🔄 Nach Updates suchen";
+      if (!fb.ready()) { msg.textContent = "Update-Suche geht nur mit Internet."; return; }
+      if (updInfo && updInfo.code > APP_CODE) { save("sp.updSkip", 0); showUpdate(); msg.innerHTML = `<b style="color:var(--done)">Neue Version ${esc(updInfo.version || String(updInfo.code))} verfügbar!</b> Oben erscheint der Hinweis zum Installieren.`; }
+      else msg.textContent = `✅ Du hast die neueste Version (${APP_VERSION}).`;
+    }; }
   const mu = $("#mUid"); if (mu) mu.onclick = () => { const t = $("#myUid").textContent; try { navigator.clipboard.writeText(t).then(() => toast("Nutzer-ID kopiert"), () => toast(t)); } catch(e) { toast(t); } };
 }
 
@@ -9234,7 +9246,7 @@ $("#locPill").onclick = () => {
   bindClose();
 };
 window.__openPending = () => { if (!hasNative("pendingOpen")) return; let v = ""; try { v = NATIVE.pendingOpen(); } catch(e) {} if (v === "area") { openAreaList(); return; } if (v && v.includes("|")) { const [st, k] = v.split("|"); if (byKey[st] && byKey[st].get(k)) { setView("map"); openStampIn(st, k); } } };
-document.addEventListener("visibilitychange", () => { if (!document.hidden) { pushSeen(true); syncBg(); takeAutoStamps(); window.__openPending(); if (trk) pollTrack(); if (shareLoc) { startLocate(true); pushLoc(true); } } });
+document.addEventListener("visibilitychange", () => { if (!document.hidden) { if (fb.ready() && Date.now() - (checkUpdate._t || 0) > 10 * 60000) { checkUpdate._t = Date.now(); checkUpdate().catch(() => {}); } pushSeen(true); syncBg(); takeAutoStamps(); window.__openPending(); if (trk) pollTrack(); if (shareLoc) { startLocate(true); pushLoc(true); } } });
 
 /* Standorte der Freunde auf der Karte */
 const locLayer = L.layerGroup().addTo(map);
