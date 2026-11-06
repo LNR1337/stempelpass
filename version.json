@@ -1,6 +1,6 @@
 {
- "code": 103,
- "version": "0.9.63 Beta",
- "notes": "Karten-Menü aufgeräumt: Dunkle Karte direkt unter Kartenart, Menü scrollt richtig, Fortschritts-Karte und Stil-Auswahl entfernt.",
+ "code": 104,
+ "version": "0.9.64 Beta",
+ "notes": "Neue untere Leiste: Avatar öffnet das Menü (Stil A/D/E, Admin wählbar, Standard E). Standort-Knopf schwebt jetzt auf der Karte über dem Copyright.",
  "apk": "Stempelpass.apk"
 }

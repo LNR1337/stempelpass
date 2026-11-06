@@ -1124,11 +1124,25 @@ nav.bottom .nseg button span{display:none;white-space:nowrap;overflow:hidden}
 nav.bottom .nseg button.on{flex-grow:2.2;background:var(--forest);color:var(--forest-fg);box-shadow:0 3px 10px color-mix(in srgb,var(--forest) 40%,transparent)}
 nav.bottom .nseg button.on span{display:inline}
 nav.bottom svg{width:21px;height:21px;flex:none}
-nav.bottom #locBtn{flex:0 0 46px;height:46px;border:1px solid var(--line);background:transparent;border-radius:14px;display:grid;place-items:center;padding:0;color:var(--forest)}
-nav.bottom #locBtn svg{width:22px;height:22px}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) nav.bottom .nseg button.on{background:color-mix(in srgb,var(--done) 30%,var(--surface));color:#fff}:root:not([data-theme="light"]) nav.bottom #locBtn{color:var(--done)}}
-:root[data-theme="dark"] nav.bottom .nseg button.on{background:color-mix(in srgb,var(--done) 30%,var(--surface));color:#fff}:root[data-theme="dark"] nav.bottom #locBtn{color:var(--done)}
-#locBtn.active{border-color:var(--me);color:var(--me);background:color-mix(in srgb,var(--me) 10%,transparent)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) nav.bottom .nseg button.on{background:color-mix(in srgb,var(--done) 30%,var(--surface));color:#fff}:root:not([data-theme="light"]) #locBtn{color:var(--done)}}
+:root[data-theme="dark"] nav.bottom .nseg button.on{background:color-mix(in srgb,var(--done) 30%,var(--surface));color:#fff}:root[data-theme="dark"] #locBtn{color:var(--done)}
+#locBtn.locf.active{color:var(--me);box-shadow:0 0 0 2px var(--me),0 3px 12px rgba(0,0,0,.25)}
+.locf{position:absolute;right:8px;bottom:42px;z-index:7;width:46px;height:46px;border-radius:50%;border:0;padding:0;background:var(--surface);color:var(--forest);display:grid;place-items:center;box-shadow:0 3px 12px rgba(0,0,0,.25)}
+.locf svg{width:22px;height:22px}
+/* Avatar-Knopf in der unteren Leiste (öffnet das Menü) – Stil A / D / E vom Admin */
+.hide-menubtn #menuBtn,.hide-menubtn #menuBtn2{display:none}
+.navme{border:0;background:none;padding:0;color:inherit;font:inherit;cursor:pointer}
+.navme em{font-style:normal;display:grid;place-items:center;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 35% 30%,#ffe9b3,#f2c14e);position:relative;line-height:1}
+.navme em img{width:100%;height:100%;object-fit:cover}
+nav.bottom .nseg button.navme-a i em{width:26px;height:26px;font-size:.95rem;box-shadow:0 0 0 2px var(--surface),0 0 0 4px #3fbf6e}
+nav.bottom .navme-d{flex:0 0 50px;height:50px;display:grid;place-items:center;position:relative}
+.navme-d::before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(#3fbf6e 0 calc(var(--np,0)*1%),color-mix(in srgb,var(--fg) 14%,transparent) 0)}
+.navme-d[data-full="1"]::before{background:#3fbf6e}
+.navme-d > em{width:42px;height:42px;font-size:1.3rem;box-shadow:0 0 0 2px var(--surface)}
+.navme-d > b{position:absolute;right:-3px;bottom:-3px;width:19px;height:19px;border-radius:50%;background:var(--forest);color:#fff;font-size:.62rem;display:grid;place-items:center;border:2px solid var(--surface)}
+body.nav-e nav.bottom,body.nav-e nav.bottom .nseg{overflow:visible}
+nav.bottom .nseg button.navme-e{flex:0 0 64px!important;padding:0!important;background:none!important;box-shadow:none!important;position:relative}
+.navme-e em{width:56px;height:56px;margin-top:-32px;font-size:1.65rem;box-shadow:0 0 0 4px var(--surface),0 0 0 7px #f2c14e,0 6px 16px rgba(0,0,0,.25)}
 
 .status{position:absolute;left:50%;top:12px;transform:translateX(-50%);z-index:10;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:99px;padding:7px 14px;font-size:.88rem;box-shadow:0 4px 14px rgba(0,0,0,.15);max-width:calc(100% - 32px);text-align:center}
 .status:empty{display:none}
@@ -1755,6 +1769,7 @@ body.compact-hdr header .tabs,body.compact-hdr header .hefts{max-height:0;opacit
 
 <main>
   <div id="map"></div>
+  <button id="locBtn" class="locf" aria-label="Mein Standort"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><circle cx="12" cy="12" r="7.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg></button>
   <button id="pBroken" class="mapbad" hidden></button>
   <div class="legend" id="legend"><span><i style="background:var(--open)"></i>offen</span><span><i style="background:var(--done)"></i>gestempelt</span><span><i style="background:var(--code)"></i>Code</span><span><i style="background:var(--digital)"></i>digital</span><span><i style="background:var(--broken);border-color:var(--bad)"></i>kaputt</span><span><i style="background:var(--open);border-color:var(--gold)"></i>Hinweis</span></div>
   <div class="routechip lochip" id="locChip" hidden><span id="locChipText"></span><button id="locChipX" aria-label="Standorte ausblenden">✕</button></div>
@@ -1831,7 +1846,6 @@ body.compact-hdr header .tabs,body.compact-hdr header .hefts{max-height:0;opacit
     <button data-view="routes" id="v-routes" aria-label="Routen"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="5" r="2.2"/><path d="M8 19h7.5a3.5 3.5 0 0 0 0-7h-7a3.5 3.5 0 0 1 0-7H16"/></svg></i><span>Routen</span></button>
     <button data-view="friends" id="v-friends" aria-label="Freunde"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c.6-3.4 3-5.4 6-5.4s5.4 2 6 5.4"/><circle cx="17" cy="9" r="2.5"/><path d="M16.5 14.6c2.4.2 4 1.9 4.5 5"/></svg></i><span>Freunde</span></button>
   </div>
-  <button id="locBtn" aria-label="Mein Standort"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><circle cx="12" cy="12" r="7.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg></button>
 </nav>
 
 <div id="scrim" class="scrim" hidden></div>
@@ -2116,8 +2130,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.63 Beta";
-const APP_CODE = 103;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.64 Beta";
+const APP_CODE = 104;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -3204,6 +3218,7 @@ function renderProgress(){
   /* Kopfzeile „Kompakt mit Ring“ */
   $("#rRing").style.setProperty("--p", total ? Math.round(count / total * 100) : 0);
   $("#rRing").dataset.full = total && count >= total ? "1" : "";
+  updateNavMe(count, total);
   $("#rNum").textContent = count;
   const rl = REGIONS.find(x => x[0] === REGION[current]);
   $("#rRegName").textContent = rl ? (rl[0] === "sax" ? "Sächsische Schweiz" : rl[1]) : SETS[current].short;
@@ -3276,6 +3291,30 @@ function openHdrPrefs(){
   $("#hpOk").onclick = () => { hdrMine = { near: $("#hpNear").checked, bars: $("#hpBars").checked }; save("sp.hdrMine", hdrMine); render(false); toast("Kopfzeile gespeichert"); openMenu(); };
   const sd = $("#hpStd"); if (sd) sd.onclick = () => { hdrMine = {}; save("sp.hdrMine", hdrMine); render(false); toast("Standard wird benutzt"); openMenu(); };
 }
+/* ---------- Untere Leiste: Avatar-Knopf öffnet das Menü (Admin wählt A = Reiter „Ich“, D = rechts mit Ring, E = groß in der Mitte) ---------- */
+const NAV_STYLES = { a: "Reiter „Ich“", d: "Rechts mit Fortschrittsring", e: "Groß in der Mitte" };
+let navStyle = load("sp.navStyle", "e");
+function navAvatar(){ return myCard.photo ? `<img src="${esc(myCard.photo)}" alt="">` : esc(myCard.avatar || "🥾"); }
+function applyNav(){
+  if (!NAV_STYLES[navStyle]) navStyle = "e";
+  const old = $("#navMe"); if (old) old.remove();
+  const seg = document.querySelector("nav.bottom .nseg"), nav = document.querySelector("nav.bottom");
+  const b = document.createElement("button");
+  b.id = "navMe"; b.className = "navme navme-" + navStyle; b.setAttribute("aria-label", "Profil & Menü");
+  if (navStyle === "a") { b.innerHTML = `<i><em>${navAvatar()}</em></i><span>Ich</span>`; seg.appendChild(b); }
+  else if (navStyle === "d") { b.innerHTML = `<em>${navAvatar()}</em><b>☰</b>`; nav.appendChild(b); }
+  else { b.innerHTML = `<em>${navAvatar()}</em>`; seg.insertBefore(b, seg.children[2] || null); }
+  b.onclick = openMenu;
+  document.body.classList.remove("nav-a", "nav-d", "nav-e"); document.body.classList.add("nav-" + navStyle, "hide-menubtn");
+  updateNavMe();
+}
+let navProg = [0, 0];
+function updateNavMe(n, tot){
+  if (n != null) navProg = [n, tot]; else [n, tot] = navProg;
+  const b = $("#navMe"); if (!b) return;
+  const em = b.querySelector("em"), h = navAvatar(); if (em && em.innerHTML !== h) em.innerHTML = h;
+  b.style.setProperty("--np", tot ? Math.round(n / tot * 100) : 0); b.dataset.full = tot && n >= tot ? "1" : "";
+}
 function openLayoutAdmin(){
   const opt = (v, t, d) => `<label class="checkline bgm"><input type="radio" name="lay" value="${v}" ${layout === v ? "checked" : ""}><span><b>${t}</b><small>${d}</small></span></label>`;
   openSheet(`<div class="kicker">Admin-Bereich</div><h2>Layout der Kopfzeile</h2>
@@ -3284,6 +3323,8 @@ function openLayoutAdmin(){
     <h3>Zusätze im kompakten Kopf (Standard für alle)</h3>
     <div class="bgmodes"><label class="checkline bgm"><input type="checkbox" id="layNear" ${hdrCfg.near ? "checked" : ""}><span><b>📍 Nächster Stempel</b><small>Zeile mit dem nächsten offenen Stempel und „Hin“-Knopf</small></span></label>
     <label class="checkline bgm"><input type="checkbox" id="layBars" ${hdrCfg.bars ? "checked" : ""}><span><b>▬ Fortschritt je Heft</b><small>kleiner Balken unter jedem Heft</small></span></label></div>
+    <h3>Profil-Knopf in der unteren Leiste</h3>
+    <div class="bgmodes">${Object.entries(NAV_STYLES).map(([v, t]) => `<label class="checkline bgm"><input type="radio" name="navs" value="${v}" ${navStyle === v ? "checked" : ""}><span><b>${v.toUpperCase()} · ${t}</b><small>${{ a: "Avatar als fünfter Reiter neben Freunde", d: "Avatar rechts mit Fortschrittsring und ☰", e: "großer Avatar mittig, ragt über die Leiste" }[v]}</small></span></label>`).join("")}</div>
     <p class="hint" style="margin-top:10px">Gilt für alle Nutzer – sie können es (noch) nicht selbst ändern.</p>
     <p id="layMsg" style="color:var(--bad)"></p>
     <div class="actions"><button class="btn primary" id="layGo">Für alle übernehmen</button><button class="btn quiet" id="layBack">Zurück</button></div>`);
@@ -3292,10 +3333,12 @@ function openLayoutAdmin(){
     const v = (document.querySelector('input[name="lay"]:checked') || {}).value || "classic";
     try {
       const hn = $("#layNear").checked, hb = $("#layBars").checked;
-      await fb.req("PATCH", "/config/app?updateMask.fieldPaths=layout&updateMask.fieldPaths=hdrNear&updateMask.fieldPaths=hdrBars", { fields: { layout: fsStr(v), hdrNear: { booleanValue: hn }, hdrBars: { booleanValue: hb } } });
+      const ns = (document.querySelector('input[name="navs"]:checked') || {}).value || "e";
+      await fb.req("PATCH", "/config/app?updateMask.fieldPaths=layout&updateMask.fieldPaths=hdrNear&updateMask.fieldPaths=hdrBars&updateMask.fieldPaths=navStyle", { fields: { layout: fsStr(v), hdrNear: { booleanValue: hn }, hdrBars: { booleanValue: hb }, navStyle: fsStr(ns) } });
+      navStyle = ns; save("sp.navStyle", ns); applyNav();
       layout = v; save("sp.layout", v); applyLayout();
       hdrCfg = { near: hn, bars: hb }; save("sp.hdrCfg", hdrCfg); render(false);
-      logMod("Layout geändert", `${v === "ring" ? "Kompakt" : "Klassisch"} · Nächster Stempel ${hn ? "an" : "aus"} · Heft-Balken ${hb ? "an" : "aus"}`);
+      logMod("Layout geändert", `${v === "ring" ? "Kompakt" : "Klassisch"} · Nächster Stempel ${hn ? "an" : "aus"} · Heft-Balken ${hb ? "an" : "aus"} · Leiste ${ns.toUpperCase()}`);
       toast("Layout für alle gespeichert"); openAdmin();
     } catch(e) { $("#layMsg").textContent = "Fehlgeschlagen: " + e.message; }
   };
@@ -5314,6 +5357,7 @@ async function checkUpdate(){
     }
     { const hn = fv(d, "hdrNear"), hb = fv(d, "hdrBars");
       if (hn != null || hb != null) { const c = { near: hn === true, bars: hb === true }; if (JSON.stringify(c) !== JSON.stringify(hdrCfg)) { hdrCfg = c; save("sp.hdrCfg", c); render(false); } } }
+    { const ns = fv(d, "navStyle"); if (NAV_STYLES[ns] && ns !== navStyle) { navStyle = ns; save("sp.navStyle", ns); applyNav(); } }
     const lay = fv(d, "layout");
     if ((lay === "classic" || lay === "ring") && lay !== layout) { layout = lay; save("sp.layout", lay); applyLayout(); }
     showUpdate();
@@ -5677,7 +5721,7 @@ const GOOGLE_G = '<svg viewBox="0 0 48 48" width="18" height="18" style="vertica
 
 /* ---------- 🚪 Abmelden: Stempel sichern, Konto-Daten vom Handy entfernen, neu starten ---------- */
 /* Diese Einstellungen gehören zum Handy, nicht zum Konto – sie bleiben beim Abmelden */
-const KEEP_KEYS = ["sp.theme", "sp.base", "sp.legMin", "sp.regions", "sp.layout", "sp.hdrCfg", "sp.hdrMine", "sp.gcfg", "sp.fixes", "sp.roles", "sp.navVoice", "sp.navEco",
+const KEEP_KEYS = ["sp.theme", "sp.base", "sp.legMin", "sp.regions", "sp.layout", "sp.hdrCfg", "sp.navStyle", "sp.hdrMine", "sp.gcfg", "sp.fixes", "sp.roles", "sp.navVoice", "sp.navEco",
   "sp.poi", "sp.heat", "sp.bgRoutes", "sp.lastCode", "sp.installHint", "sp.updSkip", "sp.official", "sp.customHefte", "sp.news", "sp.newsSeen", "sp.reports", "sp.set", "sp.hefteOn", "sp.heftSel"];
 function openLogout(){
   const hasPw = username && username.hasPw, g = load("sp.google", null);
@@ -8213,7 +8257,7 @@ function openMyProfile(){
   $("#sheet").querySelectorAll("[data-goto]").forEach(b => b.onclick = () => { const [st, kk] = b.dataset.goto.split("|"); openStampIn(st, kk); });
   bindClose();
 }
-function saveCard(){ save("sp.card", myCard); save("sp.cardVis", cardVis); scheduleCard(); }
+function saveCard(){ save("sp.card", myCard); save("sp.cardVis", cardVis); scheduleCard(); updateNavMe(); }
 function openEditProfile(){
   const earned = earnedNow("p0");
   const got = BADGES.filter(b => earned[b[0]]);
@@ -9470,6 +9514,7 @@ document.querySelectorAll("nav.bottom [data-view]").forEach(b => b.onclick = () 
 $("#locBtn").onclick = () => { if (nav) { nav.follow = true; if (myPos) map.setView(myPos, Math.max(map.getZoom(), 15)); return; } startLocate(); };
 $("#menuBtn").onclick = openMenu;
 $("#menuBtn2").onclick = openMenu;
+applyNav();
 $("#heftsBtn").onclick = openHefteAll;
 $("#heftsBtn2").onclick = openHefteAll;
 $("#rRegion").onclick = openRegionPick;
