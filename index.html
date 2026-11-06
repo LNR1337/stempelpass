@@ -1057,6 +1057,93 @@ h2 .inoff{font-size:.6rem;vertical-align:4px}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .nfacc .nfw-ic{background:var(--done)}:root:not([data-theme="light"]) .nfacc{border-color:color-mix(in srgb,var(--done) 30%,transparent);background:color-mix(in srgb,var(--done) 10%,var(--surface))}}
 :root[data-theme="dark"] .nfacc .nfw-ic{background:var(--done)}:root[data-theme="dark"] .nfacc{border-color:color-mix(in srgb,var(--done) 30%,transparent);background:color-mix(in srgb,var(--done) 10%,var(--surface))}
 .nfacc .nfw-ic{background:var(--forest);font-size:1.15rem;box-shadow:0 3px 10px color-mix(in srgb,var(--forest) 35%,transparent)}
+
+/* 👤 Profil – Banner-Stil */
+.pbn2{position:relative;margin:4px 0 0;padding:18px 16px 14px;border-radius:22px;color:#fff;background:radial-gradient(120% 90% at 90% 0%,#3a7a54,transparent 60%),linear-gradient(160deg,#1d4a33,#0f2a1d);box-shadow:0 8px 22px rgba(15,42,29,.25)}
+.pb2-edit{position:absolute;right:12px;top:12px;border:0;border-radius:99px;padding:6px 11px;background:rgba(255,255,255,.15);color:#fff;font:600 .76rem var(--body)}
+.pb2-r{display:flex;gap:14px;align-items:center}
+.pb2-av{position:relative;flex:none}.pb2-av .pring{background:conic-gradient(var(--c) calc(var(--p) * 1%),rgba(255,255,255,.18) 0)}
+.pb2-av .pav{width:80px;height:80px;font-size:2.4rem}
+.pb2-av .pmedal{position:absolute;right:-2px;bottom:-2px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#1d4a33;border:2px solid #f2c14e;font-size:.95rem}
+.pb2-av.is-on::after{content:"";position:absolute;left:4px;bottom:6px;width:14px;height:14px;border-radius:50%;background:#3fbf6e;border:3px solid #1d4a33}
+.pb2-t{flex:1;min-width:0}.pb2-t h2{margin:0;padding-right:84px;color:#fff;font:700 1.5rem/1.15 var(--display);overflow-wrap:anywhere}.pb2-t h2.l{font-size:1.25rem}
+.pb2-lv{display:inline-flex;gap:6px;align-items:center;margin:6px 0 4px;padding:5px 11px;border:0;border-radius:99px;background:rgba(255,255,255,.15);color:#fff;font:700 .78rem var(--body);text-align:left}
+.pb2-t small{display:block;opacity:.78;font-size:.78rem;line-height:1.35}
+.pb2-bio{margin:12px 0 0;font-style:italic;color:rgba(255,255,255,.88)!important;font-size:.9rem}
+.pb2-bd{display:flex;gap:8px;margin-top:14px}.pb2-bd span{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 4px 8px;border-radius:14px;background:rgba(255,255,255,.1);font:600 .7rem/1.2 var(--body);text-align:center}
+.pb2-bd span i{font-style:normal;font-size:1.45rem}
+.pb2-st{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 4px}.pb2-st div{border:1px solid var(--line);border-radius:14px;padding:10px 4px;text-align:center}
+.pb2-st b{display:block;font:700 1.3rem var(--display)}.pb2-st small{color:var(--muted);font-size:.74rem}
+.pacc{border:1px solid var(--line);border-radius:16px;margin-top:8px;overflow:hidden}
+.pacc summary{list-style:none;display:flex;align-items:center;gap:10px;padding:12px 14px;font:600 .95rem var(--body);cursor:pointer}
+.pacc summary::-webkit-details-marker{display:none}
+.pacc summary em{margin-left:auto;font-style:normal;color:var(--muted);font-size:.82rem;font-weight:500}
+.pacc summary::after{content:"›";color:var(--muted);font-size:1.3rem;line-height:1;transition:transform .2s}
+.pacc[open] summary::after{transform:rotate(90deg)}
+.pa-ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:color-mix(in srgb,var(--fg) 6%,transparent);font-size:1rem}
+.pa-b{padding:0 14px 14px}.pa-b > h3:first-child{margin-top:4px}
+
+/* 📍 Pins */
+.pin{position:relative;width:32px;height:40px;cursor:pointer;transition:transform .15s;transform-origin:50% 100%}
+.pin b{position:absolute;left:2px;top:1px;width:28px;height:28px;border-radius:50% 50% 50% 3px;transform:rotate(-45deg);background:#fff;border:3px solid var(--open);box-shadow:0 2px 6px rgba(0,0,0,.35);box-sizing:border-box}
+.pin span{position:absolute;left:2px;top:1px;width:28px;height:28px;display:grid;place-items:center;font:800 .74rem/1 var(--body);color:#5b2a0a;letter-spacing:-.02em}
+.pin.long span{font-size:.58rem}
+.pin.d b{background:var(--done);border-color:#fff}.pin.d span{color:#fff;font-size:.95rem}
+.pin.d.m-code b{background:var(--code)}.pin.d.m-digital b{background:var(--digital)}
+.pin.x b{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,#fff)}.pin.x span{color:var(--bad)}
+.pin.w b{border-color:var(--gold)}
+.pin i{position:absolute;right:-5px;top:-5px;min-width:16px;height:16px;padding:0 3px;border-radius:9px;background:var(--gold);color:#14281d;font:800 .56rem/16px var(--body);text-align:center;font-style:normal;border:2px solid #fff;box-sizing:content-box}
+.pin.nr::before{content:"";position:absolute;left:-9px;top:-10px;width:50px;height:50px;border-radius:50%;background:color-mix(in srgb,var(--open) 28%,transparent);animation:pinglow 2.2s ease-in-out infinite}
+@keyframes pinglow{0%,100%{transform:scale(.75);opacity:.9}50%{transform:scale(1.05);opacity:.35}}
+.pin.sel{transform:scale(1.28)}.pin.sel b{box-shadow:0 0 0 3px var(--gold),0 3px 10px rgba(0,0,0,.4)}
+.pin.dim{opacity:.32}
+.pin.hl b{border-color:var(--hc);border-width:4px}
+.stlabel.pl span{transform:translateY(2px)}
+:root[data-theme="dark"] .pin:not(.d):not(.x) b{background:#f3f7f2}
+
+/* 🖼️ Stempel mit Foto oben */
+.sv-hero{position:relative;height:210px;margin:0 0 10px;border-radius:20px;overflow:hidden;background:#2b3a30 center/cover;cursor:pointer}
+.sv-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,0) 30%,rgba(0,0,0,0) 40%,rgba(0,0,0,.75))}
+.sv-hero .ht{position:absolute;left:16px;right:16px;bottom:13px;z-index:1;color:#fff}
+.sv-hero .hk{font:700 .72rem var(--body);letter-spacing:.08em;text-transform:uppercase;opacity:.88}
+.sv-hero h2{margin:2px 0 3px;color:#fff;font:700 1.6rem/1.15 var(--display);text-shadow:0 1px 6px rgba(0,0,0,.35)}
+.sv-hero .hs{font-size:.8rem;opacity:.92}
+.sv-hero .sv-k{position:absolute;top:10px;right:10px;z-index:1;margin:0}
+.sv-hero .sv-st{padding:4px 10px;background:rgba(255,255,255,.94);box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.sv-hero .hc{position:absolute;top:10px;left:10px;z-index:1;padding:5px 10px;border-radius:99px;background:rgba(0,0,0,.45);color:#fff;font:600 .74rem var(--body)}
+.sv-hthumbs{display:flex;gap:6px;margin:-2px 0 10px}
+.sv-hthumbs img{width:52px;height:52px;border-radius:12px;object-fit:cover;cursor:pointer}
+.sv-hthumbs button{width:52px;height:52px;border-radius:12px;border:1px dashed var(--line);background:none;color:var(--muted);font:700 .72rem var(--body)}
+
+/* 📋 Liste in Gruppen */
+#items li.grp.lg b{font:700 .74rem var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+#items li.grp.lg.near b{color:var(--forest)}
+#items li.grp.lg small{font-size:.78rem}
+li.done .chk.phc{position:relative;border-radius:12px;border:0;background-size:cover;background-position:center;width:38px;height:38px}
+li.done .chk.phc svg{position:absolute;right:-5px;bottom:-5px;width:18px;height:18px;padding:3px;border-radius:50%;background:var(--done);border:2px solid var(--surface);box-sizing:content-box}
+
+/* ☀️ Heute-Karte */
+.today{position:absolute;left:10px;right:62px;top:10px;z-index:9;background:var(--surface);border-radius:18px;padding:12px 12px 10px;box-shadow:0 6px 22px rgba(0,0,0,.18);border:1px solid var(--line);opacity:0;transform:translateY(-12px);transition:opacity .25s,transform .25s}
+.today.in{opacity:1;transform:none}.today.out{opacity:0;transform:translateY(-12px)}
+.td-top{display:flex;gap:10px;align-items:center;padding-right:16px}
+.td-wx{flex:none;width:48px;height:48px;border-radius:14px;background:linear-gradient(160deg,#ffd76a,#f2a33a);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;line-height:1}
+.today.wet .td-wx{background:linear-gradient(160deg,#9fc3e8,#5b88b8)}
+.td-wx span{font-size:1.2rem}.td-wx b{font:800 .82rem var(--body);margin-top:2px}
+.td-t{flex:1;min-width:0}.td-t b{display:block;font:700 1rem var(--display)}.td-t small{color:var(--muted);font-size:.8rem;line-height:1.3}
+.td-x{position:absolute;right:6px;top:4px;width:28px;height:28px;border:0;background:none;color:var(--muted);font-size:1.25rem;padding:0}
+.td-ch{display:flex;gap:6px;margin-top:10px;overflow-x:auto;scrollbar-width:none;margin-right:-4px}.td-ch::-webkit-scrollbar{display:none}
+.td-ch button{flex:none;border:0;padding:7px 10px;border-radius:12px;background:color-mix(in srgb,var(--forest) 9%,transparent);font:600 .78rem var(--body);color:var(--fg);white-space:nowrap}
+.td-ch button b{color:var(--open)}.td-ch button i{font-style:normal;color:var(--muted);margin-left:5px}
+
+/* 😮 Fast verpasst */
+.miss{margin-top:14px;border-radius:18px;padding:12px;background:linear-gradient(135deg,color-mix(in srgb,#f2c14e 20%,var(--surface)),color-mix(in srgb,#e8833a 12%,var(--surface)));border:1px solid color-mix(in srgb,#e8833a 30%,transparent)}
+.miss > h3{margin:0 0 2px!important;font:700 1rem var(--display)}.miss p{margin:0 0 6px;color:var(--muted);font-size:.82rem}
+.msr{display:flex;align-items:center;gap:8px;padding:6px 6px 6px 8px;border-radius:14px;background:var(--surface);margin-top:6px}
+.msr-go{flex:1;min-width:0;display:flex;align-items:center;gap:10px;border:0;background:none;padding:0;text-align:left;color:var(--fg);font:inherit}
+.msr .n{flex:none;width:34px;height:34px;border-radius:50%;border:3px solid var(--open);display:grid;place-items:center;font:800 .78rem var(--body)}
+.msr .t{flex:1;min-width:0}.msr b{display:block;font:600 .9rem var(--body);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.msr small{color:var(--muted);font-size:.76rem}
+.msr-w{flex:none;border:0;border-radius:99px;padding:7px 11px;background:var(--forest);color:var(--forest-fg);font:700 .76rem var(--body)}
+.msr-w.on{background:color-mix(in srgb,var(--gold) 25%,transparent);color:var(--fg)}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
@@ -2201,8 +2288,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.65 Beta";
-const APP_CODE = 105;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.66 Beta";
+const APP_CODE = 106;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -2583,6 +2670,7 @@ const LayerCtl = L.Control.extend({
         <button type="button" data-bgr="1" class="lc-tg lc-routes"><span>🥾 Touren-Linien</span><i></i></button>
         <button type="button" data-clu="1" class="lc-tg lc-clu"><span>🔢 Stempel gruppieren</span><i></i></button>
         <button type="button" data-poi="1" class="lc-tg lc-poi"><span>🅿️ Parken · Einkehr · Bus</span><i></i></button>
+        <button type="button" data-today="1" class="lc-tg lc-today"><span>☀️ Heute-Karte</span><i></i></button>
         <div class="lc-h"></div>
         <button type="button" data-cmp="1" class="lc-go"><span>👥 Mit Freund vergleichen</span><b>›</b></button>
       </div>`;
@@ -2598,6 +2686,7 @@ const LayerCtl = L.Control.extend({
       if (e.target.dataset.darkset) { darkMap = e.target.dataset.darkset; save("sp.darkMap", darkMap); document.body.classList.remove("map-dark"); applyDarkMap(); return; }
       if (e.target.dataset.poi) { showPoi = !showPoi; save("sp.poi", showPoi); drawPoi(); syncLc(); toast(showPoi ? (map.getZoom() < POI_ZOOM ? "Parken & Einkehr an – näher ranzoomen, dann erscheinen sie" : "Parkplätze, Einkehr und Haltestellen werden geladen") : "Parken & Einkehr ausgeblendet"); return; }
       if (e.target.dataset.cmp) { menu.hidden = true; openCmpPick(); return; }
+      if (e.target.dataset.today) { todayOn = !todayOn; save("sp.todayOn", todayOn); syncLc(); if (todayOn) { save("sp.todayOff", ""); showToday(true); } else hideToday(); toast(todayOn ? "☀️ Heute-Karte an – einmal am Tag beim Öffnen" : "Heute-Karte aus"); return; }
       if (e.target.dataset.clu) { useClusters = !useClusters; save("sp.clusters", useClusters); updateClusters(); syncLc(); toast(useClusters ? "Stempel werden beim Rauszoomen gruppiert" : "Alle Stempel einzeln – wie vorher"); return; }
       if (e.target.dataset.dstyle) { menu.hidden = true; openDarkStyles(); return; }
       if (e.target.dataset.dark) { const nx = { auto: "on", on: "off", off: "auto" }[darkMap] || "auto"; darkMap = nx; save("sp.darkMap", nx); applyDarkMap(); toast(nx === "on" ? "🌙 Dunkle Karte immer an" : nx === "off" ? "☀️ Karte immer hell" : "🌗 Dunkle Karte automatisch (im dunklen Modus)"); return; }
@@ -2610,7 +2699,7 @@ const LayerCtl = L.Control.extend({
 new LayerCtl().addTo(map);
 function syncLc(){
   const t = (c, v) => { const b = document.querySelector(".lc-menu ." + c); if (b) b.classList.toggle("on", !!v); };
-  t("lc-routes", showBgRoutes); t("lc-clu", useClusters); t("lc-poi", showPoi); t("lc-heat", showHeat);
+  t("lc-routes", showBgRoutes); t("lc-clu", useClusters); t("lc-poi", showPoi); t("lc-heat", showHeat); t("lc-today", todayOn);
   document.querySelectorAll(".lc-menu [data-darkset]").forEach(b => b.classList.toggle("on", b.dataset.darkset === darkMap));
 }
 map.on("click", () => { const m = document.querySelector(".lc-menu"); if (m) m.hidden = true; });
@@ -2706,8 +2795,35 @@ function renderLegend(cnt){
     if (legFilter) toast(`Nur „${LEG.find(x => x[0] === v)[1]}“ hervorgehoben – nochmal tippen zum Aufheben`);
   });
 }
+/* ---------- 📍 Pins statt Punkte (ab Zoom 12, Admin wählt "pins" oder "dots") ---------- */
+let markerStyle = load("sp.markerStyle", "pins");
+let pinLayer = null, pinInfo = {}, pinGen = 0, pinKey = "";
+const PIN_ZOOM = 12;
+const pinsOn = () => markerStyle === "pins" && map.getZoom() >= PIN_ZOOM && !showHeat;
+function updatePins(){
+  if (!pinLayer) pinLayer = L.layerGroup();
+  if (!pinsOn()) { pinKey = ""; if (map.hasLayer(pinLayer)) map.removeLayer(pinLayer); return; }
+  if (map.hasLayer(layer)) map.removeLayer(layer);
+  if (!map.hasLayer(pinLayer)) pinLayer.addTo(map);
+  const bd = map.getBounds().pad(0.35), z = map.getZoom();
+  const list = visible().filter(s => hasPos(s) && pinInfo[s.k] && bd.contains([s.lat, s.lon])).slice(0, 500);
+  const key = pinGen + "|" + z + "|" + list.map(s => s.k).join(",");
+  if (key === pinKey) return;
+  pinKey = key; pinLayer.clearLayers();
+  for (const s of list) {
+    const i = pinInfo[s.k], n = String(s.n || "");
+    const cls = ["pin", i.d ? "d" : "", i.d && i.meth ? "m-" + i.meth : "", i.x && !i.d ? "x" : "", i.watch && !i.d ? "w" : "", i.near ? "nr" : "", i.sel ? "sel" : "", i.dim ? "dim" : "", i.hl ? "hl" : "", n.length > 3 ? "long" : ""].filter(Boolean).join(" ");
+    const inner = i.d ? (i.meth === "code" ? "#" : "✓") : (i.x ? "✕" : esc(n || "•"));
+    const badge = i.d && n ? `<i>${esc(n)}</i>` : (i.watch && !i.d ? "<i>★</i>" : "");
+    L.marker([s.lat, s.lon], { keyboard: false, zIndexOffset: i.sel ? 1000 : i.dim ? -500 : i.d ? -100 : 0,
+      icon: L.divIcon({ className: "", html: `<div class="${cls}"${i.hl ? ` style="--hc:${i.hl}"` : ""}><b></b><span>${inner}</span>${badge}</div>`, iconSize: [32, 40], iconAnchor: [16, 39] }) })
+      .on("click", () => openStamp(s.k)).addTo(pinLayer);
+  }
+}
+map.on("moveend", () => { if (pinsOn()) updatePins(); });
 function drawMarkers(fit){
   drawBgRoutes();
+  pinInfo = {}; pinGen++;
   if (showHeat) drawHeat();
   layer.clearLayers();
   const pts = [];
@@ -2732,6 +2848,7 @@ function drawMarkers(fit){
       fillOpacity: dim ? (legFilter ? 0.12 : 0.35) : 0.95, opacity: dim ? (legFilter ? 0.15 : 0.4) : 1
     });
     if (hl) { m.setStyle({ color: cmpCol[cc], weight: 4 }); m.setRadius(10); }
+    pinInfo[s.k] = { d, x, watch: isWatched(current, s.k), meth: d ? methodOf(current, s.k) : "", dim, sel, hl: hl ? cmpCol[cc] : "", near: !d && !x && myPos ? distKm(myPos, [s.lat, s.lon]) < 1.5 : false };
     if ((legFilter || hl) && !dim) setTimeout(() => m.bringToFront(), 0);
     m.on("click", () => openStamp(s.k));
     m.bindTooltip(s.n + " · " + s.name + (x ? " (kaputt)" : "") + (d && isGps(current, s.k) ? " · 📍 vor Ort gestempelt" : ""), { direction: "top", offset: [0,-8] });
@@ -2951,7 +3068,8 @@ let clusterLayer = null;
 function updateClusters(){
   if (!clusterLayer) clusterLayer = L.layerGroup();
   const z = map.getZoom(), on = useClusters && z <= 10 && !showHeat && !cmpMap && !activeRoute && !legFilter;
-  if (!on) { if (map.hasLayer(clusterLayer)) map.removeLayer(clusterLayer); if (!map.hasLayer(layer)) layer.addTo(map); return; }
+  if (!on) { if (map.hasLayer(clusterLayer)) map.removeLayer(clusterLayer); if (!pinsOn() && !map.hasLayer(layer)) layer.addTo(map); updatePins(); return; }
+  updatePins();
   if (map.hasLayer(layer)) map.removeLayer(layer);
   clusterLayer.clearLayers(); if (!map.hasLayer(clusterLayer)) clusterLayer.addTo(map);
   const G = 52, cells = {};
@@ -2977,7 +3095,7 @@ function updateClusters(){
 var symLayer = null, symKey = "";
 function drawStampSyms(force){
   if (!symLayer) symLayer = L.layerGroup().addTo(map);
-  const z = map.getZoom(), on = z >= 11 && view === "map" && !showHeat;
+  const z = map.getZoom(), on = z >= 11 && view === "map" && !showHeat && !pinsOn();
   const bd = map.getBounds().pad(0.1);
   const list = on ? visible().filter(s => hasPos(s) && bd.contains([s.lat, s.lon])).slice(0, 400) : [];
   const sym = s => { const d = isDone(current, s.k); if (d) { const m = methodOf(current, s.k); return m === "code" ? "#" : m === "digital" ? "▯" : "✓"; } if (isBroken(current, s.k)) return "✕"; if (isWatched(current, s.k)) return "★"; return ""; };
@@ -3002,7 +3120,7 @@ function drawStampLabels(){
   for (const s of list) {
     const d = isDone(current, s.k);
     L.marker([s.lat, s.lon], { interactive: false, keyboard: false, zIndexOffset: -1000,
-      icon: L.divIcon({ className: "stlabel" + (d ? " d" : ""), html: `<span>${isSonder(current) ? "" : `<b>${esc(s.n)}</b> `}${esc(s.name)}${d ? " ✓" : ""}</span>`, iconSize: [0, 0], iconAnchor: [0, -14] }) }).addTo(stampLabelLayer);
+      icon: L.divIcon({ className: "stlabel" + (d ? " d" : "") + (pinsOn() ? " pl" : ""), html: `<span>${isSonder(current) ? "" : `<b>${esc(s.n)}</b> `}${esc(s.name)}${d ? " ✓" : ""}</span>`, iconSize: [0, 0], iconAnchor: [0, -14] }) }).addTo(stampLabelLayer);
   }
 }
 if (showPoi) setTimeout(drawPoi, 800);
@@ -3089,7 +3207,7 @@ function renderList(){
     const right = d ? `<span class="rt done">${fmtDate(d).slice(0, 6)}<small>${d.slice(0, 4)}</small></span>`
       : (myPos && hasPos(s) ? `<span class="rt">${wd(myPos, [s.lat, s.lon])}</span>` : "");
     return `<li class="${d ? "done" + mCls(current, s.k) : ""}${selMode && sel.has(s.k) ? " sel" : ""}" data-k="${esc(s.k)}">
-      <button class="chk" data-act="toggle" aria-label="${d ? "Stempel entfernen" : "Als gestempelt markieren"}">${CHECK}</button>
+      ${(() => { const ph = d && photos[current][s.k] && photos[current][s.k].length ? photos[current][s.k][photos[current][s.k].length - 1].data : ""; return `<button class="chk${ph ? " phc" : ""}" data-act="toggle" aria-label="${d ? "Stempel entfernen" : "Als gestempelt markieren"}"${ph ? ` style="background-image:url(${ph})"` : ""}>${CHECK}</button>`; })()}
       <button class="info" data-act="open"><span class="nm"><span class="nr">${esc(s.n)}</span>${esc(s.name)}</span>${place || heftCh ? `<span class="sub sub2"><span class="pl">${esc(place)}</span>${heftCh}</span>` : ""}${chips.length ? `<span class="chips2">${chips.join("")}</span>` : ""}</button>
       ${right}
     </li>`;
@@ -3106,6 +3224,16 @@ function renderList(){
       }
       html += row(s);
     }
+  } else if (sortBy === "num" && !q && (filter === "all" || filter === "open")) {
+    /* Gruppen: 📍 In der Nähe · Noch offen · Gestempelt */
+    const grp = (ic, t, n, cls) => `<li class="grp lg ${cls || ""}"><b>${ic} ${t}</b><small>${n}</small></li>`;
+    const open = rows.filter(s => !isDone(current, s.k)), dn = rows.filter(s => isDone(current, s.k));
+    let near = [];
+    if (myPos) near = open.filter(s => hasPos(s) && !isBroken(current, s.k)).map(s => ({ s, d: distKm(myPos, [s.lat, s.lon]) })).filter(x => x.d < 5).sort((a, b) => a.d - b.d).slice(0, 5).map(x => x.s);
+    const nk = new Set(near.map(s => s.k)), rest = open.filter(s => !nk.has(s.k));
+    if (near.length) html += grp("📍", "In der Nähe", near.length, "near") + near.map(row).join("");
+    if (rest.length) html += grp("○", near.length ? "Weitere offene" : "Noch offen", rest.length) + rest.map(row).join("");
+    if (dn.length) html += grp("✓", "Gestempelt", dn.length, "dn") + dn.map(row).join("");
   } else html = rows.map(row).join("");
   const fh = $(".filters"); if (fh) document.documentElement.style.setProperty("--filtH", fh.offsetHeight + "px");
   const allDone = !rows.length && filter === "open" && !(($("#q") || {}).value || "").trim() && stamps[current].length && stamps[current].every(x => isDone(current, x.k));
@@ -3401,6 +3529,10 @@ function openLayoutAdmin(){
     <h3>Zusätze im kompakten Kopf (Standard für alle)</h3>
     <div class="bgmodes"><label class="checkline bgm"><input type="checkbox" id="layNear" ${hdrCfg.near ? "checked" : ""}><span><b>📍 Nächster Stempel</b><small>Zeile mit dem nächsten offenen Stempel und „Hin“-Knopf</small></span></label>
     <label class="checkline bgm"><input type="checkbox" id="layBars" ${hdrCfg.bars ? "checked" : ""}><span><b>▬ Fortschritt je Heft</b><small>kleiner Balken unter jedem Heft</small></span></label></div>
+    <h3>Profil-Ansicht</h3>
+    <div class="bgmodes">${[["banner", "Neu · Banner", "grünes Banner mit Avatar, Level und Top-Abzeichen, Bereiche zum Aufklappen"], ["classic", "Klassisch", "die bisherige Profilseite"]].map(([v, t, d]) => `<label class="checkline bgm"><input type="radio" name="profs" value="${v}" ${profStyle === v ? "checked" : ""}><span><b>${t}</b><small>${d}</small></span></label>`).join("")}</div>
+    <h3>Stempel auf der Karte</h3>
+    <div class="bgmodes">${[["pins", "Neu · Pins", "Tropfen mit Nummer, gestempelte grün mit ✓, nahe offene leuchten"], ["dots", "Klassisch · Punkte", "die bisherigen runden Punkte"]].map(([v, t, d]) => `<label class="checkline bgm"><input type="radio" name="mks" value="${v}" ${markerStyle === v ? "checked" : ""}><span><b>${t}</b><small>${d}</small></span></label>`).join("")}</div>
     <h3>Profil-Knopf in der unteren Leiste</h3>
     <div class="bgmodes">${Object.entries(NAV_STYLES).map(([v, t]) => `<label class="checkline bgm"><input type="radio" name="navs" value="${v}" ${navStyle === v ? "checked" : ""}><span><b>${v.toUpperCase()} · ${t}</b><small>${{ a: "Avatar als fünfter Reiter neben Freunde", d: "Avatar rechts mit Fortschrittsring und ☰", e: "großer Avatar mittig, ragt über die Leiste" }[v]}</small></span></label>`).join("")}</div>
     <p class="hint" style="margin-top:10px">Gilt für alle Nutzer – sie können es (noch) nicht selbst ändern.</p>
@@ -3412,11 +3544,15 @@ function openLayoutAdmin(){
     try {
       const hn = $("#layNear").checked, hb = $("#layBars").checked;
       const ns = (document.querySelector('input[name="navs"]:checked') || {}).value || "e";
-      await fb.req("PATCH", "/config/app?updateMask.fieldPaths=layout&updateMask.fieldPaths=hdrNear&updateMask.fieldPaths=hdrBars&updateMask.fieldPaths=navStyle", { fields: { layout: fsStr(v), hdrNear: { booleanValue: hn }, hdrBars: { booleanValue: hb }, navStyle: fsStr(ns) } });
+      const ps = (document.querySelector('input[name="profs"]:checked') || {}).value || "banner";
+      const ms = (document.querySelector('input[name="mks"]:checked') || {}).value || "pins";
+      await fb.req("PATCH", "/config/app?updateMask.fieldPaths=layout&updateMask.fieldPaths=hdrNear&updateMask.fieldPaths=hdrBars&updateMask.fieldPaths=navStyle&updateMask.fieldPaths=profStyle&updateMask.fieldPaths=markerStyle", { fields: { layout: fsStr(v), hdrNear: { booleanValue: hn }, hdrBars: { booleanValue: hb }, navStyle: fsStr(ns), profStyle: fsStr(ps), markerStyle: fsStr(ms) } });
       navStyle = ns; save("sp.navStyle", ns); applyNav();
+      profStyle = ps; save("sp.profStyle", ps);
+      if (ms !== markerStyle) { markerStyle = ms; save("sp.markerStyle", ms); try { render(); } catch(e) {} }
       layout = v; save("sp.layout", v); applyLayout();
       hdrCfg = { near: hn, bars: hb }; save("sp.hdrCfg", hdrCfg); render(false);
-      logMod("Layout geändert", `${v === "ring" ? "Kompakt" : "Klassisch"} · Nächster Stempel ${hn ? "an" : "aus"} · Heft-Balken ${hb ? "an" : "aus"} · Leiste ${ns.toUpperCase()}`);
+      logMod("Layout geändert", `${v === "ring" ? "Kompakt" : "Klassisch"} · Nächster Stempel ${hn ? "an" : "aus"} · Heft-Balken ${hb ? "an" : "aus"} · Leiste ${ns.toUpperCase()} · Profil ${ps === "banner" ? "neu" : "klassisch"} · Marker ${ms === "pins" ? "Pins" : "Punkte"}`);
       toast("Layout für alle gespeichert"); openAdmin();
     } catch(e) { $("#layMsg").textContent = "Fehlgeschlagen: " + e.message; }
   };
@@ -3694,8 +3830,11 @@ function openStamp(k){
     <div class="sv-map">${hasPos(s) ? `<div class="minimap" id="sMini" role="button" aria-label="Auf der großen Karte zeigen"></div>` : `<div class="sv-nomap">📍 Für diesen Stempel ist keine Position bekannt</div>`}
       <button class="sv-x" id="sClose" aria-label="Schließen">✕</button>${hasPos(s) ? '<span class="sv-big">⤢ Große Karte</span>' : ""}
       ${walk ? `<span class="sv-walk">🥾 ${wd(myPos, [s.lat, s.lon], "min")} zu Fuß</span>` : ""}</div>
-    <div class="sv-head"><div class="sv-k"><span>${esc(stampKicker(set, s))}</span>${stat}</div>
-      <h2>${esc(s.name)}</h2><div class="sv-sub">${sub}${profiles.length > 1 ? " · Heft: " + esc(profileName()) : ""}</div><div class="sv-last" id="sLast" hidden></div></div>
+    ${ph.length ? `<div class="sv-hero" id="svHero" style="background-image:url(${ph[ph.length - 1].data})">${ph.length > 1 ? `<span class="hc">📷 ${ph.length}</span>` : ""}<div class="sv-k">${stat}</div>
+      <div class="ht"><div class="hk">${esc(stampKicker(set, s))}</div><h2>${esc(s.name)}</h2><div class="hs">${sub}${profiles.length > 1 ? " · Heft: " + esc(profileName()) : ""}</div></div></div>
+      ${ph.length > 1 ? `<div class="sv-hthumbs">${ph.slice(0, -1).reverse().slice(0, 4).map(p => `<img src="${p.data}" alt="" data-hph="${esc(p.id)}">`).join("")}<button id="svHAdd">+ Foto</button></div>` : ""}
+      <div class="sv-last" id="sLast" hidden></div>` : `<div class="sv-head"><div class="sv-k"><span>${esc(stampKicker(set, s))}</span>${stat}</div>
+      <h2>${esc(s.name)}</h2><div class="sv-sub">${sub}${profiles.length > 1 ? " · Heft: " + esc(profileName()) : ""}</div><div class="sv-last" id="sLast" hidden></div></div>`}
     <div class="sv-main">${mainBtn}</div>
     <div class="sv-row">${row}</div>
     <div id="sHours"></div>
@@ -3730,6 +3869,9 @@ function openStamp(k){
   const hb = $("#svHefte"); if (hb) hb.onclick = () => openStampHefte(k);
   $("#svTips").onclick = () => openStampTips(k);
   $("#svPh").onclick = () => openStampPhotos(k);
+  { const h = $("#svHero"); if (h) h.onclick = e => { if (!e.target.closest(".sv-st")) openPhoto(k, ph[ph.length - 1].id); }; }
+  $("#sheet").querySelectorAll("[data-hph]").forEach(im => im.onclick = () => openPhoto(k, im.dataset.hph));
+  { const a = $("#svHAdd"); if (a) a.onclick = () => openStampPhotos(k); }
   const rb = $("#svRoutes"); if (rb) rb.onclick = () => svSub(k, "🥾 Routen mit diesem Stempel", `<ul class="slist">${rs.map(r => `<li><button data-route="${r.id}"><span class="dot" style="background:var(--route)"></span><span class="t">${esc(r.name)}<small>${km1(r.km)} km${r.up ? " · ↑ " + r.up + " m" : ""} · Stempel ${r.stamps.join(", ")}</small></span></button></li>`).join("")}</ul>`) || $("#sheet").querySelectorAll("[data-route]").forEach(b => b.onclick = () => openRoute(+b.dataset.route, true));
   const fb2 = $("#svFr"); if (fb2) fb2.onclick = () => { svSub(k, "👥 Freunde mit diesem Stempel", `<ul class="slist">${fr.map(m => `<li><button data-fp="${esc(m.code)}"><span class="dot" style="background:var(--me)"></span><span class="t">${esc(m.name)}<small>hat ihn schon</small></span></button></li>`).join("")}</ul>`); $("#sheet").querySelectorAll("[data-fp]").forEach(b => b.onclick = () => openFriendProfile(b.dataset.fp)); };
   $("#sWatch").onclick = () => { const on = !isWatched(set, k); setWatched(set, k, on); toast(on ? "Auf die Merkliste gesetzt" : "Von der Merkliste genommen"); refreshViews(); openStamp(k); };
@@ -5520,6 +5662,8 @@ async function checkUpdate(){
     { const hn = fv(d, "hdrNear"), hb = fv(d, "hdrBars");
       if (hn != null || hb != null) { const c = { near: hn === true, bars: hb === true }; if (JSON.stringify(c) !== JSON.stringify(hdrCfg)) { hdrCfg = c; save("sp.hdrCfg", c); render(false); } } }
     { const ns = fv(d, "navStyle"); if (NAV_STYLES[ns] && ns !== navStyle) { navStyle = ns; save("sp.navStyle", ns); applyNav(); } }
+    { const ps = fv(d, "profStyle"); if ((ps === "banner" || ps === "classic") && ps !== profStyle) { profStyle = ps; save("sp.profStyle", ps); } }
+    { const ms = fv(d, "markerStyle"); if ((ms === "pins" || ms === "dots") && ms !== markerStyle) { markerStyle = ms; save("sp.markerStyle", ms); try { render(); } catch(e) {} } }
     const lay = fv(d, "layout");
     if ((lay === "classic" || lay === "ring") && lay !== layout) { layout = lay; save("sp.layout", lay); applyLayout(); }
     showUpdate();
@@ -5883,7 +6027,7 @@ const GOOGLE_G = '<svg viewBox="0 0 48 48" width="18" height="18" style="vertica
 
 /* ---------- 🚪 Abmelden: Stempel sichern, Konto-Daten vom Handy entfernen, neu starten ---------- */
 /* Diese Einstellungen gehören zum Handy, nicht zum Konto – sie bleiben beim Abmelden */
-const KEEP_KEYS = ["sp.theme", "sp.base", "sp.legMin", "sp.regions", "sp.layout", "sp.hdrCfg", "sp.navStyle", "sp.hdrMine", "sp.gcfg", "sp.fixes", "sp.roles", "sp.navVoice", "sp.navEco",
+const KEEP_KEYS = ["sp.theme", "sp.base", "sp.legMin", "sp.regions", "sp.layout", "sp.hdrCfg", "sp.navStyle", "sp.profStyle", "sp.markerStyle", "sp.hdrMine", "sp.gcfg", "sp.fixes", "sp.roles", "sp.navVoice", "sp.navEco",
   "sp.poi", "sp.heat", "sp.bgRoutes", "sp.lastCode", "sp.installHint", "sp.updSkip", "sp.official", "sp.customHefte", "sp.news", "sp.newsSeen", "sp.reports", "sp.set", "sp.hefteOn", "sp.heftSel"];
 function openLogout(){
   const hasPw = username && username.hasPw, g = load("sp.google", null);
@@ -7481,6 +7625,11 @@ function yearImage(y){
   return c.toDataURL("image/png");
 }
 /* ---------- 🖼️ Stempel-Pass als Bild: alle Stempel eines Hefts als Raster (Vorschau) ---------- */
+function sharePass(set){
+  const url = passImage(set), n = Object.keys(done[set]).length, text = `📒 ${SETS[set].title}: ${n} von ${stamps[set].length} gestempelt! #Stempeljagd #Wandern`;
+  if (hasNative("shareImage")) { NATIVE.shareImage(url, text); return; }
+  const a = document.createElement("a"); a.href = url; a.download = `stempeljagd-${set}.png`; document.body.appendChild(a); a.click(); a.remove();
+}
 function passImage(set){
   const list = stamps[set].filter(s => !isSonder(set) || heftActive(s.heft)), N = list.length, W = 1080;
   const cols = N > 300 ? 20 : N > 150 ? 15 : N > 60 ? 10 : N > 24 ? 7 : 5, cell = Math.floor((W - 120) / cols), rows = Math.ceil(N / cols);
@@ -7767,7 +7916,8 @@ function openOverview(){
     ${shownRegions.includes("sax") ? `<h3>Sächsische Schweiz</h3>${sec("sax")}` : ""}
     ${VOR_SETS.map(st => shownRegions.includes(st) ? `<h3>${esc(SETS[st].title)}</h3>${sec(st)}` : "").join("")}
     <p>Tippe auf ein Kästchen, um den Stempel zu öffnen.</p>
-    <div class="actions"><button class="btn quiet" id="sClose">Schließen</button></div>`);
+    <div class="actions"><button class="btn primary" id="ovShare">📤 Heft-Karte teilen</button><button class="btn quiet" id="sClose">Schließen</button></div>`);
+  $("#ovShare").onclick = () => sharePass(current);
   $("#ovF").onclick = e => { const v = e.target.dataset.v; if (!v) return; ovFilter = v; const y = $("#sheet").scrollTop; openOverview(); $("#sheet").scrollTop = y; };
   $("#sheet").querySelectorAll("[data-ov]").forEach(b => b.onclick = () => { const [st, k] = b.dataset.ov.split("|"); openStampIn(st, k); });
   $("#sheet").querySelectorAll("[data-hsel2]").forEach(b => b.onclick = () => openHefteChooser(b.dataset.hsel2));
@@ -8174,6 +8324,38 @@ function shareLevel(lv, newTitle){
   const a = document.createElement("a"); a.href = url; a.download = `stempelpass-level-${lv.L}.png`; document.body.appendChild(a); a.click(); a.remove();
 }
 
+/* ---------- ☀️ Heute-Karte: einmal am Tag Begrüßung + Wetter + offene Stempel in der Nähe ---------- */
+var todayOn = load("sp.todayOn", true);
+function hideToday(){ const t = $("#todayCard"); if (t) { t.classList.add("out"); setTimeout(() => t.remove(), 250); } }
+async function showToday(force){
+  if (!todayOn || view !== "map" || $("#todayCard")) return;
+  if (!force && load("sp.todayOff", "") === today()) return;
+  if (!$("#sheet").hidden) return;
+  const ctr = myPos || (SETS[current] && SETS[current].center); if (!ctr) return;
+  let wx = null; try { wx = await loadWeather(ctr[0], ctr[1]); } catch(e) {}
+  if (view !== "map" || $("#todayCard") || !$("#sheet").hidden) return;
+  const h = new Date().getHours(), hi = h < 11 ? "Guten Morgen" : h < 17 ? "Hallo" : h < 22 ? "Guten Abend" : "Gute Nacht";
+  const nm = username && username.name ? username.name : (profileName && profileName() !== "Ich" ? profileName() : "");
+  let ic = "🥾", tmax = "", txt = "", wet = false;
+  if (wx && wx.daily && wx.daily.time) { const y = wx.daily, [i0, t0] = wmo(y.weather_code[0]); ic = i0; tmax = Math.round(y.temperature_2m_max[0]) + "°"; wet = (y.precipitation_probability_max[0] ?? 0) >= 50;
+    txt = `${t0[0].toUpperCase() + t0.slice(1)} bis ${tmax}` + ((y.precipitation_probability_max[0] ?? 0) >= 30 ? ` · 💧 ${y.precipitation_probability_max[0]} %` : ""); }
+  let near = [];
+  if (myPos) near = visible().filter(s => hasPos(s) && !isDone(current, s.k) && !isBroken(current, s.k)).map(s => ({ s, d: distKm(myPos, [s.lat, s.lon]) })).filter(x => x.d < 5).sort((a, b) => a.d - b.d).slice(0, 5);
+  const sub = [txt, myPos ? (near.length ? `${near.length} offene${near.length === 1 ? "r" : ""} Stempel in deiner Nähe` : "kein offener Stempel in deiner Nähe") : ""].filter(Boolean).join(" · ") || "Schön, dass du da bist!";
+  const d = document.createElement("div"); d.id = "todayCard"; d.className = "today" + (wet ? " wet" : "");
+  d.innerHTML = `<button class="td-x" aria-label="Für heute ausblenden">×</button><div class="td-top"><div class="td-wx"><span>${ic}</span>${tmax ? `<b>${tmax}</b>` : ""}</div><div class="td-t"><b>${hi}${nm ? ", " + esc(nm) : ""}!</b><small>${esc(sub)}</small></div></div>
+    ${near.length ? `<div class="td-ch">${near.map(x => `<button data-tk="${esc(x.s.k)}"><b>${esc(String(x.s.n))}</b> ${esc(x.s.name)}<i>${wd(myPos, [x.s.lat, x.s.lon])}</i></button>`).join("")}</div>` : ""}`;
+  document.querySelector("main").appendChild(d);
+  L.DomEvent && ["touchstart", "pointerdown", "wheel"].forEach(ev => d.addEventListener(ev, e => e.stopPropagation(), { passive: true }));
+  d.querySelector(".td-x").onclick = () => { save("sp.todayOff", today()); hideToday(); };
+  d.querySelectorAll("[data-tk]").forEach(b => b.onclick = () => { save("sp.todayOff", today()); hideToday(); const s = byKey[current].get(b.dataset.tk); if (s) { map.setView([s.lat, s.lon], Math.max(map.getZoom(), 14)); openStamp(s.k); } });
+  /* Wischen nach oben = weg für heute */
+  let sy = null; d.addEventListener("touchstart", e => { sy = e.touches[0].clientY; }, { passive: true });
+  d.addEventListener("touchend", e => { if (sy != null && e.changedTouches[0].clientY - sy < -40) { save("sp.todayOff", today()); hideToday(); } sy = null; });
+  requestAnimationFrame(() => d.classList.add("in"));
+}
+setTimeout(() => showToday(), 5000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) setTimeout(() => showToday(), 1500); });
 /* ---------- 📸 Fotoalbum: alle eigenen Fotos je Heft, nach Monat, Collage zum Teilen ---------- */
 let albumSet = load("sp.albumSet", "all");
 function albumPhotos(set){
@@ -8338,7 +8520,7 @@ function profDetailHtml(r, me){
 }
 function bindProfRings(me){
   const box = $("#pRings"); if (!box) return;
-  const gb = $("#sheet [data-pgoal]"); if (gb) gb.onclick = () => { const b = box.querySelector(`[data-pring="${gb.dataset.pgoal}"]`); if (b) { b.click(); b.scrollIntoView({ inline: "center", block: "nearest" }); $("#pDetail").scrollIntoView({ block: "nearest", behavior: "smooth" }); } };
+  const gb = $("#sheet [data-pgoal]"); if (gb) gb.onclick = () => { const b = box.querySelector(`[data-pring="${gb.dataset.pgoal}"]`); if (b) { const dd = box.closest("details"); if (dd) dd.open = true; b.click(); b.scrollIntoView({ inline: "center", block: "nearest" }); $("#pDetail").scrollIntoView({ block: "nearest", behavior: "smooth" }); } };
   const av = $("#sheet .pavring"); if (av && gb) av.onclick = () => toast("Ring ums Bild = " + gb.querySelector(".pg-heft").textContent + ": Fortschritt bis zur nächsten Nadel");
   box.querySelectorAll("[data-pring]").forEach(b => b.onclick = () => {
     profSel = b.dataset.pring;
@@ -8390,7 +8572,64 @@ function openProfileMap(c, name, back){
   const pts = got.map(([, s]) => [s.lat, s.lon]);
   setTimeout(() => { pm.invalidateSize(); pm.fitBounds(pts, { padding: [24, 24], maxZoom: 14 }); }, 120);
 }
+/* ---------- Profil-Stil: "banner" (neu) oder "classic" – Admin stellt um ---------- */
+let profStyle = load("sp.profStyle", "banner");
 function profileHtml(m, c, me){
+  if (profStyle === "banner") return profileBannerHtml(m, c, me);
+  return profileClassicHtml(m, c, me);
+}
+function profileBannerHtml(m, c, me){
+  const shown = (c.badges.show || []).map(id => BADGES.find(b => b[0] === id)).filter(Boolean);
+  let top = shown.slice(0, 3);
+  if (!top.length && me) { const e = load("sp.badges." + profile, {}) || {}; top = BADGES.filter(b => e[b[0]]).sort((a, b) => String(e[b[0]]).localeCompare(String(e[a[0]]))).slice(0, 3); }
+  let since = "";
+  if (c.since) since = "dabei seit " + new Date(c.since + "T12:00").toLocaleDateString("de-DE", { month: "long", year: "numeric" });
+  const R = profRings = profRingData(m, c, me);
+  const goals = R.filter(r => r.next).sort((a, b) => (a.next[0] - a.n) - (b.next[0] - b.n));
+  const goal = goals[0] || null;
+  const medalR = (goal && goal.reached ? goal : null) || R.find(r => r.id === "hwn" && r.reached) || R.find(r => r.reached);
+  const RS = R.filter(r => r.n > 0);
+  const sel = RS.find(r => r.id === profSel) || (goal && goal.n > 0 ? goal : null) || RS[0] || null;
+  if (sel) profSel = sel.id;
+  const ring = (p, col, size, w, inner, cls) => `<span class="pring ${cls || ""}" style="--p:${Math.round(p * 100)};--c:${col};--s:${size}px;--w:${w}px"><span>${inner}</span></span>`;
+  const x = xpOf(m, c), lv = levelOf(x.xp);
+  const total = c.stamps ? SET_KEYS.reduce((a, st) => a + ((c.stamps[st] || []).length), 0) : R.reduce((a, r) => a + r.n, 0);
+  const days = c.days ? Object.keys(c.days).length : null, km = c.hike && c.hike.km ? c.hike.km : 0;
+  const near = me && goal ? nearestOpen(goal.id) : null;
+  const sec = (id, ic, t, info, body, open) => body ? `<details class="pacc" data-pacc="${id}" ${open ? "open" : ""}><summary><span class="pa-ic">${ic}</span>${t}<em>${info}</em></summary><div class="pa-b">${body}</div></details>` : "";
+  const hikeB = c.hike && c.hike.last ? `<p>Zuletzt am ${fmtDate(c.hike.last.d)}: <b>${km1(c.hike.last.km)} km</b> in ${fmtDur(c.hike.last.dur)}${c.hike.last.up != null ? " · ↑ " + c.hike.last.up + " m" : ""}${c.hike.last.n ? " · " + c.hike.last.n + " Stempel" : ""}</p>${c.hike.count ? `<p class="hint">${c.hike.count} Wanderungen · ${km1(c.hike.km)} km insgesamt</p>` : ""}` : "";
+  const lastB = m.last && m.last.n ? `<p>Zuletzt gestempelt: Nr. ${esc(m.last.n)} ${esc(m.last.name || "")} · ${SET_NAMES[m.last.set] || ""} · ${dayAgo(m.last.date)}</p>` : "";
+  const vit = shown.length ? `<div class="pvit">${shown.map(([, ic, name, desc]) => `<div title="${esc(desc)}"><i>${ic}</i><b>${esc(name)}</b></div>`).join("")}</div>` : "";
+  const pins = c.pins && c.pins.length ? `<h3>Nadeln & volle Hefte</h3><div class="pinrow">${c.pins.slice(-8).reverse().map(p => `<span class="pinchip">${LV_ICON(p)} ${esc(p.replace(/^Touringen /, ""))}</span>`).join("")}${c.pins.length > 8 ? `<span class="pinchip" style="color:var(--muted)">+ ${c.pins.length - 8} weitere</span>` : ""}</div>` : "";
+  const prog = sel ? `<div class="prings" id="pRings">${RS.map(r => `<button data-pring="${r.id}" class="${r.id === sel.id ? "on" : ""}" style="--c:${r.col}">${ring(r.total ? r.n / r.total : (r.n ? 1 : 0), r.col, 64, 7, r.n)}<span class="pr-l">${esc(r.t)}${r.reached ? `<b>${esc(r.reached[1].replace(/^Touringen /, ""))}</b>` : ""}</span></button>`).join("")}</div><div id="pDetail">${profDetailHtml(sel, me)}</div>` : "";
+  const pmap = profMapHtml(c);
+  return `<div class="pbn2">${me ? '<button class="pb2-edit" id="pbEdit">✎ Bearbeiten</button>' : ""}
+      <div class="pb2-r"><span class="pb2-av ${!me && isOnline(m.updated) ? "is-on" : ""}">${ring(goal ? goal.prog : 1, goal ? goal.col : "#3fbf6e", 92, 5, avatarHtml(c, "pav"))}${medalR ? `<span class="pmedal" title="${esc(medalR.reached[1])}">${LV_ICON(medalR.reached[1])}</span>` : ""}</span>
+        <div class="pb2-t"><h2 class="${m.name.length > 14 ? "l" : ""}">${esc(m.name)}</h2>
+          <button class="pb2-lv" id="pLevel" type="button">${lv.icon} Level ${lv.L} · ${esc(lv.title)}</button>
+          <small>${[c.region ? "📍 " + esc(c.region) : "", since ? esc(since) : "", !me && m.updated ? (isOnline(m.updated) ? "● online" : esc(seenText(m.updated).replace("zuletzt online ", "🕓 "))) : ""].filter(Boolean).join(" · ")}</small></div></div>
+      ${c.bio ? `<p class="pb2-bio">„${esc(c.bio)}“</p>` : ""}
+      ${top.length ? `<div class="pb2-bd">${top.map(([, ic, name]) => `<span><i>${ic}</i>${esc(name)}</span>`).join("")}</div>` : ""}
+    </div>
+    <div class="pb2-st"><div><b>${total}</b><small>Stempel</small></div><div><b>${km ? km1(km) : "–"}</b><small>km gewandert</small></div><div><b>${days != null ? days : (c.hike && c.hike.count) || "–"}</b><small>${days != null ? "Wandertage" : "Wanderungen"}</small></div></div>
+    <div class="ph-chips ph-row">${rankHtml(m.code)}</div>
+    ${goal ? `<button class="ph-goal" data-pgoal="${goal.id}" style="--gc:${goal.col}">${ring(goal.prog, goal.col, 46, 5, Math.round(goal.prog * 100) + "%")}<span><small class="pg-heft">${esc(goal.long)}</small>Noch <b>${goal.next[0] - goal.n}</b> bis <b>${esc(goal.next[1].replace(/^Touringen /, ""))}</b> ${LV_ICON(goal.next[1])}${near ? `<small>📍 nächster offener: Nr. ${esc(near.s.n)} ${esc(near.s.name)}</small>` : ""}</span></button>` : ""}
+    ${!sel ? `<p class="hint" style="text-align:center;margin:14px 0">${me ? "Sobald du deinen ersten Stempel hast, erscheint hier dein Fortschritt." : "Noch keine Stempel gesammelt."}</p>` : ""}
+    ${sec("prog", "📊", "Fortschritt", RS.length + (RS.length === 1 ? " Heft" : " Hefte"), prog, true)}
+    ${sec("badge", "🏅", "Abzeichen & Nadeln", (c.badges.n || 0) + " Abzeichen", vit + pins || (c.badges.n ? `<p>${c.badges.n} Abzeichen gesammelt</p>` : ""))}
+    ${sec("map", "🗺️", "Stempelkarte", total + " Punkte", pmap)}
+    ${sec("days", "🗓️", "Wanderkalender", (days || 0) + " Tage", c.days ? heatmapHtml(c.days) : "")}
+    ${sec("hike", "🥾", "Wanderungen & Zuletzt", c.hike && c.hike.count ? c.hike.count + "×" : "", hikeB + lastB)}
+    ${favHtml(c.fav)}`;
+}
+let paccOpen = load("sp.paccOpen", { prog: true });
+function bindPacc(){
+  document.querySelectorAll("#sheet [data-pacc]").forEach(d => {
+    const id = d.dataset.pacc; if (paccOpen[id] != null) d.open = !!paccOpen[id];
+    d.addEventListener("toggle", () => { paccOpen[id] = d.open; save("sp.paccOpen", paccOpen); });
+  });
+}
+function profileClassicHtml(m, c, me){
   const shown = (c.badges.show || []).map(id => BADGES.find(b => b[0] === id)).filter(Boolean);
   let since = "";
   if (c.since) since = "seit " + new Date(c.since + "T12:00").toLocaleDateString("de-DE", { month: "short", year: "numeric" });
@@ -8465,9 +8704,9 @@ async function openFriendProfile(code){
       <button data-cmp="me"><b>${b}</b><span>hast du, ${esc(m.name)} fehlen sie</span></button></div>`;
     ccmp = { name: m.name, r };
   } else cmp = `<p style="font-size:.85rem">${esc(m.name)} teilt keinen Stempelvergleich.</p>`;
-  openSheet(`<div class="kicker pkick">Profil · Code ${fmtCode(code)}</div>${walksLive[code] ? `<div style="margin:-4px 0 8px">${walkChip(code).replace("data-walk", 'id="fpWalk" data-x')}</div>` : ""}${profileHtml(m, c, false)}${cmp}<div id="fpTours"></div>
+  openSheet(`<div class="kicker ${profStyle === "banner" ? "" : "pkick"}">Profil · Code ${fmtCode(code)}</div>${walksLive[code] ? `<div style="margin:-4px 0 8px">${walkChip(code).replace("data-walk", 'id="fpWalk" data-x')}</div>` : ""}${profileHtml(m, c, false)}${cmp}<div id="fpTours"></div>
     <div class="actions">${c.stamps ? '<button class="btn" id="fpMap">🗺️ Auf der Karte vergleichen</button>' : ""}${friendLocs[code] ? '<button class="btn" id="fpLoc">📍 Standort auf der Karte</button>' : ""}<button class="btn warn" id="fpRemove">Freund entfernen …</button><button class="btn quiet" id="sClose">Schließen</button></div>`);
-  bindProfRings(false);
+  bindProfRings(false); bindPacc();
   { const pl = $("#pLevel"); if (pl) pl.onclick = () => openLevelInfo(m, c, () => openFriendProfile(code)); }
   { const pmx = $("#sheet .pmap"); if (pmx) pmx.onclick = () => openProfileMap(c, m.name, () => openFriendProfile(code)); }
   $("#fpRemove").onclick = () => {
@@ -8498,12 +8737,13 @@ function myBoardEntry(){
     last: ls && t && d[ls.set][ls.k] ? { set: ls.set, n: t.n, name: t.name, date: ls.date } : null };
 }
 function openMyProfile(){
-  openSheet(`<div class="kicker pkick">Mein Profil${fb.ready() ? " · so sehen dich deine Freunde" : ""}</div>${profileHtml(myBoardEntry(), myCardLocal(), true)}
+  openSheet(`<div class="kicker ${profStyle === "banner" ? "" : "pkick"}">Mein Profil${fb.ready() ? " · so sehen dich deine Freunde" : ""}</div>${profileHtml(myBoardEntry(), myCardLocal(), true)}
     ${fb.ready() ? `<p style="font-size:.85rem">Sichtbar für Freunde: ${[cardVis.photo && myCard.photo ? "Foto" : "", cardVis.days ? "Wanderkalender" : "", cardVis.compare ? "Stempelvergleich" : ""].filter(Boolean).join(", ") || "nur Name, Spruch und Zahlen"}.</p>` : ""}
     <div class="actions"><button class="btn primary" id="mpEdit">Profil bearbeiten</button><button class="btn quiet" id="sClose">Schließen</button></div>`);
   $("#mpEdit").onclick = openEditProfile;
   const pbe = $("#pbEdit"); if (pbe) pbe.onclick = openEditProfile;
   bindProfRings(true);
+  bindPacc();
   { const pl = $("#pLevel"); if (pl) pl.onclick = () => openLevelInfo(myBoardEntry(), myCardLocal(), openMyProfile); }
   { const pmx = $("#sheet .pmap"); if (pmx) pmx.onclick = () => openProfileMap(myCardLocal(), username ? username.name : profileName(), openMyProfile); }
   $("#sheet").querySelectorAll("[data-goto]").forEach(b => b.onclick = () => { const [st, kk] = b.dataset.goto.split("|"); openStampIn(st, kk); });
@@ -10295,6 +10535,7 @@ async function finishTrack(fromNotif){
     const s = byKey[set].get(k); if (!s || !hasPos(s)) continue;
     if (simp.some(p => distKm(p, [s.lat, s.lon]) < 0.25)) hike.stamps.push(set + "|" + k);
   }
+  hike.missed = missedStamps(simp);
   // Höhenmeter über Open-Meteo (genauer als GPS), sonst GPS-Höhe
   try {
     const e = await Promise.race([routeElevation({ name: "hike:" + hike.id, pts: simp }), new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 15000))]);
@@ -10313,8 +10554,39 @@ async function finishTrack(fromNotif){
 function hikeLine(h){
   return `${km1(h.km)} km · ${fmtDur(h.dur)}${h.up != null ? " · ↑ " + h.up + " m" : ""}${h.stamps.length ? " · " + h.stamps.length + " Stempel" : ""}`;
 }
+/* 😮 Fast verpasst: offene Stempel, an denen der Weg knapp (unter 500 m) vorbeiging */
+function segDistM(p, a, b){
+  const ky = 111320, kx = 111320 * Math.cos(p[0] * Math.PI / 180);
+  const ax = (a[1] - p[1]) * kx, ay = (a[0] - p[0]) * ky, bx = (b[1] - p[1]) * kx, by = (b[0] - p[0]) * ky;
+  const dx = bx - ax, dy = by - ay, l = dx * dx + dy * dy;
+  let t = l ? -(ax * dx + ay * dy) / l : 0; t = Math.max(0, Math.min(1, t));
+  return Math.hypot(ax + t * dx, ay + t * dy);
+}
+function missedStamps(pts){
+  if (!pts || pts.length < 2) return [];
+  let la0 = 90, la1 = -90, lo0 = 180, lo1 = -180;
+  for (const p of pts) { la0 = Math.min(la0, p[0]); la1 = Math.max(la1, p[0]); lo0 = Math.min(lo0, p[1]); lo1 = Math.max(lo1, p[1]); }
+  const out = [], seen = new Set();
+  for (const set of SET_KEYS) for (const s of stamps[set]) {
+    if (!hasPos(s) || done[set][s.k] || !heftOn(set, s)) continue;
+    if (s.lat < la0 - .006 || s.lat > la1 + .006 || s.lon < lo0 - .009 || s.lon > lo1 + .009) continue;
+    const pk = s.lat.toFixed(4) + "," + s.lon.toFixed(4); if (seen.has(pk)) continue;
+    if (groupMembers(set, s.k).some(g => done[g.set] && done[g.set][g.k])) continue;   // derselbe Kasten ist in einem anderen Heft schon gestempelt
+    let m = 1e9; for (let i = 1; i < pts.length && m > 20; i++) m = Math.min(m, segDistM([s.lat, s.lon], pts[i - 1], pts[i]));
+    if (m <= 500) { seen.add(pk); out.push([set + "|" + s.k, Math.round(m)]); }
+  }
+  return out.sort((a, b) => a[1] - b[1]).slice(0, 6);
+}
+function missedHtml(h){
+  const l = (h.missed || []).filter(([key]) => { const [st, k] = key.split("|"); return byKey[st] && byKey[st].get(k) && !done[st][k] && !groupMembers(st, k).some(g => done[g.set] && done[g.set][g.k]); });
+  if (!l.length) return "";
+  return `<div class="miss"><h3>😮 Fast verpasst!</h3><p>An ${l.length === 1 ? "diesem offenen Stempel" : "diesen offenen Stempeln"} bist du ganz knapp vorbeigelaufen:</p>
+    ${l.map(([key, m]) => { const [st, k] = key.split("|"), s = byKey[st].get(k), w = isWatched(st, k);
+      return `<div class="msr"><button class="msr-go" data-goto="${esc(key)}"><span class="n">${esc(String(s.n))}</span><span class="t"><b>${esc(s.name)}</b><small>${m < 60 ? "du warst direkt dort – vergessen einzutragen?" : "nur " + (m < 100 ? m : Math.round(m / 50) * 50) + " m neben deinem Weg"}${st !== current ? " · " + esc(SETS[st].short) : ""}</small></span></button><button class="msr-w ${w ? "on" : ""}" data-mw="${esc(key)}">${w ? "★ Gemerkt" : "⭐ Merken"}</button></div>`; }).join("")}</div>`;
+}
 function openHike(id){
   const h = hikes.find(x => x.id === id); if (!h) return;
+  if (!h.missed && h.pts) { h.missed = missedStamps(h.pts); save("sp.hikes", hikes); }
   setView("map"); showRoute({ id: -3, name: "Wanderung " + fmtTs(h.start).slice(0, 10), stamps: [], pts: h.pts }, true);
   openSheet(`<div class="kicker">Wanderung · ${new Date(h.start).toLocaleDateString("de-DE", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}</div>
     <h2>🥾 ${km1(h.km)} km</h2>
@@ -10324,11 +10596,13 @@ function openHike(id){
     </div>
     ${h.elev ? `<h3>Höhenprofil</h3><div class="elev">${elevHtml(h.elev)}</div>` : ""}
     ${h.stamps.length ? `<h3>Stempel unterwegs (${h.stamps.length})</h3><ul class="slist">${h.stamps.map(x => { const [st, k] = x.split("|"); return stampLine(st, k); }).join("")}</ul>` : ""}
+    ${missedHtml(h)}
     ${fb.ready() && username && username.code ? `<div class="actions"><button class="btn ${h.shared ? "" : "primary"}" id="hkShare">${h.shared ? "👣 Für Freunde freigegeben ✓ – zurückziehen" : "👣 Für Freunde zum Nachwandern freigeben"}</button></div>` : ""}
     <div class="actions"><button class="btn" id="hkList">Alle Wanderungen</button><button class="btn warn" id="hkDel">Löschen …</button><button class="btn quiet" id="sClose">Schließen</button></div>`);
   { const hs = $("#hkShare"); if (hs) hs.onclick = async () => { try { await shareHike(h, !h.shared); h.shared = !h.shared; save("sp.hikes", hikes); toast(h.shared ? "Deine Freunde können die Tour jetzt nachwandern 👣" : "Freigabe zurückgezogen"); openHike(id); } catch(e) { toast("Hat nicht geklappt – Internet?"); } }; }
   $("#sheet").querySelectorAll("[data-goto]").forEach(b => b.onclick = () => { const [st, kk] = b.dataset.goto.split("|"); openStampIn(st, kk); });
   $("#hkList").onclick = openHikes;
+  $("#sheet").querySelectorAll("[data-mw]").forEach(b => b.onclick = () => { const [st, k] = b.dataset.mw.split("|"), on = !isWatched(st, k); setWatched(st, k, on); b.classList.toggle("on", on); b.textContent = on ? "★ Gemerkt" : "⭐ Merken"; toast(on ? "Auf die Merkliste gesetzt – fürs nächste Mal" : "Von der Merkliste genommen"); });
   $("#hkDel").onclick = () => {
     const b = $("#hkDel");
     if (!b.dataset.sure) { b.dataset.sure = "1"; b.textContent = "Wirklich löschen? Nochmal tippen"; return; }

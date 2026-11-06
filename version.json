@@ -1,6 +1,6 @@
 {
- "code": 105,
- "version": "0.9.65 Beta",
- "notes": "Benachrichtigungen (Freunde, Einladungen, Wetter, News, Updates, Postfach) mit Ruhezeit und Verlauf, Freund per QR-Code, Fotoalbum mit Collage, Widget mit Wetter, Saison-Abzeichen.",
+ "code": 106,
+ "version": "0.9.66 Beta",
+ "notes": "Neu: Heute-Karte, Pins auf der Karte, Stempel mit Foto oben, Liste in Gruppen, Fast verpasst nach Wanderungen, neues Profil, Heft-Karte teilen.",
  "apk": "Stempelpass.apk"
 }
