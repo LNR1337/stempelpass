@@ -1,6 +1,6 @@
 {
- "code": 104,
- "version": "0.9.64 Beta",
- "notes": "Neue untere Leiste: Avatar öffnet das Menü (Stil A/D/E, Admin wählbar, Standard E). Standort-Knopf schwebt jetzt auf der Karte über dem Copyright.",
+ "code": 105,
+ "version": "0.9.65 Beta",
+ "notes": "Benachrichtigungen (Freunde, Einladungen, Wetter, News, Updates, Postfach) mit Ruhezeit und Verlauf, Freund per QR-Code, Fotoalbum mit Collage, Widget mit Wetter, Saison-Abzeichen.",
  "apk": "Stempelpass.apk"
 }
