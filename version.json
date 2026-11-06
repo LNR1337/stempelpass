@@ -1,6 +1,6 @@
 {
- "code": 106,
- "version": "0.9.66 Beta",
- "notes": "Neu: Heute-Karte, Pins auf der Karte, Stempel mit Foto oben, Liste in Gruppen, Fast verpasst nach Wanderungen, neues Profil, Heft-Karte teilen.",
+ "code": 107,
+ "version": "0.9.67 Beta",
+ "notes": "Admins und Moderatoren können eigene Stempel zu einem Heft hinzufügen – auch als Bonusstempel, der nicht für die Nadel zählt.",
  "apk": "Stempelpass.apk"
 }

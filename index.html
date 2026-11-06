@@ -1144,6 +1144,14 @@ li.done .chk.phc svg{position:absolute;right:-5px;bottom:-5px;width:18px;height:
 .msr .t{flex:1;min-width:0}.msr b{display:block;font:600 .9rem var(--body);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.msr small{color:var(--muted);font-size:.76rem}
 .msr-w{flex:none;border:0;border-radius:99px;padding:7px 11px;background:var(--forest);color:var(--forest-fg);font:700 .76rem var(--body)}
 .msr-w.on{background:color-mix(in srgb,var(--gold) 25%,transparent);color:var(--fg)}
+
+/* 🎁 Bonus- / Zusatzstempel */
+.sv-alert.bonus{background:color-mix(in srgb,var(--gold) 14%,transparent);border-color:color-mix(in srgb,var(--gold) 45%,transparent)}
+.pin.bo b{border-color:var(--gold);background:linear-gradient(160deg,#fff3c4,#f2c14e)}.pin.bo span{color:#5a4100}
+.pin.bo.d b{background:var(--gold);border-color:#fff}.pin.bo.d span{color:#3a2a00}
+.assel{flex:1;width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:600 .95rem var(--body)}
+.asrow{display:flex;gap:10px}.asrow > div:first-child{width:86px}
+.asbonus{border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:10px 0 4px}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
@@ -2288,8 +2296,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.66 Beta";
-const APP_CODE = 106;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.67 Beta";
+const APP_CODE = 107;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -2379,6 +2387,10 @@ const heftOf = id => HWS.hefts.find(h => h.id === id) || TOS.hefts.find(h => h.i
 /* Welche Begleithefte man sammelt (wie die Schalter in der offiziellen App). Neue Hefte mit "opt" sind anfangs aus. */
 let heftState = load("sp.hefteOn", {});
 const heftActive = id => { const h = heftOf(id); if (!h) return false; return id in heftState ? !!heftState[id] : !h.opt; };
+/* 🎁 Bonusstempel zählen nicht für Nadel und Fortschritt */
+const isBonusK = (set, k) => { const s = byKey[set] && byKey[set].get(k); return !!(s && s.bonus); };
+const nDone = (set, d) => Object.keys(((d || done)[set]) || {}).filter(k => !isBonusK(set, k)).length;
+const nTot = set => (stamps[set] || []).filter(s => !s.bonus).length;
 const visible = () => !isSonder(current) ? stamps[current] : H() !== "all" ? stamps[current].filter(s => s.heft === H()) : stamps[current].filter(s => heftActive(s.heft));
 /* Vier-Pfoten-Wanderpass: Heft-Profil für den Hund mit eigenen Stufen */
 const DOG_LEVELS = [[15,"Bronze-Anhänger"],[50,"Silber-Anhänger"],[100,"Gold-Anhänger"],[150,"Vier-Pfoten-Wanderkönig"],[222,"Vier-Pfoten-Wanderkaiser"]];
@@ -2712,7 +2724,7 @@ function drawBgRoutes(){
   /* Routen des aktuellen Hefts (+ eingeblendete Hefte); in Thüringen wie bisher immer die Touringen-Routen */
   const sets = [...new Set([...(REGION[current] === "thue" ? ["tou"] : []), current, ...extraList()])].filter(st => routes[st] && routes[st].length);
   const on = showBgRoutes && !activeRoute && sets.length > 0;
-  const key = on ? "on|" + sets.map(st => st + Object.keys(done[st]).length).join(",") + "|" + profile : "off";
+  const key = on ? "on|" + sets.map(st => st + nDone(st)).join(",") + "|" + profile : "off";
   if (typeof syncLc === "function") syncLc();
   if (key === bgKey) return;
   bgKey = key; bgLayer.clearLayers();
@@ -2812,9 +2824,9 @@ function updatePins(){
   pinKey = key; pinLayer.clearLayers();
   for (const s of list) {
     const i = pinInfo[s.k], n = String(s.n || "");
-    const cls = ["pin", i.d ? "d" : "", i.d && i.meth ? "m-" + i.meth : "", i.x && !i.d ? "x" : "", i.watch && !i.d ? "w" : "", i.near ? "nr" : "", i.sel ? "sel" : "", i.dim ? "dim" : "", i.hl ? "hl" : "", n.length > 3 ? "long" : ""].filter(Boolean).join(" ");
-    const inner = i.d ? (i.meth === "code" ? "#" : "✓") : (i.x ? "✕" : esc(n || "•"));
-    const badge = i.d && n ? `<i>${esc(n)}</i>` : (i.watch && !i.d ? "<i>★</i>" : "");
+    const cls = ["pin", s.bonus ? "bo" : "", i.d ? "d" : "", i.d && i.meth ? "m-" + i.meth : "", i.x && !i.d ? "x" : "", i.watch && !i.d ? "w" : "", i.near ? "nr" : "", i.sel ? "sel" : "", i.dim ? "dim" : "", i.hl ? "hl" : "", n.length > 3 ? "long" : ""].filter(Boolean).join(" ");
+    const inner = s.bonus ? "🎁" : i.d ? (i.meth === "code" ? "#" : "✓") : (i.x ? "✕" : esc(n || "•"));
+    const badge = s.bonus ? (i.d ? "<i>✓</i>" : "") : i.d && n ? `<i>${esc(n)}</i>` : (i.watch && !i.d ? "<i>★</i>" : "");
     L.marker([s.lat, s.lon], { keyboard: false, zIndexOffset: i.sel ? 1000 : i.dim ? -500 : i.d ? -100 : 0,
       icon: L.divIcon({ className: "", html: `<div class="${cls}"${i.hl ? ` style="--hc:${i.hl}"` : ""}><b></b><span>${inner}</span>${badge}</div>`, iconSize: [32, 40], iconAnchor: [16, 39] }) })
       .on("click", () => openStamp(s.k)).addTo(pinLayer);
@@ -3236,7 +3248,7 @@ function renderList(){
     if (dn.length) html += grp("✓", "Gestempelt", dn.length, "dn") + dn.map(row).join("");
   } else html = rows.map(row).join("");
   const fh = $(".filters"); if (fh) document.documentElement.style.setProperty("--filtH", fh.offsetHeight + "px");
-  const allDone = !rows.length && filter === "open" && !(($("#q") || {}).value || "").trim() && stamps[current].length && stamps[current].every(x => isDone(current, x.k));
+  const allDone = !rows.length && filter === "open" && !(($("#q") || {}).value || "").trim() && stamps[current].length && stamps[current].filter(x => !x.bonus).every(x => isDone(current, x.k));
   if (allDone) { $("#items").innerHTML = `<li class="empty bigempty"><div class="be-ic">🏅</div><b>Alles gestempelt!</b><span>In „${esc(SETS[current].title)}“ ist nichts mehr offen. Zeit für den Nadel-Antrag 🎉</span><button class="btn primary" id="beGo">Nadel-Antrag öffnen</button></li>`; $("#beGo").onclick = () => openPinRequest(); return; }
   $("#items").innerHTML = rows.length ? html : `<li class="empty bigempty"><div class="be-ic">${filter === "bad" ? "🛠️" : filter === "watch" ? "⭐" : filter === "dig" ? "📱" : filter === "done" ? "🥾" : "🔍"}</div><span>${filter === "done" && !(($("#q") || {}).value || "").trim() ? "Noch nichts gestempelt – der erste Stempel wartet schon!" : ""}${filter === "bad" ? "Keine Stempelstelle ist als kaputt markiert." : filter === "watch" ? "Noch nichts auf der Merkliste – im Stempel-Fenster auf „☆ Merken“ tippen." : filter === "dig" ? "Keine digitalen Stempel, die noch ins Heft müssen." : (filter === "done" && !(($("#q") || {}).value || "").trim() ? "" : "Keine Stempelstelle passt zur Suche.")}</span></li>`;
 }
@@ -3390,9 +3402,9 @@ function renderRoutes(){
 
 /* ---------- Fortschritt ---------- */
 function renderProgress(){
-  const vis = visible();
-  const total = vis.length;
-  const count = vis.filter(s => isDone(current, s.k)).length;
+  const vis = visible(), visC = vis.filter(s => !s.bonus);
+  const total = visC.length;
+  const count = visC.filter(s => isDone(current, s.k)).length;
   $("#pCount").textContent = count;
   $("#pTotal").textContent = total;
   $("#pBar").style.width = (count/total*100) + "%";
@@ -3566,9 +3578,9 @@ function setExtras(l){ extraSets = l.filter((x, i, a) => a.indexOf(x) === i); sa
 function renderHefts(){
   const bar = $("#heftBar");
   const reg = REGION[current];
-  const cnt = (set, id) => { const l = stamps[set].filter(x => !id || (id === "all" ? heftActive(x.heft) : x.heft === id)); return `${l.filter(x => isDone(set, x.k)).length}/${l.length}`; };
+  const cnt = (set, id) => { const l = stamps[set].filter(x => !x.bonus && (!id || (id === "all" ? heftActive(x.heft) : x.heft === id))); return `${l.filter(x => isDone(set, x.k)).length}/${l.length}`; };
   const on = (set, id) => current === set && (!id || H() === id);
-  const pct = (set, id) => { const l = stamps[set].filter(x => !id || (id === "all" ? heftActive(x.heft) : x.heft === id)); return l.length ? Math.round(l.filter(x => isDone(set, x.k)).length / l.length * 100) : 0; };
+  const pct = (set, id) => { const l = stamps[set].filter(x => !x.bonus && (!id || (id === "all" ? heftActive(x.heft) : x.heft === id))); return l.length ? Math.round(l.filter(x => isDone(set, x.k)).length / l.length * 100) : 0; };
   bar.classList.toggle("bars", hdrOpt("bars"));
   const btn = (set, id, label) => `<button data-pick="${set}|${id || ""}" class="${on(set, id) ? "on" : ""}" style="--hp:${pct(set, id)}%">${hdrOpt("bars") ? `<span>${esc(label)}</span>` : esc(label)} <small>${cnt(set, id)}</small></button>`;
   const xl = extraList();
@@ -3609,7 +3621,7 @@ function pushWidget(){
   if (!hasNative("setWidget")) return;
   widgetLast = Date.now();
   const set = isSonder(current) ? (REGION[current] === "harz" ? "hwn" : "tou") : current;
-  const n = Object.keys(done[set]).length, total = stamps[set].length;
+  const n = nDone(set), total = nTot(set);
   const lv = set === "hwn" ? hwnLevels() : SETS[set].levels;
   const reached = lv.filter(([x]) => n >= x).pop(), next = lv.find(([x]) => n < x);
   const prevN = reached ? reached[0] : 0;
@@ -3770,7 +3782,7 @@ function svSub(k, title, body){
     <div class="actions" style="margin-top:14px"><button class="btn quiet" id="svBack2">Zurück</button></div>`);
   $("#svBack").onclick = $("#svBack2").onclick = () => openStamp(k);
 }
-const stampKicker = (set, s) => `${isSonder(set) ? heftOf(s.heft).title : SETS[set].short || SETS[set].title} · Nr. ${s.n}`;
+const stampKicker = (set, s) => `${isSonder(set) ? heftOf(s.heft).title : SETS[set].short || SETS[set].title} · ${s.bonus ? "🎁 Bonusstempel" : "Nr. " + s.n}`;
 function stampPlace(set, s){
   if (set === "hwn" && HWN_INFO[s.n]) return HWN_INFO[s.n][0] + (HWN_INFO[s.n][1] ? " · Nationalpark Harz" : "");
   if (isSonder(set)) return heftOf(s.heft).title;
@@ -3813,7 +3825,7 @@ function openStamp(k){
   selectedKey = k; drawMarkers(false);
   const d = done[set][k], m = methodOf(set, k), bad = isBroken(set, k);
   const ph = photos[set][k] || [], rs = routesFor(set, k), fr = friendsWith(set, k);
-  const hefte = groupMembers(set, k), alerts = stampAlerts(set, k, s);
+  const hefte = groupMembers(set, k), alerts = stampAlerts(set, k, s).concat(s.bonus ? [["bonus", "🎁 Bonusstempel", "Ein Extra – zählt nicht für die Wandernadel und nicht beim Heft-Fortschritt."]] : []);
   const distKmV = myPos && hasPos(s) ? distKm(myPos, [s.lat, s.lon]) : null, ele = stampEle(set, s), hint = stampHint(set, s);
   const walk = distKmV != null && distKmV < 30 ? Math.max(1, Math.round(distKmV * 1.3 / 4 * 60)) : null;
   const stat = d ? `<span class="sv-st ok${mCls(set, k)}">✓ ${m === "code" ? "per Code" : m === "digital" ? "digital" : "gestempelt"} ${fmtDate(d).slice(0, 6)}</span>`
@@ -4371,7 +4383,7 @@ function stampBoom(set, k){
     const s = byKey[set].get(k); if (!s) return;
     const old = document.querySelector(".boom"); if (old) old.remove();
     const name = String(s.name).toUpperCase().slice(0, 26), d = new Date(), dt = `${String(d.getDate()).padStart(2, "0")}.${String(d.getMonth() + 1).padStart(2, "0")}.${d.getFullYear()}`;
-    const n = Object.keys(done[set]).length, lv = set === "hwn" ? hwnLevels() : (SETS[set].levels || []), nx = lv.find(([x]) => n < x);
+    const n = nDone(set), lv = set === "hwn" ? hwnLevels() : (SETS[set].levels || []), nx = lv.find(([x]) => n < x);
     const el = document.createElement("div"); el.className = "boom";
     el.innerHTML = `<div class="boom-in"><svg viewBox="0 0 200 200" class="boom-st"><g fill="none" stroke="currentColor" stroke-width="5"><circle cx="100" cy="100" r="88"/><circle cx="100" cy="100" r="74" stroke-width="2"/></g>
       <path id="bmT" d="M100 100m-62 0a62 62 0 1 1 124 0" fill="none"/><text font-family="Georgia,serif" font-weight="700" font-size="${name.length > 16 ? 13 : 17}" fill="currentColor" letter-spacing="2"><textPath href="#bmT" startOffset="50%" text-anchor="middle">${esc(name)}</textPath></text>
@@ -4924,15 +4936,15 @@ const hwnLevelOf = n => (SETS.hwn.levels.filter(([m]) => n >= m).pop() || [0, ""
 /* Zahlen des Hauptheftes (Stempelheft „Ich“), die Freunde sehen */
 function statsFields(){
   const d = profile === "p0" ? done : loadDone("p0");
-  const nh = Object.keys(d.hwn).length;
+  const nh = nDone("hwn", d);
   const fields = {
-    hwn: { integerValue: String(nh) }, hws: { integerValue: String(Object.keys(d.hws).length) },
-    tou: { integerValue: String(Object.keys(d.tou).length) }, tos: { integerValue: String(Object.keys(d.tos).length) },
+    hwn: { integerValue: String(nh) }, hws: { integerValue: String(nDone("hws", d)) },
+    tou: { integerValue: String(nDone("tou", d)) }, tos: { integerValue: String(nDone("tos", d)) },
     level: { stringValue: hwnLevelOf(nh) }, updated: { timestampValue: new Date().toISOString() },
-    tab: { integerValue: String(Object.keys(d.tab || {}).length) }, sax: { integerValue: String(Object.keys(d.sax || {}).length) },
-    bro: { integerValue: String(Object.keys(d.bro || {}).length) }, wip: { integerValue: String(Object.keys(d.wip || {}).length) },
-    dre: { integerValue: String(Object.keys(d.dre || {}).length) }, nhv: { integerValue: String(Object.keys(d.nhv || {}).length) },
-    kne: { integerValue: String(Object.keys(d.kne || {}).length) }, swv: { integerValue: String(Object.keys(d.swv || {}).length) },
+    tab: { integerValue: String(nDone("tab", d)) }, sax: { integerValue: String(nDone("sax", d)) },
+    bro: { integerValue: String(nDone("bro", d)) }, wip: { integerValue: String(nDone("wip", d)) },
+    dre: { integerValue: String(nDone("dre", d)) }, nhv: { integerValue: String(nDone("nhv", d)) },
+    kne: { integerValue: String(nDone("kne", d)) }, swv: { integerValue: String(nDone("swv", d)) },
     recent: { stringValue: JSON.stringify(recentDays(d)) }
   };
   const ls = load("sp.lastStamp.p0", null);
@@ -6344,6 +6356,7 @@ async function openAdmin(){
       <button id="adStats"><span>📊</span>Statistik</button>
       <button id="adCm"><span>💬</span>Kommentare</button>
       <button id="adPos"><span>📍</span>Positionen${posReports.length ? `<i class="mdot">${posReports.length}</i>` : ""}</button>
+      <button id="adAdd"><span>➕</span>Stempel hinzufügen</button>
       <button id="adNews"><span>📣</span>Ankündigung</button>
       <button id="adReports"><span>⚠️</span>Kaputt-Meldungen${openRep ? `<i class="mdot">${openRep}</i>` : ""}</button>
       <button id="adHefte"><span>📚</span>Hefte verwalten</button>
@@ -6361,6 +6374,7 @@ async function openAdmin(){
   $("#adInbox").onclick = openInbox;
   $("#adStats").onclick = openStatsAdmin;
   $("#adPos").onclick = openPosAdmin;
+  $("#adAdd").onclick = () => openAddStamp(null, openAdmin);
   $("#adCm").onclick = () => openCommentsAdmin();
   $("#adLayout").onclick = openLayoutAdmin;
   $("#adHefte").onclick = openHefteAdmin;
@@ -6761,6 +6775,7 @@ function openModArea(){
     <div class="mtiles">
       <button id="moInbox" class="wide"><span>📥</span>Postfach${inboxCount ? `<i class="mdot">${inboxCount}</i>` : ""}</button>
       <button id="moPos"><span>📍</span>Positionen${posReports.length ? `<i class="mdot">${posReports.length}</i>` : ""}</button>
+      <button id="moAdd"><span>➕</span>Stempel hinzufügen</button>
       <button id="moRep"><span>⚠️</span>Kaputt-Meldungen${openRep ? `<i class="mdot">${openRep}</i>` : ""}</button>
       <button id="moChk"><span>💧</span>Stempel-Status</button>
       <button id="moCm"><span>💬</span>Kommentare</button>
@@ -6768,6 +6783,7 @@ function openModArea(){
     <p class="hint">Einzelne Stempel (Position, Name, Hinweis) änderst du direkt im Stempel über „🛠️ Bearbeiten“. Tipps von Wanderern kannst du dort mit ✕ löschen.</p>
     <div class="actions">${isAdmin ? '<button class="btn" id="moAdm">Zum Admin-Bereich</button>' : ""}<button class="btn quiet" id="sClose">Schließen</button></div>`);
   $("#moPos").onclick = openPosAdmin;
+  $("#moAdd").onclick = () => openAddStamp(null, openModArea);
   $("#moInbox").onclick = openInbox;
   loadInbox().then(() => { const b = $("#moInbox"); if (b) { b.querySelectorAll(".mdot").forEach(x => x.remove()); if (inboxCount) b.insertAdjacentHTML("beforeend", `<i class="mdot">${inboxCount}</i>`); } }).catch(() => {});
   $("#moRep").onclick = openReportsAdmin;
@@ -6831,10 +6847,18 @@ function applyFixes(map, quiet){
   for (const s of fixTouched) if (s._o) { Object.assign(s, s._o); delete s._o; }
   fixTouched = [];
   stampFixes = map || {};
+  /* ➕ Von Admin/Mod hinzugefügte Stempel (Eintrag mit add:1) – erst alte entfernen, dann neu anlegen */
+  for (const st of SET_KEYS) { const rm = stamps[st].filter(x => x.added); if (rm.length) { stamps[st] = stamps[st].filter(x => !x.added); rm.forEach(x => byKey[st].delete(x.k)); } }
+  for (const [key, f] of Object.entries(stampFixes)) {
+    if (!f || !f.add) continue;
+    const [st, k] = key.split("|"); if (!stamps[st] || isSonder(st) || byKey[st].has(k)) continue;
+    const ns = { k, n: f.n || "+", name: f.name || "Zusatzstempel", lat: f.lat != null ? +f.lat : null, lon: f.lon != null ? +f.lon : null, hint: f.hint || "", bonus: !!f.bonus, added: true };
+    stamps[st].push(ns); byKey[st].set(k, ns);
+  }
   const touch = s => { if (!s._o) { s._o = { lat: s.lat, lon: s.lon, name: s.name, hint: s.hint }; fixTouched.push(s); } };
   for (const [key, f] of Object.entries(stampFixes)) {
     const [st, k] = key.split("|"), s = byKey[st] && byKey[st].get(k);
-    if (!s) continue;
+    if (!s || f.add) continue;
     touch(s);
     if (f.lat != null && f.lon != null) { s.lat = +f.lat; s.lon = +f.lon; }
     if (f.name) s.name = f.name;
@@ -6892,7 +6916,8 @@ async function saveFix(set, k, fix){
   try { const r = await fb.raw("GET", "/config/fixes"); if (r.ok) cur = JSON.parse(fv(await r.json(), "data") || "{}"); } catch(e) { cur = Object.assign({}, stampFixes); }
   const key = set + "|" + k, old = cur[key];
   if (fix) {
-    const nf = Object.assign({ ts: new Date().toISOString(), by: username ? username.name : "" }, fix);
+    let nf = Object.assign({ ts: new Date().toISOString(), by: username ? username.name : "" }, fix);
+    if (old && old.add && !fix.add) nf = Object.assign({}, old, nf);   // hinzugefügter Stempel: nur die geänderten Felder ersetzen
     /* vorherige Korrektur merken, damit man sieht, wo der Stempel davor stand */
     if (old && old.lat != null && nf.lat != null && (old.lat !== nf.lat || old.lon !== nf.lon)) nf.prev = { lat: old.lat, lon: old.lon, by: old.by || "", ts: old.ts || "" };
     else if (old && old.prev && nf.lat != null && nf.lat === old.lat) nf.prev = old.prev;
@@ -6962,6 +6987,42 @@ function bindPosPicker(s, start, ref){
   $("#ppSat").onclick = () => { sat = !sat; if (sat) satL = L.tileLayer(BASES.sat.url, { maxZoom: 19 }).addTo(pm); else if (satL) pm.removeLayer(satL); $("#ppSat").textContent = sat ? "🗺️ Karte" : "🛰️ Satellit"; };
   return () => { const c = pm.getCenter(); return [Math.round(c.lat * 1e6) / 1e6, Math.round(c.lng * 1e6) / 1e6]; };
 }
+/* ---------- ➕ Admin/Mod: eigenen Stempel zu einem Heft hinzufügen (z. B. Bonusstempel) – liegt in config/fixes, gilt sofort für alle ---------- */
+const ADDABLE = () => SET_KEYS.filter(st => !isSonder(st));
+function openAddStamp(set, back, edit){
+  set = set || (ADDABLE().includes(current) ? current : "hwn");
+  const s = edit ? byKey[set].get(edit) : null;
+  const start = s && hasPos(s) ? [s.lat, s.lon] : (myPos || [map.getCenter().lat, map.getCenter().lng]);
+  openSheet(`<div class="kicker">${isAdmin ? "Admin" : "Moderator"}</div><h2>${s ? "✏️ Zusatzstempel bearbeiten" : "➕ Stempel hinzufügen"}</h2>
+    <p style="font-size:.88rem">Der Stempel erscheint sofort bei allen in diesem Heft – ohne neue App-Version.</p>
+    <div class="field"><label for="asSet">Heft</label><div class="inrow"><select id="asSet" class="assel" ${s ? "disabled" : ""}>${ADDABLE().map(st => `<option value="${st}" ${st === set ? "selected" : ""}>${esc(SETS[st].title)}</option>`).join("")}</select></div></div>
+    <div class="field asrow"><div><label for="asN">Nummer</label><div class="inrow"><input id="asN" value="${esc(s ? String(s.n) : "+")}" maxlength="6"></div></div>
+      <div style="flex:1"><label for="asName">Name</label><div class="inrow"><input id="asName" value="${esc(s ? s.name : "")}" maxlength="80" placeholder="z. B. Urlaubsmagie-Bonusstempel"></div></div></div>
+    <div class="field"><label for="asHint">Hinweis</label><div class="inrow"><input id="asHint" value="${esc(s ? s.hint || "" : "")}" maxlength="200" placeholder="z. B. Adresse, Öffnungszeiten, was es dort gibt"></div></div>
+    <label class="lc-sw asbonus"><span class="nfic">🎁</span><span><b>Bonusstempel</b><small>zählt nicht für die Wandernadel und nicht beim Heft-Fortschritt</small></span><input type="checkbox" id="asBonus" ${!s || s.bonus ? "checked" : ""}><i></i></label>
+    <h3>Position</h3>
+    ${posPickerHtml()}
+    <div class="actions"><button class="btn primary" id="asSave">${s ? "Speichern" : "Für alle hinzufügen"}</button>${s ? '<button class="btn warn" id="asDel">Stempel löschen …</button>' : ""}<button class="btn quiet" id="asBack">Zurück</button></div>`);
+  const get = bindPosPicker(s || {}, start, s && hasPos(s) ? [s.lat, s.lon] : null);
+  $("#asBack").onclick = () => (back || staffHome)();
+  $("#asSave").onclick = async () => {
+    const st = $("#asSet").value, name = $("#asName").value.trim(), n = $("#asN").value.trim() || "+", hint = $("#asHint").value.trim();
+    if (name.length < 2) { toast("Bitte einen Namen eingeben"); return; }
+    if (badText(name + " " + hint)) { toast(BAD_MSG); return; }
+    const [lat, lon] = get(), k = s ? s.k : "x" + Date.now().toString(36);
+    const b = $("#asSave"); b.disabled = true;
+    try {
+      await saveFix(st, k, { add: 1, n, name, hint, lat, lon, bonus: $("#asBonus").checked ? 1 : 0 });
+      toast(s ? "✓ Gespeichert – gilt für alle" : "✓ Stempel hinzugefügt – alle sehen ihn jetzt");
+      if (st !== current) switchSet(st);
+      closeSheet(); setView("map"); map.setView([lat, lon], 15); setTimeout(() => openStampIn(st, k), 300);
+    } catch(e) { b.disabled = false; toast("Fehlgeschlagen: " + e.message); }
+  };
+  const del = $("#asDel"); if (del) del.onclick = async () => {
+    if (!del.dataset.sure) { del.dataset.sure = "1"; del.textContent = "Wirklich löschen? Nochmal tippen"; return; }
+    try { await saveFix(set, s.k, null); toast("Stempel gelöscht"); closeSheet(); } catch(e) { toast("Fehlgeschlagen: " + e.message); }
+  };
+}
 /* Nutzer: falsche Position melden */
 function openPosReport(set, k){
   const s = byKey[set].get(k);
@@ -6991,6 +7052,7 @@ function openPosReport(set, k){
 }
 /* Admin: Stempel bearbeiten (Position, Name, Hinweis) – gilt sofort für alle */
 function openFixEdit(set, k, rep, back){
+  { const a = byKey[set].get(k); if (a && a.added && !rep) return openAddStamp(set, back, k); }
   const s = byKey[set].get(k), o = origOf(s), f = stampFixes[set + "|" + k];
   const ref = hasPos(s) ? [s.lat, s.lon] : null;
   const start = rep ? [rep.lat, rep.lon] : ref || SETS[set].center;
@@ -7045,7 +7107,7 @@ async function openPosAdmin(){
       return `<li><button data-prep="${esc(r.id)}"><span class="dot" style="background:var(--open)"></span><span class="t">${esc(stampTitle(st, s))} <small>${esc(SETS[st].title)} · ${l.length > 1 ? l.length + " Meldungen" : "von " + esc(r.name)} · ${esc(ago(r.ts))}${hasPos(s) ? " · " + fmtKm(distKm([s.lat, s.lon], [r.lat, r.lon])) + " daneben" : " · hatte keine Position"}${r.note ? " · „" + esc(r.note.slice(0, 60)) + "“" : ""}</small></span></button></li>`; }).join("")}</ul>` : '<p class="hint">Keine offenen Meldungen.</p>'}
     <h3>Schon geändert <small class="pcount">${fixed.length}</small></h3>
     ${fixed.length ? `<ul class="slist">${fixed.map(key => { const [st, k] = key.split("|"), s = byKey[st] && byKey[st].get(k); if (!s) return ""; const f = stampFixes[key];
-      return `<li><button data-pfix="${esc(key)}"><span class="dot" style="background:var(--done)"></span><span class="t">${esc(stampTitle(st, s))}<small>${esc(SETS[st].title)} · ${[f.lat != null ? "Position" : "", f.name ? "Name" : "", f.hint != null ? "Hinweis" : ""].filter(Boolean).join(", ")} geändert ${esc(ago(f.ts))} · ${f.by ? "von " + esc(f.by) : "Bearbeiter unbekannt"}</small></span></button></li>`; }).join("")}</ul>` : '<p class="hint">Noch nichts geändert.</p>'}
+      return `<li><button data-pfix="${esc(key)}"><span class="dot" style="background:var(--done)"></span><span class="t">${esc(stampTitle(st, s))}<small>${esc(SETS[st].title)} · ${[f.add ? "➕ hinzugefügt" + (f.bonus ? " · Bonus" : "") : "", !f.add && f.lat != null ? "Position" : "", f.name ? "Name" : "", f.hint != null ? "Hinweis" : ""].filter(Boolean).join(", ")} geändert ${esc(ago(f.ts))} · ${f.by ? "von " + esc(f.by) : "Bearbeiter unbekannt"}</small></span></button></li>`; }).join("")}</ul>` : '<p class="hint">Noch nichts geändert.</p>'}
     <p class="hint">Jeden Stempel kannst du auch direkt im Stempel über „🛠️ Bearbeiten“ ändern. Änderungen gelten sofort für alle – ohne neue App-Version.</p>
     <div class="actions"><button class="btn quiet" id="paBack">Zurück</button></div>`);
   $("#paBack").onclick = staffHome;
@@ -7056,6 +7118,7 @@ async function openPosAdmin(){
 function openFixInfo(key, back){
   const [st, k] = key.split("|"), s = byKey[st] && byKey[st].get(k), f = stampFixes[key];
   if (!s || !f) { back(); return; }
+  if (s.added) return openAddStamp(st, back, k);
   const o = origOf(s), moved = f.lat != null;
   const pts = [];
   if (o.lat != null) pts.push(["Original", o.lat, o.lon, "#9aa5a0"]);
@@ -7449,7 +7512,7 @@ function badgeCtx(d, pid){
   const weeks = [...new Set(dates.map(x => Math.floor((Date.parse(x + "T12:00:00Z") / 864e5 + 3) / 7)))].sort((a, b) => a - b);
   let streak = weeks.length ? 1 : 0, run = 1;
   for (let i = 1; i < weeks.length; i++) { run = weeks[i] === weeks[i - 1] + 1 ? run + 1 : 1; streak = Math.max(streak, run); }
-  const cnt = set => Object.keys(d[set] || {}).length;
+  const cnt = set => nDone(set, d);
   const inSeason = [0, 0, 0, 0]; dates.forEach(x => inSeason[season(+x.slice(5, 7))]++);
   const hrs = Object.entries((stampHours[pid || profile] || {})).filter(([key]) => { const [st, k] = key.split("|"); return d[st] && d[st][k]; }).map(([, h]) => h);
   return {
@@ -7501,7 +7564,7 @@ function pinsReached(){
   const nb = Object.keys(done.tab).length;
   for (const [n, name] of SETS.tab.levels) if (nb >= n) out.push({ id: "tab:" + n, title: name + "-Nadel Bad Tabarz", sub: `Bad Tabarzer Wandernadel · ${n} Stempel`, url: SETS.tab.url });
   if (Object.keys(done.sax).length >= 25) out.push({ id: "sax:11", title: "Wandernadel Sächsische Schweiz", sub: "Urlaubsmagie-Wanderpass · alle 25 Stempel", url: SETS.sax.url });
-  for (const st of ["bro", "wip", "nhv", "kne", "swv"]) for (const [n, name] of SETS[st].levels) if (Object.keys(done[st]).length >= n) out.push({ id: st + ":" + n, title: name + (st === "bro" ? " Brotterode" : ""), sub: `${SETS[st].title} · ${n} Stempel`, url: SETS[st].url });
+  for (const st of ["bro", "wip", "nhv", "kne", "swv"]) for (const [n, name] of SETS[st].levels) if (nDone(st) >= n) out.push({ id: st + ":" + n, title: name + (st === "bro" ? " Brotterode" : ""), sub: `${SETS[st].title} · ${n} Stempel`, url: SETS[st].url });
   const nt = Object.keys(done.tou).length;
   for (const [n, name] of SETS.tou.levels) if (nt >= n) out.push({ id: "tou:" + n, title: "Abzeichen " + name, sub: `Touringen · ${n === 430 ? "alle 430" : n} Stempel`, url: SETS.tou.pinsUrl });
   for (const { set, h } of fullHefte(done)) if (heftActive(h.id)) out.push({ id: set + ":" + h.id, title: h.title, sub: set === "hws" ? "Themenheft voll – Nadel abholen" : "Sonderedition komplett", url: h.url || "" });
@@ -7626,7 +7689,7 @@ function yearImage(y){
 }
 /* ---------- 🖼️ Stempel-Pass als Bild: alle Stempel eines Hefts als Raster (Vorschau) ---------- */
 function sharePass(set){
-  const url = passImage(set), n = Object.keys(done[set]).length, text = `📒 ${SETS[set].title}: ${n} von ${stamps[set].length} gestempelt! #Stempeljagd #Wandern`;
+  const url = passImage(set), n = nDone(set), text = `📒 ${SETS[set].title}: ${n} von ${nTot(set)} gestempelt! #Stempeljagd #Wandern`;
   if (hasNative("shareImage")) { NATIVE.shareImage(url, text); return; }
   const a = document.createElement("a"); a.href = url; a.download = `stempeljagd-${set}.png`; document.body.appendChild(a); a.click(); a.remove();
 }
@@ -7659,7 +7722,7 @@ function pinReqText(st){
   const who = username ? username.name : profileName();
   const row = x => { const m = methodOf(st, x.k), c = methodCode(st, x.k);
     return `${isSonder(st) ? "" : "Nr. " + x.n + " "}${x.name}${isSonder(st) && heftOf(x.heft) ? " (" + heftOf(x.heft).short + ")" : ""} – ${fmtDate(done[st][x.k])}${m === "code" ? " · per Code" + (c ? " " + c : "") : m === "digital" ? " · digital" : ""}`; };
-  return `Stempelnachweis ${SETS[st].title}\nName: ${who}\n${l.length} von ${stamps[st].length} Stempeln · Stand ${fmtDate(today())}\n\n${l.map(row).join("\n")}`;
+  return `Stempelnachweis ${SETS[st].title}\nName: ${who}\n${l.length} von ${nTot(st)} Stempeln · Stand ${fmtDate(today())}\n\n${l.map(row).join("\n")}`;
 }
 function openPinRequest(back){
   const have = SET_KEYS.filter(st => stamps[st] && Object.keys(done[st] || {}).length);
@@ -7668,7 +7731,7 @@ function openPinRequest(back){
   const t = pinReqText(pinReqSet), h = pinHelp(pinReqSet === "tou" || pinReqSet === "tos" ? "tou" : pinReqSet);
   openSheet(`<div class="kicker">📝 Nadel-Antrag</div><h2>Stempelliste für die Nadel</h2>
     <p class="hint" style="margin-top:-4px">Die Liste mit Nummern und Daten – zum Einfügen ins Bestellformular, per Mail oder ausgedruckt.</p>
-    <div class="chips2 prq">${have.map(st => `<button class="ch ${st === pinReqSet ? "on" : ""}" data-prq="${st}">${esc(SETS[st].short)} · ${Object.keys(done[st]).length}</button>`).join("")}</div>
+    <div class="chips2 prq">${have.map(st => `<button class="ch ${st === pinReqSet ? "on" : ""}" data-prq="${st}">${esc(SETS[st].short)} · ${nDone(st)}</button>`).join("")}</div>
     <textarea class="note prtxt" id="prTxt" readonly>${esc(t)}</textarea>
     <div class="actions prbtns"><button class="btn primary" id="prCopy">📋 Kopieren</button><button class="btn" id="prShare">📤 Teilen</button><button class="btn" id="prPdf">📄 PDF</button></div>
     ${h && h.url ? `<div class="actions"><a class="btn quiet" href="${esc(h.url)}" target="_blank" rel="noopener">🔗 Zur Nadel-Bestellung</a></div>` : ""}
@@ -7819,7 +7882,7 @@ async function diaryHtml(withPhotos){
   const days = [];
   for (const e of entries) { if (!days.length || days[days.length - 1].d !== e.d) days.push({ d: e.d, list: [] }); days[days.length - 1].list.push(e); }
   const longDate = iso => new Date(iso + "T12:00").toLocaleDateString("de-DE", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
-  const cnt = set => Object.keys(done[set]).length;
+  const cnt = set => nDone(set);
   const earned = earnedNow(profile);
   let body = "";
   for (const day of days) {
@@ -7847,7 +7910,7 @@ async function diaryHtml(withPhotos){
     .badges{color:#3d4a40;font-size:10pt}.foot{margin-top:10mm;color:#8a978d;font-size:8.5pt;text-align:center}
   </style></head><body>
     <h1>Wandertagebuch</h1><p class="sub">${esc(who)} · erstellt am ${fmtDate(today())}${entries.length ? ` · ${fmtDate(entries[0].d)} bis ${fmtDate(entries[entries.length - 1].d)}` : ""}</p>
-    <div class="sum"><div><b>${cnt("hwn")}/222</b>Harzer Wandernadel</div><div><b>${cnt("tou")}/430</b>Touringen</div><div><b>${cnt("hws") + cnt("tos")}</b>Sonderstempel</div>${cnt("tab") ? `<div><b>${cnt("tab")}/24</b>Bad Tabarz</div>` : ""}${cnt("sax") ? `<div><b>${cnt("sax")}/25</b>Sächs. Schweiz</div>` : ""}${VOR_SETS.map(st => cnt(st) ? `<div><b>${cnt(st)}/${stamps[st].length}</b>${esc(SETS[st].short)}</div>` : "").join("")}<div><b>${days.length}</b>Wandertage</div></div>
+    <div class="sum"><div><b>${cnt("hwn")}/222</b>Harzer Wandernadel</div><div><b>${cnt("tou")}/430</b>Touringen</div><div><b>${cnt("hws") + cnt("tos")}</b>Sonderstempel</div>${cnt("tab") ? `<div><b>${cnt("tab")}/24</b>Bad Tabarz</div>` : ""}${cnt("sax") ? `<div><b>${cnt("sax")}/25</b>Sächs. Schweiz</div>` : ""}${VOR_SETS.map(st => cnt(st) ? `<div><b>${cnt(st)}/${nTot(st)}</b>${esc(SETS[st].short)}</div>` : "").join("")}<div><b>${days.length}</b>Wandertage</div></div>
     ${Object.keys(earned).length ? `<p class="badges"><b>Abzeichen:</b> ${BADGES.filter(b => earned[b[0]]).map(b => b[1] + " " + esc(b[2])).join(" · ")}</p>` : ""}
     ${body || "<p>Noch keine Stempel eingetragen.</p>"}
     <p class="foot">Erstellt mit Stempeljagd${MADE_BY ? " von " + esc(MADE_BY) : ""}</p></body></html>`;
@@ -7864,7 +7927,7 @@ async function exportDiary(){
   setTimeout(() => { try { f.contentWindow.print(); } catch(e) {} setTimeout(() => f.remove(), 60000); }, 400);
 }
 function openDiary(){
-  const n = SET_KEYS.reduce((a, s) => a + Object.keys(done[s]).length, 0);
+  const n = SET_KEYS.reduce((a, s) => a + nDone(s), 0);
   openSheet(`<div class="kicker">Heft: ${esc(profileName())}</div><h2>Wandertagebuch</h2>
     <p>Alle ${n} Stempel nach Wandertagen sortiert, mit deinen Notizen${hasNative("printHtml") ? ". Im nächsten Schritt wählst du oben „Als PDF speichern“ – oder einen Drucker." : "."}</p>
     <label class="checkline"><input type="checkbox" id="dPhotos" checked> Je ein Foto pro Stempel einfügen</label>
@@ -8049,7 +8112,7 @@ function openHefteAll(){
     <button class="sv-line hg-btn" id="hgOpen"><span class="ic">🛒</span><span class="t"><b>Wo bekomme ich die Hefte?</b><small>Tourist-Infos, Shops & Preise</small></span></button>
     <h3>Gebiete</h3><ul class="hchoose">${REGIONS.map(regRow).join("")}</ul>
     <h3 id="x2sec">🗺️ Zusätzlich auf der Karte</h3><p class="hint" style="margin-top:-4px">Stempel dieser Hefte siehst du auf der Karte auch, wenn du gerade in einem anderen Heft bist – mit farbigem Rand.</p>
-    <ul class="hchoose">${SET_KEYS.filter(st => stamps[st] && stamps[st].length).map(st => `<li><span class="hic"><i class="x2ring" style="border-color:${SET_COL[st]}"></i></span><span class="t"><b>${esc(SETS[st].title)}</b><small>${stamps[st].filter(x => isDone(st, x.k)).length}/${stamps[st].length} gestempelt${st === current ? " · gerade offen" : ""}</small></span>${sw("data-ax2", st, extraSets.includes(st))}</li>`).join("")}</ul>
+    <ul class="hchoose">${SET_KEYS.filter(st => stamps[st] && stamps[st].length).map(st => `<li><span class="hic"><i class="x2ring" style="border-color:${SET_COL[st]}"></i></span><span class="t"><b>${esc(SETS[st].title)}</b><small>${nDone(st)}/${nTot(st)} gestempelt${st === current ? " · gerade offen" : ""}</small></span>${sw("data-ax2", st, extraSets.includes(st))}</li>`).join("")}</ul>
     ${shownRegions.includes("harz") ? `<h3>Harz · Begleithefte</h3><ul class="hchoose">${heftRows("hws")}</ul>` : ""}
     ${shownRegions.includes("thue") ? `<h3>Touringen · Sondereditionen</h3><ul class="hchoose">${heftRows("tos")}</ul>` : ""}
     <div class="actions"><button class="btn primary" id="sClose">Fertig</button></div>`);
@@ -8134,7 +8197,7 @@ function pinsOf(d){
   const nb = Object.keys(d.tab || {}).length;
   for (const [n, name] of SETS.tab.levels) if (nb >= n) out.push(name + " Bad Tabarz");
   if (Object.keys(d.sax || {}).length >= 25) out.push("Wandernadel Sächs. Schweiz");
-  for (const st of ["bro", "wip", "nhv", "kne", "swv"]) for (const [n, name] of SETS[st].levels) if (Object.keys(d[st] || {}).length >= n) out.push(name + (st === "bro" ? " Brotterode" : ""));
+  for (const st of ["bro", "wip", "nhv", "kne", "swv"]) for (const [n, name] of SETS[st].levels) if (nDone(st, d) >= n) out.push(name + (st === "bro" ? " Brotterode" : ""));
   for (const { h } of fullHefte(d)) out.push(h.short);
   return out;
 }
@@ -8477,8 +8540,8 @@ function profRingData(m, c, me){
     { id: "tab", t: "Tabarz", long: "Bad Tabarzer Wandernadel", n: m.tab || 0, total: 24, col: "var(--pc-tab)", lv: SETS.tab.levels, show: (m.tab || 0) > 0 || (me && shownRegions.includes("tab")) },
     { id: "sax", t: "Sachsen", long: "Sächsische Schweiz", n: m.sax || 0, total: 25, col: "var(--pc-sax)", lv: SETS.sax.levels, show: (m.sax || 0) > 0 || (me && shownRegions.includes("sax")) },
     ...[["bro", "Brotterode", "var(--pc-bro)"], ["nhv", "Nördl. Harzv.", "var(--pc-vor)"], ["dre", "Dreiländereck", "var(--pc-dre)"], ["wip", "Wippertal", "var(--pc-wip)"], ["kne", "Kneipp", "var(--pc-kne)"], ["swv", "Wilde Heimat", "var(--pc-swv)"]].map(([st, t, col]) => {
-      const n = me ? Object.keys((profile === "p0" ? done : loadDone("p0"))[st] || {}).length : (c.stamps ? (c.stamps[st] || []).length : 0);
-      return { id: st, t, long: SETS[st].title, n, total: stamps[st].length, col, lv: SETS[st].levels, show: n > 0 || (me && shownRegions.includes(st)) };
+      const n = me ? nDone(st, profile === "p0" ? done : loadDone("p0")) : (c.stamps ? (c.stamps[st] || []).length : 0);
+      return { id: st, t, long: SETS[st].title, n, total: nTot(st), col, lv: SETS[st].levels, show: n > 0 || (me && shownRegions.includes(st)) };
     }),
     { id: "son", t: "Sonder", long: "Sonderhefte", n: m.hws + m.tos, total: sonderTotal, col: "var(--pc-son)", lv: [], show: m.hws + m.tos > 0 }
   ].filter(r => r.show);
@@ -8977,7 +9040,7 @@ function openStats(){
     const h = per.hwn[m] || 0, x = (per.hws[m] || 0) + (per.tos[m] || 0), t = per.tou[m] || 0, [y, mo] = m.split("-");
     return `<div class="mrow"><span>${MONTHS[+mo-1]} ${y.slice(2)}</span><span class="track"><i class="h" style="width:${h/maxM*100}%"></i><i class="x" style="width:${x/maxM*100}%"></i><i class="t" style="width:${t/maxM*100}%"></i></span><em>${h + x + t || ""}</em></div>`;
   }).join("");
-  const cnt = set => Object.keys(done[set]).length;
+  const cnt = set => nDone(set);
   const rDone = routes.tou.filter(r => r.stamps.every(k => done.tou[k])).length;
   const rStarted = routes.tou.filter(r => r.stamps.some(k => done.tou[k])).length;
   const rKm = routes.tou.filter(r => r.stamps.every(k => done.tou[k])).reduce((a, r) => a + r.km, 0);
@@ -8994,7 +9057,7 @@ function openStats(){
       <div class="stat"><b>${cnt("hws")}<small style="font-size:.9rem;color:var(--muted)"> / ${stamps.hws.length}</small></b><span>Harzer Sonderstempel${(n => n ? `, ${n} ${n === 1 ? "Themenheft" : "Themenhefte"} voll` : "")(HWS.hefts.filter(h => h.id !== "einzel" && stamps.hws.filter(x => x.heft === h.id).every(x => done.hws[x.k])).length)}</span></div>
       ${shownRegions.includes("tab") || cnt("tab") ? `<div class="stat"><b>${cnt("tab")}<small style="font-size:.9rem;color:var(--muted)"> / 24</small></b><span>Bad Tabarz${(l => l ? " · " + l[1] : "")(SETS.tab.levels.filter(([n]) => cnt("tab") >= n).pop())}</span></div>` : ""}
       ${shownRegions.includes("sax") || cnt("sax") ? `<div class="stat"><b>${cnt("sax")}<small style="font-size:.9rem;color:var(--muted)"> / 25</small></b><span>Sächs. Schweiz${cnt("sax") >= 25 ? " · Nadel" : ""}</span></div>` : ""}
-      ${VOR_SETS.filter(st => shownRegions.includes(st) || cnt(st)).map(st => `<div class="stat"><b>${cnt(st)}<small style="font-size:.9rem;color:var(--muted)"> / ${stamps[st].length}</small></b><span>${esc(SETS[st].short)}${(l => l ? " · " + esc(l[1]) : "")(SETS[st].levels.filter(([n]) => cnt(st) >= n).pop())}</span></div>`).join("")}
+      ${VOR_SETS.filter(st => shownRegions.includes(st) || cnt(st)).map(st => `<div class="stat"><b>${cnt(st)}<small style="font-size:.9rem;color:var(--muted)"> / ${nTot(st)}</small></b><span>${esc(SETS[st].short)}${(l => l ? " · " + esc(l[1]) : "")(SETS[st].levels.filter(([n]) => cnt(st) >= n).pop())}</span></div>`).join("")}
       <div class="stat"><b>${rDone}<small style="font-size:.9rem;color:var(--muted)"> / ${routes.tou.length}</small></b><span>Touringen-Routen komplett${rDone ? ` (${km1(rKm)} km)` : ""}, ${rStarted} angefangen</span></div>
       <div class="stat"><b>${ph}</b><span>Fotos</span></div>
     </div>
@@ -9951,7 +10014,7 @@ function syncNotify(now){
     for (const o of invitesOut || []) if (o.reply === "yes" && invFuture(o)) { const p = plans[o.id] || (plans[o.id] = { id: o.id, date: o.date, time: o.time, title: o.title, with: "" }); p.with = [p.with, o.toName].filter(Boolean).join(", "); }
     cfg.plans = Object.values(plans);
     cfg.totals = {}; cfg.titles = {};
-    for (const k of SET_KEYS) { cfg.totals[k] = (stamps[k] || []).length; cfg.titles[k] = SETS[k].title; }
+    for (const k of SET_KEYS) { cfg.totals[k] = nTot(k); cfg.titles[k] = SETS[k].title; }
     cfg.home = myPos ? [+myPos[0].toFixed(3), +myPos[1].toFixed(3)] : SETS[current].center;
     const ls = load("sp.lastStamp.p0", null); cfg.lastStamp = ls && ls.date ? String(ls.date).slice(0, 10) : "";
     pushNearbyList();   // auch fürs Widget (nächster Stempel im Hintergrund)
