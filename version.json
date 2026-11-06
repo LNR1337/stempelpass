@@ -1,6 +1,6 @@
 {
- "code": 107,
- "version": "0.9.67 Beta",
- "notes": "Admins und Moderatoren können eigene Stempel zu einem Heft hinzufügen – auch als Bonusstempel, der nicht für die Nadel zählt.",
+ "code": 108,
+ "version": "0.9.68 Beta",
+ "notes": "Fehler behoben: App blieb nach dem Hinzufügen eines Stempels beim Laden hängen.",
  "apk": "Stempelpass.apk"
 }

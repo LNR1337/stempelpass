@@ -2296,8 +2296,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.67 Beta";
-const APP_CODE = 107;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.68 Beta";
+const APP_CODE = 108;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -6851,7 +6851,7 @@ function applyFixes(map, quiet){
   for (const st of SET_KEYS) { const rm = stamps[st].filter(x => x.added); if (rm.length) { stamps[st] = stamps[st].filter(x => !x.added); rm.forEach(x => byKey[st].delete(x.k)); } }
   for (const [key, f] of Object.entries(stampFixes)) {
     if (!f || !f.add) continue;
-    const [st, k] = key.split("|"); if (!stamps[st] || isSonder(st) || byKey[st].has(k)) continue;
+    const [st, k] = key.split("|"); if (!stamps[st] || !stamps[st].length || isSonder(st) || byKey[st].has(k)) continue;   // erst wenn das Heft geladen ist
     const ns = { k, n: f.n || "+", name: f.name || "Zusatzstempel", lat: f.lat != null ? +f.lat : null, lon: f.lon != null ? +f.lon : null, hint: f.hint || "", bonus: !!f.bonus, added: true };
     stamps[st].push(ns); byKey[st].set(k, ns);
   }
@@ -6867,9 +6867,10 @@ function applyFixes(map, quiet){
   /* Gleiche Stempelstelle in anderen Heften (z. B. Inselsberg in Tabarz und Brotterode) mitverschieben,
      solange dort nicht selbst etwas korrigiert wurde */
   for (const [key, f] of Object.entries(stampFixes)) {
-    if (f.lat == null || f.lon == null) continue;
+    if (f.lat == null || f.lon == null || f.add) continue;
     const [st, k] = key.split("|"); if (!byKey[st] || !byKey[st].has(k)) continue;
-    for (const m of groupMembers(st, k)) {
+    let gm = []; try { gm = groupMembers(st, k); } catch(e) {}   // beim Start sind die Gruppen evtl. noch nicht fertig
+    for (const m of gm) {
       if ((m.set === st && m.k === k) || stampFixes[m.set + "|" + m.k]) continue;
       const t = byKey[m.set].get(m.k); if (!t) continue;
       touch(t); t.lat = +f.lat; t.lon = +f.lon;
@@ -7146,7 +7147,7 @@ function openFixInfo(key, back){
     setTimeout(() => mm.invalidateSize(), 200);
   }
 }
-applyFixes(load("sp.fixes", {}), true);
+try { applyFixes(load("sp.fixes", {}), true); } catch(e) { console.error("Korrekturen", e); }   // ein kaputter Eintrag darf den Start nie blockieren
 
 async function loadCustomHefte(){
   if (!fb.ready()) return;
