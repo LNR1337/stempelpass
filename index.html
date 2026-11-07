@@ -1060,13 +1060,13 @@ h2 .inoff{font-size:.6rem;vertical-align:4px}
 
 /* 👤 Profil – Banner-Stil */
 .pbn2{position:relative;margin:4px 0 0;padding:18px 16px 14px;border-radius:22px;color:#fff;background:radial-gradient(120% 90% at 90% 0%,#3a7a54,transparent 60%),linear-gradient(160deg,#1d4a33,#0f2a1d);box-shadow:0 8px 22px rgba(15,42,29,.25)}
-.pb2-edit{position:absolute;right:12px;top:12px;border:0;border-radius:99px;padding:6px 11px;background:rgba(255,255,255,.15);color:#fff;font:600 .76rem var(--body)}
+.pb2-edit{position:absolute;right:10px;top:10px;width:34px;height:34px;border:0;border-radius:50%;padding:0;background:rgba(255,255,255,.15);color:#fff;font:600 1rem var(--body);display:grid;place-items:center}
 .pb2-r{display:flex;gap:14px;align-items:center}
 .pb2-av{position:relative;flex:none}.pb2-av .pring{background:conic-gradient(var(--c) calc(var(--p) * 1%),rgba(255,255,255,.18) 0)}
 .pb2-av .pav{width:80px;height:80px;font-size:2.4rem}
 .pb2-av .pmedal{position:absolute;right:-2px;bottom:-2px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#1d4a33;border:2px solid #f2c14e;font-size:.95rem}
 .pb2-av.is-on::after{content:"";position:absolute;left:4px;bottom:6px;width:14px;height:14px;border-radius:50%;background:#3fbf6e;border:3px solid #1d4a33}
-.pb2-t{flex:1;min-width:0}.pb2-t h2{margin:0;padding-right:84px;color:#fff;font:700 1.5rem/1.15 var(--display);overflow-wrap:anywhere}.pb2-t h2.l{font-size:1.25rem}
+.pb2-t{flex:1;min-width:0}.pb2-t h2{margin:0;padding-right:34px;color:#fff;font:700 1.5rem/1.15 var(--display);overflow-wrap:break-word;hyphens:auto}.pb2-t h2.l{font-size:1.25rem}.pb2-t h2.xl{font-size:1.08rem}
 .pb2-lv{display:inline-flex;gap:6px;align-items:center;margin:6px 0 4px;padding:5px 11px;border:0;border-radius:99px;background:rgba(255,255,255,.15);color:#fff;font:700 .78rem var(--body);text-align:left}
 .pb2-t small{display:block;opacity:.78;font-size:.78rem;line-height:1.35}
 .pb2-bio{margin:12px 0 0;font-style:italic;color:rgba(255,255,255,.88)!important;font-size:.9rem}
@@ -1165,6 +1165,30 @@ li.done .chk.phc svg{position:absolute;right:-5px;bottom:-5px;width:18px;height:
 .fe-why{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}.fe-why > b{display:block;font:700 .76rem var(--body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:6px}
 .fe-why div{display:flex;gap:10px;align-items:flex-start;padding:5px 0}.fe-why i{font-style:normal;width:28px;height:28px;flex:none;border-radius:9px;display:grid;place-items:center;background:color-mix(in srgb,var(--fg) 6%,transparent)}
 .fe-why span{font-size:.84rem;color:var(--muted);line-height:1.35}.fe-why span b{display:block;color:var(--fg);font-weight:600}
+
+/* 👤 Profil mit Reitern */
+.pt-head{display:flex;gap:14px;align-items:center;padding:4px 0 6px;position:relative}
+.pt-head .pavring{flex:none;position:relative}.pt-head .pav{width:76px;height:76px;font-size:2.3rem}
+.pt-head .pmedal{position:absolute;right:-2px;bottom:0}
+.pt-t{flex:1;min-width:0}.pt-t h2{margin:0;padding-right:36px;font:700 1.45rem/1.15 var(--display);overflow-wrap:break-word;hyphens:auto}.pt-t h2.l{font-size:1.25rem}.pt-t h2.xl{font-size:1.08rem}
+.pt-lv{display:inline-flex;gap:5px;align-items:center;margin:5px 0 3px;padding:4px 10px;border:0;border-radius:99px;background:color-mix(in srgb,var(--done) 14%,transparent);color:var(--done);font:700 .76rem var(--body)}
+.pt-t small{display:block;color:var(--muted);font-size:.78rem;line-height:1.35}
+.pt-ed{position:absolute;right:0;top:4px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:0;font-size:.95rem}
+.pt-bio{margin:4px 0 8px;font-style:italic;color:var(--muted);font-size:.88rem}
+.pt-tabs{position:sticky;top:-2px;z-index:3;display:flex;gap:4px;padding:4px;margin:8px 0 12px;border-radius:14px;background:color-mix(in srgb,var(--fg) 6%,var(--surface));box-shadow:0 0 0 6px var(--surface)}
+.pt-tabs button{flex:1;border:0;background:none;padding:9px 0;border-radius:11px;font:600 .82rem var(--body);color:var(--muted)}
+.pt-tabs button.on{background:var(--surface);color:var(--fg);box-shadow:0 1px 4px rgba(0,0,0,.14)}
+.pt-p{min-height:48vh}
+.pt-st{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}.pt-st div{border-radius:16px;padding:11px 4px;text-align:center;background:color-mix(in srgb,var(--fg) 5%,transparent)}
+.pt-st b{display:block;font:700 1.3rem var(--display)}.pt-st small{color:var(--muted);font-size:.74rem}
+.pt-rows{display:flex;flex-direction:column}
+.pt-row{display:flex;gap:12px;align-items:center;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:none;color:var(--fg);padding:10px 4px;font:inherit;border-radius:0}
+.pt-row.on{background:color-mix(in srgb,var(--c) 8%,transparent);border-radius:12px}
+.pt-row .t{flex:1;min-width:0}.pt-row .t > b{font:600 .95rem var(--body)}.pt-row .t > small{color:var(--muted);font-size:.78rem}
+.pt-bar{display:block;height:7px;border-radius:9px;background:color-mix(in srgb,var(--fg) 10%,transparent);margin:5px 0 3px;overflow:hidden}.pt-bar i{display:block;height:100%;background:var(--c);border-radius:9px}
+.pt-last{display:flex;gap:12px;align-items:center;width:100%;text-align:left;border:0;background:none;color:var(--fg);padding:9px 2px;border-bottom:1px solid var(--line);font:inherit}
+.pt-last > span{font-size:1.35rem}.pt-last b{display:block;font:600 .92rem var(--body)}.pt-last small{color:var(--muted);font-size:.78rem}
+.pt-sum{padding:10px 12px;border-radius:14px;background:color-mix(in srgb,var(--gold) 16%,transparent);font-size:.9rem;margin-bottom:4px}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
@@ -2309,8 +2333,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.71 Beta";
-const APP_CODE = 111;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.72 Beta";
+const APP_CODE = 112;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -3555,7 +3579,7 @@ function openLayoutAdmin(){
     <div class="bgmodes"><label class="checkline bgm"><input type="checkbox" id="layNear" ${hdrCfg.near ? "checked" : ""}><span><b>📍 Nächster Stempel</b><small>Zeile mit dem nächsten offenen Stempel und „Hin“-Knopf</small></span></label>
     <label class="checkline bgm"><input type="checkbox" id="layBars" ${hdrCfg.bars ? "checked" : ""}><span><b>▬ Fortschritt je Heft</b><small>kleiner Balken unter jedem Heft</small></span></label></div>
     <h3>Profil-Ansicht</h3>
-    <div class="bgmodes">${[["banner", "Neu · Banner", "grünes Banner mit Avatar, Level und Top-Abzeichen, Bereiche zum Aufklappen"], ["classic", "Klassisch", "die bisherige Profilseite"]].map(([v, t, d]) => `<label class="checkline bgm"><input type="radio" name="profs" value="${v}" ${profStyle === v ? "checked" : ""}><span><b>${t}</b><small>${d}</small></span></label>`).join("")}</div>
+    <div class="bgmodes">${[["tabs", "Neu · Reiter", "Kopf mit Avatar, darunter Übersicht · Abzeichen · Karte · Kalender"], ["banner", "Banner", "grünes Banner mit Avatar, Level und Top-Abzeichen, Bereiche zum Aufklappen"], ["classic", "Klassisch", "die bisherige Profilseite"]].map(([v, t, d]) => `<label class="checkline bgm"><input type="radio" name="profs" value="${v}" ${profStyle === v ? "checked" : ""}><span><b>${t}</b><small>${d}</small></span></label>`).join("")}</div>
     <h3>Stempel auf der Karte</h3>
     <div class="bgmodes">${[["pins", "Neu · Pins", "Tropfen mit Nummer, gestempelte grün mit ✓, nahe offene leuchten"], ["dots", "Klassisch · Punkte", "die bisherigen runden Punkte"]].map(([v, t, d]) => `<label class="checkline bgm"><input type="radio" name="mks" value="${v}" ${markerStyle === v ? "checked" : ""}><span><b>${t}</b><small>${d}</small></span></label>`).join("")}</div>
     <h3>Profil-Knopf in der unteren Leiste</h3>
@@ -3569,7 +3593,7 @@ function openLayoutAdmin(){
     try {
       const hn = $("#layNear").checked, hb = $("#layBars").checked;
       const ns = (document.querySelector('input[name="navs"]:checked') || {}).value || "e";
-      const ps = (document.querySelector('input[name="profs"]:checked') || {}).value || "banner";
+      const ps = (document.querySelector('input[name="profs"]:checked') || {}).value || "tabs";
       const ms = (document.querySelector('input[name="mks"]:checked') || {}).value || "pins";
       await fb.req("PATCH", "/config/app?updateMask.fieldPaths=layout&updateMask.fieldPaths=hdrNear&updateMask.fieldPaths=hdrBars&updateMask.fieldPaths=navStyle&updateMask.fieldPaths=profStyle&updateMask.fieldPaths=markerStyle", { fields: { layout: fsStr(v), hdrNear: { booleanValue: hn }, hdrBars: { booleanValue: hb }, navStyle: fsStr(ns), profStyle: fsStr(ps), markerStyle: fsStr(ms) } });
       navStyle = ns; save("sp.navStyle", ns); applyNav();
@@ -3577,7 +3601,7 @@ function openLayoutAdmin(){
       if (ms !== markerStyle) { markerStyle = ms; save("sp.markerStyle", ms); try { render(); } catch(e) {} }
       layout = v; save("sp.layout", v); applyLayout();
       hdrCfg = { near: hn, bars: hb }; save("sp.hdrCfg", hdrCfg); render(false);
-      logMod("Layout geändert", `${v === "ring" ? "Kompakt" : "Klassisch"} · Nächster Stempel ${hn ? "an" : "aus"} · Heft-Balken ${hb ? "an" : "aus"} · Leiste ${ns.toUpperCase()} · Profil ${ps === "banner" ? "neu" : "klassisch"} · Marker ${ms === "pins" ? "Pins" : "Punkte"}`);
+      logMod("Layout geändert", `${v === "ring" ? "Kompakt" : "Klassisch"} · Nächster Stempel ${hn ? "an" : "aus"} · Heft-Balken ${hb ? "an" : "aus"} · Leiste ${ns.toUpperCase()} · Profil ${{ tabs: "Reiter", banner: "Banner", classic: "klassisch" }[ps]} · Marker ${ms === "pins" ? "Pins" : "Punkte"}`);
       toast("Layout für alle gespeichert"); openAdmin();
     } catch(e) { $("#layMsg").textContent = "Fehlgeschlagen: " + e.message; }
   };
@@ -5708,7 +5732,7 @@ async function checkUpdate(){
     { const hn = fv(d, "hdrNear"), hb = fv(d, "hdrBars");
       if (hn != null || hb != null) { const c = { near: hn === true, bars: hb === true }; if (JSON.stringify(c) !== JSON.stringify(hdrCfg)) { hdrCfg = c; save("sp.hdrCfg", c); render(false); } } }
     { const ns = fv(d, "navStyle"); if (NAV_STYLES[ns] && ns !== navStyle) { navStyle = ns; save("sp.navStyle", ns); applyNav(); } }
-    { const ps = fv(d, "profStyle"); if ((ps === "banner" || ps === "classic") && ps !== profStyle) { profStyle = ps; save("sp.profStyle", ps); } }
+    { const ps = fv(d, "profStyle"); if (["tabs", "banner", "classic"].includes(ps) && ps !== profStyle) { profStyle = ps; save("sp.profStyle", ps); } }
     { const ms = fv(d, "markerStyle"); if ((ms === "pins" || ms === "dots") && ms !== markerStyle) { markerStyle = ms; save("sp.markerStyle", ms); try { render(); } catch(e) {} } }
     const lay = fv(d, "layout");
     if ((lay === "classic" || lay === "ring") && lay !== layout) { layout = lay; save("sp.layout", lay); applyLayout(); }
@@ -6144,6 +6168,13 @@ function applyAdminEdit(txt){
     }
     save("sp.adminEditSeen", j.adminEdit);
     toast("Ein Admin hat deine Stempel aktualisiert");
+    /* Steht man in einem leeren Heft, aber der Admin hat woanders eingetragen → dorthin wechseln */
+    try {
+      if (profile === "p0" && !nDone(current)) {
+        const best = SET_KEYS.filter(st => !isSonder(st)).map(st => [st, nDone(st)]).sort((a, b) => b[1] - a[1])[0];
+        if (best && best[1] > 0) setTimeout(() => { try { switchSet(best[0]); } catch(e) {} }, 300);
+      }
+    } catch(e) {}
     return true;
   } catch(e) { return false; }
 }
@@ -8707,8 +8738,9 @@ function openProfileMap(c, name, back){
   setTimeout(() => { pm.invalidateSize(); pm.fitBounds(pts, { padding: [24, 24], maxZoom: 14 }); }, 120);
 }
 /* ---------- Profil-Stil: "banner" (neu) oder "classic" – Admin stellt um ---------- */
-let profStyle = load("sp.profStyle", "banner");
-function profileHtml(m, c, me){
+let profStyle = load("sp.profStyle", "tabs");
+function profileHtml(m, c, me, opts){
+  if (profStyle === "tabs") return profileTabsHtml(m, c, me, opts || {});
   if (profStyle === "banner") return profileBannerHtml(m, c, me);
   return profileClassicHtml(m, c, me);
 }
@@ -8719,7 +8751,8 @@ function profileBannerHtml(m, c, me){
   let since = "";
   if (c.since) since = "dabei seit " + new Date(c.since + "T12:00").toLocaleDateString("de-DE", { month: "long", year: "numeric" });
   const R = profRings = profRingData(m, c, me);
-  const goals = R.filter(r => r.next).sort((a, b) => (a.next[0] - a.n) - (b.next[0] - b.n));
+  /* Ziel: nur Hefte, in denen man schon gestempelt hat (sonst z. B. „Harz 0 %“ bei reinen Touringen-Wanderern) */
+  const goals = (R.some(r => r.next && r.n > 0) ? R.filter(r => r.next && r.n > 0) : R.filter(r => r.next)).sort((a, b) => (a.next[0] - a.n) - (b.next[0] - b.n));
   const goal = goals[0] || null;
   const medalR = (goal && goal.reached ? goal : null) || R.find(r => r.id === "hwn" && r.reached) || R.find(r => r.reached);
   const RS = R.filter(r => r.n > 0);
@@ -8737,9 +8770,9 @@ function profileBannerHtml(m, c, me){
   const pins = c.pins && c.pins.length ? `<h3>Nadeln & volle Hefte</h3><div class="pinrow">${c.pins.slice(-8).reverse().map(p => `<span class="pinchip">${LV_ICON(p)} ${esc(p.replace(/^Touringen /, ""))}</span>`).join("")}${c.pins.length > 8 ? `<span class="pinchip" style="color:var(--muted)">+ ${c.pins.length - 8} weitere</span>` : ""}</div>` : "";
   const prog = sel ? `<div class="prings" id="pRings">${RS.map(r => `<button data-pring="${r.id}" class="${r.id === sel.id ? "on" : ""}" style="--c:${r.col}">${ring(r.total ? r.n / r.total : (r.n ? 1 : 0), r.col, 64, 7, r.n)}<span class="pr-l">${esc(r.t)}${r.reached ? `<b>${esc(r.reached[1].replace(/^Touringen /, ""))}</b>` : ""}</span></button>`).join("")}</div><div id="pDetail">${profDetailHtml(sel, me)}</div>` : "";
   const pmap = profMapHtml(c);
-  return `<div class="pbn2">${me ? '<button class="pb2-edit" id="pbEdit">✎ Bearbeiten</button>' : ""}
+  return `<div class="pbn2">${me ? '<button class="pb2-edit" id="pbEdit" aria-label="Profil bearbeiten">✎</button>' : ""}
       <div class="pb2-r"><span class="pb2-av ${!me && isOnline(m.updated) ? "is-on" : ""}">${ring(goal ? goal.prog : 1, goal ? goal.col : "#3fbf6e", 92, 5, avatarHtml(c, "pav"))}${medalR ? `<span class="pmedal" title="${esc(medalR.reached[1])}">${LV_ICON(medalR.reached[1])}</span>` : ""}</span>
-        <div class="pb2-t"><h2 class="${m.name.length > 14 ? "l" : ""}">${esc(m.name)}</h2>
+        <div class="pb2-t"><h2 class="${m.name.length > 14 ? "xl" : m.name.length > 9 ? "l" : ""}">${esc(m.name)}</h2>
           <button class="pb2-lv" id="pLevel" type="button">${lv.icon} Level ${lv.L} · ${esc(lv.title)}</button>
           <small>${[c.region ? "📍 " + esc(c.region) : "", since ? esc(since) : "", !me && m.updated ? (isOnline(m.updated) ? "● online" : esc(seenText(m.updated).replace("zuletzt online ", "🕓 "))) : ""].filter(Boolean).join(" · ")}</small></div></div>
       ${c.bio ? `<p class="pb2-bio">„${esc(c.bio)}“</p>` : ""}
@@ -8756,6 +8789,79 @@ function profileBannerHtml(m, c, me){
     ${sec("hike", "🥾", "Wanderungen & Zuletzt", c.hike && c.hike.count ? c.hike.count + "×" : "", hikeB + lastB)}
     ${favHtml(c.fav)}`;
 }
+/* ---------- 👤 Profil mit Reitern: Übersicht · Abzeichen · Karte · Kalender ---------- */
+let profTab = load("sp.profTab", "ov");
+function profileTabsHtml(m, c, me, opts){
+  const shown = (c.badges.show || []).map(id => BADGES.find(b => b[0] === id)).filter(Boolean);
+  let since = "";
+  if (c.since) since = "seit " + new Date(c.since + "T12:00").toLocaleDateString("de-DE", { month: "long", year: "numeric" });
+  const R = profRings = profRingData(m, c, me);
+  const goals = (R.some(r => r.next && r.n > 0) ? R.filter(r => r.next && r.n > 0) : R.filter(r => r.next)).sort((a, b) => (a.next[0] - a.n) - (b.next[0] - b.n));
+  const goal = goals[0] || null;
+  const medalR = (goal && goal.reached ? goal : null) || R.find(r => r.id === "hwn" && r.reached) || R.find(r => r.reached);
+  const RS = R.filter(r => r.n > 0);
+  const sel = RS.find(r => r.id === profSel) || (goal && goal.n > 0 ? goal : null) || RS[0] || null;
+  if (sel) profSel = sel.id;
+  const ring = (p, col, size, w, inner, cls) => `<span class="pring ${cls || ""}" style="--p:${Math.round(p * 100)};--c:${col};--s:${size}px;--w:${w}px"><span>${inner}</span></span>`;
+  const x = xpOf(m, c), lv = levelOf(x.xp);
+  const total = Math.max(c.stamps ? SET_KEYS.reduce((a, st) => a + ((c.stamps[st] || []).length), 0) : 0, R.reduce((a, r) => a + (r.n || 0), 0));
+  const days = c.days || null, nDays = days ? Object.keys(days).length : null;
+  const km = me ? hikes.reduce((a, h) => a + (h.km || 0), 0) : (c.hike && c.hike.km) || 0;
+  const near = me && goal ? nearestOpen(goal.id) : null;
+  const tab = ["ov", "bd", "map", "cal"].includes(profTab) ? profTab : "ov";
+  const P = (id, body) => `<div class="pt-p" data-ptp="${id}" ${tab === id ? "" : "hidden"}>${body}</div>`;
+  /* Übersicht */
+  const nextTxt = r => { const nx = r.next; return nx ? `noch ${nx[0] - r.n} bis ${LV_ICON(nx[1])} ${esc(nx[1].replace(/^Touringen /, ""))}` : (r.reached ? "🏆 alles geschafft" : ""); };
+  const rows = RS.map(r => `<button class="pt-row ${r.id === (sel && sel.id) ? "on" : ""}" data-pring="${r.id}" style="--c:${r.col}">${ring(r.total ? r.n / r.total : (r.n ? 1 : 0), r.col, 46, 5, `<b>${r.n}</b>`)}
+      <span class="t"><b>${esc(r.long || r.t)}</b> <small>${r.n}${r.total ? "/" + r.total : ""}</small><i class="pt-bar"><i style="width:${r.total ? Math.max(2, Math.round(r.n / r.total * 100)) : 100}%"></i></i><small>${r.reached ? LV_ICON(r.reached[1]) + " " + esc(r.reached[1].replace(/^Touringen /, "")) + " · " : ""}${nextTxt(r)}</small></span></button>`).join("");
+  const lastHike = c.hike && c.hike.last ? `<div class="pt-last"><span>🥾</span><div><b>${km1(c.hike.last.km)} km · ${fmtDur(c.hike.last.dur)}${c.hike.last.up != null ? " · ↑ " + c.hike.last.up + " m" : ""}</b><small>${fmtDate(c.hike.last.d)}${c.hike.last.n ? " · " + c.hike.last.n + " Stempel" : ""}</small></div></div>` : "";
+  const lastSt = m.last && m.last.n ? `<div class="pt-last"><span>📒</span><div><b>Nr. ${esc(m.last.n)} ${esc(m.last.name || "")}</b><small>${SET_NAMES[m.last.set] || ""} · ${dayAgo(m.last.date)}</small></div></div>` : "";
+  const ov = `<div class="pt-st"><div><b>${total}</b><small>Stempel</small></div><div><b>${nDays != null ? nDays : (c.hike && c.hike.count) || 0}</b><small>${nDays != null ? "Wandertage" : "Wanderungen"}</small></div><div><b>${km ? km1(km) : "–"}</b><small>km gewandert</small></div></div>
+    <div class="ph-chips ph-row">${rankHtml(m.code)}</div>
+    ${goal ? `<button class="ph-goal" data-pgoal="${goal.id}" style="--gc:${goal.col}">${ring(goal.prog, goal.col, 46, 5, Math.round(goal.prog * 100) + "%")}<span><small class="pg-heft">Nächstes Ziel · ${esc(goal.long)}</small>Noch <b>${goal.next[0] - goal.n}</b> bis <b>${esc(goal.next[1].replace(/^Touringen /, ""))}</b> ${LV_ICON(goal.next[1])}${near ? `<small>📍 nächster offener: Nr. ${esc(near.s.n)} ${esc(near.s.name)}</small>` : ""}</span></button>` : ""}
+    ${sel ? `<h3>${me ? "Meine Hefte" : "Hefte"}</h3><div id="pRings" class="pt-rows">${rows}</div><div id="pDetail">${profDetailHtml(sel, me)}</div>` : `<p class="hint" style="text-align:center;margin:14px 0">${me ? "Sobald du deinen ersten Stempel hast, erscheint hier dein Fortschritt." : "Noch keine Stempel gesammelt."}</p>`}
+    ${lastHike || lastSt ? `<h3>Zuletzt</h3>${lastHike}${lastSt}` : ""}
+    ${favHtml(c.fav)}${opts.tours ? '<div id="fpTours"></div>' : ""}`;
+  /* Abzeichen */
+  const pins = c.pins && c.pins.length ? `<h3>Nadeln & volle Hefte <small class="pcount">${c.pins.length}</small></h3><div class="pinrow">${c.pins.slice().reverse().map(p => `<span class="pinchip">${LV_ICON(p)} ${esc(p.replace(/^Touringen /, ""))}</span>`).join("")}</div>` : "";
+  const vit = shown.length ? `<h3>Vitrine</h3><div class="pvit">${shown.map(([, ic, name, desc]) => `<div title="${esc(desc)}"><i>${ic}</i><b>${esc(name)}</b></div>`).join("")}</div>` : "";
+  const bd = `<div class="pt-sum"><b>${c.badges.n || 0}</b> von ${BADGES.length} Abzeichen${c.pins && c.pins.length ? ` · <b>${c.pins.length}</b> Nadeln` : ""}</div>${pins}${me ? badgesHtml() : vit || `<p class="hint">${esc(m.name)} hat noch keine Abzeichen in die Vitrine gestellt.</p>`}`;
+  /* Karte + Vergleich */
+  const mp = `${profMapHtml(c) || `<p class="hint">Noch keine Stempel auf der Karte.</p>`}
+    ${me ? `<h3>👥 Mit Freunden vergleichen</h3><p class="hint" style="margin-top:-4px">Sieh auf der Karte, welche Stempel ein Freund schon hat und dir noch fehlen – und umgekehrt.</p><button class="btn" id="ptCmp" style="width:100%">👥 Freund zum Vergleichen wählen</button>`
+      : (opts.cmp || "")}`;
+  /* Kalender */
+  let calSt = "";
+  if (days) {
+    const mo = new Date().toISOString().slice(0, 7), wd = [0, 0, 0, 0, 0, 0, 0];
+    Object.keys(days).forEach(d => { wd[(new Date(d + "T12:00").getDay() + 6) % 7]++; });
+    const best = wd.indexOf(Math.max(...wd));
+    calSt = `<div class="pt-st"><div><b>${nDays}</b><small>Wandertage</small></div><div><b>${Object.keys(days).filter(d => d.startsWith(mo)).length}</b><small>diesen Monat</small></div><div><b>${nDays ? ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"][best] : "–"}</b><small>Lieblingstag</small></div></div>`;
+  }
+  const hk = me ? hikes.slice(0, 6).map(h => `<button class="pt-last" data-hk="${esc(h.id)}"><span>🥾</span><div><b>${km1(h.km)} km · ${fmtDur(h.dur)}${h.up != null ? " · ↑ " + h.up + " m" : ""}</b><small>${fmtDate(new Date(h.start).toISOString().slice(0, 10))}${h.stamps && h.stamps.length ? " · " + h.stamps.length + " Stempel" : ""}</small></div></button>`).join("") : lastHike;
+  const cal = `${calSt}${days ? `<h3>Wanderkalender</h3>${heatmapHtml(days)}` : `<p class="hint">${me ? "Noch keine Wandertage." : esc(m.name) + " teilt den Wanderkalender nicht."}</p>`}${hk ? `<h3>Wanderungen${me && hikes.length > 6 ? ` <small class="pcount">${hikes.length}</small>` : ""}</h3>${hk}` : ""}`;
+  return `<div class="pt-head">
+      <span class="pavring ${!me && isOnline(m.updated) ? "is-on" : ""}">${ring(goal ? goal.prog : 1, goal ? goal.col : "var(--pc-acc)", 86, 5, avatarHtml(c, "pav"))}${medalR ? `<span class="pmedal" style="--gc:${goal ? goal.col : "var(--pc-acc)"}" title="${esc(medalR.reached[1])}">${LV_ICON(medalR.reached[1])}</span>` : ""}</span>
+      <div class="pt-t"><h2 class="${m.name.length > 14 ? "xl" : m.name.length > 9 ? "l" : ""}">${esc(m.name)}</h2>
+        <button class="pt-lv" id="pLevel" type="button">${lv.icon} Level ${lv.L} · ${esc(lv.title)}</button>
+        <small>${[c.region ? "📍 " + esc(c.region) : "", since ? esc(since) : "", !me && m.updated ? (isOnline(m.updated) ? "● online" : esc(seenText(m.updated).replace("zuletzt online ", "🕓 "))) : ""].filter(Boolean).join(" · ")}</small></div>
+      ${me ? '<button class="pt-ed" id="pbEdit" aria-label="Profil bearbeiten">✎</button>' : ""}</div>
+    ${c.bio ? `<p class="pt-bio">„${esc(c.bio)}“</p>` : ""}
+    <div class="pt-tabs" role="tablist">${[["ov", "Übersicht"], ["bd", "Abzeichen"], ["map", "Karte"], ["cal", "Kalender"]].map(([id, t]) => `<button role="tab" data-ptab="${id}" class="${tab === id ? "on" : ""}">${t}</button>`).join("")}</div>
+    ${P("ov", ov)}${P("bd", bd)}${P("map", mp)}${P("cal", cal)}`;
+}
+function bindProfTabs(){
+  const sh = $("#sheet");
+  sh.querySelectorAll("[data-ptab]").forEach(b => b.onclick = () => {
+    profTab = b.dataset.ptab; save("sp.profTab", profTab);
+    sh.querySelectorAll("[data-ptab]").forEach(x => x.classList.toggle("on", x === b));
+    sh.querySelectorAll("[data-ptp]").forEach(p => p.hidden = p.dataset.ptp !== profTab);
+  });
+  /* Ziel antippen → Übersicht mit dem Heft */
+  const gb = sh.querySelector("[data-pgoal]"); if (gb && sh.querySelector(".pt-tabs")) { const o = gb.onclick; gb.onclick = e => { const t = sh.querySelector('[data-ptab="ov"]'); if (t) t.click(); if (o) o(e); }; }
+  const cm = $("#ptCmp"); if (cm) cm.onclick = openCmpPick;
+  sh.querySelectorAll("[data-hk]").forEach(b => b.onclick = () => openHike(b.dataset.hk));
+}
 let paccOpen = load("sp.paccOpen", { prog: true });
 function bindPacc(){
   document.querySelectorAll("#sheet [data-pacc]").forEach(d => {
@@ -8769,7 +8875,8 @@ function profileClassicHtml(m, c, me){
   if (c.since) since = "seit " + new Date(c.since + "T12:00").toLocaleDateString("de-DE", { month: "short", year: "numeric" });
   const R = profRings = profRingData(m, c, me);
   /* Ziel = Stufe mit den wenigsten fehlenden Stempeln */
-  const goals = R.filter(r => r.next).sort((a, b) => (a.next[0] - a.n) - (b.next[0] - b.n));
+  /* Ziel: nur Hefte, in denen man schon gestempelt hat (sonst z. B. „Harz 0 %“ bei reinen Touringen-Wanderern) */
+  const goals = (R.some(r => r.next && r.n > 0) ? R.filter(r => r.next && r.n > 0) : R.filter(r => r.next)).sort((a, b) => (a.next[0] - a.n) - (b.next[0] - b.n));
   const goal = goals[0] || null;
   const medalR = (goal && goal.reached ? goal : null) || R.find(r => r.id === "hwn" && r.reached) || R.find(r => r.reached);
   /* Kreise nur für Gebiete, in denen schon mindestens ein Stempel gesammelt ist */
@@ -8838,9 +8945,9 @@ async function openFriendProfile(code){
       <button data-cmp="me"><b>${b}</b><span>hast du, ${esc(m.name)} fehlen sie</span></button></div>`;
     ccmp = { name: m.name, r };
   } else cmp = `<p style="font-size:.85rem">${esc(m.name)} teilt keinen Stempelvergleich.</p>`;
-  openSheet(`<div class="kicker ${profStyle === "banner" ? "" : "pkick"}">Profil · Code ${fmtCode(code)}</div>${walksLive[code] ? `<div style="margin:-4px 0 8px">${walkChip(code).replace("data-walk", 'id="fpWalk" data-x')}</div>` : ""}${profileHtml(m, c, false)}${cmp}<div id="fpTours"></div>
-    <div class="actions">${c.stamps ? '<button class="btn" id="fpMap">🗺️ Auf der Karte vergleichen</button>' : ""}${friendLocs[code] ? '<button class="btn" id="fpLoc">📍 Standort auf der Karte</button>' : ""}<button class="btn warn" id="fpRemove">Freund entfernen …</button><button class="btn quiet" id="sClose">Schließen</button></div>`);
-  bindProfRings(false); bindPacc();
+  openSheet(`<div class="kicker ${profStyle === "classic" ? "pkick" : ""}">Profil · Code ${fmtCode(code)}</div>${walksLive[code] ? `<div style="margin:-4px 0 8px">${walkChip(code).replace("data-walk", 'id="fpWalk" data-x')}</div>` : ""}${profStyle === "tabs" ? profileHtml(m, c, false, { cmp: cmp + (c.stamps ? '<button class="btn" id="fpMap" style="width:100%;margin-top:10px">🗺️ Auf der Karte vergleichen</button>' : ""), tours: true }) : profileHtml(m, c, false) + cmp + '<div id="fpTours"></div>'}
+    <div class="actions">${c.stamps && profStyle !== "tabs" ? '<button class="btn" id="fpMap">🗺️ Auf der Karte vergleichen</button>' : ""}${friendLocs[code] ? '<button class="btn" id="fpLoc">📍 Standort auf der Karte</button>' : ""}<button class="btn warn" id="fpRemove">Freund entfernen …</button><button class="btn quiet" id="sClose">Schließen</button></div>`);
+  bindProfRings(false); bindPacc(); bindProfTabs();
   { const pl = $("#pLevel"); if (pl) pl.onclick = () => openLevelInfo(m, c, () => openFriendProfile(code)); }
   { const pmx = $("#sheet .pmap"); if (pmx) pmx.onclick = () => openProfileMap(c, m.name, () => openFriendProfile(code)); }
   $("#fpRemove").onclick = () => {
@@ -8871,13 +8978,13 @@ function myBoardEntry(){
     last: ls && t && d[ls.set][ls.k] ? { set: ls.set, n: t.n, name: t.name, date: ls.date } : null };
 }
 function openMyProfile(){
-  openSheet(`<div class="kicker ${profStyle === "banner" ? "" : "pkick"}">Mein Profil${fb.ready() ? " · so sehen dich deine Freunde" : ""}</div>${profileHtml(myBoardEntry(), myCardLocal(), true)}
+  openSheet(`<div class="kicker ${profStyle === "classic" ? "pkick" : ""}">Mein Profil${fb.ready() ? " · so sehen dich deine Freunde" : ""}</div>${profileHtml(myBoardEntry(), myCardLocal(), true)}
     ${fb.ready() ? `<p style="font-size:.85rem">Sichtbar für Freunde: ${[cardVis.photo && myCard.photo ? "Foto" : "", cardVis.days ? "Wanderkalender" : "", cardVis.compare ? "Stempelvergleich" : ""].filter(Boolean).join(", ") || "nur Name, Spruch und Zahlen"}.</p>` : ""}
     <div class="actions"><button class="btn primary" id="mpEdit">Profil bearbeiten</button><button class="btn quiet" id="sClose">Schließen</button></div>`);
   $("#mpEdit").onclick = openEditProfile;
   const pbe = $("#pbEdit"); if (pbe) pbe.onclick = openEditProfile;
   bindProfRings(true);
-  bindPacc();
+  bindPacc(); bindProfTabs();
   { const pl = $("#pLevel"); if (pl) pl.onclick = () => openLevelInfo(myBoardEntry(), myCardLocal(), openMyProfile); }
   { const pmx = $("#sheet .pmap"); if (pmx) pmx.onclick = () => openProfileMap(myCardLocal(), username ? username.name : profileName(), openMyProfile); }
   $("#sheet").querySelectorAll("[data-goto]").forEach(b => b.onclick = () => { const [st, kk] = b.dataset.goto.split("|"); openStampIn(st, kk); });

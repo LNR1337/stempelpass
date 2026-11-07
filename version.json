@@ -1,6 +1,6 @@
 {
- "code": 111,
- "version": "0.9.71 Beta",
- "notes": "Einstellungen bleiben beim Abmelden, Heute-Karte ganz ausschaltbar, vom Admin eingetragene Stempel erscheinen sofort im Profil.",
+ "code": 112,
+ "version": "0.9.72 Beta",
+ "notes": "Neues Profil mit Reitern (Übersicht, Abzeichen, Karte, Kalender) und Freunde-Vergleich unter der Stempelkarte.",
  "apk": "Stempelpass.apk"
 }
