@@ -1,6 +1,6 @@
 {
- "code": 109,
- "version": "0.9.69 Beta",
- "notes": "Profilbild kommt nach dem Anmelden zurück, Konto-Anlegen zeigt Fehler statt still abzubrechen, Admin-Nutzerliste aktualisiert sich selbst.",
+ "code": 110,
+ "version": "0.9.70 Beta",
+ "notes": "Neuer Freunde-Bildschirm für neue Nutzer, klareres Namensfeld bei der Anmeldung.",
  "apk": "Stempelpass.apk"
 }

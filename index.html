@@ -1152,6 +1152,18 @@ li.done .chk.phc svg{position:absolute;right:-5px;bottom:-5px;width:18px;height:
 .assel{flex:1;width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:600 .95rem var(--body)}
 .asrow{display:flex;gap:10px}.asrow > div:first-child{width:86px}
 .asbonus{border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:10px 0 4px}
+
+/* 👋 Freunde: leerer Zustand */
+.fempty{margin-top:14px;border-radius:20px;padding:16px 14px 14px;background:linear-gradient(160deg,color-mix(in srgb,var(--forest) 10%,var(--surface)),var(--surface));border:1px solid var(--line)}
+.fe-top{display:flex;gap:12px;align-items:center}.fe-ic{flex:none;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:1.7rem;background:radial-gradient(circle at 35% 30%,#ffe9b3,#f2c14e)}
+.fe-top h3{margin:0!important;font:700 1.1rem var(--display)}.fe-top p{margin:2px 0 0;color:var(--muted);font-size:.84rem;line-height:1.35}
+.fe-ways{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 4px}
+.fe-ways button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 4px 10px;border-radius:16px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:inherit;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.fe-ways button span{font-size:1.5rem;margin-bottom:2px}.fe-ways button b{font:700 .84rem var(--body)}.fe-ways button small{color:var(--muted);font-size:.7rem;line-height:1.2;text-align:center}
+.fe-ways button:first-child{background:var(--forest);border-color:var(--forest);color:var(--forest-fg)}.fe-ways button:first-child small{color:inherit;opacity:.8}
+.fe-why{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}.fe-why > b{display:block;font:700 .76rem var(--body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:6px}
+.fe-why div{display:flex;gap:10px;align-items:flex-start;padding:5px 0}.fe-why i{font-style:normal;width:28px;height:28px;flex:none;border-radius:9px;display:grid;place-items:center;background:color-mix(in srgb,var(--fg) 6%,transparent)}
+.fe-why span{font-size:.84rem;color:var(--muted);line-height:1.35}.fe-why span b{display:block;color:var(--fg);font-weight:600}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
@@ -1886,7 +1898,7 @@ body.compact-hdr header .tabs,body.compact-hdr header .hefts{max-height:0;opacit
     <h2 id="wTitle">Willkommen bei Stempeljagd!</h2>
     <p id="wText">Wähle deinen Benutzernamen.</p>
     <label for="wName">Benutzername</label>
-    <input id="wName" maxlength="20" autocomplete="username" autocapitalize="words" placeholder="z. B. Wanderfuchs">
+    <input id="wName" maxlength="20" autocomplete="username" autocapitalize="words" placeholder="Deinen Namen eintippen …">
     <label for="wPw" id="wPwL">Passwort</label>
     <input id="wPw" type="password" maxlength="64" autocomplete="new-password" placeholder="mindestens 6 Zeichen">
     <p id="wMsg" class="wmsg" role="alert"></p>
@@ -2296,8 +2308,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.69 Beta";
-const APP_CODE = 109;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.70 Beta";
+const APP_CODE = 110;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -5511,10 +5523,21 @@ function renderFriends(){
     </div>
 
     ${invitesHtml()}
+    ${ms.length && !friends ? `<div class="fempty">
+      <div class="fe-top"><span class="fe-ic">👋</span><div><h3>Noch allein unterwegs?</h3><p>Hol deine Wanderfreunde dazu – so geht's am schnellsten:</p></div></div>
+      <div class="fe-ways">
+        <button id="feQr"><span>📷</span><b>QR-Code</b><small>zeigen oder scannen</small></button>
+        <button id="feShare"><span>📤</span><b>Code teilen</b><small>per WhatsApp & Co.</small></button>
+        <button id="feSearch"><span>🔎</span><b>Name suchen</b><small>oben eintippen</small></button>
+      </div>
+      <div class="fe-why"><b>Mit Freunden kannst du …</b>
+        <div><i>🏆</i><span><b>Rangliste</b>sehen, wer diese Woche am meisten gestempelt hat</span></div>
+        <div><i>🥾</i><span><b>Zusammen wandern</b>Einladungen mit Treffpunkt und Uhrzeit schicken</span></div>
+        <div><i>🟢</i><span><b>Unterwegs sehen</b>wer gerade wandert – und wo, wenn er es teilt</span></div>
+      </div></div>` : `
     <div class="fhead"><h3>Rangliste${weekAll ? ` <small class="wk">· diese Woche +${weekAll}</small>` : ""}</h3><button class="iconbtn" id="frRefresh" aria-label="Aktualisieren">${boardBusy ? "…" : "↻"}</button></div>
     <div class="seg" id="bSort">${Object.entries(sortLbl).map(([v, t]) => `<button data-v="${v}" class="${boardSort === v ? "on" : ""}">${t}</button>`).join("")}</div>
-    ${ms.length ? `<ul class="fcards">${rows}</ul>` : `<p>${boardBusy ? "Wird geladen …" : "Tippe auf ↻."}</p>`}
-    ${ms.length && !friends ? `<p class="hint">Noch keine Freunde. Teil deinen Code oder gib unten den Namen eines Freundes ein.</p>` : ""}
+    ${ms.length ? `<ul class="fcards">${rows}</ul>` : `<p>${boardBusy ? "Wird geladen …" : "Tippe auf ↻."}</p>`}`}
     ${friends ? `<div class="actions" style="margin-top:8px"><button class="btn" id="frMap">📍 Freunde auf der Karte</button></div>` : ""}
 
     ${feedHtml(ms)}
@@ -5533,6 +5556,9 @@ function renderFriends(){
     try { navigator.clipboard.writeText(t).then(() => toast("Code kopiert – jetzt z. B. in WhatsApp einfügen"), () => toast("Dein Code: " + fmtCode(username.code))); }
     catch(e) { toast("Dein Code: " + fmtCode(username.code)); }
   };
+  { const q = $("#feQr"); if (q) q.onclick = openFriendQr; }
+  { const q = $("#feShare"); if (q) q.onclick = e => $("#frCopy").onclick(e); }
+  { const q = $("#feSearch"); if (q) q.onclick = () => { const i = $("#frCode"); i.scrollIntoView({ block: "center", behavior: "smooth" }); setTimeout(() => i.focus(), 250); }; }
   $("#frCodeCopy").onclick = () => copyText(username.code, () => {
     const b = $("#frCodeCopy"); if (!b) return; vibrate(20);
     b.classList.add("ok"); b.innerHTML = "✓ <b>Kopiert</b>";
@@ -5541,10 +5567,10 @@ function renderFriends(){
   $("#frAdd").onclick = () => addFriend($("#frCode").value);
   { const q = $("#frQr"); if (q) q.onclick = openFriendQr; }
   $("#frCode").addEventListener("keydown", e => { if (e.key === "Enter") addFriend(e.target.value); });
-  $("#frRefresh").onclick = () => refreshBoard(true);
+  { const r = $("#frRefresh"); if (r) r.onclick = () => refreshBoard(true); }
   bindInvites(el);
   el.querySelectorAll("[data-walk]").forEach(b => b.onclick = e => { e.stopPropagation(); openWalk(b.dataset.walk); });
-  $("#bSort").onclick = e => { const v = e.target.dataset.v; if (!v) return; boardSort = v; renderFriends(); };
+  if ($("#bSort")) $("#bSort").onclick = e => { const v = e.target.dataset.v; if (!v) return; boardSort = v; renderFriends(); };
   $("#fbOnline").onchange = e => { showOnline = e.target.checked; save("sp.showOnline", showOnline); if (showOnline) pushSeen(true); renderFriends(); };
   $("#fbLast").onchange = e => { shareLast = e.target.checked; save("sp.shareLast", shareLast); refreshBoard(); };
   $("#frLoc").onchange = e => { if (e.target.checked) { e.target.checked = false; askShareLoc(); } else setShareLoc(false).then(renderFriends); };
@@ -6180,6 +6206,7 @@ $("#wForm").addEventListener("submit", async e => {
   e.preventDefault();
   const v = $("#wName").value.trim().replace(/\s+/g, " ");
   const pw = $("#wPw").value;
+  if (!v) { $("#wMsg").textContent = "Bitte tippe zuerst einen Benutzernamen ein – z. B. deinen Vornamen oder einen Spitznamen."; $("#wName").focus(); return; }
   if (badText(v)) { $("#wMsg").textContent = "Dieser Benutzername ist nicht erlaubt – bitte wähle einen anderen."; return; }
   if (!nameOk(v)) { $("#wMsg").textContent = "Benutzername: 3 bis 20 Zeichen – Buchstaben, Zahlen, Leerzeichen, Punkt, Strich oder Unterstrich."; return; }
   if (fb.ready() && pw.length < 6 && wMode !== "google") { $("#wMsg").textContent = "Das Passwort braucht mindestens 6 Zeichen."; return; }
