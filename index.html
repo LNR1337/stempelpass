@@ -1133,6 +1133,7 @@ li.done .chk.phc svg{position:absolute;right:-5px;bottom:-5px;width:18px;height:
 .td-x{position:absolute;right:6px;top:4px;width:28px;height:28px;border:0;background:none;color:var(--muted);font-size:1.25rem;padding:0}
 .td-ch{display:flex;gap:6px;margin-top:10px;overflow-x:auto;scrollbar-width:none;margin-right:-4px}.td-ch::-webkit-scrollbar{display:none}
 .td-ch button{flex:none;border:0;padding:7px 10px;border-radius:12px;background:color-mix(in srgb,var(--forest) 9%,transparent);font:600 .78rem var(--body);color:var(--fg);white-space:nowrap}
+.td-ft{display:flex;justify-content:flex-end;margin-top:6px}.td-off{border:0;background:none;padding:2px 0;color:var(--muted);font:600 .74rem var(--body);text-decoration:underline;text-underline-offset:2px}
 .td-ch button b{color:var(--open)}.td-ch button i{font-style:normal;color:var(--muted);margin-left:5px}
 
 /* 😮 Fast verpasst */
@@ -2308,8 +2309,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.70 Beta";
-const APP_CODE = 110;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.71 Beta";
+const APP_CODE = 111;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -6074,7 +6075,7 @@ const GOOGLE_G = '<svg viewBox="0 0 48 48" width="18" height="18" style="vertica
 /* ---------- 🚪 Abmelden: Stempel sichern, Konto-Daten vom Handy entfernen, neu starten ---------- */
 /* Diese Einstellungen gehören zum Handy, nicht zum Konto – sie bleiben beim Abmelden */
 const KEEP_KEYS = ["sp.theme", "sp.base", "sp.legMin", "sp.regions", "sp.layout", "sp.hdrCfg", "sp.navStyle", "sp.profStyle", "sp.markerStyle", "sp.hdrMine", "sp.gcfg", "sp.fixes", "sp.roles", "sp.navVoice", "sp.navEco",
-  "sp.poi", "sp.heat", "sp.bgRoutes", "sp.lastCode", "sp.installHint", "sp.updSkip", "sp.official", "sp.customHefte", "sp.news", "sp.newsSeen", "sp.reports", "sp.set", "sp.hefteOn", "sp.heftSel"];
+  "sp.poi", "sp.heat", "sp.bgRoutes", "sp.clusters", "sp.todayOn", "sp.todayOff", "sp.darkMap", "sp.darkStyle", "sp.paccOpen", "sp.albumSet", "sp.notifAsked", "sp.offAreas", "sp.offAsked", "sp.extraSets", "sp.extraSet", "sp.legMin", "sp.lastCode", "sp.installHint", "sp.updSkip", "sp.official", "sp.customHefte", "sp.news", "sp.newsSeen", "sp.reports", "sp.set", "sp.hefteOn", "sp.heftSel"];
 function openLogout(){
   const hasPw = username && username.hasPw, g = load("sp.google", null);
   const safe = hasPw || g;
@@ -6150,7 +6151,7 @@ async function pushStamps(){
   if (!fb.ready() || !username || !username.reserved) return;
   const a = await fb.auth();
   const cur = await fb.raw("GET", `/stamps/${a.uid}`);
-  if (cur.ok) { const t = fv(await cur.json(), "data"); if (t && applyAdminEdit(t)) render(false); }
+  if (cur.ok) { const t = fv(await cur.json(), "data"); if (t && applyAdminEdit(t)) { render(false); setTimeout(() => { try { scheduleSync(); } catch(e) {} }, 500); } }
   await fb.req("PATCH", `/stamps/${a.uid}`, { fields: { data: fsStr(cloudPayload()), updated: { timestampValue: new Date().toISOString() } } });
   save("sp.stampsPushed", Date.now());
 }
@@ -6166,7 +6167,7 @@ async function pullStamps(){
   if (r.ok) {
     const d = await r.json();
     const txt = fv(d, "data");
-    if (txt) { applyAdminEdit(txt); const res = importBackup(txt); render(false); if (res.n) toast(`${res.n} Stempel aus der Cloud geholt`); }
+    if (txt) { const ae = applyAdminEdit(txt); const res = importBackup(txt); if (ae) setTimeout(() => { try { scheduleSync(); } catch(e) {} }, 1500); render(false); if (res.n) toast(`${res.n} Stempel aus der Cloud geholt`); }
   } else if (r.status !== 404) return 0;
   await pushStamps();
   return 1;
@@ -7333,10 +7334,14 @@ function renderUserStamps(){
     try {
       await fb.req("PATCH", `/stamps/${ued.uid}`, { fields: { data: fsStr(JSON.stringify(ued.payload)), updated: { timestampValue: new Date().toISOString() } } });
       if (ued.code) {
-        const c = st => Object.keys(ued.payload.done.p0[st] || {}).length;
-        await fb.req("PATCH", `/profiles/${ued.code}?updateMask.fieldPaths=hwn&updateMask.fieldPaths=hws&updateMask.fieldPaths=tou&updateMask.fieldPaths=tos&updateMask.fieldPaths=level&updateMask.fieldPaths=updated`, { fields: {
-          hwn: { integerValue: String(c("hwn")) }, hws: { integerValue: String(c("hws")) }, tou: { integerValue: String(c("tou")) }, tos: { integerValue: String(c("tos")) },
-          level: fsStr(hwnLevelOf(c("hwn"))), updated: { timestampValue: new Date().toISOString() } } });
+        const c = st => nDone(st, ued.payload.done.p0);
+        const PS = ["hwn", "hws", "tou", "tos", "tab", "sax", "bro", "wip", "dre", "nhv", "kne", "swv"].filter(st => stamps[st]);
+        const f = { level: fsStr(hwnLevelOf(c("hwn"))), updated: { timestampValue: new Date().toISOString() } };
+        PS.forEach(st => { f[st] = { integerValue: String(c(st)) }; });
+        const mask = [...PS, "level", "updated"].map(x => "updateMask.fieldPaths=" + x).join("&");
+        try { await fb.req("PATCH", `/profiles/${ued.code}?${mask}`, { fields: f }); }
+        catch(e) { const old = ["hwn", "hws", "tou", "tos", "level", "updated"]; await fb.req("PATCH", `/profiles/${ued.code}?` + old.map(x => "updateMask.fieldPaths=" + x).join("&"), { fields: Object.fromEntries(old.map(x => [x, f[x]])) }); }
+        if (cardCache[ued.code]) delete cardCache[ued.code];
       }
       toast("Stempel von " + ued.name + " gespeichert");
       ued.sel = null; renderUserStamps();
@@ -8471,10 +8476,12 @@ async function showToday(force){
   const sub = [txt, myPos ? (near.length ? `${near.length} offene${near.length === 1 ? "r" : ""} Stempel in deiner Nähe` : "kein offener Stempel in deiner Nähe") : ""].filter(Boolean).join(" · ") || "Schön, dass du da bist!";
   const d = document.createElement("div"); d.id = "todayCard"; d.className = "today" + (wet ? " wet" : "");
   d.innerHTML = `<button class="td-x" aria-label="Für heute ausblenden">×</button><div class="td-top"><div class="td-wx"><span>${ic}</span>${tmax ? `<b>${tmax}</b>` : ""}</div><div class="td-t"><b>${hi}${nm ? ", " + esc(nm) : ""}!</b><small>${esc(sub)}</small></div></div>
-    ${near.length ? `<div class="td-ch">${near.map(x => `<button data-tk="${esc(x.s.k)}"><b>${esc(String(x.s.n))}</b> ${esc(x.s.name)}<i>${wd(myPos, [x.s.lat, x.s.lon])}</i></button>`).join("")}</div>` : ""}`;
+    ${near.length ? `<div class="td-ch">${near.map(x => `<button data-tk="${esc(x.s.k)}"><b>${esc(String(x.s.n))}</b> ${esc(x.s.name)}<i>${wd(myPos, [x.s.lat, x.s.lon])}</i></button>`).join("")}</div>` : ""}
+    <div class="td-ft"><button class="td-off">Nicht mehr anzeigen</button></div>`;
   document.querySelector("main").appendChild(d);
   L.DomEvent && ["touchstart", "pointerdown", "wheel"].forEach(ev => d.addEventListener(ev, e => e.stopPropagation(), { passive: true }));
-  d.querySelector(".td-x").onclick = () => { save("sp.todayOff", today()); hideToday(); };
+  d.querySelector(".td-x").onclick = () => { save("sp.todayOff", today()); hideToday(); toast("Bis morgen! Ganz ausschalten: unten „Nicht mehr anzeigen“ oder im Karten-Menü"); };
+  d.querySelector(".td-off").onclick = () => { todayOn = false; save("sp.todayOn", false); hideToday(); try { syncLc(); } catch(e) {} toast("Heute-Karte aus – wieder einschalten im Karten-Menü unter „Anzeigen“"); };
   d.querySelectorAll("[data-tk]").forEach(b => b.onclick = () => { save("sp.todayOff", today()); hideToday(); const s = byKey[current].get(b.dataset.tk); if (s) { map.setView([s.lat, s.lon], Math.max(map.getZoom(), 14)); openStamp(s.k); } });
   /* Wischen nach oben = weg für heute */
   let sy = null; d.addEventListener("touchstart", e => { sy = e.touches[0].clientY; }, { passive: true });
@@ -8720,7 +8727,7 @@ function profileBannerHtml(m, c, me){
   if (sel) profSel = sel.id;
   const ring = (p, col, size, w, inner, cls) => `<span class="pring ${cls || ""}" style="--p:${Math.round(p * 100)};--c:${col};--s:${size}px;--w:${w}px"><span>${inner}</span></span>`;
   const x = xpOf(m, c), lv = levelOf(x.xp);
-  const total = c.stamps ? SET_KEYS.reduce((a, st) => a + ((c.stamps[st] || []).length), 0) : R.reduce((a, r) => a + r.n, 0);
+  const total = Math.max(c.stamps ? SET_KEYS.reduce((a, st) => a + ((c.stamps[st] || []).length), 0) : 0, R.reduce((a, r) => a + (r.n || 0), 0));
   const days = c.days ? Object.keys(c.days).length : null, km = c.hike && c.hike.km ? c.hike.km : 0;
   const near = me && goal ? nearestOpen(goal.id) : null;
   const sec = (id, ic, t, info, body, open) => body ? `<details class="pacc" data-pacc="${id}" ${open ? "open" : ""}><summary><span class="pa-ic">${ic}</span>${t}<em>${info}</em></summary><div class="pa-b">${body}</div></details>` : "";
