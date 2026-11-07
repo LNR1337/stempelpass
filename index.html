@@ -706,6 +706,53 @@ body.navving .toast{bottom:calc(200px + env(safe-area-inset-bottom,0px))}
 .nb-btns button.stop.sure{font-size:.85rem}
 .nb-btns button.nb-wide{font:700 .9rem var(--body);padding:0 12px}
 .nb-btns button.go{background:var(--forest);border-color:var(--forest);color:var(--forest-fg)}
+.nb-info em.nb-off{font:700 .7rem var(--body);font-style:normal;color:var(--done);background:color-mix(in srgb,var(--done) 12%,transparent);border-radius:99px;padding:1px 7px;margin-left:4px;white-space:nowrap}.nb-info em.nb-off.warn{color:#b26a00;background:color-mix(in srgb,#e8a33a 18%,transparent)}
+.navbar .nb-btns{flex-wrap:wrap;justify-content:flex-end}
+.nav-wz{position:absolute;left:10px;right:10px;z-index:7;display:flex;align-items:center;gap:11px;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-left:5px solid var(--forest);border-radius:14px;padding:8px 12px;box-shadow:0 4px 14px rgba(0,0,0,.18);font-size:.9rem;line-height:1.25}
+.nav-wz[hidden],.nav-poi[hidden]{display:none}
+.nav-wz small{display:block;color:var(--muted);font-size:.76rem;margin-top:1px}
+.wzs{flex:none;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:6px;background:var(--wb,#fff);border:1.5px solid #8889;position:relative;overflow:hidden;vertical-align:middle}
+.wzs i{display:block;background:var(--wf)}
+.wzs i.sh-dot,.wzs i.sh-circle{width:14px;height:14px;border-radius:50%}.wzs i.sh-circle{background:none;border:3px solid var(--wf)}
+.wzs i.sh-bar,.wzs i.sh-stripe,.wzs i.sh-lower{width:100%;height:9px}.wzs i.sh-lower{align-self:end;height:10px}
+.wzs i.sh-triangle{width:0;height:0;background:none;border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:15px solid var(--wf)}
+.wzs i.sh-diamond{width:13px;height:13px;transform:rotate(45deg)}
+.wzs i.sh-rectangle{width:18px;height:11px}
+.wzs i.sh-cross,.wzs i.sh-x{width:18px;height:4px;box-shadow:0 0 0 0 var(--wf);transform:rotate(45deg);position:relative}.wzs i.sh-cross::after,.wzs i.sh-x::after{content:"";position:absolute;inset:0;background:var(--wf);transform:rotate(90deg)}
+.wzs i.sh-corner{width:0;height:0;background:none;border-top:28px solid var(--wf);border-right:28px solid transparent;position:absolute;left:0;top:0}
+.wzs i.sh-backslash,.wzs i.sh-slash{width:6px;height:40px;transform:rotate(-45deg)}.wzs i.sh-slash{transform:rotate(45deg)}
+.wzs i.sh-hiker,.wzs i.sh-arch,.wzs i.sh-pointer,.wzs i.sh-arrow{width:12px;height:12px;border-radius:3px}
+.wzs i.sh-none{width:0;height:0}
+.nav-poi{position:absolute;left:10px;right:10px;z-index:7;display:flex;align-items:center;gap:9px;text-align:left;background:color-mix(in srgb,var(--surface) 94%,transparent);color:var(--fg);border:1px solid var(--line);border-radius:99px;padding:7px 14px;box-shadow:0 3px 10px rgba(0,0,0,.16);font:500 .82rem var(--body)}
+.nav-poi span:first-child{font-size:1.1rem}.nav-poi b{font-weight:700}
+.ncw{display:flex;gap:12px;align-items:center;width:100%;text-align:left;margin-top:8px;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font:inherit}
+.ncw>i{font-style:normal;font-size:1.4rem;flex:none}.ncw .t{display:flex;flex-direction:column;gap:3px;min-width:0}.ncw b{font:700 1rem var(--display)}.ncw small{color:var(--muted);font-size:.8rem}
+.ncw small.ncw-w{display:flex;flex-wrap:wrap;align-items:center;gap:5px}.ncw-w .wzs{width:20px;height:20px;border-radius:4px}.ncw-w .wzs i.sh-dot{width:9px;height:9px}.ncw-w .wzs i.sh-bar,.ncw-w .wzs i.sh-stripe{height:6px}.ncw-w .wzs i.sh-triangle{border-left-width:6px;border-right-width:6px;border-bottom-width:10px}.ncw-w .wzs i.sh-diamond{width:9px;height:9px}
+.ncw.on{border-color:var(--route,var(--forest));background:color-mix(in srgb,var(--route,var(--forest)) 10%,var(--bg));box-shadow:0 0 0 2px color-mix(in srgb,var(--route,var(--forest)) 30%,transparent)}
+.nb-prof{flex-basis:100%;position:relative;height:46px;margin-top:6px}.nb-prof svg{width:100%;height:100%;display:block}
+.np-a{fill:color-mix(in srgb,var(--route,#2f6fd6) 14%,transparent)}.np-d{fill:color-mix(in srgb,var(--route,#2f6fd6) 34%,transparent)}.np-l{fill:none;stroke:var(--route,#2f6fd6);stroke-width:1.6;vector-effect:non-scaling-stroke}.np-m{stroke:var(--fg);stroke-width:1;stroke-dasharray:2 2;opacity:.45;vector-effect:non-scaling-stroke}
+.np-me{position:absolute;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:var(--me,#e8833a);border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.np-lo,.np-hi{position:absolute;font:700 .66rem var(--body);color:var(--muted);background:color-mix(in srgb,var(--surface) 85%,transparent);border-radius:6px;padding:0 4px}.np-lo{left:2px;bottom:1px}.np-hi{top:-2px;transform:translateX(-50%)}
+/* Neue kompakte Navi (Variante A) */
+.nt-wz{display:none}
+body.navving.nv-new header{display:none!important}
+body.nv-new .navtop{flex-wrap:wrap;top:calc(10px + env(safe-area-inset-top,0px));border-radius:18px;padding:10px 14px 10px 10px}
+body.nv-new .nt-wz:not([hidden]){display:flex;flex-basis:100%;align-items:center;gap:8px;margin-top:2px;padding-top:8px;border-top:1px solid color-mix(in srgb,var(--forest-fg) 18%,transparent);font-size:.85rem;line-height:1.25}
+.nt-wz .wzs{width:22px;height:22px;border-radius:4px}.nt-wz .wzs i.sh-dot{width:10px;height:10px}.nt-wz .wzs i.sh-bar,.nt-wz .wzs i.sh-stripe{height:7px}.nt-wz .wzs i.sh-triangle{border-left-width:7px;border-right-width:7px;border-bottom-width:11px}.nt-wz .wzs i.sh-diamond{width:10px;height:10px}
+.navbar.nva{border-radius:18px;padding:6px 10px 12px 16px;gap:8px 10px}
+.nb-grab{flex-basis:100%;height:14px;border:0;background:none;padding:0;display:grid;place-items:center;margin-bottom:-4px}.nb-grab::before{content:"";width:38px;height:4px;border-radius:4px;background:var(--line)}
+.navbar.nva .nb-info{cursor:pointer}.navbar.nva .nb-info small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.navbar.nva .nb-btns button{width:44px;height:44px;border-radius:50%;padding:0}.navbar.nva .nb-btns button.stop.sure{width:auto;border-radius:22px;padding:0 12px}
+.navbar.nva .nb-prof{margin-top:0}.navbar.nva .nb-prof.mini{height:22px}
+.navbar.nva .nb-stats{margin-top:0}.nb-stats .nb-offs{font-size:.76rem;align-self:center}
+.nb-grid{flex-basis:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px}
+.nb-grid button{height:48px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:0}
+.nb-grid button span{font:600 .74rem var(--body)}.nb-grid button.on{border-color:var(--done);background:color-mix(in srgb,var(--done) 16%,var(--bg))}
+body.nv-glass .navtop{background:color-mix(in srgb,var(--forest) 74%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+body.nv-glass .navbar{background:color-mix(in srgb,var(--surface) 74%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+body.nv-glass .navbar .nb-btns button:not(.stop):not(.go),body.nv-glass .nb-grid button:not(.on){background:color-mix(in srgb,var(--bg) 55%,transparent)}
+.nav-poim i{width:30px;height:30px;border-radius:50%;background:var(--surface);border:2px solid var(--route,#2f6fd6);display:grid;place-items:center;font-size:15px;font-style:normal;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.wk-to{margin:10px 0 0;padding:9px 12px;border-radius:12px;background:color-mix(in srgb,var(--done) 12%,transparent);font-size:.88rem}
 .nav-me{background:none;border:0}.nav-me i{display:block;width:34px;height:34px;transition:transform .4s;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
 /* Freunde-Vergleich auf der Karte */
 .cmpbar{position:absolute;left:10px;right:56px;top:10px;z-index:6;background:var(--surface);color:var(--fg);border:2px solid var(--me);border-radius:14px;padding:6px 6px 6px 10px;box-shadow:0 4px 14px rgba(0,0,0,.15);display:flex;flex-direction:column;gap:5px}
@@ -1187,8 +1234,30 @@ li.done .chk.phc svg{position:absolute;right:-5px;bottom:-5px;width:18px;height:
 .pt-row .t{flex:1;min-width:0}.pt-row .t > b{font:600 .95rem var(--body)}.pt-row .t > small{color:var(--muted);font-size:.78rem}
 .pt-bar{display:block;height:7px;border-radius:9px;background:color-mix(in srgb,var(--fg) 10%,transparent);margin:5px 0 3px;overflow:hidden}.pt-bar i{display:block;height:100%;background:var(--c);border-radius:9px}
 .pt-last{display:flex;gap:12px;align-items:center;width:100%;text-align:left;border:0;background:none;color:var(--fg);padding:9px 2px;border-bottom:1px solid var(--line);font:inherit}
-.pt-last > span{font-size:1.35rem}.pt-last b{display:block;font:600 .92rem var(--body)}.pt-last small{color:var(--muted);font-size:.78rem}
+.pt-last > div{flex:1;min-width:0}.pt-go{font-style:normal;color:var(--muted);font-size:1.3rem}.pt-last > span{font-size:1.35rem}.pt-last b{display:block;font:600 .92rem var(--body)}.pt-last small{color:var(--muted);font-size:.78rem}
 .pt-sum{padding:10px 12px;border-radius:14px;background:color-mix(in srgb,var(--gold) 16%,transparent);font-size:.9rem;margin-bottom:4px}
+
+/* 🧭 Route planen A–D */
+.rp-pin{width:30px;height:30px;border-radius:50%;color:#fff;display:grid;place-items:center;font:800 .9rem var(--body);border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.rp-plus{width:24px;height:24px;border-radius:50%;background:var(--surface);color:var(--route);display:grid;place-items:center;font:900 .95rem/1 var(--body);border:2px dashed var(--route);box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.pl-sum{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}.pl-sum div{border-radius:14px;padding:8px 4px;text-align:center;background:color-mix(in srgb,var(--fg) 5%,transparent)}.pl-sum b{display:block;font:700 1.08rem var(--display)}.pl-sum small{color:var(--muted);font-size:.72rem}
+.pl-l{list-style:none;margin:6px 0 0;padding:0}.pl-l li{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
+.pl-l .lt{flex:none;width:30px;height:30px;border-radius:50%;color:#fff;display:grid;place-items:center;font:800 .85rem var(--body)}
+.pl-l .t{flex:1;min-width:0;border:0;background:none;padding:0;text-align:left;color:var(--fg);font:inherit}.pl-l .t b{display:block;font:600 .92rem var(--body);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pl-l .t small{color:var(--muted);font-size:.76rem}
+.rp-mv{display:flex;flex-direction:column}.rp-mv button{border:0;background:none;color:var(--muted);font-size:.7rem;padding:1px 6px;line-height:1.2}.rp-mv button:disabled{opacity:.25}
+.pl-l .x{border:0;background:none;color:var(--muted);font-size:1rem;padding:4px 6px}
+.pl-seg{display:flex;align-items:center;gap:8px;padding:2px 0 2px 38px;font-size:.74rem;color:var(--muted)}
+.pl-insb{margin-left:auto;border:1px dashed var(--line);background:var(--surface);color:var(--muted);border-radius:99px;padding:2px 10px;font:600 .72rem var(--body)}
+.pl-add{display:grid;grid-template-columns:repeat(auto-fill,minmax(68px,1fr));gap:6px;margin:10px 0}.pl-add button{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:12px;padding:8px 2px;font:600 .7rem var(--body);display:flex;flex-direction:column;align-items:center;gap:2px}.pl-add button span{font-size:1.15rem}
+.rp-save{display:flex;gap:6px;width:100%}.rp-save input{flex:1;min-width:0;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:inherit}
+.rp-bar{position:absolute;left:10px;right:10px;bottom:10px;z-index:9;background:var(--surface);border-radius:18px;padding:10px 12px;box-shadow:0 6px 20px rgba(0,0,0,.22)}
+.rpb-r{display:flex;gap:4px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:.8rem}.rpb-r span{display:inline-flex;align-items:center;gap:4px;font:600 .76rem var(--body);color:var(--fg)}
+.rpb-r i{font-style:normal;width:20px;height:20px;border-radius:50%;color:#fff;display:grid;place-items:center;font:800 .66rem var(--body)}
+.rpb-tip{margin-top:6px;padding:6px 10px;border-radius:10px;background:color-mix(in srgb,var(--gold) 18%,transparent);font:600 .8rem var(--body)}
+.rpb-a{display:flex;gap:6px;align-items:center;margin-top:8px}.rpb-a b{flex:1;font:700 .9rem var(--body)}
+.rp-own{display:flex;gap:12px;align-items:center;width:100%;text-align:left;margin:4px 0 10px;padding:12px;border-radius:16px;border:1px solid color-mix(in srgb,var(--route) 40%,var(--line));background:color-mix(in srgb,var(--route) 8%,var(--surface));color:var(--fg);font:inherit}
+.rp-own > span:first-child{font-size:1.6rem}.rp-own span b{display:block;font:700 .95rem var(--body)}.rp-own small{color:var(--muted);font-size:.78rem}.rp-own i{font-style:normal;margin-left:auto;color:var(--muted);font-size:1.3rem}
+.myr{margin:10px 0;padding:12px;border-radius:16px;border:1px solid var(--line)}.myr-h{display:flex;align-items:center;gap:8px}.myr-h b{flex:1;font:700 .95rem var(--body)}.myr .slist{margin-top:6px}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
@@ -1973,7 +2042,7 @@ body.compact-hdr header .tabs,body.compact-hdr header .hefts{max-height:0;opacit
   <div class="legend" id="legend"><span><i style="background:var(--open)"></i>offen</span><span><i style="background:var(--done)"></i>gestempelt</span><span><i style="background:var(--code)"></i>Code</span><span><i style="background:var(--digital)"></i>digital</span><span><i style="background:var(--broken);border-color:var(--bad)"></i>kaputt</span><span><i style="background:var(--open);border-color:var(--gold)"></i>Hinweis</span></div>
   <div class="routechip lochip" id="locChip" hidden><span id="locChipText"></span><button id="locChipX" aria-label="Standorte ausblenden">✕</button></div>
   <div class="routechip trackchip" id="trackChip" hidden><span id="trackChipText"></span><button id="trackChipGo" aria-label="Aufzeichnung">■</button></div>
-  <div class="navtop" id="navTop" hidden><div class="nt-ic" id="ntIc"></div><div class="nt-tx"><b id="ntDist"></b><span id="ntText"></span><small id="ntThen"></small></div></div>
+  <div class="navtop" id="navTop" hidden><div class="nt-ic" id="ntIc"></div><div class="nt-tx"><b id="ntDist"></b><span id="ntText"></span><small id="ntThen"></small></div><div class="nt-wz" id="ntWz" hidden></div></div>
   <div class="navbar" id="navBar" hidden></div>
   <div class="cmpbar" id="cmpBar" hidden></div>
   <div class="routechip" id="routeChip" hidden><span id="routeChipName"></span><button id="routeChipX" aria-label="Route ausblenden">✕</button></div>
@@ -2333,8 +2402,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.72 Beta";
-const APP_CODE = 112;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.73 Beta";
+const APP_CODE = 113;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -3386,15 +3455,15 @@ function renderRoutes(){
   $("#planBtn").innerHTML = ico("compass") + "Tour planen";
   $("#rfrow").hidden = !list.length;
   if (!list.length) {
-    sum.innerHTML = hikeCardHtml(); hk();
+    sum.innerHTML = hikeCardHtml() + myRoutesHtml(); hk(); bindMyRoutes();
     $("#ritems").innerHTML = `<li class="empty bigempty"><div class="be-ic">🧭</div><b>Noch keine fertigen Touren</b><span>Für „${esc(SETS[current].title)}“ gibt es keine fertigen Routen. Die App stellt dir aber eine Tour aus deinen offenen Stempeln zusammen.</span><button class="btn primary" id="reGo">🧭 Tour selbst planen</button></li>`;
     $("#reGo").onclick = () => $("#planBtn").click();
     return;
   }
   drawRouteOverview(list);
   const nDone = list.filter(r => routeProgress(r).n === r.stamps.length).length;
-  sum.innerHTML = hikeCardHtml() + `<div class="rsum"><span><b style="color:var(--fg)">${nDone}</b> von ${list.length} Routen geschafft</span><span class="bar"><i style="width:${Math.round(nDone / list.length * 100)}%"></i></span></div>`;
-  hk();
+  sum.innerHTML = hikeCardHtml() + myRoutesHtml() + `<div class="rsum"><span><b style="color:var(--fg)">${nDone}</b> von ${list.length} Routen geschafft</span><span class="bar"><i style="width:${Math.round(nDone / list.length * 100)}%"></i></span></div>`;
+  hk(); bindMyRoutes();
   const cntR = { all: list.length, open: list.length - nDone, done: nDone };
   const lblR = { all: "Alle", open: "Offen", done: "✓ Geschafft" };
   $("#rfiltSel").querySelectorAll("option").forEach(o => { o.textContent = `${lblR[o.value]} (${cntR[o.value]})`; });
@@ -3549,6 +3618,13 @@ function openHdrPrefs(){
 /* ---------- Untere Leiste: Avatar-Knopf öffnet das Menü (Admin wählt A = Reiter „Ich“, D = rechts mit Ring, E = groß in der Mitte) ---------- */
 const NAV_STYLES = { a: "Reiter „Ich“", d: "Rechts mit Fortschrittsring", e: "Groß in der Mitte" };
 let navStyle = load("sp.navStyle", "e");
+/* Navi-Ansicht: glass = kompakt & leicht durchsichtig, solid = kompakt & deckend, classic = bisher */
+const NAVI_UI = { glass: ["Neu · Kompakt, leicht durchsichtig", "ohne Kopfzeile, Leiste zum Aufklappen, Karte scheint durch"], solid: ["Neu · Kompakt, deckend", "wie oben, aber nicht durchsichtig (besser in der Sonne)"], classic: ["Klassisch", "die bisherige Navi-Ansicht mit allen Infos"] };
+let naviUi = load("sp.naviUi", "glass"); if (!NAVI_UI[naviUi]) naviUi = "glass";
+let navOpen = load("sp.navOpen", false);
+const naviNew = () => naviUi !== "classic";
+function applyNaviUi(){ document.body.classList.toggle("nv-new", naviNew()); document.body.classList.toggle("nv-glass", naviUi === "glass"); try { if (nav) { renderNavUi(); setTimeout(() => map.invalidateSize(), 60); } } catch(e) {} }
+applyNaviUi();
 function navAvatar(){ return myCard.photo ? `<img src="${esc(myCard.photo)}" alt="">` : esc(myCard.avatar || "🥾"); }
 function applyNav(){
   if (!NAV_STYLES[navStyle]) navStyle = "e";
@@ -3584,6 +3660,8 @@ function openLayoutAdmin(){
     <div class="bgmodes">${[["pins", "Neu · Pins", "Tropfen mit Nummer, gestempelte grün mit ✓, nahe offene leuchten"], ["dots", "Klassisch · Punkte", "die bisherigen runden Punkte"]].map(([v, t, d]) => `<label class="checkline bgm"><input type="radio" name="mks" value="${v}" ${markerStyle === v ? "checked" : ""}><span><b>${t}</b><small>${d}</small></span></label>`).join("")}</div>
     <h3>Profil-Knopf in der unteren Leiste</h3>
     <div class="bgmodes">${Object.entries(NAV_STYLES).map(([v, t]) => `<label class="checkline bgm"><input type="radio" name="navs" value="${v}" ${navStyle === v ? "checked" : ""}><span><b>${v.toUpperCase()} · ${t}</b><small>${{ a: "Avatar als fünfter Reiter neben Freunde", d: "Avatar rechts mit Fortschrittsring und ☰", e: "großer Avatar mittig, ragt über die Leiste" }[v]}</small></span></label>`).join("")}</div>
+    <h3>Navigation</h3>
+    <div class="bgmodes">${Object.entries(NAVI_UI).map(([v, [t, d]]) => `<label class="checkline bgm"><input type="radio" name="nvui" value="${v}" ${naviUi === v ? "checked" : ""}><span><b>${t}</b><small>${d}</small></span></label>`).join("")}</div>
     <p class="hint" style="margin-top:10px">Gilt für alle Nutzer – sie können es (noch) nicht selbst ändern.</p>
     <p id="layMsg" style="color:var(--bad)"></p>
     <div class="actions"><button class="btn primary" id="layGo">Für alle übernehmen</button><button class="btn quiet" id="layBack">Zurück</button></div>`);
@@ -3595,13 +3673,15 @@ function openLayoutAdmin(){
       const ns = (document.querySelector('input[name="navs"]:checked') || {}).value || "e";
       const ps = (document.querySelector('input[name="profs"]:checked') || {}).value || "tabs";
       const ms = (document.querySelector('input[name="mks"]:checked') || {}).value || "pins";
-      await fb.req("PATCH", "/config/app?updateMask.fieldPaths=layout&updateMask.fieldPaths=hdrNear&updateMask.fieldPaths=hdrBars&updateMask.fieldPaths=navStyle&updateMask.fieldPaths=profStyle&updateMask.fieldPaths=markerStyle", { fields: { layout: fsStr(v), hdrNear: { booleanValue: hn }, hdrBars: { booleanValue: hb }, navStyle: fsStr(ns), profStyle: fsStr(ps), markerStyle: fsStr(ms) } });
+      const nu = (document.querySelector('input[name="nvui"]:checked') || {}).value || "glass";
+      await fb.req("PATCH", "/config/app?updateMask.fieldPaths=layout&updateMask.fieldPaths=hdrNear&updateMask.fieldPaths=hdrBars&updateMask.fieldPaths=navStyle&updateMask.fieldPaths=profStyle&updateMask.fieldPaths=markerStyle&updateMask.fieldPaths=naviUi", { fields: { naviUi: fsStr(nu), layout: fsStr(v), hdrNear: { booleanValue: hn }, hdrBars: { booleanValue: hb }, navStyle: fsStr(ns), profStyle: fsStr(ps), markerStyle: fsStr(ms) } });
       navStyle = ns; save("sp.navStyle", ns); applyNav();
+      naviUi = nu; save("sp.naviUi", nu); applyNaviUi();
       profStyle = ps; save("sp.profStyle", ps);
       if (ms !== markerStyle) { markerStyle = ms; save("sp.markerStyle", ms); try { render(); } catch(e) {} }
       layout = v; save("sp.layout", v); applyLayout();
       hdrCfg = { near: hn, bars: hb }; save("sp.hdrCfg", hdrCfg); render(false);
-      logMod("Layout geändert", `${v === "ring" ? "Kompakt" : "Klassisch"} · Nächster Stempel ${hn ? "an" : "aus"} · Heft-Balken ${hb ? "an" : "aus"} · Leiste ${ns.toUpperCase()} · Profil ${{ tabs: "Reiter", banner: "Banner", classic: "klassisch" }[ps]} · Marker ${ms === "pins" ? "Pins" : "Punkte"}`);
+      logMod("Layout geändert", `${v === "ring" ? "Kompakt" : "Klassisch"} · Nächster Stempel ${hn ? "an" : "aus"} · Heft-Balken ${hb ? "an" : "aus"} · Leiste ${ns.toUpperCase()} · Profil ${{ tabs: "Reiter", banner: "Banner", classic: "klassisch" }[ps]} · Marker ${ms === "pins" ? "Pins" : "Punkte"} · Navi ${NAVI_UI[nu][0]}`);
       toast("Layout für alle gespeichert"); openAdmin();
     } catch(e) { $("#layMsg").textContent = "Fehlgeschlagen: " + e.message; }
   };
@@ -4388,6 +4468,8 @@ function openRoute(id, showOnMap){
     <h3>Höhenprofil</h3><div class="elev" id="rElev"><div class="skel"><i></i><i></i><i style="width:60%"></i></div></div>
     <h3>Wetter am Start</h3><div class="wx" id="rWx"><div class="skel"><i></i><i></i><i style="width:60%"></i></div></div>
     <div class="actions">
+      <button class="btn" id="rEdit">✏️ Bearbeiten · Punkte hinzufügen</button>
+      <button class="btn" id="rCar">🚗 Mit dem Auto zum Start</button>
       <button class="btn" id="rShare">📤 Mit Freunden teilen</button>
       ${hasNative("downloadTiles") ? '<button class="btn" id="rOffline">📥 Karte offline speichern</button>' : ""}
       <button class="btn quiet" id="sClose">Schließen</button>
@@ -4408,6 +4490,8 @@ function openRoute(id, showOnMap){
   const rs = $("#rShow"); if (rs) rs.onclick = () => { closeSheet(); setView("map"); showRoute(r, true); };
   const ro = $("#rOffline"); if (ro) ro.onclick = () => { closeSheet(); saveTilesFor(boundsOf(r.pts, 0.01), 10, 16, r.name); };
   $("#rShare").onclick = () => shareRoute(r);
+  $("#rEdit").onclick = () => editRoute(r, current);
+  $("#rCar").onclick = () => openCarToParking(r.pts[0], "Start");
   const ev = $("#rElev");
   routeElevation(r).then(e => { if (ev.isConnected) ev.innerHTML = elevHtml(e); }).catch(() => { if (ev.isConnected) ev.textContent = "Höhenprofil gerade nicht abrufbar (kein Internet?)."; });
   fillWeather($("#rWx"), r.pts[0][0], r.pts[0][1]);
@@ -4604,7 +4688,8 @@ function openPlanner(){
   openSheet(`
     <div class="kicker">${esc(SETS[current].title)}</div>
     <h2>Eigene Tour planen</h2>
-    <p>Die App sucht offene Stempel in der Nähe und bringt sie in eine kurze Reihenfolge. Kaputte Stempel werden ausgelassen.</p>
+    <button class="rp-own" id="plOwn"><span>🧭</span><span><b>Route selbst zusammenstellen</b><small>Punkt A, B, C, D … – Stempel, Parkplatz, Einkehr oder auf die Karte tippen</small></span><i>›</i></button>
+    <p>Oder die App sucht offene Stempel in der Nähe und bringt sie in eine kurze Reihenfolge. Kaputte Stempel werden ausgelassen.</p>
     <div class="plcard">
     <div class="plrow"><label>📍 Start</label>
       <div class="seg" id="plFrom"><button data-v="me" class="${from === "me" ? "on" : ""}">Mein Standort</button><button data-v="center" class="${from === "center" ? "on" : ""}">Kartenmitte</button></div></div>
@@ -4624,6 +4709,7 @@ function openPlanner(){
       <textarea class="note" id="plImp" placeholder="Nachricht mit [stempeltour~…] einfügen"></textarea>
       <div class="actions" style="margin-top:8px"><button class="btn" id="plImpGo">Tour öffnen</button></div></details>`);
   $("#plImpGo").onclick = () => importTour($("#plImp").value);
+  $("#plOwn").onclick = () => openRoutePlanner();
   const opts = { from, count: planOpts.count, loop: planOpts.loop, src: planOpts.src || "all" };
   const seg = (id, fn) => $(id).onclick = e => { const v = e.target.dataset.v; if (v == null) return;
     $(id).querySelectorAll("button").forEach(b => b.classList.toggle("on", b === e.target)); fn(v); };
@@ -4681,11 +4767,16 @@ function openPlan(){
       <a class="btn" href="${planMapsUrl(p)}" target="_blank" rel="noopener">In Google Maps starten</a>
       ${hasNative("downloadTiles") ? '<button class="btn" id="plOffline">Karte für diese Tour offline speichern</button>' : ""}
       <button class="btn" id="plShare">Mit Freunden teilen</button>
+      <button class="btn" id="plEdit">✏️ Bearbeiten · Punkte hinzufügen</button>
       <button class="btn" id="plAgain">Neu planen</button>
       <button class="btn quiet" id="sClose">Schließen</button>
     </div>`);
   $("#sheet").querySelectorAll("[data-stamp]").forEach(b => b.onclick = () => openStamp(b.dataset.stamp));
   $("#plAgain").onclick = () => openPlanner();
+  $("#plEdit").onclick = () => { closeSheet(); const w = [{ lat: p.start[0], lon: p.start[1], name: p.fromMe ? "Mein Standort" : "Start", kind: p.fromMe ? "me" : "point" }];
+    p.stamps.forEach(k => { const s = byKey[p.set].get(k); if (s) w.push({ lat: s.lat, lon: s.lon, name: `Nr. ${s.n} ${s.name}`, kind: "stamp", set: p.set, k }); });
+    if (p.loop) w.push({ lat: p.start[0], lon: p.start[1], name: "Zurück zum Start", kind: "point" });
+    openRoutePlanner(w, p.name); };
   $("#plNav").onclick = () => startTourNav(p);
   $("#plShare").onclick = () => sharePlan(p);
   { const f = byKey[p.set].get(p.stamps[0]); fillWeather($("#plWx"), f.lat, f.lon); }
@@ -5196,30 +5287,38 @@ async function pushWalk(on, force){
   const iso = isoDay(Date.now()); let n = 0;
   if (on) for (const st of SET_KEYS) for (const d of Object.values(done[st])) if (d === iso) n++;
   const p = on && myPos ? myPos : null;
+  const fields = { uid: null, on: { booleanValue: !!on }, km: { doubleValue: km }, n: { integerValue: String(n) },
+    start: { timestampValue: new Date(trk ? trk.start : Date.now()).toISOString() }, lat: { doubleValue: p ? +p[0].toFixed(4) : 0 }, lon: { doubleValue: p ? +p[1].toFixed(4) : 0 },
+    ts: { timestampValue: new Date().toISOString() } };
+  /* 🧭 wohin gerade navigiert wird + ungefähre Ankunft */
+  const to = on && nav && !nav.arrived && nav.rest != null ? nav.name.slice(0, 60) : "";
+  if (to) { fields.to = fsStr(to); fields.eta = { timestampValue: new Date(Date.now() + navMinutes(nav.rest) * 60000).toISOString() }; }
   try {
-    const a = await fb.auth();
-    await fb.req("PATCH", `/walks/${username.code}`, { fields: { uid: fsStr(a.uid), on: { booleanValue: !!on }, km: { doubleValue: km }, n: { integerValue: String(n) },
-      start: { timestampValue: new Date(trk ? trk.start : Date.now()).toISOString() }, lat: { doubleValue: p ? +p[0].toFixed(4) : 0 }, lon: { doubleValue: p ? +p[1].toFixed(4) : 0 },
-      ts: { timestampValue: new Date().toISOString() } } });
+    const a = await fb.auth(); fields.uid = fsStr(a.uid);
+    try { await fb.req("PATCH", `/walks/${username.code}`, { fields }); }
+    catch(e) { if (!to) throw e; delete fields.to; delete fields.eta; await fb.req("PATCH", `/walks/${username.code}`, { fields }); }
   } catch(e) {}
 }
 async function loadWalks(codes){
   const out = {};
   await Promise.all(codes.map(async c => {
     try { const r = await fb.raw("GET", `/walks/${c}`); if (!r.ok) return; const d = await r.json();
-      const w = { on: fv(d, "on") === true, km: +fv(d, "km") || 0, n: +fv(d, "n") || 0, start: fv(d, "start"), lat: +fv(d, "lat") || 0, lon: +fv(d, "lon") || 0, ts: fv(d, "ts") };
+      const w = { on: fv(d, "on") === true, km: +fv(d, "km") || 0, n: +fv(d, "n") || 0, start: fv(d, "start"), lat: +fv(d, "lat") || 0, lon: +fv(d, "lon") || 0, ts: fv(d, "ts"), to: fv(d, "to") || "", eta: fv(d, "eta") || "" };
       if (w.on && Date.now() - Date.parse(w.ts) < 45 * 60000) out[c] = w; } catch(e) {}
   }));
   walksLive = out;
 }
 function walkChip(code){
   const w = walksLive[code]; if (!w) return "";
+  if (w.to && w.eta && Date.parse(w.eta) > Date.now() - 10 * 60000) { const e = new Date(w.eta);
+    return `<button class="fchip walking" data-walk="${esc(code)}"><i></i>🧭 unterwegs zu ${esc(w.to)} · an ~${e.getHours()}:${String(e.getMinutes()).padStart(2, "0")}</button>`; }
   return `<button class="fchip walking" data-walk="${esc(code)}"><i></i>unterwegs · ${km1(w.km)} km${w.n ? " · " + w.n + " Stempel" : ""} · seit ${fmtDur(Date.now() - Date.parse(w.start))}</button>`;
 }
 function openWalk(code){
   const w = walksLive[code], m = board && board.list.find(x => x.code === code); if (!w || !m) return;
   openSheet(`<div class="kicker">🟢 Gerade unterwegs</div><h2>${esc(m.name)} wandert</h2>
     <div class="stats"><div class="stat"><b>${km1(w.km)} km</b><span>bisher</span></div><div class="stat"><b>${fmtDur(Date.now() - Date.parse(w.start))}</b><span>unterwegs</span></div><div class="stat"><b>${w.n}</b><span>Stempel heute</span></div></div>
+    ${w.to && w.eta ? `<p class="wk-to">🧭 Navigiert gerade zu <b>${esc(w.to)}</b> · Ankunft ca. <b>${new Date(w.eta).getHours()}:${String(new Date(w.eta).getMinutes()).padStart(2, "0")}</b></p>` : ""}
     ${w.lat ? `<div class="fxmap" id="wkMap"></div><p class="hint">Ungefährer Standort, Stand ${esc(ago(w.ts))}${myPos ? " · " + fmtKm(distKm(myPos, [w.lat, w.lon])) + " von dir" : ""}.</p>` : ""}
     <div class="actions">${w.lat ? '<button class="btn primary" id="wkGo">🧭 Dazustoßen</button>' : ""}<button class="btn quiet" id="sClose">Schließen</button></div>`);
   if (w.lat) {
@@ -5519,7 +5618,7 @@ function renderFriends(){
     const lvl = (SETS.hwn.levels.filter(([n]) => m.hwn >= n).pop() || [])[1] || "";
     const wkN = since(m, weekFrom);
     const trend = boardSort === "all" ? (wkN ? `<span class="trend up">▲ +${wkN}</span>` : `<span class="trend">±0</span>`) : `<span class="trend">${totalOf(m)} gesamt</span>`;
-    const full = i < 3 || me;
+    const full = true;   // Hefte bei allen zeigen (vorher nur Platz 1–3 und man selbst)
     /* Harz & Touringen als eigene Balken, alle anderen Hefte (mit mind. 1 Stempel) in einem Farb-Balken darunter */
     const main = cols.slice(0, 2), rest = cols.slice(2).filter(([, f]) => f(m) > 0);
     const minis = full ? `<div class="minis" style="grid-template-columns:repeat(2,1fr)">${main.map(([t, f, max, col]) => `<div class="mini"><span>${t}</span><b>${f(m)}</b><div class="mbar"><i style="width:${Math.min(100, Math.round(f(m) / max * 100))}%;background:${col}"></i></div></div>`).join("")}</div>`
@@ -5732,6 +5831,7 @@ async function checkUpdate(){
     { const hn = fv(d, "hdrNear"), hb = fv(d, "hdrBars");
       if (hn != null || hb != null) { const c = { near: hn === true, bars: hb === true }; if (JSON.stringify(c) !== JSON.stringify(hdrCfg)) { hdrCfg = c; save("sp.hdrCfg", c); render(false); } } }
     { const ns = fv(d, "navStyle"); if (NAV_STYLES[ns] && ns !== navStyle) { navStyle = ns; save("sp.navStyle", ns); applyNav(); } }
+    { const nu = fv(d, "naviUi"); if (NAVI_UI[nu] && nu !== naviUi) { naviUi = nu; save("sp.naviUi", nu); applyNaviUi(); } }
     { const ps = fv(d, "profStyle"); if (["tabs", "banner", "classic"].includes(ps) && ps !== profStyle) { profStyle = ps; save("sp.profStyle", ps); } }
     { const ms = fv(d, "markerStyle"); if ((ms === "pins" || ms === "dots") && ms !== markerStyle) { markerStyle = ms; save("sp.markerStyle", ms); try { render(); } catch(e) {} } }
     const lay = fv(d, "layout");
@@ -6098,7 +6198,7 @@ const GOOGLE_G = '<svg viewBox="0 0 48 48" width="18" height="18" style="vertica
 
 /* ---------- 🚪 Abmelden: Stempel sichern, Konto-Daten vom Handy entfernen, neu starten ---------- */
 /* Diese Einstellungen gehören zum Handy, nicht zum Konto – sie bleiben beim Abmelden */
-const KEEP_KEYS = ["sp.theme", "sp.base", "sp.legMin", "sp.regions", "sp.layout", "sp.hdrCfg", "sp.navStyle", "sp.profStyle", "sp.markerStyle", "sp.hdrMine", "sp.gcfg", "sp.fixes", "sp.roles", "sp.navVoice", "sp.navEco",
+const KEEP_KEYS = ["sp.naviUi", "sp.navOpen", "sp.navVib", "sp.theme", "sp.base", "sp.legMin", "sp.regions", "sp.layout", "sp.hdrCfg", "sp.navStyle", "sp.profStyle", "sp.markerStyle", "sp.hdrMine", "sp.gcfg", "sp.fixes", "sp.roles", "sp.navVoice", "sp.navEco",
   "sp.poi", "sp.heat", "sp.bgRoutes", "sp.clusters", "sp.todayOn", "sp.todayOff", "sp.darkMap", "sp.darkStyle", "sp.paccOpen", "sp.albumSet", "sp.notifAsked", "sp.offAreas", "sp.offAsked", "sp.extraSets", "sp.extraSet", "sp.legMin", "sp.lastCode", "sp.installHint", "sp.updSkip", "sp.official", "sp.customHefte", "sp.news", "sp.newsSeen", "sp.reports", "sp.set", "sp.hefteOn", "sp.heftSel"];
 function openLogout(){
   const hasPw = username && username.hasPw, g = load("sp.google", null);
@@ -8491,7 +8591,7 @@ function shareLevel(lv, newTitle){
 var todayOn = load("sp.todayOn", true);
 function hideToday(){ const t = $("#todayCard"); if (t) { t.classList.add("out"); setTimeout(() => t.remove(), 250); } }
 async function showToday(force){
-  if (!todayOn || view !== "map" || $("#todayCard")) return;
+  if (!todayOn || view !== "map" || $("#todayCard") || nav) return;   // nicht über der Navigation
   if (!force && load("sp.todayOff", "") === today()) return;
   if (!$("#sheet").hidden) return;
   const ctr = myPos || (SETS[current] && SETS[current].center); if (!ctr) return;
@@ -8814,7 +8914,7 @@ function profileTabsHtml(m, c, me, opts){
   const nextTxt = r => { const nx = r.next; return nx ? `noch ${nx[0] - r.n} bis ${LV_ICON(nx[1])} ${esc(nx[1].replace(/^Touringen /, ""))}` : (r.reached ? "🏆 alles geschafft" : ""); };
   const rows = RS.map(r => `<button class="pt-row ${r.id === (sel && sel.id) ? "on" : ""}" data-pring="${r.id}" style="--c:${r.col}">${ring(r.total ? r.n / r.total : (r.n ? 1 : 0), r.col, 46, 5, `<b>${r.n}</b>`)}
       <span class="t"><b>${esc(r.long || r.t)}</b> <small>${r.n}${r.total ? "/" + r.total : ""}</small><i class="pt-bar"><i style="width:${r.total ? Math.max(2, Math.round(r.n / r.total * 100)) : 100}%"></i></i><small>${r.reached ? LV_ICON(r.reached[1]) + " " + esc(r.reached[1].replace(/^Touringen /, "")) + " · " : ""}${nextTxt(r)}</small></span></button>`).join("");
-  const lastHike = c.hike && c.hike.last ? `<div class="pt-last"><span>🥾</span><div><b>${km1(c.hike.last.km)} km · ${fmtDur(c.hike.last.dur)}${c.hike.last.up != null ? " · ↑ " + c.hike.last.up + " m" : ""}</b><small>${fmtDate(c.hike.last.d)}${c.hike.last.n ? " · " + c.hike.last.n + " Stempel" : ""}</small></div></div>` : "";
+  const lastHike = c.hike && c.hike.last ? `<button class="pt-last" ${me && hikes[0] ? `data-hk="${esc(hikes[0].id)}"` : 'data-fhk="1"'}><span>🥾</span><div><b>${km1(c.hike.last.km)} km · ${fmtDur(c.hike.last.dur)}${c.hike.last.up != null ? " · ↑ " + c.hike.last.up + " m" : ""}</b><small>${fmtDate(c.hike.last.d)}${c.hike.last.n ? " · " + c.hike.last.n + " Stempel" : ""}</small></div><i class="pt-go">›</i></button>` : "";
   const lastSt = m.last && m.last.n ? `<div class="pt-last"><span>📒</span><div><b>Nr. ${esc(m.last.n)} ${esc(m.last.name || "")}</b><small>${SET_NAMES[m.last.set] || ""} · ${dayAgo(m.last.date)}</small></div></div>` : "";
   const ov = `<div class="pt-st"><div><b>${total}</b><small>Stempel</small></div><div><b>${nDays != null ? nDays : (c.hike && c.hike.count) || 0}</b><small>${nDays != null ? "Wandertage" : "Wanderungen"}</small></div><div><b>${km ? km1(km) : "–"}</b><small>km gewandert</small></div></div>
     <div class="ph-chips ph-row">${rankHtml(m.code)}</div>
@@ -8838,7 +8938,7 @@ function profileTabsHtml(m, c, me, opts){
     const best = wd.indexOf(Math.max(...wd));
     calSt = `<div class="pt-st"><div><b>${nDays}</b><small>Wandertage</small></div><div><b>${Object.keys(days).filter(d => d.startsWith(mo)).length}</b><small>diesen Monat</small></div><div><b>${nDays ? ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"][best] : "–"}</b><small>Lieblingstag</small></div></div>`;
   }
-  const hk = me ? hikes.slice(0, 6).map(h => `<button class="pt-last" data-hk="${esc(h.id)}"><span>🥾</span><div><b>${km1(h.km)} km · ${fmtDur(h.dur)}${h.up != null ? " · ↑ " + h.up + " m" : ""}</b><small>${fmtDate(new Date(h.start).toISOString().slice(0, 10))}${h.stamps && h.stamps.length ? " · " + h.stamps.length + " Stempel" : ""}</small></div></button>`).join("") : lastHike;
+  const hk = me ? hikes.slice(0, 6).map(h => `<button class="pt-last" data-hk="${esc(h.id)}"><span>🥾</span><div><b>${km1(h.km)} km · ${fmtDur(h.dur)}${h.up != null ? " · ↑ " + h.up + " m" : ""}</b><small>${fmtDate(new Date(h.start).toISOString().slice(0, 10))}${h.stamps && h.stamps.length ? " · " + h.stamps.length + " Stempel" : ""}</small></div><i class="pt-go">›</i></button>`).join("") + (hikes.length > 6 ? '<button class="pt-last" id="ptAllHk"><span>📋</span><div><b>Alle Wanderungen</b><small>' + hikes.length + ' insgesamt</small></div><i class="pt-go">›</i></button>' : "") : lastHike;
   const cal = `${calSt}${days ? `<h3>Wanderkalender</h3>${heatmapHtml(days)}` : `<p class="hint">${me ? "Noch keine Wandertage." : esc(m.name) + " teilt den Wanderkalender nicht."}</p>`}${hk ? `<h3>Wanderungen${me && hikes.length > 6 ? ` <small class="pcount">${hikes.length}</small>` : ""}</h3>${hk}` : ""}`;
   return `<div class="pt-head">
       <span class="pavring ${!me && isOnline(m.updated) ? "is-on" : ""}">${ring(goal ? goal.prog : 1, goal ? goal.col : "var(--pc-acc)", 86, 5, avatarHtml(c, "pav"))}${medalR ? `<span class="pmedal" style="--gc:${goal ? goal.col : "var(--pc-acc)"}" title="${esc(medalR.reached[1])}">${LV_ICON(medalR.reached[1])}</span>` : ""}</span>
@@ -8860,7 +8960,25 @@ function bindProfTabs(){
   /* Ziel antippen → Übersicht mit dem Heft */
   const gb = sh.querySelector("[data-pgoal]"); if (gb && sh.querySelector(".pt-tabs")) { const o = gb.onclick; gb.onclick = e => { const t = sh.querySelector('[data-ptab="ov"]'); if (t) t.click(); if (o) o(e); }; }
   const cm = $("#ptCmp"); if (cm) cm.onclick = openCmpPick;
-  sh.querySelectorAll("[data-hk]").forEach(b => b.onclick = () => openHike(b.dataset.hk));
+  sh.querySelectorAll("[data-hk]").forEach(b => b.onclick = () => openHike(b.dataset.hk, openMyProfile));
+  const ah = $("#ptAllHk"); if (ah) ah.onclick = openHikes;
+  sh.querySelectorAll("[data-fhk]").forEach(b => b.onclick = () => { const f = profFriendHike; if (f) openFriendHike(f.c, f.name, f.code); });
+}
+/* Letzte Wanderung eines Freundes: was er gelaufen ist (ohne Spur – die teilt nur er selbst über „Touren zum Nachwandern“) */
+let profFriendHike = null;
+function openFriendHike(c, name, code){
+  const h = c.hike && c.hike.last; if (!h) return;
+  const st = (h.st || []).map(x => { const s = byKey[x.s] && [...byKey[x.s].values()].find(t => String(t.n) === String(x.n)); return s ? stampLine(x.s, s.k) : `<li><span class="t">${esc(SETS[x.s] ? SETS[x.s].short : "")} Nr. ${esc(x.n)} ${esc(x.name || "")}</span></li>`; }).join("");
+  openSheet(`<div class="kicker">Wanderung von ${esc(name)} · ${new Date(h.d + "T12:00").toLocaleDateString("de-DE", { weekday: "long", day: "numeric", month: "long" })}</div>
+    <h2>🥾 ${km1(h.km)} km</h2>
+    <div class="stats"><div class="stat"><b>${fmtDur(h.dur)}</b><span>Dauer</span></div><div class="stat"><b>${h.up != null ? "↑ " + h.up + " m" : "–"}</b><span>Anstieg</span></div><div class="stat"><b>${h.n || 0}</b><span>Stempel</span></div></div>
+    ${st ? `<h3>Stempel unterwegs</h3><ul class="slist">${st}</ul>${h.n > (h.st || []).length ? `<p class="hint">… und ${h.n - h.st.length} weitere</p>` : ""}` : ""}
+    ${c.hike.count ? `<p class="hint">${esc(name)} ist insgesamt ${c.hike.count}× gewandert, zusammen ${km1(c.hike.km)} km.</p>` : ""}
+    <p class="hint">Die genaue Strecke siehst du, wenn ${esc(name)} sie unter „Touren zum Nachwandern“ freigibt.</p>
+    <div class="actions"><button class="btn quiet" id="fhBack">← Zurück zum Profil</button></div>`);
+  $("#sheet").querySelectorAll("[data-goto]").forEach(b => b.onclick = () => { const [s2, kk] = b.dataset.goto.split("|"); openStampIn(s2, kk); });
+  $("#fhBack").onclick = () => openFriendProfile(code);
+  bindClose();
 }
 let paccOpen = load("sp.paccOpen", { prog: true });
 function bindPacc(){
@@ -8947,6 +9065,7 @@ async function openFriendProfile(code){
   } else cmp = `<p style="font-size:.85rem">${esc(m.name)} teilt keinen Stempelvergleich.</p>`;
   openSheet(`<div class="kicker ${profStyle === "classic" ? "pkick" : ""}">Profil · Code ${fmtCode(code)}</div>${walksLive[code] ? `<div style="margin:-4px 0 8px">${walkChip(code).replace("data-walk", 'id="fpWalk" data-x')}</div>` : ""}${profStyle === "tabs" ? profileHtml(m, c, false, { cmp: cmp + (c.stamps ? '<button class="btn" id="fpMap" style="width:100%;margin-top:10px">🗺️ Auf der Karte vergleichen</button>' : ""), tours: true }) : profileHtml(m, c, false) + cmp + '<div id="fpTours"></div>'}
     <div class="actions">${c.stamps && profStyle !== "tabs" ? '<button class="btn" id="fpMap">🗺️ Auf der Karte vergleichen</button>' : ""}${friendLocs[code] ? '<button class="btn" id="fpLoc">📍 Standort auf der Karte</button>' : ""}<button class="btn warn" id="fpRemove">Freund entfernen …</button><button class="btn quiet" id="sClose">Schließen</button></div>`);
+  profFriendHike = { c, name: m.name, code };
   bindProfRings(false); bindPacc(); bindProfTabs();
   { const pl = $("#pLevel"); if (pl) pl.onclick = () => openLevelInfo(m, c, () => openFriendProfile(code)); }
   { const pmx = $("#sheet .pmap"); if (pmx) pmx.onclick = () => openProfileMap(c, m.name, () => openFriendProfile(code)); }
@@ -9616,11 +9735,11 @@ function say(text){
 }
 const sayDist = km => km < 1 ? `${Math.max(10, Math.round(km * 100) * 10)} Meter` : `${km1(km)} Kilometer`;
 const sayMin = m => m < 60 ? `${m} Minuten` : `${km1(m / 60)} Stunden`;
-async function routeFootFull(from, to){
-  const j = await getJson(`https://routing.openstreetmap.de/routed-foot/route/v1/foot/${from[1].toFixed(6)},${from[0].toFixed(6)};${to[1].toFixed(6)},${to[0].toFixed(6)}?overview=full&geometries=geojson&steps=true`);
-  const r = j && j.routes && j.routes[0];
-  if (!r || !r.geometry) throw new Error("Keine Route");
-  return { pts: r.geometry.coordinates.map(([lo, la]) => [la, lo]), steps: (r.legs || []).flatMap(l => l.steps || []) };
+async function routeFootFull(from, to, alt){
+  const j = await getJson(`https://routing.openstreetmap.de/routed-foot/route/v1/foot/${from[1].toFixed(6)},${from[0].toFixed(6)};${to[1].toFixed(6)},${to[0].toFixed(6)}?overview=full&geometries=geojson&steps=true${alt ? "&alternatives=2" : ""}`);
+  const rs = ((j && j.routes) || []).filter(r => r && r.geometry).map(r => ({ pts: r.geometry.coordinates.map(([lo, la]) => [la, lo]), steps: (r.legs || []).flatMap(l => l.steps || []) }));
+  if (!rs.length) throw new Error("Keine Route");
+  return Object.assign(rs[0], { alts: rs });
 }
 async function routeFoot(from, to){ return (await routeFootFull(from, to)).pts; }
 /* ---------- 🥾 Entfernungen immer über Wanderwege (OSRM-Fuß-Tabelle), nicht Luftlinie – mit Zwischenspeicher ---------- */
@@ -9738,6 +9857,7 @@ function navBuild(r){
 }
 async function startNav(set, k, queue){
   const s = byKey[set].get(k); if (!s || !hasPos(s)) return;
+  try { hideToday(); } catch(e) {}
   closeSheet(); setView("map");
   toast("Navigation wird vorbereitet …");
   startLocate(true);
@@ -9747,17 +9867,20 @@ async function startNav(set, k, queue){
   { const st = load("sp.navStart", null); if (myPos && (!st || Date.now() - st.t > 10 * 3600000)) save("sp.navStart", { p: myPos.slice(), t: Date.now() }); }
   nav = { set, k, name: `Nr. ${s.n} ${s.name}`, sayName: `Stempel Nummer ${s.n}, ${s.name}`, target: [s.lat, s.lon], follow: true, lastRoute: 0,
     queue: queue || [], ms: {}, off: 0, arrived: false, up: null, eco: load("sp.navEco", false) && hasNative("navBg"), kmh: 0 };
+  if (pendingTrip) { nav.trip = pendingTrip; pendingTrip = null; }
   if (hasNative("keepScreen")) NATIVE.keepScreen(!nav.eco);
   document.body.classList.add("navving"); map.invalidateSize();
   await navRoute(true);
 }
 /* Zu einem beliebigen Punkt führen (z. B. zurück zum Ausgangspunkt) */
 async function startNavTo(p, name){
+  try { hideToday(); } catch(e) {}
   closeSheet(); setView("map"); startLocate(true);
   if (!/^Zurück/.test(name)) setTimeout(() => offlineHint(p, name.replace(/^Start: /, "")), 1500);
   if (!(await waitForPos(20000))) { toast("Standort nicht gefunden – bitte GPS einschalten"); return; }
   nav = { set: null, k: null, home: true, name, sayName: name, target: p.slice(), follow: true, lastRoute: 0,
     queue: [], ms: {}, off: 0, arrived: false, up: null, eco: load("sp.navEco", false) && hasNative("navBg"), kmh: 0, backWarned: true };
+  if (pendingTrip) { nav.trip = pendingTrip; pendingTrip = null; }
   if (hasNative("keepScreen")) NATIVE.keepScreen(!nav.eco);
   document.body.classList.add("navving"); map.invalidateSize();
   await navRoute(true);
@@ -9767,18 +9890,25 @@ async function navRoute(first){
   nav.lastRoute = Date.now();
   const me = nav;
   let r;
-  try { r = await routeFootFull(myPos, nav.target); nav.straight = false; }
-  catch(e) { r = { pts: [myPos.slice(), nav.target], steps: [] }; nav.straight = true; if (first) toast("Kein Wanderweg berechenbar – zeige Luftlinie"); }
+  try { r = await routeFootFull(myPos, nav.target, first); nav.straight = false; nav.offline = false; }
+  catch(e) {
+    if (nav !== me) return;
+    /* kein Netz: gespeicherte Route weiter benutzen statt Luftlinie */
+    if (!first && nav.pts && !nav.straight) { nav.offline = true; nav.off = 0; if (!nav.offWarned) { nav.offWarned = true; toast("📵 Kein Netz – folge der gespeicherten Route"); say("Kein Netz. Folge der gespeicherten Route zurück auf den Weg."); } navUpdate(); return; }
+    r = { pts: [myPos.slice(), nav.target], steps: [] }; nav.straight = true; if (first) toast("Kein Wanderweg berechenbar – zeige Luftlinie");
+  }
   if (nav !== me) return;
-  navBuild(r); nav.off = 0;
+  navBuild(r); nav.off = 0; nav.trailId = undefined; nav.pois = null; nav.trails = null;
   showRoute({ id: -2, nav: true, name: nav.name, stamps: [], pts: nav.pts }, first);
   if (first) {
     const min = navMinutes(nav.total);
     say(`Los geht's zu ${nav.sayName}. ${sayDist(nav.total)}, etwa ${sayMin(min)}.`);
   }
-  if (!nav.straight) navElevation(me);
+  if (!nav.straight) { navElevation(me); navExtras(me); }
   navUpdate();
   navBgSend();
+  if (first && typeof trk !== "undefined" && trk) setTimeout(() => pushWalk(true, true), 3000);
+  if (first && r.alts && r.alts.length > 1 && !nav.straight) { me.alts = r.alts; me.altSel = 0; setTimeout(() => { if (nav === me && !me.arrived) openNavChoice(me); }, 400); }
 }
 /* Akku-Sparmodus: Route an den Hintergrund-Dienst geben, der spricht bei ausgeschaltetem Bildschirm */
 function navBgSend(){
@@ -9822,6 +9952,16 @@ async function navElevation(me){
 function navArrive(){
   const { set, k, name, sayName } = nav;
   vibrate(600);
+  if (nav.trip && nav.trip.i < nav.trip.trip.wps.length - 1) {
+    const nx = nav.trip.trip.wps[nav.trip.i + 1];
+    nav.arrived = true;
+    if (hasNative("navBg")) NATIVE.navBg("");
+    if (navArrow && myPos) navArrow.setLatLng(myPos);
+    say(`Du bist da! ${sayName}. Als Nächstes: ${LETTER(nav.trip.i + 1)}, ${nx.name}.`);
+    toast(`🎉 ${name} erreicht`);
+    renderNavUi(); try { navNotify(true); } catch(e) {}
+    return;
+  }
   if (nav.queue.length) {
     const nk = nav.queue[0], ns = byKey[set].get(nk);
     nav.arrived = true;
@@ -9844,22 +9984,26 @@ function navUpdate(){
   let rest = dT, next = null, dNext = 0, then = null, dir = null;
   if (!nav.straight) {
     const o = onRoute(myPos, nav.pts, nav.cum);
+    nav.along = o.along;
     rest = Math.max(dT, nav.total - o.along);
     dir = bearing(nav.pts[o.i], nav.pts[Math.min(o.i + 1, nav.pts.length - 1)]);
     /* vom Weg abgekommen? zweimal hintereinander > 40 m daneben → neu berechnen */
     if (o.d > 0.04 && myAcc < 45) nav.off++; else nav.off = 0;
     if (nav.off >= 2 && Date.now() - nav.lastRoute > 15000) {
+      if (navigator.onLine === false && !nav.straight) { nav.lastRoute = Date.now(); nav.off = 0; say("Du hast den Weg verlassen. Kein Netz – geh zurück zur Linie auf der Karte."); vibPat(4); }
+      else {
       say("Du hast den Weg verlassen. Ich berechne eine neue Route.");
       vibrate(250);
       navRoute(false); return;
+      }
     }
     const i = nav.man.findIndex(m => m.along > o.along + 0.006);
     if (i >= 0) {
       next = nav.man[i]; dNext = next.along - o.along; then = nav.man[i + 1];
       const v = next.text + (next.name ? " auf " + next.name : "");
       if (next.type !== "arrive") {
-        if (!next.said1 && dNext <= 0.13 && dNext > 0.045) { next.said1 = true; say(`In ${Math.round(dNext * 100) * 10} Metern ${v.charAt(0).toLowerCase() + v.slice(1)}`); }
-        if (!next.said2 && dNext <= 0.025) { next.said1 = next.said2 = true; say(`Jetzt ${v.charAt(0).toLowerCase() + v.slice(1)}`); vibrate(120); setTimeout(() => vibrate(120), 260); }
+        if (!next.said1 && dNext <= 0.13 && dNext > 0.045) { next.said1 = true; say(`In ${Math.round(dNext * 100) * 10} Metern ${v.charAt(0).toLowerCase() + v.slice(1)}`); vibPat(modDir(next.mod)); }
+        if (!next.said2 && dNext <= 0.025) { next.said1 = next.said2 = true; say(`Jetzt ${v.charAt(0).toLowerCase() + v.slice(1)}`); vibPat(modDir(next.mod)); }
       }
     }
   } else if (Date.now() - nav.lastRoute > 60000) navRoute(false);
@@ -9884,8 +10028,8 @@ function navUpdate(){
     let j = E.d.findIndex(d => d > al); if (j < 0) j = E.d.length - 1;
     const i0 = Math.max(0, j - 1), f = E.d[j] > E.d[i0] ? Math.min(1, Math.max(0, (al - E.d[i0]) / (E.d[j] - E.d[i0]))) : 0;
     nav.alt = Math.round(E.h[i0] + (E.h[j] - E.h[i0]) * f);
-    let u = Math.max(0, E.h[j] - nav.alt); for (let q = j + 1; q < E.h.length; q++) u += Math.max(0, E.h[q] - E.h[q - 1]);
-    nav.upRest = Math.round(u);
+    let u = Math.max(0, E.h[j] - nav.alt), dn = Math.max(0, nav.alt - E.h[j]); for (let q = j + 1; q < E.h.length; q++) { u += Math.max(0, E.h[q] - E.h[q - 1]); dn += Math.max(0, E.h[q - 1] - E.h[q]); }
+    nav.upRest = Math.round(u); nav.downRest = Math.round(dn);
   }
   /* Sonnenuntergang: warnen, wenn man erst danach ankommt */
   const ss = sunsetAt(myPos[0], myPos[1]), eta = Date.now() + navMinutes(rest) * 60000;
@@ -9922,13 +10066,25 @@ function navUpdate(){
   if (!navArrow) navArrow = L.marker(myPos, { icon: ic, interactive: false, keyboard: false, zIndexOffset: 2000 }).addTo(map);
   else { navArrow.setLatLng(myPos); navArrow.setIcon(ic); }
   renderNavUi();
+  try { navExtrasTick(); navNotify(); } catch(e) {}
   if (nav.follow && view === "map") map.panTo(myPos, { animate: true });
 }
 function renderNavUi(){
   const top = $("#navTop"), bar = $("#navBar");
+  try { renderNavExtras(); } catch(e) {}
   if (!nav) { top.hidden = bar.hidden = true; return; }
   bar.hidden = false;
   bar.className = "navbar" + (nav.arrived ? " arr" : "");
+  if (nav.arrived && nav.trip) {
+    top.hidden = true;
+    const t = nav.trip, nx = t.trip.wps[t.i + 1], cur = t.trip.wps[t.i];
+    bar.innerHTML = `<div class="nb-info"><b>✓ ${esc(nav.name)} erreicht</b><span>Als Nächstes: ${LETTER(t.i + 1)} · ${esc(nx.name)} · noch ${t.trip.wps.length - t.i - 1} Punkt${t.trip.wps.length - t.i - 1 === 1 ? "" : "e"}</span></div>
+      <div class="nb-btns">${cur.kind === "stamp" ? '<button id="nbStamp" class="nb-wide">Stempel öffnen</button>' : ""}<button id="nbNext" class="nb-wide go">Weiter zu ${LETTER(t.i + 1)} ▶</button><button id="nbStop" class="stop" aria-label="Navigation beenden">✕</button></div>`;
+    const sb = $("#nbStamp"); if (sb) sb.onclick = () => openStampIn(cur.set, cur.k);
+    $("#nbNext").onclick = () => startWp(t.trip, t.i + 1);
+    $("#nbStop").onclick = () => { stopNav(); toast("Navigation beendet"); };
+    return;
+  }
   if (nav.arrived) {
     top.hidden = true;
     const ns = byKey[nav.set].get(nav.queue[0]);
@@ -9954,36 +10110,62 @@ function renderNavUi(){
     $("#ntThen").textContent = n.name ? "auf " + n.name : (nav.then && nav.then.along - n.along < 0.08 ? "dann " + nav.then.text.toLowerCase() : "");
   }
   const min = navMinutes(nav.rest || 0), eta = new Date(Date.now() + min * 60000);
+  if (naviNew()) { renderNavUiA(bar, min, eta); return; }
   bar.innerHTML = `<div class="nb-info"><b>${fmtKm(nav.rest || 0)} · ${min < 60 ? min + " min" : Math.floor(min / 60) + " h " + String(min % 60).padStart(2, "0")}</b>
-      <span>${esc(nav.name)}</span><small>Ankunft ${eta.getHours()}:${String(eta.getMinutes()).padStart(2, "0")}${nav.queue.length ? ` · danach noch ${nav.queue.length}` : ""}</small></div>
-    <div class="nb-btns">${hasNative("navBg") ? `<button id="nbEco" class="${nav.eco ? "on" : ""}" aria-label="Akku-Sparmodus">🔋</button>` : ""}${canSpeak() ? `<button id="nbVoice" aria-label="Sprachansage">${navVoice ? "🔊" : "🔇"}</button>` : ""}
+      <span>${esc(nav.name)}</span><small>Ankunft ${eta.getHours()}:${String(eta.getMinutes()).padStart(2, "0")}${nav.queue.length ? ` · danach noch ${nav.queue.length}` : ""}${!nav.straight && nav.pts ? ` <em class="nb-off${nav.offline || navigator.onLine === false ? " warn" : ""}">${nav.offline || navigator.onLine === false ? "📵 offline" : "📶 offline bereit"}</em>` : ""}</small></div>
+    <div class="nb-btns">${hasNative("navBg") ? `<button id="nbEco" class="${nav.eco ? "on" : ""}" aria-label="Akku-Sparmodus">🔋</button>` : ""}${canSpeak() ? `<button id="nbVoice" aria-label="Sprachansage">${navVoice ? "🔊" : "🔇"}</button>` : ""}<button id="nbVib" class="${navVib ? "on" : ""}" aria-label="Vibration bei Abzweigungen">📳</button>
       <button id="nbOver" aria-label="${nav.follow ? "Übersicht" : "Zentrieren"}">${nav.follow ? '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>' : '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>'}</button>
       <button id="nbStop" class="stop" aria-label="Navigation beenden">✕</button></div>
-    <div class="nb-stats"><span><b>${km1(nav.kmh || 0)}</b> km/h</span><span>⛰️ <b>${nav.alt != null ? Math.round(nav.alt) : "–"}</b> m</span><span>↗ <b>${nav.upRest != null ? nav.upRest : nav.up != null ? nav.up : "–"}</b> hm noch</span>${nav.sunset ? `<span class="${nav.late ? "late" : ""}">🌅 <b>${nav.sunset.getHours()}:${String(nav.sunset.getMinutes()).padStart(2, "0")}</b></span>` : ""}</div>`;
+    <div class="nb-stats"><span><b>${km1(nav.kmh || 0)}</b> km/h</span><span>⛰️ <b>${nav.alt != null ? Math.round(nav.alt) : "–"}</b> m</span><span>↗ <b>${nav.upRest != null ? nav.upRest : nav.up != null ? nav.up : "–"}</b> ↘ <b>${nav.downRest != null ? nav.downRest : nav.down != null ? nav.down : "–"}</b> hm</span>${nav.sunset ? `<span class="${nav.late ? "late" : ""}">🌅 <b>${nav.sunset.getHours()}:${String(nav.sunset.getMinutes()).padStart(2, "0")}</b></span>` : ""}</div>`;
+  if (nav.elev && !nav.straight) { const pf = document.createElement("div"); pf.className = "nb-prof"; pf.innerHTML = navProfileSvg(); bar.appendChild(pf); }
+  bindNavBtns();
+}
+/* Neue kompakte Navi-Leiste (zum Aufklappen) */
+function renderNavUiA(bar, min, eta){
+  bar.className = "navbar nva" + (navOpen ? " open" : "");
+  const hm = d => d.getHours() + ":" + String(d.getMinutes()).padStart(2, "0");
+  const off = nav.offline || navigator.onLine === false;
+  const pn = nav.poiNow, pd = pn ? pn.along - (nav.along || 0) : 0;
+  const prof = nav.elev && !nav.straight ? `<div class="nb-prof${navOpen ? "" : " mini"}">${navProfileSvg(!navOpen)}</div>` : "";
+  bar.innerHTML = `<button class="nb-grab" id="nbFoldG" aria-label="${navOpen ? "Zuklappen" : "Aufklappen"}"></button>
+    <div class="nb-info" id="nbInfo"><b>${fmtKm(nav.rest || 0)} · ${min < 60 ? min + " min" : Math.floor(min / 60) + " h " + String(min % 60).padStart(2, "0")}</b>
+      <small>${esc(nav.name)} · an ${hm(eta)}${nav.queue.length ? ` · danach noch ${nav.queue.length}` : ""}${pn && pd > 0.03 ? ` · ${POI_IC[pn.p.kind] === "P" ? "🅿️" : POI_IC[pn.p.kind] || "📍"} in ${fmtKm(pd)}` : ""}${off && !nav.straight ? ' · <em class="nb-off warn">📵 offline</em>' : ""}</small></div>
+    <div class="nb-btns"><button id="nbFold" aria-label="${navOpen ? "Zuklappen" : "Mehr anzeigen"}">${navOpen ? "▼" : "▲"}</button><button id="nbStop" class="stop" aria-label="Navigation beenden">✕</button></div>
+    ${prof}
+    ${navOpen ? `<div class="nb-stats"><span>⛰️ <b>${nav.alt != null ? Math.round(nav.alt) : "–"}</b> m</span><span>↗ <b>${nav.upRest != null ? nav.upRest : nav.up != null ? nav.up : "–"}</b> ↘ <b>${nav.downRest != null ? nav.downRest : nav.down != null ? nav.down : "–"}</b> hm</span>${nav.sunset ? `<span class="${nav.late ? "late" : ""}">🌅 <b>${hm(nav.sunset)}</b></span>` : ""}${!nav.straight ? `<span class="nb-offs">${off ? "📵 offline" : "📶 offline ok"}</span>` : `<span><b>${km1(nav.kmh || 0)}</b> km/h</span>`}</div>
+    <div class="nb-grid">${canSpeak() ? `<button id="nbVoice" class="${navVoice ? "on" : ""}">${navVoice ? "🔊" : "🔇"}<span>Ansage</span></button>` : ""}<button id="nbVib" class="${navVib ? "on" : ""}">📳<span>Vibration</span></button>${hasNative("navBg") ? `<button id="nbEco" class="${nav.eco ? "on" : ""}">🔋<span>Sparen</span></button>` : ""}<button id="nbOver">${nav.follow ? "⛶" : "◎"}<span>${nav.follow ? "Übersicht" : "Zentrieren"}</span></button></div>` : ""}`;
+  const fold = () => { navOpen = !navOpen; save("sp.navOpen", navOpen); renderNavUi(); };
+  $("#nbFold").onclick = fold; $("#nbFoldG").onclick = fold; $("#nbInfo").onclick = fold;
+  bindNavBtns();
+}
+function bindNavBtns(){
   const ne = $("#nbEco"); if (ne) ne.onclick = () => {
     nav.eco = !nav.eco; save("sp.navEco", nav.eco);
     if (hasNative("keepScreen")) NATIVE.keepScreen(!nav.eco);
     if (nav.eco) { navBgSend(); toast("🔋 Sparmodus an – Bildschirm darf ausgehen, Ansagen kommen trotzdem"); } else { NATIVE.navBg(""); toast("Sparmodus aus – Bildschirm bleibt an"); }
+    try { navNotify(true); } catch(e) {}
     renderNavUi();
   };
   const nv = $("#nbVoice"); if (nv) nv.onclick = () => { navVoice = !navVoice; save("sp.navVoice", navVoice); toast(navVoice ? "Sprachansage an" : "Sprachansage aus"); if (navVoice) say("Sprachansage ist an."); navBgSend(); renderNavUi(); };
-  $("#nbOver").onclick = () => {
+  const vb = $("#nbVib"); if (vb) vb.onclick = () => { navVib = !navVib; save("sp.navVib", navVib); toast(navVib ? "📳 Vibration an – 2× kurz = links, 3× kurz = rechts" : "Vibration aus"); if (navVib) vibPat(2); renderNavUi(); };
+  const ov = $("#nbOver"); if (ov) ov.onclick = () => {
     if (nav.follow) { nav.follow = false; map.fitBounds(nav.pts.concat([myPos]), { paddingTopLeft: [30, 130], paddingBottomRight: [30, 120] }); }
     else { nav.follow = true; map.setView(myPos, Math.max(map.getZoom(), 16)); }
     renderNavUi();
   };
-  $("#nbStop").onclick = () => {
-    const b = $("#nbStop");
-    if (!b.dataset.sure) { b.dataset.sure = "1"; b.textContent = "Beenden?"; b.classList.add("sure"); setTimeout(() => { if (b.isConnected) { delete b.dataset.sure; b.textContent = "✕"; b.classList.remove("sure"); } }, 3000); return; }
+  const sb = $("#nbStop"); if (sb) sb.onclick = () => {
+    if (!sb.dataset.sure) { sb.dataset.sure = "1"; sb.textContent = "Beenden?"; sb.classList.add("sure"); setTimeout(() => { if (sb.isConnected) { delete sb.dataset.sure; sb.textContent = "✕"; sb.classList.remove("sure"); } }, 3000); return; }
     stopNav(); toast("Navigation beendet");
   };
 }
 function stopNav(){
   if (!nav) return;
   nav = null;
+  if (rp && rp.mode === "nav") { rp.mode = "map"; setTimeout(() => { if (rp && !nav) rpBar(); }, 100); }
   if (hasNative("keepScreen")) NATIVE.keepScreen(false);
   if (hasNative("navBg")) NATIVE.navBg("");
   if (navArrow) { map.removeLayer(navArrow); navArrow = null; }
+  try { navNotify(); } catch(e) {}
   document.body.classList.remove("navving"); setTimeout(() => map.invalidateSize(), 50);
   renderNavUi();
   showRoute(null);
@@ -9997,6 +10179,425 @@ async function startTourNav(p){
   await startNav(p.set, k, q);
 }
 map.on("dragstart", () => { if (nav && nav.follow) { nav.follow = false; renderNavUi(); } });
+
+/* ---------- 🧭 Unterwegs: Wegzeichen, Einkehr am Weg, Vibration, Sperrbildschirm, Wegwahl ---------- */
+let navVib = load("sp.navVib", true);
+let navPoiLayer = null;
+function vibPat(n){ if (!navVib) return; for (let i = 0; i < n; i++) setTimeout(() => vibrate(90), i * 230); }
+const modDir = mod => /left/.test(mod || "") ? 2 : /right/.test(mod || "") ? 3 : 1;
+/* osmc:symbol → „dem roten Punkt“ */
+const WZ_COL = { red: ["roten", "#d32f2f"], blue: ["blauen", "#1f5fd1"], green: ["grünen", "#2a9a3a"], yellow: ["gelben", "#e8c21a"], black: ["schwarzen", "#222"], white: ["weißen", "#ffffff"], orange: ["orangen", "#ee8a1c"], purple: ["lila", "#8a3fc0"], brown: ["braunen", "#8b5a2b"] };
+const WZ_SH = { dot: ["Punkt", "m"], bar: ["Balken", "m"], stripe: ["Strich", "m"], lower: ["Balken", "m"], triangle: ["Dreieck", "n"], circle: ["Kreis", "m"], cross: ["Kreuz", "n"], x: ["Kreuz", "n"], diamond: ["Raute", "f"], rectangle: ["Rechteck", "n"], corner: ["Winkel", "m"], hiker: ["Wanderer", "m"], arch: ["Bogen", "m"], pointer: ["Pfeil", "m"], arrow: ["Pfeil", "m"], backslash: ["Schrägstrich", "m"], slash: ["Schrägstrich", "m"] };
+function wzParse(tags, id){
+  const sym = tags["osmc:symbol"] || "", p = sym.split(":"), fg = (p[2] || "").split("_");
+  const col = fg.length > 1 ? fg[0] : (p[0] || ""), shape = fg.length > 1 ? fg.slice(1).join("_") : "";
+  const bg = (p[1] || "white").split("_")[0], C = WZ_COL[col], S = WZ_SH[shape];
+  const say = C && S ? `${S[1] === "f" ? "der" : "dem"} ${C[0]} ${S[0]}` : C ? `der ${C[0]} Markierung` : "";
+  return { id, name: (tags.name || "").replace(/^Wanderweg\s+/i, ""), ref: tags.ref || "", say, col: C ? C[1] : null, bg: (WZ_COL[bg] || [0, "#ffffff"])[1], shape: S ? shape : (C ? "bar" : "") };
+}
+const wzSym = w => `<span class="wzs" style="--wb:${w.bg};--wf:${w.col || "#888"}"><i class="sh-${esc(w.shape || "none")}"></i></span>`;
+const wzLine = w => w.say ? `Folge ${w.say.replace(/(roten|blauen|grünen|gelben|schwarzen|weißen|orangen|lila|braunen) (\S+)$/, "<b>$1 $2</b>")}` : `Folge dem Weg <b>${esc(w.name || w.ref)}</b>`;
+/* Wanderweg-Relationen rund um die Route – als Gitter zum schnellen Abgleich */
+async function trailGrid(b){
+  const bb = `${b.s.toFixed(4)},${b.w.toFixed(4)},${b.n.toFixed(4)},${b.e.toFixed(4)}`;
+  const j = await overpass(`[out:json][timeout:25];relation["route"~"^(hiking|foot)$"](${bb});out geom(${bb});`);
+  const G = 0.0004, grid = new Map(), rels = [];
+  for (const el of j.elements || []) {
+    if (el.type !== "relation") continue;
+    const w = wzParse(el.tags || {}, el.id); if (!w.say && !w.name && !w.ref) continue;
+    const ri = rels.push(w) - 1;
+    for (const m of el.members || []) {
+      const g = m.geometry; if (!g) continue;
+      for (let i = 0; i < g.length; i++) {
+        const a = g[i], c = g[i + 1], pts = [[a.lat, a.lon]];
+        if (c) { const n = Math.min(60, Math.floor(distKm([a.lat, a.lon], [c.lat, c.lon]) / 0.02)); for (let k = 1; k < n; k++) pts.push([a.lat + (c.lat - a.lat) * k / n, a.lon + (c.lon - a.lon) * k / n]); }
+        for (const q of pts) { const key = Math.floor(q[0] / G) + "|" + Math.floor(q[1] / G); let s = grid.get(key); if (!s) grid.set(key, s = new Set()); s.add(ri); }
+      }
+    }
+  }
+  return { b, grid, rels, G };
+}
+function trailRuns(pts, cum, total, tg){
+  const { grid, rels, G } = tg;
+  const per = pts.map(p => { const gx = Math.floor(p[0] / G), gy = Math.floor(p[1] / G), s = new Set(); for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) { const c = grid.get((gx + dx) + "|" + (gy + dy)); if (c) c.forEach(x => s.add(x)); } return s; });
+  const runs = []; let i = 0;
+  while (i < per.length) {
+    if (!per[i].size) { i++; continue; }
+    let best = null, bestJ = i;
+    for (const r of per[i]) { let j = i; while (j < per.length && (per[j].has(r) || (j + 1 < per.length && per[j + 1].has(r)))) j++; if (j > bestJ) { bestJ = j; best = r; } }
+    if (best == null) { i++; continue; }
+    runs.push({ a: cum[i], b: cum[Math.min(bestJ, per.length - 1)], w: rels[best] }); i = bestJ + 1;
+  }
+  const trails = runs.filter(x => x.b - x.a > 0.15);
+  return { trails, pct: total ? Math.min(100, Math.round(trails.reduce((s, x) => s + (x.b - x.a), 0) / total * 100)) : 0 };
+}
+const inB = (b, pts) => pts.every(p => p[0] >= b.s && p[0] <= b.n && p[1] >= b.w && p[1] <= b.e);
+async function navExtras(me){
+  if (!me || !me.pts || me.straight) return;
+  try {
+    if (!me.tg || !inB(me.tg.b, me.pts)) me.tg = await trailGrid(boundsOf(me.pts, 0.004));
+    if (nav !== me) return;
+    const t = trailRuns(me.pts, me.cum, me.total, me.tg); me.trails = t.trails; me.trailPct = t.pct;
+  } catch(e) {}
+  try {
+    const b = boundsOf(me.pts, 0.003);
+    const l = poiParse(await overpass(poiQ(`(${b.s.toFixed(4)},${b.w.toFixed(4)},${b.n.toFixed(4)},${b.e.toFixed(4)})`)));
+    if (nav !== me) return;
+    me.pois = l.filter(p => ["hut", "cafe", "pub", "food", "bus", "train"].includes(p.kind)).map(p => { const o = onRoute([p.lat, p.lon], me.pts, me.cum); return { p, along: o.along, off: o.d }; })
+      .filter(x => x.off <= 0.15).sort((a, b) => a.along - b.along);
+  } catch(e) {}
+  if (nav === me) { me.trailId = undefined; navUpdate(); }
+}
+function navExtrasTick(){
+  if (!nav || nav.straight || nav.along == null || nav.arrived) { renderNavExtras(); return; }
+  const al = nav.along;
+  const t = (nav.trails || []).find(x => al >= x.a - 0.02 && al <= x.b);
+  const id = t ? t.w.id + "@" + t.a.toFixed(2) : "";
+  if (id !== nav.trailId) {
+    const first = nav.trailId === undefined; nav.trailId = id;
+    if (t && t.b - al > 0.2 && !first) say(t.w.say ? `Folge jetzt ${t.w.say}${t.w.name ? ", " + t.w.name : ""}.` : `Folge jetzt dem Weg ${t.w.name || t.w.ref}.`);
+  }
+  nav.trailNow = t || null;
+  const nx = (nav.pois || []).find(x => x.along > al - 0.03 && x.along - al < 3);
+  nav.poiNow = nx || null;
+  if (nx && !nx.said && nx.along - al < 0.35 && nx.along - al > 0.05) { nx.said = true; say(`In ${Math.max(50, Math.round((nx.along - al) * 20) * 50)} Metern: ${POI_NAME[nx.p.kind]}${nx.p.name ? " " + nx.p.name : ""}.`); }
+  renderNavExtras();
+}
+function renderNavExtras(){
+  const main = document.querySelector("main"); if (!main) return;
+  let wz = $("#navWz"), pi = $("#navPoi");
+  if (!wz) { wz = document.createElement("div"); wz.id = "navWz"; wz.className = "nav-wz"; main.appendChild(wz); }
+  if (!pi) { pi = document.createElement("button"); pi.id = "navPoi"; pi.className = "nav-poi"; main.appendChild(pi); }
+  const on = nav && !nav.arrived && view === "map";
+  const t = on && nav.trailNow, nx = on && !naviNew() && nav.poiNow;
+  /* Einkehr am Weg als kleine Symbole auf der Karte */
+  if (!navPoiLayer) navPoiLayer = L.layerGroup().addTo(map);
+  if (!nav || !nav.pois) { if (navPoiLayer._pois) { navPoiLayer.clearLayers(); navPoiLayer._pois = null; } }
+  else if (navPoiLayer._pois !== nav.pois) {
+    navPoiLayer.clearLayers(); navPoiLayer._pois = nav.pois;
+    for (const x of nav.pois) L.marker([x.p.lat, x.p.lon], { icon: L.divIcon({ className: "nav-poim", html: `<i>${POI_IC[x.p.kind] === "P" ? "🅿️" : POI_IC[x.p.kind] || "📍"}</i>`, iconSize: [30, 30], iconAnchor: [15, 15] }), keyboard: false })
+      .bindTooltip(esc(x.p.name || POI_NAME[x.p.kind]), { direction: "top", offset: [0, -14] }).addTo(navPoiLayer);
+  }
+  const nw = $("#ntWz");
+  if (naviNew()) {
+    wz.hidden = true;
+    if (nw) { nw.hidden = !t; if (t) nw.innerHTML = `${wzSym(t.w)}<span>${wzLine(t.w)}${t.w.name ? " · " + esc(t.w.name) : t.w.ref ? " · " + esc(t.w.ref) : ""}</span>`; }
+  } else { if (nw) nw.hidden = true; wz.hidden = !t; }
+  pi.hidden = !nx;
+  const mt = main.getBoundingClientRect().top;
+  if (t && !naviNew()) {
+    const top = $("#navTop"); wz.style.top = ((top && !top.hidden ? top.getBoundingClientRect().bottom : mt + 10) - mt + 8) + "px";
+    const rest = t.b - nav.along;
+    wz.innerHTML = `${wzSym(t.w)}<div>${wzLine(t.w)}<small>${esc([t.w.name, t.w.ref && t.w.ref !== t.w.name ? t.w.ref : ""].filter(Boolean).join(" · "))}${rest > 0.1 ? (t.w.name || t.w.ref ? " · " : "") + "noch " + fmtKm(rest) + " auf diesem Weg" : ""}</small></div>`;
+  }
+  if (nx) {
+    const bar = $("#navBar"); pi.style.bottom = (main.getBoundingClientRect().bottom - (bar && !bar.hidden ? bar.getBoundingClientRect().top : main.getBoundingClientRect().bottom - 10) + 8) + "px";
+    const d = nx.along - nav.along;
+    pi.innerHTML = `<span>${POI_IC[nx.p.kind] || "📍"}</span><span><b>${esc(nx.p.name || POI_NAME[nx.p.kind])}</b> · ${esc(POI_NAME[nx.p.kind])} ${nx.off < 0.04 ? "direkt am Weg" : Math.round(nx.off * 1000 / 10) * 10 + " m neben dem Weg"}${d > 0.03 ? " in " + fmtKm(d) : " – jetzt hier"}</span>`;
+    pi.onclick = () => { nav.follow = false; map.setView([nx.p.lat, nx.p.lon], 17); renderNavUi(); };
+  }
+}
+/* ⛰️ Höhenprofil der Route mit „Du bist hier“ */
+function navProfileSvg(mini){
+  const E = nav.elev, tot = E.d[E.d.length - 1] || 1, W = 300, H = mini ? 22 : 46;
+  const lo = Math.min(...E.h), hi = Math.max(...E.h), rg = Math.max(30, hi - lo);
+  const X = d => (d / tot * W).toFixed(1), Y = h => (H - 4 - (h - lo) / rg * (H - 12)).toFixed(1);
+  const line = E.d.map((d, i) => `${X(d)},${Y(E.h[i])}`).join(" L");
+  const al = Math.max(0, Math.min(tot, nav.along || 0)), ya = Y(nav.alt != null ? nav.alt : E.h[0]);
+  const hiI = E.h.indexOf(hi);
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-label="Höhenprofil"><defs><clipPath id="npDone${mini ? "m" : ""}"><rect x="0" y="0" width="${X(al)}" height="${H}"/></clipPath></defs>
+    <path d="M0,${H} L${line} L${W},${H}Z" class="np-a"/><path d="M0,${H} L${line} L${W},${H}Z" class="np-d" clip-path="url(#npDone${mini ? "m" : ""})"/><path d="M${line}" class="np-l"/>
+    <line x1="${X(al)}" x2="${X(al)}" y1="0" y2="${H}" class="np-m"/></svg>
+    <i class="np-me" style="left:${(al / tot * 100).toFixed(1)}%;top:${(ya / H * 100).toFixed(1)}%"></i>
+    ${mini ? "" : `<span class="np-lo">${Math.round(lo)} m</span><span class="np-hi" style="left:${Math.min(88, Math.max(6, hiI / (E.h.length - 1) * 100)).toFixed(0)}%">▲ ${Math.round(hi)} m</span>`}`;
+}
+/* 🔒 Sperrbildschirm / Benachrichtigung mit dem nächsten Hinweis */
+let navNoteLast = { t: 0, k: "" };
+function navNotify(force){
+  if (!hasNative("navNotify")) return;
+  if (!nav || nav.eco) { if (navNoteLast.k) { try { NATIVE.navNotify(""); } catch(e) {} navNoteLast = { t: 0, k: "" }; } return; }
+  let title, text;
+  if (nav.arrived) { title = "✓ " + nav.name + " erreicht"; text = nav.trip ? "Weiter zu " + nav.trip.trip.wps[nav.trip.i + 1].name : "Tippe für den nächsten Stempel"; }
+  else if (nav.next && nav.next.type !== "arrive") { title = `In ${nav.dNext < 1 ? Math.max(10, Math.round(nav.dNext * 100) * 10) + " m" : km1(nav.dNext) + " km"} ${nav.next.text.charAt(0).toLowerCase() + nav.next.text.slice(1)}`; text = (nav.next.name ? "auf " + nav.next.name : "") + (nav.trailNow && nav.trailNow.w.say ? (nav.next.name ? " · " : "") + "Folge " + nav.trailNow.w.say : ""); }
+  else { title = "Geradeaus · noch " + fmtKm(nav.rest || 0); text = nav.trailNow && nav.trailNow.w.say ? "Folge " + nav.trailNow.w.say : ""; }
+  const min = navMinutes(nav.rest || 0), eta = new Date(Date.now() + min * 60000);
+  const sub = `${nav.name} · ${fmtKm(nav.rest || 0)} · an ${eta.getHours()}:${String(eta.getMinutes()).padStart(2, "0")}`;
+  const k = title + "|" + text;
+  if (!force && k === navNoteLast.k && Date.now() - navNoteLast.t < 15000) return;
+  navNoteLast = { t: Date.now(), k };
+  const prog = nav.total ? Math.max(0, Math.min(100, Math.round((1 - (nav.rest || 0) / nav.total) * 100))) : 0;
+  try { NATIVE.navNotify(JSON.stringify({ title, text: text || sub, sub, prog, icon: nav.arrived ? "✓" : nav.next ? (/left/.test(nav.next.mod) ? "↰" : /right/.test(nav.next.mod) ? "↱" : "↑") : "↑" })); } catch(e) {}
+}
+/* 🔀 Wegwahl: Alternativen vergleichen (Länge, Höhenmeter, Anteil markierter Wanderwege) */
+async function routeElevUp(pts){
+  try {
+    const N = Math.min(50, pts.length), idx = []; for (let n = 0; n < N; n++) idx.push(Math.round(n * (pts.length - 1) / (N - 1 || 1)));
+    const e = await getJson(`https://api.open-meteo.com/v1/elevation?latitude=${idx.map(i => pts[i][0].toFixed(5)).join(",")}&longitude=${idx.map(i => pts[i][1].toFixed(5)).join(",")}`);
+    const h = e.elevation || []; let up = 0, down = 0; for (let i = 1; i < h.length; i++) { const d = h[i] - h[i - 1]; if (d > 0) up += d; else down -= d; }
+    return { up: Math.round(up), down: Math.round(down) };
+  } catch(e) { return { up: null, down: null }; }
+}
+async function openNavChoice(me){
+  const alts = me.alts; if (!alts || alts.length < 2) return;
+  alts.forEach(a => { a.cum = [0]; for (let i = 1; i < a.pts.length; i++) a.cum.push(a.cum[i - 1] + distKm(a.pts[i - 1], a.pts[i])); a.km = a.cum[a.cum.length - 1]; });
+  const draw = () => {
+    if (nav !== me || me.arrived) return;
+    const minKm = Math.min(...alts.map(a => a.km)), maxPct = Math.max(...alts.map(a => a.pct || 0));
+    const lab = a => a.pct != null && a.pct === maxPct && maxPct >= 20 && alts.some(o => o !== a && (o.pct || 0) + 10 <= a.pct) ? ["🥾", "Mehr auf Wanderwegen"] : a.km === minKm ? ["⚡", "Kürzeste"] : ["🔀", "Alternative"];
+    openSheet(`<div class="kicker">${esc(me.name)}</div><h2>Welcher Weg?</h2>
+      ${alts.map((a, i) => { const [ic, t] = lab(a), names = [...new Map((a.trails || []).map(x => [x.w.id, x.w])).values()].slice(0, 3);
+        return `<button class="ncw ${i === (me.altSel || 0) ? "on" : ""}" data-alt="${i}"><i>${ic}</i><div class="t"><b>${t}</b><small>${km1(a.km)} km${a.up != null ? " · ↑ " + a.up + " m" : ""} · ${fmtMin(rpMin(a.km, a.up, a.down))}${a.pct != null ? " · " + a.pct + " % markierte Wege" : ""}</small>${names.length ? `<small class="ncw-w">${names.map(w => wzSym(w) + " " + esc(w.name || w.ref || "")).join(" · ")}</small>` : ""}</div></button>`; }).join("")}
+      <p class="hint" style="margin-top:10px">📶 Die gewählte Route wird gespeichert – die Navigation läuft auch ohne Netz weiter.</p>
+      <div class="actions"><button class="btn primary" id="ncGo">▶ Los geht's</button><button class="btn" id="ncCar">🚗 Erst mit dem Auto: Parkplatz nahe Ziel</button>${hasNative("downloadTiles") ? '<button class="btn" id="ncOff">📥 Karte entlang der Route offline speichern</button>' : ""}</div>`);
+    $("#sheet").querySelectorAll("[data-alt]").forEach(b => b.onclick = () => { const i = +b.dataset.alt; if (i === (me.altSel || 0)) return; me.altSel = i; const a = alts[i]; navBuild({ pts: a.pts, steps: a.steps }); me.off = 0; me.trailId = undefined; showRoute({ id: -2, nav: true, name: me.name, stamps: [], pts: me.pts }, false); navElevation(me); navExtras(me); navUpdate(); navBgSend(); draw(); });
+    $("#ncGo").onclick = () => { closeSheet(); renderNavUi(); };
+    $("#ncCar").onclick = () => openCarToParking(me.target, me.name);
+    const off = $("#ncOff"); if (off) off.onclick = () => { closeSheet(); saveTilesFor(boundsOf(me.pts, 0.008), 12, 16, me.name); };
+    bindClose();
+  };
+  draw();
+  /* Höhenmeter + Wanderweg-Anteil nachladen */
+  (async () => {
+    await Promise.all(alts.map(async a => Object.assign(a, await routeElevUp(a.pts)))); if ($("#sheet [data-alt]")) draw();
+    try {
+      let b = boundsOf(alts.flatMap(a => a.pts), 0.004);
+      me.tg = await trailGrid(b);
+      alts.forEach(a => Object.assign(a, trailRuns(a.pts, a.cum, a.km, me.tg)));
+      if ($("#sheet [data-alt]")) draw();
+    } catch(e) {}
+  })();
+}
+
+/* ---------- 🧭 Route planen: A, B, C, D … (Punkte hinzufügen, verschieben, löschen) ---------- */
+let rp = null;                       // { id, name, wps: [{ lat, lon, name, kind, set, k }], res, mode, tapAdd, insertAt }
+let myRoutes = load("sp.myRoutes", []);
+let pendingTrip = null;              // wird von startNav/startNavTo übernommen
+const rpLayer = L.layerGroup().addTo(map);
+const LETTER = i => i < 26 ? String.fromCharCode(65 + i) : "Z" + (i - 25);
+const RP_KIND = { me: "📍 Standort", stamp: "📒 Stempel", point: "📍 Punkt auf der Karte", park: "🅿️ Parkplatz", hut: "🛖 Hütte", cafe: "☕ Café", pub: "🍺 Gaststätte", food: "🍽️ Gasthaus", bus: "🚏 Haltestelle", train: "🚆 Bahnhof", start: "🚩 Start der Tour", end: "🏁 Ende der Tour" };
+const rpCol = (i, n) => i === 0 ? "#2e9e5b" : i === n - 1 ? "#d33a3a" : "#e8833a";
+const rpMin = (km, up, down) => { const th = km / 4, tv = (up || 0) / 300 + (down || 0) / 500; return Math.max(1, Math.round((Math.max(th, tv) + Math.min(th, tv) / 2) * 60)); };
+function rpIcon(t, col){ return L.divIcon({ className: "", html: `<div class="rp-pin" style="background:${col}">${t}</div>`, iconSize: [30, 30], iconAnchor: [15, 15] }); }
+function rpRef(){ const i = rp.insertAt != null ? rp.insertAt - 1 : rp.wps.length - 1; const w = rp.wps[i] || rp.wps[0]; return w ? [w.lat, w.lon] : (myPos || [map.getCenter().lat, map.getCenter().lng]); }
+function rpInsert(w){
+  const at = rp.insertAt != null ? rp.insertAt : rp.wps.length;
+  rp.wps.splice(at, 0, w); rp.insertAt = null; rp.dirty = true; rpCalc();
+}
+function openRoutePlanner(wps, name, id){
+  rp = { id: id || null, name: name || "", wps: (wps || (myPos ? [{ lat: myPos[0], lon: myPos[1], name: "Mein Standort", kind: "me" }] : [])).map(w => Object.assign({}, w)), res: null, mode: "sheet", tapAdd: false, insertAt: null };
+  setView("map"); rpCalc(); openRp();
+}
+function rpClose(){ rp = null; rpLayer.clearLayers(); const b = $("#rpBar"); if (b) b.remove(); }
+async function rpCalc(){
+  if (!rp) return;
+  const me = rp; rp.res = null; rpDraw(); rpRender();
+  if (rp.wps.length < 2) return;
+  try {
+    const coords = rp.wps.map(w => `${(+w.lon).toFixed(6)},${(+w.lat).toFixed(6)}`).join(";");
+    const j = await getJson(`https://routing.openstreetmap.de/routed-foot/route/v1/foot/${coords}?overview=full&geometries=geojson&steps=true`);
+    const r = j && j.routes && j.routes[0]; if (!r) throw new Error("Keine Route");
+    const res = { pts: r.geometry.coordinates.map(([lo, la]) => [la, lo]), legs: r.legs.map(l => l.distance / 1000), km: r.distance / 1000, up: null, down: null };
+    if (rp !== me) return;
+    me.res = res; rpDraw(); rpRender();
+    /* Höhenmeter */
+    try {
+      const N = Math.min(80, res.pts.length), idx = []; for (let n = 0; n < N; n++) idx.push(Math.round(n * (res.pts.length - 1) / (N - 1 || 1)));
+      const e = await getJson(`https://api.open-meteo.com/v1/elevation?latitude=${idx.map(i => res.pts[i][0].toFixed(5)).join(",")}&longitude=${idx.map(i => res.pts[i][1].toFixed(5)).join(",")}`);
+      const h = e.elevation || []; let up = 0, down = 0;
+      for (let i = 1; i < h.length; i++) { const d = h[i] - h[i - 1]; if (d > 0) up += d; else down -= d; }
+      if (me.res === res) { res.up = Math.round(up); res.down = Math.round(down); rpRender(); }
+    } catch(e) {}
+  } catch(e) {
+    if (rp !== me) return;
+    let km = 0; const legs = []; for (let i = 1; i < me.wps.length; i++) { const d = distKm([me.wps[i - 1].lat, me.wps[i - 1].lon], [me.wps[i].lat, me.wps[i].lon]) * 1.35; legs.push(d); km += d; }
+    me.res = { err: true, pts: me.wps.map(w => [w.lat, w.lon]), legs, km, up: null }; rpDraw(); rpRender();
+  }
+}
+function rpDraw(){
+  rpLayer.clearLayers(); if (!rp) return;
+  const n = rp.wps.length;
+  if (rp.res && rp.res.pts) {
+    L.polyline(rp.res.pts, { color: "#fff", weight: 8, opacity: .9, interactive: false }).addTo(rpLayer);
+    L.polyline(rp.res.pts, { color: css("--route"), weight: 5, opacity: 1, dashArray: rp.res.err ? "8 8" : null, interactive: false }).addTo(rpLayer);
+  }
+  /* ＋ auf jedem Teilstück: dort einen Punkt einfügen */
+  for (let i = 1; i < n && rp.mode !== "nav"; i++) {
+    const a = rp.wps[i - 1], b = rp.wps[i], m = [(a.lat + b.lat) / 2, (a.lon + b.lon) / 2];
+    L.marker(m, { icon: L.divIcon({ className: "", html: '<div class="rp-plus">＋</div>', iconSize: [24, 24], iconAnchor: [12, 12] }), keyboard: false })
+      .on("click", () => { rp.insertAt = i; rpInsert({ lat: m[0], lon: m[1], name: "Punkt auf der Karte", kind: "point" }); toast("Punkt eingefügt – zum Verschieben festhalten und ziehen"); }).addTo(rpLayer);
+  }
+  rp.wps.forEach((w, i) => {
+    L.marker([w.lat, w.lon], { icon: rpIcon(LETTER(i), rpCol(i, n)), draggable: true, zIndexOffset: 1000, keyboard: false })
+      .on("dragend", e => { const ll = e.target.getLatLng(); w.lat = ll.lat; w.lon = ll.lng; if (w.kind !== "point") { w.kind = "point"; w.name = "Punkt auf der Karte"; w.set = w.k = undefined; } rp.dirty = true; rpCalc(); })
+      .on("click", () => { if (rp.mode === "map") { rp.mode = "sheet"; openRp(); } })
+      .addTo(rpLayer);
+  });
+}
+function rpSumHtml(){
+  const r = rp.res;
+  if (rp.wps.length < 2) return `<p class="hint">Füge mindestens zwei Punkte hinzu – Start und Ziel.</p>`;
+  if (!r) return `<div class="pl-sum"><div><b>…</b><small>Strecke</small></div><div><b>…</b><small>Anstieg</small></div><div><b>…</b><small>Gehzeit</small></div></div>`;
+  return `<div class="pl-sum"><div><b>${r.err ? "ca. " : ""}${km1(r.km)} km</b><small>${rp.origKm ? "vorher " + km1(rp.origKm) : "Strecke"}</small></div><div><b>${r.up != null ? "↑ " + r.up + " m" : "–"}</b><small>Anstieg</small></div><div><b>${fmtMin(rpMin(r.km, r.up, r.down))}</b><small>Gehzeit</small></div></div>${r.err ? '<p class="hint">Ohne Internet nur geschätzt – die genaue Route kommt, sobald du wieder Netz hast.</p>' : ""}`;
+}
+function rpRender(){
+  if (!rp) return;
+  if (rp.mode === "map") { rpBar(); return; }
+  if (!$("#rpList")) return;
+  $("#rpSum").innerHTML = rpSumHtml();
+  rp.wps.forEach((w, i) => { const s = $(`#sheet [data-rpleg="${i}"]`); if (s && rp.res && rp.res.legs && rp.res.legs[i - 1] != null) s.textContent = `↓ ${rp.res.err ? "ca. " : ""}${km1(rp.res.legs[i - 1])} km · ${fmtMin(rpMin(rp.res.legs[i - 1]))}`; });
+}
+function openRp(){
+  if (!rp) return;
+  rp.mode = "sheet"; const bar = $("#rpBar"); if (bar) bar.remove();
+  const n = rp.wps.length;
+  const li = rp.wps.map((w, i) => `${i ? `<div class="pl-seg"><span data-rpleg="${i}">↓ …</span><button class="pl-insb" data-rpins="${i}">＋ hier einfügen</button></div>` : ""}
+    <li><span class="lt" style="background:${rpCol(i, n)}">${LETTER(i)}</span><button class="t" data-rpgo="${i}"><b>${esc(w.name)}</b><small>${RP_KIND[w.kind] || "📍 Punkt"}${i === 0 ? " · Start" : i === n - 1 ? " · Ziel" : ""}</small></button>
+      <span class="rp-mv"><button data-rpup="${i}" ${i ? "" : "disabled"} aria-label="nach oben">▲</button><button data-rpdn="${i}" ${i < n - 1 ? "" : "disabled"} aria-label="nach unten">▼</button></span><button class="x" data-rpdel="${i}" aria-label="Punkt löschen">✕</button></li>`).join("");
+  const first = rp.wps[0];
+  openSheet(`<div class="kicker">${rp.id ? "Meine Route" : "Route planen"}</div><h2>🧭 ${esc(rp.name || "Neue Route")}</h2>
+    <div id="rpSum">${rpSumHtml()}</div>
+    ${n ? `<ul class="pl-l" id="rpList">${li}</ul>` : `<p class="hint" id="rpList">Noch keine Punkte. Füg unten den Start hinzu.</p>`}
+    <div class="pl-add"><button data-rpadd="stamp"><span>📒</span>Stempel</button><button data-rpadd="map"><span>👆</span>Auf Karte</button><button data-rpadd="park"><span>🅿️</span>Parkplatz</button><button data-rpadd="food"><span>🍺</span>Einkehr</button>
+      ${myPos ? '<button data-rpadd="me"><span>📍</span>Mein Ort</button>' : ""}${n >= 2 ? '<button data-rpadd="loop"><span>🔁</span>Rundtour</button>' : ""}</div>
+    <div class="actions">
+      ${n >= 2 ? '<button class="btn primary" id="rpNav">▶ Navigation starten</button>' : ""}
+      <button class="btn" id="rpMap">🗺️ Auf der Karte bearbeiten</button>
+      ${first && first.kind !== "me" ? '<button class="btn" id="rpCar">🚗 Mit dem Auto zu A</button>' : ""}
+      ${n >= 2 && hasNative("downloadTiles") && rp.res && rp.res.pts ? '<button class="btn" id="rpOff">📥 Karte entlang der Route offline speichern</button>' : ""}
+      <div class="rp-save"><input id="rpName" maxlength="40" placeholder="Name der Route" value="${esc(rp.name)}"><button class="btn" id="rpSave">💾 Speichern</button></div>
+      ${rp.id ? '<button class="btn warn" id="rpDelR">Route löschen …</button>' : ""}
+      <button class="btn quiet" id="rpX">Schließen</button>
+    </div>`);
+  rpRender();
+  const sh = $("#sheet");
+  sh.querySelectorAll("[data-rpins]").forEach(b => b.onclick = () => { rp.insertAt = +b.dataset.rpins; openRpAdd(); });
+  sh.querySelectorAll("[data-rpdel]").forEach(b => b.onclick = () => { rp.wps.splice(+b.dataset.rpdel, 1); rp.dirty = true; rpCalc(); openRp(); });
+  sh.querySelectorAll("[data-rpup]").forEach(b => b.onclick = () => { const i = +b.dataset.rpup; [rp.wps[i - 1], rp.wps[i]] = [rp.wps[i], rp.wps[i - 1]]; rp.dirty = true; rpCalc(); openRp(); });
+  sh.querySelectorAll("[data-rpdn]").forEach(b => b.onclick = () => { const i = +b.dataset.rpdn; [rp.wps[i + 1], rp.wps[i]] = [rp.wps[i], rp.wps[i + 1]]; rp.dirty = true; rpCalc(); openRp(); });
+  sh.querySelectorAll("[data-rpgo]").forEach(b => b.onclick = () => { const w = rp.wps[+b.dataset.rpgo]; rpToMap(); map.setView([w.lat, w.lon], Math.max(map.getZoom(), 15)); });
+  sh.querySelectorAll("[data-rpadd]").forEach(b => b.onclick = () => { rp.insertAt = null; openRpAdd(b.dataset.rpadd); });
+  const nv = $("#rpNav"); if (nv) nv.onclick = () => startTrip({ name: rp.name || "Meine Route", wps: rp.wps.map(w => Object.assign({}, w)) });
+  $("#rpMap").onclick = () => rpToMap();
+  const car = $("#rpCar"); if (car) car.onclick = () => openCarTo([first.lat, first.lon]);
+  const off = $("#rpOff"); if (off) off.onclick = () => { const r = rp.res; closeSheet(); saveTilesFor(boundsOf(r.pts, 0.01), 10, 16, rp.name || "Route"); };
+  $("#rpSave").onclick = () => {
+    const nm = $("#rpName").value.trim() || `Route mit ${rp.wps.length} Punkten`;
+    if (badText(nm)) { toast(BAD_MSG); return; }
+    rp.name = nm;
+    const rec = { id: rp.id || "r" + Date.now().toString(36), name: nm, wps: rp.wps, km: rp.res ? rp.res.km : null, up: rp.res ? rp.res.up : null, ts: Date.now() };
+    myRoutes = myRoutes.filter(x => x.id !== rec.id); myRoutes.unshift(rec); save("sp.myRoutes", myRoutes.slice(0, 50));
+    rp.id = rec.id; rp.dirty = false; toast("💾 Gespeichert – unter Routen › Meine Routen"); openRp();
+    if (view === "routes") renderRoutes();
+  };
+  const dr = $("#rpDelR"); if (dr) dr.onclick = () => { if (!dr.dataset.sure) { dr.dataset.sure = "1"; dr.textContent = "Wirklich löschen? Nochmal tippen"; return; } myRoutes = myRoutes.filter(x => x.id !== rp.id); save("sp.myRoutes", myRoutes); closeSheet(); rpClose(); toast("Route gelöscht"); if (view === "routes") renderRoutes(); };
+  $("#rpX").onclick = () => { closeSheet(); if (!rp.dirty || !rp.wps.length) rpClose(); else rpToMap(); };
+  bindClose();
+}
+/* Karten-Modus: Sheet zu, kleine Leiste unten – Punkte antippen/ziehen */
+function rpToMap(){ if (!rp) return; rp.mode = "map"; closeSheet(); setView("map"); rpBar(); if (rp.res && rp.res.pts && rp.res.pts.length > 1) map.fitBounds(L.latLngBounds(rp.res.pts).pad(0.15)); else if (rp.wps.length) map.setView([rp.wps[0].lat, rp.wps[0].lon], 14); }
+function rpBar(){
+  let b = $("#rpBar");
+  if (!b) { b = document.createElement("div"); b.id = "rpBar"; b.className = "rp-bar"; document.querySelector("main").appendChild(b); ["touchstart", "pointerdown", "wheel", "click", "dblclick"].forEach(ev => b.addEventListener(ev, e => e.stopPropagation())); }
+  const n = rp.wps.length, r = rp.res;
+  b.innerHTML = `<div class="rpb-r">${rp.wps.slice(0, 8).map((w, i) => `<span><i style="background:${rpCol(i, n)}">${LETTER(i)}</i>${esc(w.name.replace(/^Nr\. (\S+).*/, "Nr. $1").slice(0, 12))}</span>`).join("›")}${n > 8 ? " …" : ""}</div>
+    ${rp.tapAdd ? `<div class="rpb-tip">👆 Tippe auf die Karte, wo der neue Punkt hin soll</div>` : ""}
+    <div class="rpb-a"><b>${n >= 2 ? (r ? `${r.err ? "ca. " : ""}${km1(r.km)} km${r.up != null ? " · ↑ " + r.up + " m" : ""} · ${fmtMin(rpMin(r.km, r.up, r.down))}` : "wird berechnet …") : "Punkte hinzufügen"}</b>
+      <button class="mini ${rp.tapAdd ? "primary" : ""}" id="rpbAdd">${rp.tapAdd ? "Fertig" : "＋ Punkt"}</button><button class="mini" id="rpbList">☰ Liste</button>${n >= 2 ? '<button class="mini primary" id="rpbGo">▶ Start</button>' : ""}<button class="mini" id="rpbX" aria-label="Planen beenden">✕</button></div>`;
+  $("#rpbAdd").onclick = () => { rp.tapAdd = !rp.tapAdd; rpBar(); };
+  $("#rpbList").onclick = () => { rp.tapAdd = false; openRp(); };
+  const g = $("#rpbGo"); if (g) g.onclick = () => startTrip({ name: rp.name || "Meine Route", wps: rp.wps.map(w => Object.assign({}, w)) });
+  $("#rpbX").onclick = () => { rpClose(); };
+}
+map.on("click", e => {
+  if (!rp || rp.mode !== "map" || !rp.tapAdd) return;
+  rp.insertAt = null; rpInsert({ lat: e.latlng.lat, lon: e.latlng.lng, name: "Punkt auf der Karte", kind: "point" });
+});
+/* Punkt hinzufügen: Stempel, Parkplatz, Einkehr, Karte, Rundtour */
+async function openRpAdd(kind){
+  if (!kind) {
+    openSheet(`<div class="kicker">Route planen</div><h2>＋ Punkt an Stelle ${LETTER(rp.insertAt)}</h2>
+      <div class="pl-add"><button data-rpk="stamp"><span>📒</span>Stempel</button><button data-rpk="map"><span>👆</span>Auf Karte</button><button data-rpk="park"><span>🅿️</span>Parkplatz</button><button data-rpk="food"><span>🍺</span>Einkehr</button></div>
+      <div class="actions"><button class="btn quiet" id="rpaBack">Zurück</button></div>`);
+    $("#sheet").querySelectorAll("[data-rpk]").forEach(b => b.onclick = () => openRpAdd(b.dataset.rpk));
+    $("#rpaBack").onclick = openRp; bindClose(); return;
+  }
+  if (kind === "me") { if (myPos) rpInsert({ lat: myPos[0], lon: myPos[1], name: "Mein Standort", kind: "me" }); openRp(); return; }
+  if (kind === "loop") { const a = rp.wps[0]; rp.insertAt = null; rpInsert(Object.assign({}, a, { name: "Zurück zu " + a.name.replace(/^Zurück zu /, "") })); openRp(); toast("🔁 Rundtour: zurück zum Start angehängt"); return; }
+  if (kind === "map") { rp.tapAdd = true; rpToMap(); toast("👆 Tippe auf die Karte, wo der Punkt hin soll"); return; }
+  const ref = rpRef();
+  if (kind === "stamp") {
+    const all = visible().filter(s => hasPos(s)).map(s => ({ s, d: distKm(ref, [s.lat, s.lon]) })).sort((a, b) => (isDone(current, a.s.k) - isDone(current, b.s.k)) || a.d - b.d);
+    const row = x => `<li><button data-rps="${esc(x.s.k)}"><span class="dot ${isDone(current, x.s.k) ? "d" : ""}"></span><span class="t">Nr. ${esc(String(x.s.n))} · ${esc(x.s.name)}<small>${isDone(current, x.s.k) ? "gestempelt" : "offen"} · ${wd(ref, [x.s.lat, x.s.lon])} entfernt</small></span></button></li>`;
+    openSheet(`<div class="kicker">Route planen · ${esc(SETS[current].title)}</div><h2>📒 Stempel hinzufügen</h2>
+      <div class="fsearch"><span class="fs-i">🔎</span><input id="rpQ" placeholder="Nummer oder Name" autocomplete="off"></div>
+      <ul class="slist" id="rpSL">${all.slice(0, 25).map(row).join("")}</ul><div class="actions"><button class="btn quiet" id="rpaBack">Zurück</button></div>`);
+    const bindL = () => $("#rpSL").querySelectorAll("[data-rps]").forEach(b => b.onclick = () => { const s = byKey[current].get(b.dataset.rps); rpInsert({ lat: s.lat, lon: s.lon, name: `Nr. ${s.n} ${s.name}`, kind: "stamp", set: current, k: s.k }); openRp(); });
+    $("#rpQ").oninput = e => { const q = norm(e.target.value).trim(); $("#rpSL").innerHTML = (q ? all.filter(x => norm(String(x.s.n) + " " + x.s.name).includes(q)) : all).slice(0, 25).map(row).join(""); bindL(); };
+    bindL(); $("#rpaBack").onclick = openRp; bindClose(); return;
+  }
+  /* Parkplatz / Einkehr aus OpenStreetMap */
+  const want = kind === "park" ? ["park"] : ["hut", "cafe", "pub", "food"];
+  openSheet(`<div class="kicker">Route planen</div><h2>${kind === "park" ? "🅿️ Parkplatz" : "🍺 Einkehr"} hinzufügen</h2><p>Suche in der Nähe von ${LETTER(rp.insertAt != null ? Math.max(0, rp.insertAt - 1) : Math.max(0, rp.wps.length - 1))} …</p><div class="actions"><button class="btn quiet" id="rpaBack">Zurück</button></div>`);
+  $("#rpaBack").onclick = openRp; bindClose();
+  let list = [];
+  try { list = poiParse(await overpass(poiQ(`(around:4000,${ref[0].toFixed(5)},${ref[1].toFixed(5)})`))).filter(p => want.includes(p.kind)); } catch(e) {}
+  if (!$("#rpaBack")) return;
+  list = list.map(p => ({ p, d: distKm(ref, [p.lat, p.lon]) })).sort((a, b) => a.d - b.d).slice(0, 20);
+  openSheet(`<div class="kicker">Route planen</div><h2>${kind === "park" ? "🅿️ Parkplatz" : "🍺 Einkehr"} hinzufügen</h2>
+    ${list.length ? `<ul class="slist">${list.map((x, i) => `<li><button data-rpp="${i}"><span class="t">${POI_IC[x.p.kind] || "📍"} ${esc(x.p.name || POI_NAME[x.p.kind])}<small>${esc(POI_NAME[x.p.kind])}${x.p.fee === "yes" ? " · kostenpflichtig" : x.p.fee === "no" ? " · kostenlos" : ""} · ${wd(ref, [x.p.lat, x.p.lon])} entfernt</small></span></button></li>`).join("")}</ul>` : `<p class="hint">Nichts gefunden (oder kein Internet).</p>`}
+    <div class="actions"><button class="btn quiet" id="rpaBack">Zurück</button></div>`);
+  $("#sheet").querySelectorAll("[data-rpp]").forEach(b => b.onclick = () => { const p = list[+b.dataset.rpp].p; rpInsert({ lat: p.lat, lon: p.lon, name: p.name || POI_NAME[p.kind], kind: p.kind }); openRp(); });
+  $("#rpaBack").onclick = openRp; bindClose();
+}
+/* 🚗 Mit dem Auto hinfahren (Google Maps) */
+function openCarTo(p){
+  const u = `https://www.google.com/maps/dir/?api=1&destination=${(+p[0]).toFixed(6)},${(+p[1]).toFixed(6)}&travelmode=driving`;
+  if (hasNative("openExternal")) { try { NATIVE.openExternal(u); return; } catch(e) {} }
+  const a = document.createElement("a"); a.href = u; a.target = "_blank"; a.rel = "noopener"; document.body.appendChild(a); a.click(); a.remove();
+}
+async function openCarToParking(p, name){
+  toast("Suche Parkplatz …");
+  let best = null;
+  try { const l = poiParse(await overpass(poiQ(`(around:3000,${p[0].toFixed(5)},${p[1].toFixed(5)})`))).filter(x => x.kind === "park"); best = l.map(x => ({ x, d: distKm(p, [x.lat, x.lon]) })).sort((a, b) => a.d - b.d)[0]; } catch(e) {}
+  if (best) { toast(`🚗 Zum Parkplatz ${best.x.name || ""} (${fmtKm(best.d)} von ${name})`); openCarTo([best.x.lat, best.x.lon]); }
+  else { toast("Kein Parkplatz gefunden – Google Maps führt dich direkt hin"); openCarTo(p); }
+}
+/* Fertige Tour → bearbeitbare Punkte */
+function routeToWps(r, set){
+  const w = [];
+  if (r.pts && r.pts.length) w.push({ lat: r.pts[0][0], lon: r.pts[0][1], name: "Start der Tour", kind: "start" });
+  for (const k of r.stamps || []) { const s = byKey[set].get(k); if (s && hasPos(s)) w.push({ lat: s.lat, lon: s.lon, name: `Nr. ${s.n} ${s.name}`, kind: "stamp", set, k }); }
+  if (r.pts && r.pts.length > 1) { const e = r.pts[r.pts.length - 1]; if (distKm(e, [w[0].lat, w[0].lon]) < 0.15) w.push(Object.assign({}, w[0], { name: "Zurück zum Start" })); else w.push({ lat: e[0], lon: e[1], name: "Ende der Tour", kind: "end" }); }
+  return w;
+}
+function editRoute(r, set){ closeSheet(); openRoutePlanner(routeToWps(r, set || current), r.name + " (bearbeitet)"); rp.origKm = r.km || null; }
+function myRoutesHtml(){
+  const l = myRoutes;
+  return `<div class="myr"><div class="myr-h"><b>🧭 Meine Routen</b><button class="mini primary" id="myrNew">＋ Route planen (A, B, C …)</button></div>
+    ${l.length ? `<ul class="slist">${l.slice(0, 8).map(r => `<li><button data-myr="${esc(r.id)}"><span class="dot" style="background:var(--route)"></span><span class="t">${esc(r.name)}<small>${r.wps.length} Punkte${r.km ? " · " + km1(r.km) + " km" : ""}${r.up ? " · ↑ " + r.up + " m" : ""}</small></span></button></li>`).join("")}</ul>` : `<p class="hint" style="margin:4px 0 0">Plane eigene Wanderungen mit beliebig vielen Punkten – Stempel, Parkplatz, Einkehr oder einfach auf die Karte tippen.</p>`}</div>`;
+}
+function bindMyRoutes(){
+  const n = $("#myrNew"); if (n) n.onclick = () => openRoutePlanner();
+  document.querySelectorAll("[data-myr]").forEach(b => b.onclick = () => { const r = myRoutes.find(x => x.id === b.dataset.myr); if (r) openRoutePlanner(r.wps, r.name, r.id); });
+}
+/* ▶ Route Punkt für Punkt navigieren */
+async function startTrip(trip){
+  let i = 0;
+  if (trip.wps[0] && trip.wps[0].kind === "me") i = 1;
+  else if (myPos && trip.wps[0] && distKm(myPos, [trip.wps[0].lat, trip.wps[0].lon]) < 0.06) i = 1;
+  if (rp) { rp.mode = "nav"; const b = $("#rpBar"); if (b) b.remove(); rpDraw(); }
+  closeSheet();
+  await startWp(trip, i);
+}
+async function startWp(trip, i){
+  const w = trip.wps[i]; if (!w) return;
+  pendingTrip = { trip, i };
+  nav = null;
+  const nm = `${LETTER(i)} · ${w.name}`;
+  if (w.kind === "stamp" && w.set && byKey[w.set] && byKey[w.set].get(w.k)) await startNav(w.set, w.k);
+  else await startNavTo([w.lat, w.lon], nm);
+  if (nav && nav.trip) { nav.name = nm; nav.sayName = `${LETTER(i)}, ${w.name}`; renderNavUi(); }
+}
 
 /* ---------- Standort mit Freunden teilen (freiwillig, ein- und ausschaltbar) ---------- */
 let shareLoc = load("sp.shareLoc", false);
@@ -10272,6 +10873,9 @@ function openGo(t){
   else if (t === "near") { setView("map"); openAreaList(); }
   else if (t === "notif") openNotifSettings();
   else if (t === "notiflog") openNotifLog();
+  else if (t === "navstop") { if (nav) { stopNav(); toast("Navigation beendet"); } }
+  else if (t === "navmute") { navVoice = !navVoice; save("sp.navVoice", navVoice); toast(navVoice ? "Sprachansage an" : "Sprachansage aus"); navBgSend(); renderNavUi(); }
+  else if (t === "nav") { setView("map"); if (nav) { nav.follow = true; if (myPos) map.setView(myPos, Math.max(map.getZoom(), 16)); renderNavUi(); } }
   else if (t.startsWith("addfriend:")) { setView("friends"); confirmFriend(cleanCode(t.slice(10))); }
 }
 /* Standorte der Freunde auf der Karte */
@@ -10825,7 +11429,7 @@ function missedHtml(h){
     ${l.map(([key, m]) => { const [st, k] = key.split("|"), s = byKey[st].get(k), w = isWatched(st, k);
       return `<div class="msr"><button class="msr-go" data-goto="${esc(key)}"><span class="n">${esc(String(s.n))}</span><span class="t"><b>${esc(s.name)}</b><small>${m < 60 ? "du warst direkt dort – vergessen einzutragen?" : "nur " + (m < 100 ? m : Math.round(m / 50) * 50) + " m neben deinem Weg"}${st !== current ? " · " + esc(SETS[st].short) : ""}</small></span></button><button class="msr-w ${w ? "on" : ""}" data-mw="${esc(key)}">${w ? "★ Gemerkt" : "⭐ Merken"}</button></div>`; }).join("")}</div>`;
 }
-function openHike(id){
+function openHike(id, back){
   const h = hikes.find(x => x.id === id); if (!h) return;
   if (!h.missed && h.pts) { h.missed = missedStamps(h.pts); save("sp.hikes", hikes); }
   setView("map"); showRoute({ id: -3, name: "Wanderung " + fmtTs(h.start).slice(0, 10), stamps: [], pts: h.pts }, true);
@@ -10839,10 +11443,11 @@ function openHike(id){
     ${h.stamps.length ? `<h3>Stempel unterwegs (${h.stamps.length})</h3><ul class="slist">${h.stamps.map(x => { const [st, k] = x.split("|"); return stampLine(st, k); }).join("")}</ul>` : ""}
     ${missedHtml(h)}
     ${fb.ready() && username && username.code ? `<div class="actions"><button class="btn ${h.shared ? "" : "primary"}" id="hkShare">${h.shared ? "👣 Für Freunde freigegeben ✓ – zurückziehen" : "👣 Für Freunde zum Nachwandern freigeben"}</button></div>` : ""}
-    <div class="actions"><button class="btn" id="hkList">Alle Wanderungen</button><button class="btn warn" id="hkDel">Löschen …</button><button class="btn quiet" id="sClose">Schließen</button></div>`);
+    <div class="actions">${back ? '<button class="btn" id="hkBack">← Zurück zum Profil</button>' : ""}<button class="btn" id="hkList">Alle Wanderungen</button><button class="btn warn" id="hkDel">Löschen …</button><button class="btn quiet" id="sClose">Schließen</button></div>`);
   { const hs = $("#hkShare"); if (hs) hs.onclick = async () => { try { await shareHike(h, !h.shared); h.shared = !h.shared; save("sp.hikes", hikes); toast(h.shared ? "Deine Freunde können die Tour jetzt nachwandern 👣" : "Freigabe zurückgezogen"); openHike(id); } catch(e) { toast("Hat nicht geklappt – Internet?"); } }; }
   $("#sheet").querySelectorAll("[data-goto]").forEach(b => b.onclick = () => { const [st, kk] = b.dataset.goto.split("|"); openStampIn(st, kk); });
   $("#hkList").onclick = openHikes;
+  { const hb = $("#hkBack"); if (hb) hb.onclick = () => back(); }
   $("#sheet").querySelectorAll("[data-mw]").forEach(b => b.onclick = () => { const [st, k] = b.dataset.mw.split("|"), on = !isWatched(st, k); setWatched(st, k, on); b.classList.toggle("on", on); b.textContent = on ? "★ Gemerkt" : "⭐ Merken"; toast(on ? "Auf die Merkliste gesetzt – fürs nächste Mal" : "Von der Merkliste genommen"); });
   $("#hkDel").onclick = () => {
     const b = $("#hkDel");

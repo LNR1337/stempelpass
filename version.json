@@ -1,6 +1,6 @@
 {
- "code": 112,
- "version": "0.9.72 Beta",
- "notes": "Neues Profil mit Reitern (Übersicht, Abzeichen, Karte, Kalender) und Freunde-Vergleich unter der Stempelkarte.",
+ "code": 113,
+ "version": "0.9.73 Beta",
+ "notes": "Navigation neu: Route planen mit Punkten A, B, C, D und eigene Routen bearbeiten · Wegwahl (kürzeste oder mehr auf Wanderwegen) · Wegzeichen-Ansage (z. B. Folge dem roten Punkt) · Einkehr & Haltestellen am Weg · Vibration vor dem Abbiegen (2× links, 3× rechts) · nächster Hinweis auf dem Sperrbildschirm · läuft ohne Netz weiter · Höhenprofil · aufgeräumte Navi ohne Kopfzeile, zum Aufklappen · Freunde sehen dein Ziel · Rangliste mit Heft-Balken für alle · Wanderungen im Profil antippbar · Ziel-Fix im Profil",
  "apk": "Stempelpass.apk"
 }
