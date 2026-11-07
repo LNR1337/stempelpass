@@ -1,6 +1,6 @@
 {
- "code": 108,
- "version": "0.9.68 Beta",
- "notes": "Fehler behoben: App blieb nach dem Hinzufügen eines Stempels beim Laden hängen.",
+ "code": 109,
+ "version": "0.9.69 Beta",
+ "notes": "Profilbild kommt nach dem Anmelden zurück, Konto-Anlegen zeigt Fehler statt still abzubrechen, Admin-Nutzerliste aktualisiert sich selbst.",
  "apk": "Stempelpass.apk"
 }

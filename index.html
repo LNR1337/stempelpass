@@ -2296,8 +2296,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.68 Beta";
-const APP_CODE = 108;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.69 Beta";
+const APP_CODE = 109;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -5440,8 +5440,15 @@ function renderFriends(){
     return;
   }
   if (!username.code) {
-    el.innerHTML = `<h2>Freunde</h2><p>Dein Freundescode wird erstellt, sobald du Internet hast.</p><button class="btn primary" id="frRetry">${boardBusy ? "Lädt …" : "Jetzt versuchen"}</button>${credit}`;
-    $("#frRetry").onclick = () => { unameSynced = false; refreshBoard(true); };
+    el.innerHTML = `<h2>Freunde</h2><p>Dein Konto „${esc(username.name)}“ ist noch nicht fertig angelegt – dein Freundescode fehlt noch. Mit Internet geht das automatisch, oder tipp hier:</p><button class="btn primary" id="frRetry">${boardBusy ? "Lädt …" : "Jetzt versuchen"}</button>${credit}`;
+    $("#frRetry").onclick = async () => {
+      const b = $("#frRetry"); b.disabled = true; b.textContent = "Lege Konto an …";
+      unameSynced = false;
+      try { await syncUsername(); }
+      catch(e) { toast("Hat nicht geklappt: " + (e.message || e)); }
+      if (username && !username.reserved && reserveName.err) toast("Name nicht gespeichert: " + reserveName.err);
+      b.disabled = false; renderFriends(); refreshBoard(true);
+    };
     return;
   }
   /* Zeitraum: Gesamt · Diese Woche (ab Montag) · Dieser Monat */
@@ -5572,7 +5579,7 @@ async function reserveName(name, forUid){
       if (!c.ok) return c.status === 403 || c.status === 400 || c.status === 409 ? "taken" : "offline";
     } else return "offline";
     return "ok";
-  } catch(e) { return "offline"; }
+  } catch(e) { reserveName.err = e && e.message || String(e); return "offline"; }
 }
 /* Legt das öffentliche Profil mit einem freien 6-stelligen Freundescode an */
 async function ensureProfile(name){
@@ -5612,7 +5619,7 @@ async function chooseName(name){
   applyName(name, res === "ok");
   if (res === "offline") return "offline";
   unameSynced = false;
-  try { await syncUsername(); } catch(e) {}
+  try { await syncUsername(); } catch(e) { setTimeout(() => toast("Konto noch nicht ganz fertig – wird beim nächsten Start nachgeholt (" + e.message + ")"), 1500); }
   return "ok";
 }
 /* Gleicht Name und Code mit Firebase ab: reserviert nachträglich, legt den Code an, übernimmt Umbenennungen durch Admins */
@@ -5971,6 +5978,7 @@ async function finishLogin(a, u, hasPw){
   unameSynced = false; isAdmin = false; save("sp.isAdmin", false);
   board = null; save("sp.friendsBoard", null);
   await pullStamps();
+  try { await syncCardDown(); } catch(e) {}
   await checkAdmin();
   render(false);
   refreshBoard(false);
@@ -6189,6 +6197,8 @@ $("#wForm").addEventListener("submit", async e => {
     $("#wMsg").textContent = fb.ready() ? "Prüfe, ob der Name frei ist …" : "";
     const res = await chooseName(v);
     if (res === "taken") { $("#wMsg").textContent = "Der Name ist schon vergeben. Ist das dein Konto? Dann tippe unten auf „Ich habe schon ein Konto“."; return; }
+    /* Mit Server, aber Name nicht gespeichert → nicht so tun, als wäre alles fertig */
+    if (res === "offline" && fb.ready() && (navigator.onLine !== false)) { $("#wMsg").style.color = "var(--bad)"; $("#wMsg").textContent = "Dein Name konnte nicht gespeichert werden" + (reserveName.err ? " (" + reserveName.err + ")" : "") + ". Bitte tippe nochmal auf „Los geht's“."; return; }
     if (res === "ok" && fb.ready() && username.reserved && wMode !== "google") {
       try { await setPassword(pw); }
       catch(err) { toast("Passwort nicht gespeichert: " + authMsg(err) + " Du kannst es im Menü festlegen."); }
@@ -6231,7 +6241,7 @@ async function listAll(path){
 let adminCache = null;
 async function loadAdmin(){
   const [users, profs, , mods, bans] = await Promise.all([listAll("/users"), listAll("/profiles"), loadPosReports(), listAll("/moderators").catch(() => []), listAll("/banned").catch(() => [])]);
-  adminCache = { users, profs, mods: new Set(mods.map(docId)), banned: new Set(bans.map(docId)) };
+  adminCache = { users, profs, mods: new Set(mods.map(docId)), banned: new Set(bans.map(docId)), ts: Date.now() };
 }
 /* App-Version eines Nutzers (Profilfeld ver: Nummer, +10000 = Web-App/iPhone) */
 function verInfo(v){
@@ -6331,6 +6341,11 @@ async function openStatsAdmin(){
 }
 async function openAdmin(){
   if (!isAdmin) return;
+  /* Nutzerliste nicht ewig aus dem Zwischenspeicher zeigen: nach 1 Minute im Hintergrund neu laden (neue Anmeldungen erscheinen dann) */
+  if (adminCache && Date.now() - (adminCache.ts || 0) > 60000 && !openAdmin._busy) {
+    openAdmin._busy = true;
+    loadAdmin().then(() => { if ($("#auList")) openAdmin(); }).catch(() => {}).finally(() => { openAdmin._busy = false; });
+  }
   if (!adminCache) {
     openSheet(`<div class="kicker">Admin</div><h2>Lade Daten …</h2>`);
     try { await loadAdmin(); } catch(e) { openSheet(`<div class="kicker">Admin</div><h2>Keine Verbindung</h2><p>Die Daten konnten nicht geladen werden.</p><div class="actions"><button class="btn quiet" id="sClose">Schließen</button></div>`); bindClose(); return; }
@@ -8223,8 +8238,29 @@ function cardFields(){
   if (cardVis.compare) f.stamps = fsStr(JSON.stringify(Object.fromEntries(SET_KEYS.map(st => [st, Object.keys(d[st])]))));
   return f;
 }
+/* Profilkarte vom Server übernehmen (nach Anmelden / Neuinstallation), damit Profilbild, Bio usw. nicht verloren gehen.
+   Lokale Angaben gewinnen, wenn sie schon gesetzt sind. */
+function mergeCard(c){
+  if (!c) return false;
+  let ch = false;
+  const def = { avatar: "🥾", photo: null, bio: "", region: "", fav: null };
+  for (const k of ["avatar", "photo", "bio", "region", "fav"]) if (c[k] && (myCard[k] == null || myCard[k] === "" || myCard[k] === def[k])) { myCard[k] = c[k]; ch = true; }
+  if ((!myCard.show || !myCard.show.length) && c.badges && c.badges.show && c.badges.show.length) { myCard.show = c.badges.show.slice(); ch = true; }
+  if (c.photo) cardVis.photo = true;
+  if (ch) { save("sp.card", myCard); save("sp.cardVis", cardVis); try { updateNavMe(); } catch(e) {} }
+  return ch;
+}
+async function syncCardDown(){
+  if (!fb.ready() || !username || !username.code) return false;
+  const c = await loadCard(username.code);   // wirft bei Verbindungsfehler → dann lieber nichts hochladen
+  mergeCard(c);
+  save("sp.cardSynced", username.code);
+  return true;
+}
 async function pushCard(){
   if (!fb.ready() || !username || !username.code) return;
+  /* nie eine leere Karte über die gespeicherte schreiben: erst einmal vom Server holen */
+  if (load("sp.cardSynced", "") !== username.code) await syncCardDown();
   await fb.req("PATCH", `/cards/${username.code}`, { fields: cardFields() });
   save("sp.cardPushed", Date.now());
 }
