@@ -745,6 +745,9 @@ body.nv-new .nt-wz:not([hidden]){display:flex;flex-basis:100%;align-items:center
 .navbar.nva .nb-btns button{width:44px;height:44px;border-radius:50%;padding:0}.navbar.nva .nb-btns button.stop.sure{width:auto;border-radius:22px;padding:0 12px}
 .navbar.nva .nb-prof{margin-top:0}.navbar.nva .nb-prof.mini{height:22px}
 .navbar.nva .nb-stats{margin-top:0}.nb-stats .nb-offs{font-size:.76rem;align-self:center}
+#rpFollow{display:flex;flex-direction:column;align-items:center;gap:2px}#rpFollow small{display:block;font:500 .76rem var(--body);opacity:.85}
+.nb-live{flex-basis:100%;display:flex;gap:14px;font-size:.8rem;color:var(--muted);margin:-2px 0 -2px 0}.nb-live b{color:var(--fg);font:700 .9rem var(--display)}
+p.nb-offs{flex-basis:100%;margin:0;font-size:.76rem;color:var(--muted)}
 .nb-grid{flex-basis:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px}
 .nb-grid button{height:48px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:0}
 .nb-grid button span{font:600 .74rem var(--body)}.nb-grid button.on{border-color:var(--done);background:color-mix(in srgb,var(--done) 16%,var(--bg))}
@@ -2412,8 +2415,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.74 Beta";
-const APP_CODE = 114;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.75 Beta";
+const APP_CODE = 115;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -4466,6 +4469,7 @@ function openRoute(id, showOnMap){
   }).join("");
   const hints = [...new Set(r.stamps.flatMap(k => officialNotes(current, k)))];
   const pct = p.total ? Math.round(p.n / p.total * 100) : 0, near = myPos ? distKm(myPos, r.pts[0]) : null;
+  const nearT = myPos && Date.now() - myPosTs < 900000 ? onRoute(myPos, r.pts, cumOf(r.pts)).d : null;
   openSheet(`
     <div class="rhero"><div id="rMap" class="rmap"></div><span class="rh-badge">${r.loop ? "↻ Rundweg" : "→ Strecke"}</span></div>
     <div class="kicker">${esc(SETS[current].short)} · Route</div>
@@ -4479,7 +4483,7 @@ function openRoute(id, showOnMap){
     </div>
     <div class="rprog"><i style="width:${pct}%"></i></div>
     <p class="hint" style="margin:6px 0 0">Gehzeit ohne Pausen (nach DIN 33466: 4 km/h, 300 Hm/h bergauf)${near != null ? ` · Start ${wd(myPos, r.pts[0])} von dir` : ""}</p>
-    <div class="actions rmain"><button class="btn primary" id="rStart">🧭 Zum Start</button><button class="btn" id="rShow2">🗺️ Auf der Karte</button><a class="btn" href="${navUrl(r.pts[0][0], r.pts[0][1])}" target="_blank" rel="noopener">🚗 Anfahrt</a></div>
+    <div class="actions rmain"><button class="btn primary" id="rStart">🧭 Ab Start</button><button class="btn" id="rShow2">🗺️ Auf der Karte</button><a class="btn" href="${navUrl(r.pts[0][0], r.pts[0][1])}" target="_blank" rel="noopener">🚗 Anfahrt</a></div>
     ${brokenNotice(current, r.stamps)}
     ${hints.length ? `<div class="notice warn"><b>Hinweise zu dieser Route</b><ul>${hints.map(h => `<li>${esc(h)}</li>`).join("")}</ul></div>` : ""}
     <h3>Stempel unterwegs</h3>
@@ -4487,13 +4491,13 @@ function openRoute(id, showOnMap){
     <h3>Höhenprofil</h3><div class="elev" id="rElev"><div class="skel"><i></i><i></i><i style="width:60%"></i></div></div>
     <h3>Wetter am Start</h3><div class="wx" id="rWx"><div class="skel"><i></i><i></i><i style="width:60%"></i></div></div>
     <div class="actions">
-      <button class="btn" id="rEdit">✏️ Bearbeiten · Punkte hinzufügen</button>
+      <button class="btn" id="rEdit">✏️ Eigene Version bauen · Punkte dazu / weg</button>
       <button class="btn" id="rCar">🚗 Mit dem Auto zum Start</button>
       <button class="btn" id="rShare">📤 Mit Freunden teilen</button>
       ${hasNative("downloadTiles") ? '<button class="btn" id="rOffline">📥 Karte offline speichern</button>' : ""}
       <button class="btn quiet" id="sClose">Schließen</button>
     </div>
-    <div class="rgo"><button class="btn primary" id="rGo">▶ Tour starten<small>${near != null ? `Start ${wd(myPos, r.pts[0])} entfernt · ` : ""}Karte + Hinführen zum Start</small></button></div>`);
+    <div class="rgo"><button class="btn primary" id="rGo">▶ Tour starten<small>${nearT != null ? (nearT < 0.06 ? "Du bist schon auf der Tour · los geht's ab hier" : `Einstieg am nächsten Punkt · ${fmtKm(nearT)} entfernt`) : "Einstieg am nächsten Punkt der Tour"}</small></button></div>`);
   { const mm = L.map($("#rMap"), { zoomControl: false, attributionControl: false, zoomSnap: 0.25, fadeAnimation: false, zoomAnimation: false, dragging: false, scrollWheelZoom: false, doubleClickZoom: false, touchZoom: false, boxZoom: false, keyboard: false, tap: false });
     const b = curBase(); L.tileLayer(b.url, { maxZoom: 19, maxNativeZoom: b.native, subdomains: b.sub || "abc" }).addTo(mm);
     L.polyline(r.pts, { color: "#fff", weight: 7, opacity: .85 }).addTo(mm);
@@ -4502,8 +4506,8 @@ function openRoute(id, showOnMap){
     r.stamps.forEach(k => { const s = byKey[current].get(k); if (s && hasPos(s)) L.circleMarker([s.lat, s.lon], { radius: 7, weight: 2.5, color: "#fff", fillColor: isDone(current, k) ? css("--done") : isBroken(current, k) ? css("--bad") : css("--open"), fillOpacity: 1 }).bindTooltip(String(k), { permanent: true, direction: "center", className: "rnum" }).addTo(mm); });
     const fit = () => { if (!$("#rMap")) return; mm.invalidateSize(); mm.fitBounds(r.pts, { padding: [26, 26], animate: false }); }; fit(); [150, 400, 800].forEach(t => setTimeout(fit, t));
     $("#rMap").onclick = () => { closeSheet(); setView("map"); showRoute(r, true); }; }
-  $("#rStart").onclick = () => startNavTo(r.pts[0], "Start: " + r.name);
-  $("#rGo").onclick = () => { closeSheet(); setView("map"); showRoute(r, true); setTimeout(() => startNavTo(r.pts[0], "Start: " + r.name), 300); };
+  $("#rStart").onclick = () => startRouteFollow(Object.assign({ set: current }, r), { fromStart: true });
+  $("#rGo").onclick = () => startRouteFollow(Object.assign({ set: current }, r));
   $("#rShow2").onclick = () => { closeSheet(); setView("map"); showRoute(r, true); };
   $("#sheet").querySelectorAll("[data-stamp]").forEach(b => b.onclick = () => openStamp(b.dataset.stamp));
   const rs = $("#rShow"); if (rs) rs.onclick = () => { closeSheet(); setView("map"); showRoute(r, true); };
@@ -9922,6 +9926,7 @@ async function startNavTo(p, name){
 }
 async function navRoute(first){
   if (!nav) return;
+  if (nav.tour) { await tourReroute(); return; }
   nav.lastRoute = Date.now();
   const me = nav;
   let r;
@@ -10007,6 +10012,7 @@ function navArrive(){
     renderNavUi();
     return;
   }
+  if (nav.tour) { say(`Geschafft! Tour ${name} beendet.`); stopNav(); toast(`🎉 Tour „${name}“ geschafft`); return; }
   say(`Du bist da! ${sayName}.`);
   stopNav();
   toast(`🎉 Angekommen: ${name}`);
@@ -10014,8 +10020,9 @@ function navArrive(){
 }
 function navUpdate(){
   if (!nav || !myPos || !nav.pts || nav.arrived) return;
+  if (nav.tour && nav.tour.approach && tourCheck()) return;
   const dT = distKm(myPos, nav.target);
-  if (dT < 0.035 || (dT < 0.06 && myAcc > 30)) { navArrive(); return; }
+  if ((dT < 0.035 || (dT < 0.06 && myAcc > 30)) && !(nav.tour && nav.along != null && nav.total - nav.along > 0.3)) { navArrive(); return; }
   let rest = dT, next = null, dNext = 0, then = null, dir = null;
   if (!nav.straight) {
     const o = onRoute(myPos, nav.pts, nav.cum);
@@ -10046,7 +10053,7 @@ function navUpdate(){
   for (const m of [1000, 500, 300, 100]) {
     if (rest * 1000 <= m && !nav.ms[m]) {
       nav.ms[m] = true;
-      if (nav.total * 1000 > m + 80 && !(next && dNext < 0.05 && next.type !== "arrive")) say(`Noch ${m === 1000 ? "1 Kilometer" : m + " Meter"} bis ${nav.sayName.replace(/^Stempel/, "zum Stempel")}`);
+      if (nav.total * 1000 > m + 80 && !(next && dNext < 0.05 && next.type !== "arrive")) say(`Noch ${m === 1000 ? "1 Kilometer" : m + " Meter"} bis ${nav.tour ? "zum Ende der Tour" : nav.sayName.replace(/^Stempel/, "zum Stempel")}`);
       break;
     }
   }
@@ -10166,8 +10173,9 @@ function renderNavUiA(bar, min, eta){
     <div class="nb-info" id="nbInfo"><b>${fmtKm(nav.rest || 0)} · ${min < 60 ? min + " min" : Math.floor(min / 60) + " h " + String(min % 60).padStart(2, "0")}</b>
       <small>${esc(nav.name)} · an ${hm(eta)}${nav.queue.length ? ` · danach noch ${nav.queue.length}` : ""}${pn && pd > 0.03 ? ` · ${POI_IC[pn.p.kind] === "P" ? "🅿️" : POI_IC[pn.p.kind] || "📍"} in ${fmtKm(pd)}` : ""}${off && !nav.straight ? ' · <em class="nb-off warn">📵 offline</em>' : ""}</small></div>
     <div class="nb-btns"><button id="nbFold" aria-label="${navOpen ? "Zuklappen" : "Mehr anzeigen"}">${navOpen ? "▼" : "▲"}</button><button id="nbStop" class="stop" aria-label="Navigation beenden">✕</button></div>
+    ${navOpen ? "" : `<div class="nb-live"><span>🚶 <b>${km1(nav.kmh || 0)}</b> km/h</span><span>⛰️ <b>${nav.alt != null ? Math.round(nav.alt) : "–"}</b> m</span>${nav.upRest != null ? `<span>↗ <b>${nav.upRest}</b> hm</span>` : ""}</div>`}
     ${prof}
-    ${navOpen ? `<div class="nb-stats"><span>⛰️ <b>${nav.alt != null ? Math.round(nav.alt) : "–"}</b> m</span><span>↗ <b>${nav.upRest != null ? nav.upRest : nav.up != null ? nav.up : "–"}</b> ↘ <b>${nav.downRest != null ? nav.downRest : nav.down != null ? nav.down : "–"}</b> hm</span>${nav.sunset ? `<span class="${nav.late ? "late" : ""}">🌅 <b>${hm(nav.sunset)}</b></span>` : ""}${!nav.straight ? `<span class="nb-offs">${off ? "📵 offline" : "📶 offline ok"}</span>` : `<span><b>${km1(nav.kmh || 0)}</b> km/h</span>`}</div>
+    ${navOpen ? `<div class="nb-stats"><span>🚶 <b>${km1(nav.kmh || 0)}</b> km/h</span><span>⛰️ <b>${nav.alt != null ? Math.round(nav.alt) : "–"}</b> m</span><span>↗ <b>${nav.upRest != null ? nav.upRest : nav.up != null ? nav.up : "–"}</b> ↘ <b>${nav.downRest != null ? nav.downRest : nav.down != null ? nav.down : "–"}</b> hm</span>${nav.sunset ? `<span class="${nav.late ? "late" : ""}">🌅 <b>${hm(nav.sunset)}</b></span>` : ""}</div>${!nav.straight ? `<p class="nb-offs">${off ? "📵 offline – folge der gespeicherten Linie" : "📶 Route gespeichert – läuft auch ohne Netz"}</p>` : ""}
     <div class="nb-grid">${canSpeak() ? `<button id="nbVoice" class="${navVoice ? "on" : ""}">${navVoice ? "🔊" : "🔇"}<span>Ansage</span></button>` : ""}<button id="nbVib" class="${navVib ? "on" : ""}">📳<span>Vibration</span></button>${hasNative("navBg") ? `<button id="nbEco" class="${nav.eco ? "on" : ""}">🔋<span>Sparen</span></button>` : ""}<button id="nbOver">${nav.follow ? "⛶" : "◎"}<span>${nav.follow ? "Übersicht" : "Zentrieren"}</span></button></div>` : ""}`;
   const fold = () => { navOpen = !navOpen; save("sp.navOpen", navOpen); renderNavUi(); };
   $("#nbFold").onclick = fold; $("#nbFoldG").onclick = fold; $("#nbInfo").onclick = fold;
@@ -10204,6 +10212,118 @@ function stopNav(){
   document.body.classList.remove("navving"); setTimeout(() => map.invalidateSize(), 50);
   renderNavUi();
   showRoute(null);
+}
+/* ---------- 🥾 Tour-Linie folgen: Einstieg an jeder Stelle, Abbiegehinweise aus der Linie ---------- */
+const cumOf = pts => { const c = [0]; for (let i = 1; i < pts.length; i++) c.push(c[i - 1] + distKm(pts[i - 1], pts[i])); return c; };
+/* Abbiegungen aus der Form der Linie ableiten (die Tour hat keine OSRM-Hinweise) */
+function routeTurns(pts){
+  const cum = cumOf(pts), out = [], W = 0.025;
+  const at = (i, dir) => { let j = i; while (j > 0 && j < pts.length - 1 && Math.abs(cum[j] - cum[i]) < W) j += dir; return j; };
+  let cands = [];
+  for (let i = 1; i < pts.length - 1; i++) {
+    const a = at(i, -1), b = at(i, 1); if (a === i || b === i) continue;
+    let d = bearing(pts[i], pts[b]) - bearing(pts[a], pts[i]); d = ((d + 540) % 360) - 180;
+    if (Math.abs(d) >= 38) cands.push({ i, d });
+  }
+  /* pro Abbiegung nur der stärkste Punkt (mind. 40 m Abstand) */
+  cands.sort((x, y) => Math.abs(y.d) - Math.abs(x.d));
+  const took = [];
+  for (const c of cands) { if (took.some(t => Math.abs(cum[t.i] - cum[c.i]) < 0.04)) continue; took.push(c); }
+  took.sort((x, y) => x.i - y.i);
+  for (const t of took) {
+    const ad = Math.abs(t.d), side = t.d < 0 ? "left" : "right";
+    const mod = ad > 150 ? "uturn" : ad > 110 ? "sharp " + side : ad < 60 ? "slight " + side : side;
+    out.push({ maneuver: { location: [pts[t.i][1], pts[t.i][0]], type: "turn", modifier: mod }, name: "" });
+  }
+  const e = pts[pts.length - 1]; out.push({ maneuver: { location: [e[1], e[0]], type: "arrive" }, name: "" });
+  return out;
+}
+/* Rest der Tour ab Index i (bei Rundwegen einmal rum bis zum Einstieg) */
+function tourTail(pts, i, loop, from){
+  let t = pts.slice(i + 1);
+  if (loop && i > 0) t = t.concat(pts.slice(1, i + 1));
+  return [from || pts[i]].concat(t);
+}
+/* Projektion auf das Teilstück i → i+1 */
+function projOn(p, a, b){
+  const k = Math.cos(p[0] * Math.PI / 180);
+  const ax = a[1] * k, ay = a[0], bx = b[1] * k, by = b[0], px = p[1] * k, py = p[0];
+  const dx = bx - ax, dy = by - ay, L2 = dx * dx + dy * dy; let t = L2 ? ((px - ax) * dx + (py - ay) * dy) / L2 : 0; t = Math.max(0, Math.min(1, t));
+  return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+}
+async function startRouteFollow(r, opt){
+  opt = opt || {};
+  try { hideToday(); } catch(e) {}
+  closeSheet(); setView("map"); startLocate(true);
+  toast("Tour wird vorbereitet …");
+  if (!(await waitForPos(20000))) { toast("Standort nicht gefunden – bitte GPS einschalten"); return; }
+  { const st = load("sp.navStart", null); if (myPos && (!st || Date.now() - st.t > 10 * 3600000)) save("sp.navStart", { p: myPos.slice(), t: Date.now() }); }
+  const pts = r.pts, loop = distKm(pts[0], pts[pts.length - 1]) < 0.15, cum = cumOf(pts);
+  const o = onRoute(myPos, pts, cum);
+  let ji = 0, jp = pts[0];
+  if (!opt.fromStart) { ji = o.i; jp = projOn(myPos, pts[o.i], pts[Math.min(o.i + 1, pts.length - 1)]); }
+  const tail = tourTail(pts, ji, loop, jp);
+  nav = { set: r.set || current, k: null, name: r.name, sayName: "Tour " + r.name, target: tail[tail.length - 1].slice(), follow: true, lastRoute: Date.now(),
+    queue: [], ms: {}, off: 0, arrived: false, up: null, eco: load("sp.navEco", false) && hasNative("navBg"), kmh: 0, backWarned: true,
+    tour: { r, tail, tcum: cumOf(tail), loop, approach: false } };
+  if (hasNative("keepScreen")) NATIVE.keepScreen(!nav.eco);
+  document.body.classList.add("navving"); map.invalidateSize();
+  const me = nav;
+  await tourBuild(me, o.d > 0.05 || opt.fromStart, true);
+  if (nav !== me) return;
+  const gone = ji > 0 && !opt.fromStart ? cum[ji] : 0;
+  say(o.d <= 0.05 && !opt.fromStart ? `Los geht's. Du bist schon auf der Tour ${r.name}. Noch ${sayDist(me.tour.tcum[me.tour.tcum.length - 1])}.`
+    : `Los geht's. Ich führe dich ${opt.fromStart ? "zum Start" : "zum nächsten Punkt"} der Tour ${r.name}, ${sayDist(me.approachKm || 0)}. Danach folgst du der Tour.`);
+  if (gone > 0.3) toast(`🥾 Einstieg bei km ${km1(gone)} – ${loop ? "einmal rum bis hierher" : "bis zum Ende der Tour"}`);
+}
+/* Navi-Linie bauen: (Hinweg) + Rest der Tour */
+async function tourBuild(me, needApproach, first){
+  const T = me.tour;
+  let pts, steps = [], ok = true;
+  me.approachKm = 0; T.approach = false;
+  if (needApproach) {
+    try {
+      const a = await routeFootFull(myPos, T.tail[0], false);
+      if (nav !== me) return;
+      pts = a.pts.concat(T.tail.slice(1)); steps = a.steps.filter(s => !s.maneuver || s.maneuver.type !== "arrive");
+      me.approachKm = cumOf(a.pts).pop(); T.approach = true; T.approachN = a.pts.length;
+    } catch(e) {
+      if (nav !== me) return;
+      if (!first && me.pts) { me.offline = true; me.off = 0; return; }
+      pts = [myPos.slice()].concat(T.tail); me.approachKm = distKm(myPos, T.tail[0]); T.approach = true; T.approachN = 1; ok = false;
+    }
+  } else pts = [myPos.slice()].concat(T.tail.slice(1));
+  steps = steps.concat(routeTurns(T.tail));
+  me.straight = false; me.offline = !ok;
+  navBuild({ pts, steps });
+  me.off = 0; me.trailId = undefined; me.pois = null; me.trails = null;
+  showRoute({ id: -2, nav: true, name: me.name, stamps: [], pts: me.pts }, first);
+  navElevation(me); navExtras(me);
+  navUpdate(); navBgSend();
+  if (first && typeof trk !== "undefined" && trk) setTimeout(() => pushWalk(true, true), 3000);
+}
+/* Unterwegs: auf die Tour getroffen → ab hier der Tour folgen; vom Weg ab → zurück zum nächsten Punkt der Tour */
+function tourCheck(){
+  const me = nav, T = me && me.tour; if (!T || me.arrived || !myPos) return false;
+  const o = onRoute(myPos, T.tail, T.tcum);
+  if (T.approach && o.d < 0.025 && myAcc < 40) {
+    /* Hinweg abkürzen: man ist schon auf der Tour */
+    T.tail = [projOn(myPos, T.tail[o.i], T.tail[Math.min(o.i + 1, T.tail.length - 1)])].concat(T.tail.slice(o.i + 1)); T.tcum = cumOf(T.tail);
+    say(`Du bist auf der Tour. Folge jetzt der Tour ${me.name}.`); vibPat(1);
+    tourBuild(me, false, false); return true;
+  }
+  return false;
+}
+async function tourReroute(){
+  const me = nav, T = me.tour;
+  me.lastRoute = Date.now();
+  const o = onRoute(myPos, T.tail, T.tcum);
+  /* zurück zur Tour: nächster Punkt, aber nicht rückwärts hinter den bisherigen Fortschritt */
+  const prog = Math.max(0, (me.along || 0) - (me.approachKm || 0));
+  let i = o.i; if (T.tcum[i] < prog - 0.15) { i = T.tcum.findIndex(c => c >= prog); if (i < 0) i = T.tail.length - 2; }
+  T.tail = [i === o.i ? projOn(myPos, T.tail[i], T.tail[Math.min(i + 1, T.tail.length - 1)]) : T.tail[i]].concat(T.tail.slice(i + 1)); T.tcum = cumOf(T.tail);
+  await tourBuild(me, true, false);
+  if (nav === me && me.offline) { toast("📵 Kein Netz – geh zurück zur Linie auf der Karte"); }
 }
 /* Geplante Tour Stempel für Stempel in der App navigieren */
 async function startTourNav(p){
@@ -10484,7 +10604,7 @@ function rpRender(){
 function openRp(){
   if (!rp) return;
   rp.mode = "sheet"; const bar = $("#rpBar"); if (bar) bar.remove();
-  const n = rp.wps.length;
+  const n = rp.wps.length, r = rp.res;
   const li = rp.wps.map((w, i) => `${i ? `<div class="pl-seg"><span data-rpleg="${i}">↓ …</span><button class="pl-insb" data-rpins="${i}">＋ hier einfügen</button></div>` : ""}
     <li><span class="lt" style="background:${rpCol(i, n)}">${LETTER(i)}</span><button class="t" data-rpgo="${i}"><b>${esc(w.name)}</b><small>${RP_KIND[w.kind] || "📍 Punkt"}${i === 0 ? " · Start" : i === n - 1 ? " · Ziel" : ""}</small></button>
       <span class="rp-mv"><button data-rpup="${i}" ${i ? "" : "disabled"} aria-label="nach oben">▲</button><button data-rpdn="${i}" ${i < n - 1 ? "" : "disabled"} aria-label="nach unten">▼</button></span><button class="x" data-rpdel="${i}" aria-label="Punkt löschen">✕</button></li>`).join("");
@@ -10495,7 +10615,8 @@ function openRp(){
     <div class="pl-add"><button data-rpadd="stamp"><span>📒</span>Stempel</button><button data-rpadd="map"><span>👆</span>Auf Karte</button><button data-rpadd="park"><span>🅿️</span>Parkplatz</button><button data-rpadd="food"><span>🍺</span>Einkehr</button>
       ${myPos ? '<button data-rpadd="me"><span>📍</span>Mein Ort</button>' : ""}${n >= 2 ? '<button data-rpadd="loop"><span>🔁</span>Rundtour</button>' : ""}</div>
     <div class="actions">
-      ${n >= 2 ? '<button class="btn primary" id="rpNav">▶ Navigation starten</button>' : ""}
+      ${n >= 2 && r && !r.err && r.pts ? '<button class="btn primary" id="rpFollow">▶ Route starten<small>Einstieg am nächsten Punkt – du musst nicht bei A anfangen</small></button>' : ""}
+      ${n >= 2 ? `<button class="btn ${r && !r.err && r.pts ? "" : "primary"}" id="rpNav">🧭 Punkt für Punkt (A → B → C …)</button>` : ""}
       <button class="btn" id="rpMap">🗺️ Auf der Karte bearbeiten</button>
       ${first && first.kind !== "me" ? '<button class="btn" id="rpCar">🚗 Mit dem Auto zu A</button>' : ""}
       ${n >= 2 && hasNative("downloadTiles") && rp.res && rp.res.pts ? '<button class="btn" id="rpOff">📥 Karte entlang der Route offline speichern</button>' : ""}
@@ -10511,6 +10632,7 @@ function openRp(){
   sh.querySelectorAll("[data-rpdn]").forEach(b => b.onclick = () => { const i = +b.dataset.rpdn; [rp.wps[i + 1], rp.wps[i]] = [rp.wps[i], rp.wps[i + 1]]; rp.dirty = true; rpCalc(); openRp(); });
   sh.querySelectorAll("[data-rpgo]").forEach(b => b.onclick = () => { const w = rp.wps[+b.dataset.rpgo]; rpToMap(); map.setView([w.lat, w.lon], Math.max(map.getZoom(), 15)); });
   sh.querySelectorAll("[data-rpadd]").forEach(b => b.onclick = () => { rp.insertAt = null; openRpAdd(b.dataset.rpadd); });
+  const fw = $("#rpFollow"); if (fw) fw.onclick = () => { const res = rp.res, name = rp.name || "Meine Route"; rpClose(); startRouteFollow({ name, pts: res.pts, km: res.km, set: current }); };
   const nv = $("#rpNav"); if (nv) nv.onclick = () => startTrip({ name: rp.name || "Meine Route", wps: rp.wps.map(w => Object.assign({}, w)) });
   $("#rpMap").onclick = () => rpToMap();
   const car = $("#rpCar"); if (car) car.onclick = () => openCarTo([first.lat, first.lon]);
@@ -10541,7 +10663,9 @@ function rpBar(){
     <div class="rpb-btns"><button class="${rp.tapAdd ? "on" : ""}" id="rpbAdd">${rp.tapAdd ? "✓ Fertig" : "＋ Punkt"}</button><button id="rpbList">☰ Liste</button>${n >= 2 ? '<button class="go" id="rpbGo">▶ Start</button>' : ""}<button class="x" id="rpbX" aria-label="Planen beenden">✕</button></div>`;
   $("#rpbAdd").onclick = () => { rp.tapAdd = !rp.tapAdd; rpBar(); };
   $("#rpbList").onclick = () => { rp.tapAdd = false; openRp(); };
-  const g = $("#rpbGo"); if (g) g.onclick = () => startTrip({ name: rp.name || "Meine Route", wps: rp.wps.map(w => Object.assign({}, w)) });
+  const g = $("#rpbGo"); if (g) g.onclick = () => { const res = rp.res, name = rp.name || "Meine Route";
+    if (res && !res.err && res.pts) { rpClose(); startRouteFollow({ name, pts: res.pts, km: res.km, set: current }); }
+    else startTrip({ name, wps: rp.wps.map(w => Object.assign({}, w)) }); };
   $("#rpbX").onclick = () => { rpClose(); };
 }
 map.on("click", e => {
@@ -11287,7 +11411,13 @@ function renderTrackChip(){
   if (!trk) { el.hidden = true; return; }
   const km = trackKm(trk.pts);
   const t0 = Math.min(trk.start, (trk.pts[0] && trk.pts[0][3]) || trk.start);
-  $("#trackChipText").textContent = `⏺ ${km1(km)} km · ${fmtDur(Date.now() - t0)}`;
+  /* Tempo aus den letzten ~2 Minuten, Höhe (GPS-Höhe über Ellipsoid → ca. über NN) */
+  let v = 0; const P = trk.pts, L = P[P.length - 1];
+  if (L && Date.now() - L[3] < 60000) { let j = P.length - 1; while (j > 0 && L[3] - P[j - 1][3] < 120000) j--; const dt = (L[3] - P[j][3]) / 3600000; if (dt > 0.008) v = trackKm(P.slice(j)) / dt; }
+  if (v > 40) v = 0;
+  const ga = myAlt != null && Date.now() - myPosTs < 60000 ? myAlt : L && L[2] > -9000 ? L[2] : null;
+  const alt = nav && nav.alt != null ? nav.alt : ga != null ? ga - 47 : null;
+  $("#trackChipText").textContent = `⏺ ${km1(km)} km · ${fmtDur(Date.now() - t0)} · ${km1(v)} km/h${alt != null ? " · ⛰️ " + Math.round(alt) + " m" : ""}`;
   el.hidden = false;
 }
 function pollTrack(){

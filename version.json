@@ -1,6 +1,6 @@
 {
- "code": 114,
- "version": "0.9.74 Beta",
- "notes": "Touren auf der Karte antippbar · Stempel zeigt seine Tour · schönere Leiste beim Route-Planen · Avatare in der Admin-Liste",
+ "code": 115,
+ "version": "0.9.75 Beta",
+ "notes": "Touren an jeder Stelle starten (Einstieg am nächsten Punkt) · Navi folgt der Tour-Linie mit Abbiegehinweisen · triffst du unterwegs auf die Tour, geht's direkt dort weiter · vom Weg ab → zurück zur Tour · km/h und Höhe beim Aufnehmen und Navigieren · eigene Routen aus Touren bauen und starten",
  "apk": "Stempelpass.apk"
 }
