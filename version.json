@@ -1,6 +1,6 @@
 {
- "code": 115,
- "version": "0.9.75 Beta",
- "notes": "Touren an jeder Stelle starten (Einstieg am nächsten Punkt) · Navi folgt der Tour-Linie mit Abbiegehinweisen · triffst du unterwegs auf die Tour, geht's direkt dort weiter · vom Weg ab → zurück zur Tour · km/h und Höhe beim Aufnehmen und Navigieren · eigene Routen aus Touren bauen und starten",
+ "code": 116,
+ "version": "0.9.76 Beta",
+ "notes": "Lange auf die Karte drücken: Möchtest du dahin? (auch beim Aufnehmen) · Abstecher während der Navi · Stempel am Weg werden angesagt · Ankunft nach deinem Tempo · neuer Wanderbericht mit Ø-Tempo, Zeit in Bewegung, km-Zeiten, Fotos · 9 Bild-Stile zum Teilen (Insta-Post, Story, Sticker) mit eigenem Bild und App-Logo",
  "apk": "Stempelpass.apk"
 }
