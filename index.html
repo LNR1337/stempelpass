@@ -759,6 +759,13 @@ body.nv-new .nt-wz:not([hidden]){display:flex;flex-basis:100%;align-items:center
 .hks-list b{display:block;font:700 .9rem var(--body);padding-right:26px}.hks-list small{display:block;color:var(--muted);font-size:.72rem;line-height:1.25;margin-top:2px;padding-right:4px}
 .hks-list i{position:absolute;top:8px;right:9px;font:700 .64rem var(--body);font-style:normal;color:var(--muted)}
 .hks-list button.on{border-color:var(--done);background:color-mix(in srgb,var(--done) 14%,var(--bg))}
+.hk-recs{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 2px}.hk-recs span{padding:6px 12px;border-radius:99px;background:var(--gold);color:#2a2000;font:800 .8rem var(--body)}
+.hk-rate{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:6px 0 6px}.hk-rate>span{font:700 .9rem var(--body)}
+.hk-stars{display:flex;gap:2px}.hk-stars button{border:0;background:none;font-size:1.7rem;line-height:1;color:var(--line);padding:2px 3px}.hk-stars button.on{color:#e8b41a}
+.hk-note{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--fg);font:500 .92rem var(--body);padding:9px 12px;resize:none;margin-bottom:6px}
+.hks-opts{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}.hks-opts label{display:inline-flex;align-items:center}.hks-opts input{display:none}
+.hks-opts span{padding:6px 11px;border-radius:99px;border:1px solid var(--line);font:600 .78rem var(--body);color:var(--muted);background:var(--bg)}
+.hks-opts input:checked+span{border-color:var(--done);color:var(--fg);background:color-mix(in srgb,var(--done) 14%,var(--bg))}.hks-opts input:checked+span::before{content:"✓ "}
 .hk-done{margin:-2px 0 12px;padding:11px 14px;border-radius:14px;background:color-mix(in srgb,var(--done) 16%,transparent);font:700 .95rem var(--body);color:var(--fg)}
 .hk-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:10px 0}
 .hk-tiles div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:9px 6px;text-align:center;min-width:0}
@@ -2439,8 +2446,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   levels: [[25, "Wandernadel"]],
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
-const APP_VERSION = "0.9.76 Beta";
-const APP_CODE = 116;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "0.9.77 Beta";
+const APP_CODE = 117;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 const FIREBASE = { apiKey: "AIzaSyCvXOz4wOGKoW4xoqTRV7vWYhbW_NSJzX4", projectId: "stempelpass-lnr" };
@@ -2773,7 +2780,10 @@ const darkMapOn = () => (darkMap === "on" || (darkMap === "auto" && document.doc
 /* Stile der dunklen Karte – zum Ausprobieren in der App wählbar */
 const DARK_STYLES = {
   dim:    { name: "Gedimmt",      desc: "Normale Karte, nur dunkler – alle Wege wie gewohnt" },
-  night:  { name: "Nacht",        desc: "Dunkelgrau wie Google Maps, Wanderwege farbig darüber", tiles: DARK_OSM },
+  /* CARTO verlangt inzwischen einen API-Schlüssel → „Nacht“ nimmt jetzt die dunkelgraue Esri-Karte */
+  night:  { name: "Nacht",        desc: "Dunkelgrau wie Google Maps, Wanderwege farbig darüber",
+            tiles: { name: "Karte", url: "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}", native: 16,
+              labels: "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}", attr: "© Esri, HERE, Garmin, © OpenStreetMap" } },
   gray:   { name: "Anthrazit",    desc: "Ruhiges Dunkelgrau (Esri), Wanderwege farbig darüber",
             tiles: { name: "Karte", url: "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}", native: 16,
               labels: "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}", attr: "© Esri, HERE, Garmin, © OpenStreetMap" } },
@@ -11764,23 +11774,28 @@ const APP_LOGO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS
 const hkLogo = new Image(); hkLogo.src = APP_LOGO;
 const hkLogoReady = () => hkLogo.complete && hkLogo.naturalWidth ? Promise.resolve() : new Promise(ok => { hkLogo.onload = ok; hkLogo.onerror = ok; setTimeout(ok, 1500); });
 function mercPx(p, z){ const n = 256 * Math.pow(2, z), s = Math.sin(p[0] * Math.PI / 180); return [(p[1] + 180) / 360 * n, (0.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI)) * n]; }
-/* Karte als Hintergrund: CARTO-Kacheln (erlauben das Zeichnen ins Bild) */
+/* Karte als Hintergrund: OpenStreetMap-Kacheln (wie die Karte in der App; CARTO will inzwischen einen API-Schlüssel).
+   Dunkel = dieselben Kacheln umgefärbt. */
 async function hkTiles(g, pts, box, W, H, dark){
-  let z = 17; const S = 2;
-  for (; z > 3; z--) { const a = pts.map(p => mercPx(p, z)), xs = a.map(q => q[0]), ys = a.map(q => q[1]); if ((Math.max(...xs) - Math.min(...xs)) * S <= box.w && (Math.max(...ys) - Math.min(...ys)) * S <= box.h) break; }
+  let z = 17;
+  for (; z > 3; z--) { const a = pts.map(p => mercPx(p, z)), xs = a.map(q => q[0]), ys = a.map(q => q[1]); if (Math.max(...xs) - Math.min(...xs) <= box.w && Math.max(...ys) - Math.min(...ys) <= box.h) break; }
   const a = pts.map(p => mercPx(p, z)), xs = a.map(q => q[0]), ys = a.map(q => q[1]);
   const cx = (Math.min(...xs) + Math.max(...xs)) / 2, cy = (Math.min(...ys) + Math.max(...ys)) / 2;
-  const ox = box.x + box.w / 2 - cx * S, oy = box.y + box.h / 2 - cy * S;
-  const t0x = Math.floor(-ox / S / 256), t1x = Math.floor((W - ox) / S / 256), t0y = Math.floor(-oy / S / 256), t1y = Math.floor((H - oy) / S / 256);
-  const style = dark ? "dark_all" : "rastertiles/voyager", jobs = [];
+  const ox = box.x + box.w / 2 - cx, oy = box.y + box.h / 2 - cy, n = Math.pow(2, z);
+  const t0x = Math.floor(-ox / 256), t1x = Math.floor((W - ox) / 256), t0y = Math.max(0, Math.floor(-oy / 256)), t1y = Math.min(n - 1, Math.floor((H - oy) / 256));
+  const jobs = [];
+  g.save(); if (dark) g.filter = "invert(1) hue-rotate(180deg) brightness(.82) contrast(.92) saturate(.6)";
   for (let tx = t0x; tx <= t1x; tx++) for (let ty = t0y; ty <= t1y; ty++) jobs.push(new Promise(ok => {
     const im = new Image(); im.crossOrigin = "anonymous"; const t = setTimeout(() => ok(), 8000);
-    im.onload = () => { clearTimeout(t); try { g.drawImage(im, ox + tx * 256 * S, oy + ty * 256 * S, 256 * S, 256 * S); } catch(e) {} ok(); };
+    im.onload = () => { clearTimeout(t); try { g.drawImage(im, ox + tx * 256, oy + ty * 256, 256, 256); } catch(e) {} ok(); };
     im.onerror = () => { clearTimeout(t); ok(); };
-    im.src = `https://${"abcd"[(tx + ty) & 3]}.basemaps.cartocdn.com/${style}/${z}/${tx}/${ty}@2x.png`;
+    im.src = `https://tile.openstreetmap.org/${z}/${((tx % n) + n) % n}/${ty}.png`;
   }));
   await Promise.all(jobs);
-  return p => { const q = mercPx(p, z); return [ox + q[0] * S, oy + q[1] * S]; };
+  g.restore();
+  /* Quellenangabe (OSM-Lizenz) */
+  g.save(); g.font = `600 22px ${FONT_B}`; g.textAlign = "right"; g.fillStyle = dark ? "rgba(255,255,255,.55)" : "rgba(0,0,0,.5)"; g.fillText("© OpenStreetMap", W - 24, H - 18); g.restore();
+  return p => { const q = mercPx(p, z); return [ox + q[0], oy + q[1]]; };
 }
 /* Route einfach in einen Kasten einpassen (ohne Karte) */
 function hkFit(pts, box){
@@ -11800,17 +11815,88 @@ function hkDots(g, pts, P, r){
   g.fillStyle = "#fff"; g.beginPath(); g.arc(b[0], b[1], r + 5, 0, 7); g.fill(); g.fillStyle = "#e53935"; g.beginPath(); g.arc(b[0], b[1], r, 0, 7); g.fill();
   g.fillStyle = "#fff"; g.beginPath(); g.arc(a[0], a[1], r + 5, 0, 7); g.fill(); g.fillStyle = "#2ea65a"; g.beginPath(); g.arc(a[0], a[1], r, 0, 7); g.fill();
 }
+/* ---------- Teilbild-Extras: Gipfel, Heft-Fortschritt, Rekorde, Bewertung, was aufs Bild soll ---------- */
+const HK_OPTS = [["date", "Datum"], ["dur", "Dauer"], ["spd", "Tempo"], ["hm", "Höhenmeter"], ["st", "Stempel"], ["dots", "Stempel-Punkte"], ["peak", "Gipfel ▲"], ["heft", "Heft-Fortschritt"], ["rec", "Rekord"], ["note", "Bewertung & Notiz"]];
+let hkOpt = Object.assign({ date: true, dur: true, spd: true, hm: true, st: true, dots: true, peak: true, heft: true, rec: true, note: true }, load("sp.hkOpt", {}));
+/* Gipfel = höchster Punkt im Höhenprofil, auf die Strecke umgerechnet */
+function hkPeak(h){
+  const e = h.elev; if (!e || !e.h || e.h.length < 3 || !h.pts || h.pts.length < 2) return null;
+  let i = 0; e.h.forEach((v, j) => { if (v > e.h[i]) i = j; });
+  const want = e.d[i] / (e.d[e.d.length - 1] || 1), cum = cumOf(h.pts), tot = cum[cum.length - 1] || 1;
+  let j = 0; while (j < cum.length - 1 && cum[j] / tot < want) j++;
+  return { p: h.pts[j], alt: Math.round(e.h[i]) };
+}
+function hkDrawPeak(g, h, P, col){
+  if (!hkOpt.peak) return; const pk = hkPeak(h); if (!pk) return;
+  const q = P(pk.p), txt = "▲ " + pk.alt + " m";
+  g.save(); g.font = `700 30px ${FONT_B}`; const w = g.measureText(txt).width + 28;
+  const x = Math.min(Math.max(q[0] - w / 2, 20), g.canvas.width - w - 20), y = q[1] - 64;
+  g.shadowColor = "rgba(0,0,0,.3)"; g.shadowBlur = 10; g.fillStyle = col || "rgba(255,255,255,.92)"; g.beginPath(); g.roundRect(x, y, w, 44, 22); g.fill();
+  g.shadowBlur = 0; g.beginPath(); g.moveTo(q[0] - 9, y + 44); g.lineTo(q[0] + 9, y + 44); g.lineTo(q[0], y + 56); g.fill();
+  g.fillStyle = "#1f2a20"; g.textAlign = "left"; g.fillText(txt, x + 14, y + 32); g.restore();
+}
+/* Heft mit den meisten Stempeln dieser Wanderung → Fortschritt */
+function hkHeft(h){
+  const c = {}; (h.stamps || []).forEach(x => { const st = x.split("|")[0]; c[st] = (c[st] || 0) + 1; });
+  const st = Object.keys(c).sort((a, b) => c[b] - c[a])[0]; if (!st || !SETS[st]) return null;
+  const n = nDone(st), t = nTot(st); if (!t) return null;
+  return { name: SETS[st].short, n, t, pct: n / t };
+}
+function hkDrawHeft(g, h, x, y, w, col, track){
+  if (!hkOpt.heft) return 0; const hf = hkHeft(h); if (!hf) return 0;
+  g.save(); g.textAlign = "left"; g.fillStyle = col; g.font = `700 28px ${FONT_B}`;
+  let t = `📒 ${hf.name}: ${hf.n} von ${hf.t} Stempeln`; if (g.measureText(t).width > w) t = `📒 ${hf.name} ${hf.n}/${hf.t}`; g.fillText(t, x, y);
+  g.fillStyle = track || "rgba(255,255,255,.25)"; g.beginPath(); g.roundRect(x, y + 14, w, 12, 6); g.fill();
+  g.fillStyle = "#f3c64a"; g.beginPath(); g.roundRect(x, y + 14, Math.max(12, w * hf.pct), 12, 6); g.fill(); g.restore();
+  return 1;
+}
+/* Rekorde gegenüber allen anderen Wanderungen */
+function hikeRecords(h){
+  const o = hikes.filter(x => x.id !== h.id && x.km > 0.3); if (!o.length || h.km < 1) return [];
+  const r = [], spd = x => x.km / ((x.mov || x.dur) / 3600000);
+  if (h.km > Math.max(...o.map(x => x.km))) r.push(["🏆", "Längste Wanderung bisher"]);
+  if (h.up != null && h.up > Math.max(0, ...o.map(x => x.up || 0))) r.push(["⛰️", "Die meisten Höhenmeter bisher"]);
+  if (h.stamps.length >= 2 && h.stamps.length > Math.max(0, ...o.map(x => x.stamps.length))) r.push(["📒", "Die meisten Stempel an einem Tag"]);
+  if (h.km >= 3 && spd(h) > Math.max(...o.filter(x => x.km >= 3).map(spd), 0)) r.push(["⚡", "Dein schnellstes Tempo bisher"]);
+  if (h.fast && h.fast < Math.min(99, ...o.map(x => x.fast || 99))) r.push(["⏱️", "Schnellster Kilometer aller Zeiten"]);
+  return r;
+}
+function hkDrawRecord(g, h, x, y, col, bg){
+  if (!hkOpt.rec) return 0; const r = hikeRecords(h)[0]; if (!r) return 0;
+  g.save(); g.font = `800 30px ${FONT_B}`; const t = r[0] + " " + r[1], w = g.measureText(t).width + 36;
+  g.fillStyle = bg || "#f3c64a"; g.beginPath(); g.roundRect(x, y - 36, w, 52, 26); g.fill();
+  g.fillStyle = col || "#2a2000"; g.textAlign = "left"; g.fillText(t, x + 18, y); g.restore();
+  return 1;
+}
+function hkDrawNote(g, h, x, y, maxW, col){
+  if (!hkOpt.note || (!h.rating && !h.note)) return 0;
+  g.save(); g.textAlign = "left"; let yy = y;
+  if (h.rating) { g.fillStyle = "#f3c64a"; g.font = `700 40px ${FONT_B}`; g.fillText("★".repeat(h.rating) + "☆".repeat(5 - h.rating), x, yy); yy += 48; }
+  if (h.note) { g.fillStyle = col; g.font = `italic 600 32px ${FONT_B}`; let t = "„" + h.note.trim() + "“"; while (g.measureText(t).width > maxW && t.length > 8) t = t.slice(0, -2) + "“"; if (t !== "„" + h.note.trim() + "“") t = t.slice(0, -2) + "…“"; g.fillText(t, x, yy); yy += 40; }
+  g.restore(); return yy - y;
+}
+/* kleine Punkte, wo gestempelt wurde */
+function hkStampDots(g, h, P, col, ring){
+  if (!hkOpt.dots) return;
+  for (const x of h.stamps || []) {
+    const [st, k] = x.split("|"), sp = byKey[st] && byKey[st].get(k); if (!sp || !hasPos(sp)) continue;
+    const q = P([sp.lat, sp.lon]);
+    g.save(); g.shadowColor = "rgba(0,0,0,.35)"; g.shadowBlur = 8;
+    g.fillStyle = ring || "#fff"; g.beginPath(); g.arc(q[0], q[1], 15, 0, 7); g.fill(); g.restore();
+    g.fillStyle = col || "#f3c64a"; g.beginPath(); g.arc(q[0], q[1], 10, 0, 7); g.fill();
+  }
+}
 function hkNums(h){
   const mov = h.mov || h.dur, avg = h.km / (mov / 3600000);
-  return [[fmtDur(h.dur), "Dauer"], [km1(avg) + " km/h", "Ø Tempo"], [h.up != null ? Math.round(h.up) + " m" : "–", "Anstieg"], [String(h.stamps.length), h.stamps.length === 1 ? "Stempel" : "Stempel"]];
+  return [hkOpt.dur && [fmtDur(h.dur), "Dauer"], hkOpt.spd && [km1(avg) + " km/h", "Ø Tempo"], hkOpt.hm && [h.up != null ? Math.round(h.up) + " m" : "–", "Anstieg"], hkOpt.st && h.stamps.length && [String(h.stamps.length), "Stempel"]].filter(Boolean);
 }
 function hkStats(g, h, x, y, w, col, sub, shadow){
-  const n = hkNums(h), cw = w / n.length;
+  const n = hkNums(h); if (!n.length) return; const cw = w / Math.max(n.length, 3);
   g.save(); if (shadow) { g.shadowColor = "rgba(0,0,0,.55)"; g.shadowBlur = 14; }
   n.forEach(([v, l], i) => { g.textAlign = "left"; g.fillStyle = col; g.font = `700 46px ${FONT_B}`; g.fillText(v, x + i * cw, y); g.fillStyle = sub; g.font = `600 30px ${FONT_B}`; g.fillText(l, x + i * cw, y + 44); });
   g.restore();
 }
-function hkDate(h){ return new Date(h.start).toLocaleDateString("de-DE", { weekday: "long", day: "numeric", month: "long", year: "numeric" }); }
+function hkDate(h){ if (!hkOpt.date) return ""; return new Date(h.start).toLocaleDateString("de-DE", { weekday: "long", day: "numeric", month: "long", year: "numeric" }); }
 /* Logo + „Name · Stempeljagd“ (links-, mittig- oder rechtsbündig) */
 function hkBrand(g, x, y, col, align){
   const txt = (username && username.name ? username.name + "  ·  " : "") + "Stempeljagd", L = 64, gap = 16;
@@ -11842,19 +11928,21 @@ async function hikeImage(h, style){
     /* leicht abdunkeln, unten stärker – damit Route und Zahlen lesbar sind */
     g.fillStyle = "rgba(0,0,0,.18)"; g.fillRect(0, 0, W, H);
     const v = g.createLinearGradient(0, H * 0.55, 0, H); v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(0,0,0,.72)"); g.fillStyle = v; g.fillRect(0, H * 0.55, W, H * 0.45);
-    const st = S.id === "bildst", top = st ? 330 : 150, bh = st ? 1050 : 760;
+    const st = S.id === "bildst", hasNote = hkOpt.note && (h.rating || h.note), top = st ? 330 : 170, bh = (st ? 1050 : 740) - (hasNote ? 110 : 0);
     const P = hkFit(pts, { x: 150, y: top, w: W - 300, h: bh });
-    hkLine(g, pts, P, "rgba(0,0,0,.35)", 20); hkLine(g, pts, P, "#fff", 10, "rgba(0,0,0,.4)"); hkDots(g, pts, P, 12);
+    hkLine(g, pts, P, "rgba(0,0,0,.35)", 20); hkLine(g, pts, P, "#fff", 10, "rgba(0,0,0,.4)"); hkDots(g, pts, P, 12); hkStampDots(g, h, P); hkDrawPeak(g, h, P);
+    hkDrawRecord(g, h, 70, st ? 200 : 100);
+    if (hasNote) { g.save(); g.shadowColor = "rgba(0,0,0,.55)"; g.shadowBlur = 12; const ty = H - (st ? 420 : 300); hkDrawNote(g, h, 70, ty - (h.rating && h.note ? 126 : 78), W - 140, "#fff"); g.restore(); }
     g.save(); g.shadowColor = "rgba(0,0,0,.55)"; g.shadowBlur = 14;
     g.textAlign = "left"; g.fillStyle = "#fff"; g.font = `700 ${st ? 54 : 46}px ${FONT_D}`;
     const title = h.name || ("Wanderung am " + new Date(h.start).toLocaleDateString("de-DE", { weekday: "long" }));
     g.fillText(title.length > 30 ? title.slice(0, 29) + "…" : title, 70, H - (st ? 420 : 300));
     g.fillStyle = "rgba(255,255,255,.8)"; g.font = `600 ${st ? 34 : 30}px ${FONT_B}`; g.fillText(hkDate(h), 70, H - (st ? 365 : 252));
     /* Werte-Zeile mit Trennstrichen */
-    const mov = h.mov || h.dur, n = [[km1(h.km) + " km", "Strecke"], [fmtDur(h.dur), "Dauer"], [km1(h.km / (mov / 3600000)), "Ø km/h"], [h.up != null ? Math.round(h.up) + " m" : "–", "↑ bergauf"], [h.down != null ? Math.round(h.down) + " m" : "–", "↓ bergab"]];
+    const mov = h.mov || h.dur, n = [[km1(h.km) + " km", "Strecke"], hkOpt.dur && [fmtDur(h.dur), "Dauer"], hkOpt.spd && [km1(h.km / (mov / 3600000)), "Ø km/h"], hkOpt.hm && [h.up != null ? Math.round(h.up) + " m" : "–", "↑ bergauf"], hkOpt.hm && [h.down != null ? Math.round(h.down) + " m" : "–", "↓ bergab"], hkOpt.st && h.stamps.length && [String(h.stamps.length), "Stempel"]].filter(Boolean);
     const y0 = H - (st ? 250 : 175), vf = `700 ${st ? 46 : 42}px ${FONT_B}`, lf = `600 ${st ? 28 : 26}px ${FONT_B}`;
     const ws = n.map(([val, lab]) => { g.font = vf; const a = g.measureText(val).width; g.font = lf; return Math.max(a, g.measureText(lab).width); });
-    const gap = Math.max(24, (W - 140 - ws.reduce((x, y) => x + y, 0)) / (n.length - 1));
+    const gap = n.length > 1 ? Math.min(90, Math.max(24, (W - 140 - ws.reduce((x, y) => x + y, 0)) / (n.length - 1))) : 0;
     let x = 70;
     n.forEach(([val, lab], i) => {
       if (i) { g.fillStyle = "rgba(255,255,255,.35)"; g.fillRect(x - gap / 2, y0 - 46, 2, 92); }
@@ -11864,6 +11952,7 @@ async function hikeImage(h, style){
     });
     g.restore();
     g.save(); g.shadowColor = "rgba(0,0,0,.5)"; g.shadowBlur = 10; hkBrand(g, 70, H - (st ? 110 : 60), "rgba(255,255,255,.85)"); g.restore();
+    hkDrawHeft(g, h, W - 70 - 380, H - (st ? 128 : 78), 380, "#fff");
   }
   else if (S.id === "foto") {
     const im = await hkPhoto(h);
@@ -11871,15 +11960,18 @@ async function hikeImage(h, style){
     if (im) { hkCover(g, im, 0, 0, W, 780); const sh = g.createLinearGradient(0, 420, 0, 790); sh.addColorStop(0, "rgba(15,42,29,0)"); sh.addColorStop(1, "#0f2a1d"); g.fillStyle = sh; g.fillRect(0, 420, W, 380); }
     const box = im ? { x: 660, y: 470, w: 350, h: 280 } : { x: 140, y: 140, w: 800, h: 600 };
     if (im) { g.fillStyle = "rgba(15,42,29,.5)"; g.beginPath(); g.roundRect(box.x - 26, box.y - 26, box.w + 52, box.h + 52, 30); g.fill(); }
-    const P = hkFit(pts, box); hkLine(g, pts, P, "rgba(255,255,255,.95)", 16); hkLine(g, pts, P, "#ff5a4e", 9); hkDots(g, pts, P, 11);
+    const P = hkFit(pts, box); hkLine(g, pts, P, "rgba(255,255,255,.95)", 16); hkLine(g, pts, P, "#ff5a4e", 9); hkDots(g, pts, P, 11); hkStampDots(g, h, P);
     g.textAlign = "left"; g.fillStyle = "rgba(243,247,242,.75)"; g.font = `600 36px ${FONT_B}`; g.fillText(hkDate(h), 70, 860);
     g.fillStyle = "#f3f7f2"; g.font = `700 150px ${FONT_D}`; g.fillText(kmTxt, 62, 1010);
     hkStats(g, h, 70, 1120, 960, "#f3f7f2", "rgba(243,247,242,.65)"); hkBrand(g, 70, 1280, "rgba(243,247,242,.6)");
+    hkDrawHeft(g, h, W - 70 - 360, 1262, 360, "#f3f7f2"); hkDrawRecord(g, h, 70, 100);
+    if (hkOpt.note && (h.rating || h.note)) { g.save(); g.shadowColor = "rgba(0,0,0,.5)"; g.shadowBlur = 10; hkDrawNote(g, h, 70, 180, 560, "#fff"); g.restore(); }
   }
   else if (S.id === "karte") {
     g.fillStyle = "#e8ece6"; g.fillRect(0, 0, W, H);
     const P = await hkTiles(g, pts, { x: 90, y: 90, w: 900, h: 820 }, W, H, false);
-    hkLine(g, pts, P, "#fff", 20); hkLine(g, pts, P, "#e53935", 11); hkDots(g, pts, P, 13);
+    hkLine(g, pts, P, "#fff", 20); hkLine(g, pts, P, "#e53935", 11); hkDots(g, pts, P, 13); hkStampDots(g, h, P); hkDrawPeak(g, h, P);
+    hkDrawRecord(g, h, 60, 100);
     g.save(); g.fillStyle = "rgba(255,255,255,.72)"; g.shadowColor = "rgba(0,0,0,.18)"; g.shadowBlur = 30; g.beginPath(); g.roundRect(50, 970, W - 100, 330, 36); g.fill(); g.restore();
     g.textAlign = "left"; g.fillStyle = "#4b5a50"; g.font = `600 32px ${FONT_B}`; g.fillText(hkDate(h), 95, 1030);
     g.fillStyle = "#13261b"; g.font = `700 110px ${FONT_D}`; g.fillText(kmTxt, 88, 1140);
@@ -11891,26 +11983,29 @@ async function hikeImage(h, style){
     const P = await hkTiles(g, pts, { x: 110, y: 430, w: 860, h: 900 }, W, H, S.id === "nacht");
     if (S.id === "glas") { const v = g.createLinearGradient(0, 0, 0, H); v.addColorStop(0, "rgba(16,40,28,.78)"); v.addColorStop(.22, "rgba(16,40,28,.25)"); v.addColorStop(.7, "rgba(16,40,28,.25)"); v.addColorStop(1, "rgba(16,40,28,.85)"); g.fillStyle = v; g.fillRect(0, 0, W, H); }
     else { const v = g.createLinearGradient(0, 0, 0, H); v.addColorStop(0, "rgba(0,0,0,.65)"); v.addColorStop(.25, "rgba(0,0,0,0)"); v.addColorStop(.72, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(0,0,0,.8)"); g.fillStyle = v; g.fillRect(0, 0, W, H); }
-    hkLine(g, pts, P, S.id === "nacht" ? "#ffb347" : "#fff", 14, S.id === "nacht" ? "rgba(255,170,60,.9)" : "rgba(0,0,0,.35)"); if (S.id === "glas") hkLine(g, pts, P, "#e53935", 8); hkDots(g, pts, P, 13);
+    hkLine(g, pts, P, S.id === "nacht" ? "#ffb347" : "#fff", 14, S.id === "nacht" ? "rgba(255,170,60,.9)" : "rgba(0,0,0,.35)"); if (S.id === "glas") hkLine(g, pts, P, "#e53935", 8); hkDots(g, pts, P, 13); hkStampDots(g, h, P); hkDrawPeak(g, h, P);
     g.textAlign = "left"; g.fillStyle = "rgba(255,255,255,.8)"; g.font = `600 38px ${FONT_B}`; g.fillText(hkDate(h), 80, 170);
+    hkDrawRecord(g, h, 80, 420);
     g.fillStyle = "#fff"; g.font = `700 170px ${FONT_D}`; g.fillText(kmTxt, 70, 340);
     if (S.id === "glas") { g.save(); g.fillStyle = "rgba(255,255,255,.16)"; g.strokeStyle = "rgba(255,255,255,.35)"; g.lineWidth = 2; g.beginPath(); g.roundRect(50, 1500, W - 100, 230, 36); g.fill(); g.stroke(); g.restore(); }
     const el = h.elev && S.id === "nacht" ? hkElev(g, h, { x: 80, y: 1430, w: 920, h: 110 }, "rgba(255,179,71,.18)", "rgba(255,179,71,.85)") : null;
     hkStats(g, h, 90, S.id === "glas" ? 1600 : 1650, 920, "#fff", "rgba(255,255,255,.7)");
+    hkDrawHeft(g, h, 90, S.id === "glas" ? 1450 : 1390, 900, "#fff");
     hkBrand(g, W / 2, 1830, "rgba(255,255,255,.75)", "center");
   }
   else if (S.id === "sticker") {
     const P = hkFit(pts, { x: 140, y: 560, w: 800, h: 760 });
-    hkLine(g, pts, P, "rgba(0,0,0,.35)", 22); hkLine(g, pts, P, "#fff", 12); hkDots(g, pts, P, 12);
+    hkLine(g, pts, P, "rgba(0,0,0,.35)", 22); hkLine(g, pts, P, "#fff", 12); hkDots(g, pts, P, 12); hkStampDots(g, h, P); hkDrawPeak(g, h, P);
     g.save(); g.shadowColor = "rgba(0,0,0,.6)"; g.shadowBlur = 18; g.textAlign = "center"; g.fillStyle = "#fff";
     g.font = `700 190px ${FONT_D}`; g.fillText(kmTxt, W / 2, 420); g.font = `600 40px ${FONT_B}`; g.fillText(hkDate(h), W / 2, 490); g.restore();
     hkStats(g, h, 110, 1500, 900, "#fff", "rgba(255,255,255,.85)", true);
-    g.save(); g.shadowColor = "rgba(0,0,0,.6)"; g.shadowBlur = 12; hkBrand(g, W / 2, 1700, "#fff", "center"); g.restore();
+    g.save(); g.shadowColor = "rgba(0,0,0,.6)"; g.shadowBlur = 12; hkDrawHeft(g, h, 110, 1610, 860, "#fff", "rgba(255,255,255,.35)"); g.restore();
+    g.save(); g.shadowColor = "rgba(0,0,0,.6)"; g.shadowBlur = 12; hkBrand(g, W / 2, 1760, "#fff", "center"); g.restore();
   }
   else if (S.id === "route") {
     g.fillStyle = "#1f4d36"; g.fillRect(0, 0, W, H);
     const P = hkFit(pts, { x: 170, y: 120, w: 740, h: 640 });
-    hkLine(g, pts, P, "#f3c64a", 12); hkDots(g, pts, P, 11);
+    hkLine(g, pts, P, "#f3c64a", 12); hkDots(g, pts, P, 11); hkStampDots(g, h, P, "#fff", "#1f4d36");
     g.textAlign = "center"; g.fillStyle = "#fff"; g.font = `700 120px ${FONT_D}`; g.fillText(kmTxt, W / 2, 895);
     g.fillStyle = "rgba(255,255,255,.7)"; g.font = `600 36px ${FONT_B}`; g.fillText(`${fmtDur(h.dur)}${h.up != null ? "  ·  ↑ " + Math.round(h.up) + " m" : ""}  ·  ${hkDate(h).replace(/^\w+, /, "")}`, W / 2, 960);
     hkBrand(g, W / 2, 1050, "rgba(243,198,74,.85)", "center");
@@ -11941,6 +12036,7 @@ function openHikeShare(h, back){
     <div class="hks-prev" id="hksPrev"><div class="hks-load">Bild wird gemalt …</div></div>
     <div class="hks-list">${HK_STYLES.map(s => `<button data-hks="${s.id}" class="${s.id === sel ? "on" : ""}"><b>${s.name}</b><small>${s.sub}</small><i>${s.W === s.H ? "1:1" : s.H === 1920 ? "9:16" : "4:5"}</i></button>`).join("")}</div>
     <div class="hks-own" id="hksOwn"></div>
+    <div class="hks-opts">${HK_OPTS.map(([k, l]) => `<label><input type="checkbox" data-hko="${k}" ${hkOpt[k] ? "checked" : ""}><span>${l}</span></label>`).join("")}</div>
     <div class="actions"><button class="btn primary" id="hksGo">📤 Teilen</button><button class="btn quiet" id="hksBack">Zurück</button></div>`);
   const ownUi = () => { const o = $("#hksOwn"), S = HK_STYLES.find(x => x.id === sel); if (!o) return;
     o.innerHTML = S.own ? `<button class="btn" id="hksPick">📷 ${hkOwnImg ? "Anderes Bild wählen" : "Eigenes Bild dahinter legen"}</button>${hkOwnImg ? '<button class="btn quiet" id="hksNoPick">Bild entfernen</button>' : ""}` : "";
@@ -11961,6 +12057,7 @@ function openHikeShare(h, back){
   $("#sheet").querySelectorAll("[data-hks]").forEach(b => b.onclick = () => { sel = b.dataset.hks; save("sp.hkStyle", sel); $("#sheet").querySelectorAll("[data-hks]").forEach(x => x.classList.toggle("on", x === b)); ownUi(); draw(); });
   $("#hksGo").onclick = async () => { const b = $("#hksGo"); b.disabled = true; try { await shareHikeImage(h, sel, cache[sel]); } catch(e) { toast("Bild ging nicht"); } b.disabled = false; };
   $("#hksBack").onclick = () => back ? back() : openHike(h.id);
+  $("#sheet").querySelectorAll("[data-hko]").forEach(c => c.onchange = () => { hkOpt[c.dataset.hko] = c.checked; save("sp.hkOpt", hkOpt); for (const k in cache) delete cache[k]; draw(); });
   bindClose(); ownUi(); draw();
 }
 function hikeReportHtml(h, fresh){
@@ -11978,7 +12075,10 @@ function hikeReportHtml(h, fresh){
     <div class="rhero"><div id="hkMap" class="rmap"></div><span class="rh-badge">🥾 ${km1(h.km)} km</span></div>
     <div class="kicker">Wanderung · ${new Date(h.start).toLocaleDateString("de-DE", { weekday: "long", day: "numeric", month: "long", year: "numeric" })} · ${fmtTs(h.start).slice(-5)}–${fmtTs(h.end || h.start + h.dur).slice(-5)}</div>
     <h2>🥾 ${km1(h.km)} km · ${fmtDur(h.dur)}</h2>
+    ${(r => r.length ? `<div class="hk-recs">${r.map(([i, t]) => `<span>${i} ${t}</span>`).join("")}</div>` : "")(hikeRecords(h))}
     <div class="hk-tiles">${tiles.map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join("")}</div>
+    <div class="hk-rate"><span>Wie war's?</span><div class="hk-stars">${[1, 2, 3, 4, 5].map(i => `<button data-hkr="${i}" class="${(h.rating || 0) >= i ? "on" : ""}" aria-label="${i} Sterne">★</button>`).join("")}</div></div>
+    <textarea class="hk-note" id="hkNote" rows="2" maxlength="120" placeholder="Notiz, z. B. „Tolle Aussicht am Turm“ – kommt auch aufs Bild">${esc(h.note || "")}</textarea>
     ${h.stamps.length ? `<div class="hk-badge">📒 ${h.stamps.length} Stempel gesammelt${h.fast ? ` · ⚡ schnellster km ${fmtPace(h.fast)} min` : ""}</div>` : h.fast ? `<div class="hk-badge">⚡ schnellster km in ${fmtPace(h.fast)} min</div>` : ""}
     ${photos.length ? `<h3>📸 Fotos von unterwegs</h3><div class="hk-photos">${photos.slice(0, 12).map((x, i) => `<button data-hkph="${i}"><img src="${x.p.data}" alt="" loading="lazy"></button>`).join("")}</div>` : ""}
     ${h.elev ? `<h3>Höhenprofil</h3><div class="elev">${elevHtml(h.elev)}</div>` : ""}
@@ -12033,6 +12133,8 @@ function openHike(id, back, fresh){
   { const m = $("#hkMap"); if (m && h.pts && h.pts.length > 1) { hikeMapInit(h, m); m.onclick = () => { closeSheet(); setView("map"); }; } }
   { const ph = hikeDayPhotos(h); $("#sheet").querySelectorAll("[data-hkph]").forEach(b => b.onclick = () => openAlbumPhoto(ph, +b.dataset.hkph)); }
   { const si = $("#hkImg"); if (si) si.onclick = () => openHikeShare(h, () => openHike(id, back)); }
+  $("#sheet").querySelectorAll("[data-hkr]").forEach(b => b.onclick = () => { const v = +b.dataset.hkr; h.rating = h.rating === v ? 0 : v; save("sp.hikes", hikes); $("#sheet").querySelectorAll("[data-hkr]").forEach(x => x.classList.toggle("on", +x.dataset.hkr <= h.rating)); });
+  { const nt = $("#hkNote"); if (nt) nt.onchange = nt.onblur = () => { const v = nt.value.trim().slice(0, 120); if (v !== (h.note || "")) { h.note = v; save("sp.hikes", hikes); } }; }
   { const hb = $("#hkBack"); if (hb) hb.onclick = () => back(); }
   $("#sheet").querySelectorAll("[data-mw]").forEach(b => b.onclick = () => { const [st, k] = b.dataset.mw.split("|"), on = !isWatched(st, k); setWatched(st, k, on); b.classList.toggle("on", on); b.textContent = on ? "★ Gemerkt" : "⭐ Merken"; toast(on ? "Auf die Merkliste gesetzt – fürs nächste Mal" : "Von der Merkliste genommen"); });
   $("#hkDel").onclick = () => {

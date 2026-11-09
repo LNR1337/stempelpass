@@ -1,6 +1,6 @@
 {
- "code": 116,
- "version": "0.9.76 Beta",
- "notes": "Lange auf die Karte drücken: Möchtest du dahin? (auch beim Aufnehmen) · Abstecher während der Navi · Stempel am Weg werden angesagt · Ankunft nach deinem Tempo · neuer Wanderbericht mit Ø-Tempo, Zeit in Bewegung, km-Zeiten, Fotos · 9 Bild-Stile zum Teilen (Insta-Post, Story, Sticker) mit eigenem Bild und App-Logo",
+ "code": 117,
+ "version": "0.9.77 Beta",
+ "notes": "Teilbilder: Karte jetzt von OpenStreetMap (kein API-Hinweis mehr) · Stempel als Punkte auf der Route · Gipfel ▲ · Heft-Fortschritt · Rekorde · Sterne-Bewertung & Notiz · selbst wählen, was aufs Bild soll · dunkle Karte „Nacht“ repariert",
  "apk": "Stempelpass.apk"
 }
