@@ -1,6 +1,6 @@
 {
- "code": 120,
- "version": "0.9.80 Test",
- "notes": "Neuer Routenplaner (Suche, Reiter), Parkplatz = Start, Stempel antippen = hinzufügen, Notfall, Kalender, Herausforderungen u. v. m.",
+ "code": 121,
+ "version": "0.9.81 Test",
+ "notes": "🎬 3D-Flug über deine Wanderung (wie Komoot) – in der App ansehen und als Video für Insta/WhatsApp teilen · 🧪 Tester-Funktion: Admin kann andere als Tester markieren",
  "apk": "Stempelpass-test.apk"
 }
