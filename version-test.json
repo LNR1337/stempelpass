@@ -1,6 +1,6 @@
 {
- "code": 121,
- "version": "0.9.81 Test",
- "notes": "🎬 3D-Flug über deine Wanderung (wie Komoot) – in der App ansehen und als Video für Insta/WhatsApp teilen · 🧪 Tester-Funktion: Admin kann andere als Tester markieren",
+ "code": 122,
+ "version": "0.9.82 Test",
+ "notes": "🎬 3D-Flug ausgebaut: Satellit/Topo/Karte + Wanderwege, Tempo, Steigung, Bergab, Stempel- und Gipfel-Schilder, Abschlusskarte, Geschwindigkeit, Video als Story 9:16 oder Beitrag 4:5, ⚙️ einstellbar was rein soll",
  "apk": "Stempelpass-test.apk"
 }
