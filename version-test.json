@@ -1,6 +1,6 @@
 {
- "code": 123,
- "version": "0.9.83 Test",
- "notes": "🔧 Backup & Cloud sichern jetzt auch eigene Routen, Notfallkontakt und Herausforderungen · Wanderungen behalten beim Wiederherstellen Name, Bewertung, Notiz und km-Zeiten · kleine Korrekturen (Notfall-Seite, Wanderkalender) · aufgeräumt",
+ "code": 124,
+ "version": "0.9.84 Test",
+ "notes": "🧭 Navigation neu: mehr Karte, Abbiege-Fortschritt + übernächste Abbiegung, gegangener Weg grau, Tempo/Höhe als Kacheln, Zentrieren-Knopf, Auto-Zoom, Hinweis neben dem Weg, Ankunftsbild, Nachtkarte · 👤 Profil aufgeräumt · 📊 Statistik-Ringe · 🥾 Wanderliste mit Vorschau · 📋 Menü in Gruppen · ⛰️ genaueres Höhenprofil · Ladebildschirm mit Fortschritt",
  "apk": "Stempelpass-test.apk"
 }
