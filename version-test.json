@@ -1,6 +1,6 @@
 {
- "code": 122,
- "version": "0.9.82 Test",
- "notes": "🎬 3D-Flug ausgebaut: Satellit/Topo/Karte + Wanderwege, Tempo, Steigung, Bergab, Stempel- und Gipfel-Schilder, Abschlusskarte, Geschwindigkeit, Video als Story 9:16 oder Beitrag 4:5, ⚙️ einstellbar was rein soll",
+ "code": 123,
+ "version": "0.9.83 Test",
+ "notes": "🔧 Backup & Cloud sichern jetzt auch eigene Routen, Notfallkontakt und Herausforderungen · Wanderungen behalten beim Wiederherstellen Name, Bewertung, Notiz und km-Zeiten · kleine Korrekturen (Notfall-Seite, Wanderkalender) · aufgeräumt",
  "apk": "Stempelpass-test.apk"
 }
