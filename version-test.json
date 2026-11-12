@@ -1,6 +1,6 @@
 {
- "code": 125,
- "version": "0.9.85 Test",
- "notes": "⛰️ Höhenprofil zum Ziehen – Punkt wandert auf der Karte mit · 🌲 neuer Hintergrund (Waldgrün mit Höhenlinien), Admin kann unter Layout umstellen",
+ "code": 126,
+ "version": "0.9.86 Test",
+ "notes": "🌄 Startbildschirm mit Bergen – im Dunkelmodus Sternennacht · 🎨 eigener Hintergrund für Hell und Dunkel (Admin → Layout)",
  "apk": "Stempelpass-test.apk"
 }
