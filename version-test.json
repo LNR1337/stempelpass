@@ -1,6 +1,6 @@
 {
- "code": 126,
- "version": "0.9.86 Test",
- "notes": "🌄 Startbildschirm mit Bergen – im Dunkelmodus Sternennacht · 🎨 eigener Hintergrund für Hell und Dunkel (Admin → Layout)",
+ "code": 127,
+ "version": "0.9.87 Test",
+ "notes": "📚 Neue Stempelhefte im Test (nur Admins/Tester): Deister-Wanderpass, Bergpass Zittauer Gebirge – Admin kann sie freischalten · 🌄 Startbildschirm aufgeräumt",
  "apk": "Stempelpass-test.apk"
 }
