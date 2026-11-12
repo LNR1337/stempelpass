@@ -1,6 +1,6 @@
 {
- "code": 124,
- "version": "0.9.84 Test",
- "notes": "🧭 Navigation neu: mehr Karte, Abbiege-Fortschritt + übernächste Abbiegung, gegangener Weg grau, Tempo/Höhe als Kacheln, Zentrieren-Knopf, Auto-Zoom, Hinweis neben dem Weg, Ankunftsbild, Nachtkarte · 👤 Profil aufgeräumt · 📊 Statistik-Ringe · 🥾 Wanderliste mit Vorschau · 📋 Menü in Gruppen · ⛰️ genaueres Höhenprofil · Ladebildschirm mit Fortschritt",
+ "code": 125,
+ "version": "0.9.85 Test",
+ "notes": "⛰️ Höhenprofil zum Ziehen – Punkt wandert auf der Karte mit · 🌲 neuer Hintergrund (Waldgrün mit Höhenlinien), Admin kann unter Layout umstellen",
  "apk": "Stempelpass-test.apk"
 }
