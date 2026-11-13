@@ -1,6 +1,6 @@
 {
- "code": 129,
- "version": "0.9.89 Test",
- "notes": "✨ Runde vorschlagen (Rundtour mit offenen Stempeln) · 🔗 Wanderungen zusammenfügen · Höhenprofil in Navigation & 3D-Flug ziehbar · 🔠 Schrift & Kontrast · Menü neu sortiert",
+ "code": 130,
+ "version": "0.9.90 Test",
+ "notes": "◀ Zurück-Taste geht jetzt Schritt für Schritt zurück (Fenster → Menü → Karte), Navigation läuft im Hintergrund weiter, zum Beenden zweimal drücken",
  "apk": "Stempelpass-test.apk"
 }
