@@ -1,6 +1,6 @@
 {
- "code": 128,
- "version": "0.9.88 Test",
- "notes": "👑 Rangsystem (Inhaber/Admin/Moderator) · 📍 GPX-Export & -Import · ✂️ Wanderung kürzen · 📸 Fotos im 3D-Flug · 🥾 Wanderwetter morgens · 📈 Jahresvergleich & km-Bestenliste · 💾 Backup-Erinnerung · schnellerer 3D-Flug",
+ "code": 129,
+ "version": "0.9.89 Test",
+ "notes": "✨ Runde vorschlagen (Rundtour mit offenen Stempeln) · 🔗 Wanderungen zusammenfügen · Höhenprofil in Navigation & 3D-Flug ziehbar · 🔠 Schrift & Kontrast · Menü neu sortiert",
  "apk": "Stempelpass-test.apk"
 }
