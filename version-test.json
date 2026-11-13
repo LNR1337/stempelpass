@@ -1,6 +1,6 @@
 {
- "code": 127,
- "version": "0.9.87 Test",
- "notes": "📚 Neue Stempelhefte im Test (nur Admins/Tester): Deister-Wanderpass, Bergpass Zittauer Gebirge – Admin kann sie freischalten · 🌄 Startbildschirm aufgeräumt",
+ "code": 128,
+ "version": "0.9.88 Test",
+ "notes": "👑 Rangsystem (Inhaber/Admin/Moderator) · 📍 GPX-Export & -Import · ✂️ Wanderung kürzen · 📸 Fotos im 3D-Flug · 🥾 Wanderwetter morgens · 📈 Jahresvergleich & km-Bestenliste · 💾 Backup-Erinnerung · schnellerer 3D-Flug",
  "apk": "Stempelpass-test.apk"
 }
