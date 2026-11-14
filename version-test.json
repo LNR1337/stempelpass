@@ -1,6 +1,6 @@
 {
- "code": 132,
- "version": "0.9.92 Test",
- "notes": "🛒 Verkaufsstellen jetzt wie Stempel als Pins, farbig nach Öffnungszeit (offen/öffnet noch/zu), über die Legende ein-/ausblendbar · schnellere Ortssuche über OpenStreetMap",
+ "code": 133,
+ "version": "0.9.93 Test",
+ "notes": "🧭 Neue Navigation jetzt überall (Stempel, Treffpunkt, Verkaufsstelle, Parkplatz …) – immer der kürzeste Weg zuerst · ⏺ Aufnahme-Leiste mit Höhe, Höhenmetern & Profil · 🏞️ Aussicht-Fotos am Stempel",
  "apk": "Stempelpass-test.apk"
 }
