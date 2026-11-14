@@ -1,6 +1,6 @@
 {
- "code": 134,
- "version": "0.9.94 Test",
- "notes": "↔️ Navi-Kopffeld wischbar (rechts = Infos, links = nächste Abbiegungen) · 🎉 Halbzeit-Hinweis · Stempel-Symbol richtig in der Fortschrittsleiste · 🏞️ Vorschaubild zum Wischen (Aussicht, Kasten, weitere) mit Großansicht · 🛡️ Aussicht-Fotos werden vom Team freigegeben · Stop-Knopf der Aufnahme bleibt im Bild",
+ "code": 135,
+ "version": "0.9.95 Test",
+ "notes": "⏸ Etappen: Route unterbrechen und später ab km X weiterwandern (online gesichert) · 🗺️ Gelaufene Routen im Profil für Freunde (mit 200-m-Privatzone) · ▶ Route eines Freundes nachlaufen / speichern",
  "apk": "Stempelpass-test.apk"
 }
