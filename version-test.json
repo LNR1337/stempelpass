@@ -1,6 +1,6 @@
 {
- "code": 130,
- "version": "0.9.90 Test",
- "notes": "◀ Zurück-Taste geht jetzt Schritt für Schritt zurück (Fenster → Menü → Karte), Navigation läuft im Hintergrund weiter, zum Beenden zweimal drücken",
+ "code": 131,
+ "version": "0.9.91 Test",
+ "notes": "🧭 Geplante Routen werden beim Losgehen gespeichert & mit der Wanderung verknüpft · 💾 Wanderung als Route speichern · ⏺ Aufnahme bei Routen · 🛒 Wanderpass-Verkaufsstellen (Harz) mit Öffnungszeiten auf der Karte",
  "apk": "Stempelpass-test.apk"
 }
