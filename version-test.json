@@ -1,6 +1,6 @@
 {
- "code": 131,
- "version": "0.9.91 Test",
- "notes": "🧭 Geplante Routen werden beim Losgehen gespeichert & mit der Wanderung verknüpft · 💾 Wanderung als Route speichern · ⏺ Aufnahme bei Routen · 🛒 Wanderpass-Verkaufsstellen (Harz) mit Öffnungszeiten auf der Karte",
+ "code": 132,
+ "version": "0.9.92 Test",
+ "notes": "🛒 Verkaufsstellen jetzt wie Stempel als Pins, farbig nach Öffnungszeit (offen/öffnet noch/zu), über die Legende ein-/ausblendbar · schnellere Ortssuche über OpenStreetMap",
  "apk": "Stempelpass-test.apk"
 }
