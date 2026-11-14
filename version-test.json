@@ -1,6 +1,6 @@
 {
- "code": 133,
- "version": "0.9.93 Test",
- "notes": "🧭 Neue Navigation jetzt überall (Stempel, Treffpunkt, Verkaufsstelle, Parkplatz …) – immer der kürzeste Weg zuerst · ⏺ Aufnahme-Leiste mit Höhe, Höhenmetern & Profil · 🏞️ Aussicht-Fotos am Stempel",
+ "code": 134,
+ "version": "0.9.94 Test",
+ "notes": "↔️ Navi-Kopffeld wischbar (rechts = Infos, links = nächste Abbiegungen) · 🎉 Halbzeit-Hinweis · Stempel-Symbol richtig in der Fortschrittsleiste · 🏞️ Vorschaubild zum Wischen (Aussicht, Kasten, weitere) mit Großansicht · 🛡️ Aussicht-Fotos werden vom Team freigegeben · Stop-Knopf der Aufnahme bleibt im Bild",
  "apk": "Stempelpass-test.apk"
 }
