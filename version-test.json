@@ -1,6 +1,6 @@
 {
- "code": 135,
- "version": "0.9.95 Test",
- "notes": "⏸ Etappen: Route unterbrechen und später ab km X weiterwandern (online gesichert) · 🗺️ Gelaufene Routen im Profil für Freunde (mit 200-m-Privatzone) · ▶ Route eines Freundes nachlaufen / speichern",
+ "code": 136,
+ "version": "0.9.96 Test",
+ "notes": "✂️ Wanderung mitten drin schneiden (z. B. Autofahrt raus) · genaue Zeiten je Punkt bei neuen Aufnahmen · ↺ Original jederzeit zurück",
  "apk": "Stempelpass-test.apk"
 }
