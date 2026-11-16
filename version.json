@@ -1,6 +1,6 @@
 {
- "code": 117,
- "version": "0.9.77 Beta",
- "notes": "Teilbilder: Karte jetzt von OpenStreetMap (kein API-Hinweis mehr) · Stempel als Punkte auf der Route · Gipfel ▲ · Heft-Fortschritt · Rekorde · Sterne-Bewertung & Notiz · selbst wählen, was aufs Bild soll · dunkle Karte „Nacht“ repariert",
+ "code": 143,
+ "version": "1.0",
+ "notes": "🎉 Stempeljagd 1.0 – raus aus der Beta! · 🧭 Neue Navigation überall · ⛰️ Höhenprofile zum Ziehen · ✨ Runde vorschlagen · 🎯 Fast geschafft · ⏸ Etappen · 💾 Routen merken · ✂️ Wanderungen bearbeiten · ☕ Pausen · 🏷️ Stichworte · 🏞️ Aussicht-Fotos · 🌦️ Wege-Zustand & Wetterwarnung · 📥 Offline entlang der Route · 👣 Routen von Freunden · 🛒 Verkaufsstellen im Harz · 🔠 Schrift & Kontrast · ◀ Zurück-Taste",
  "apk": "Stempelpass.apk"
 }
