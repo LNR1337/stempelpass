@@ -1,6 +1,6 @@
 {
- "code": 144,
- "version": "1.01 Test",
- "notes": "1.01 · 🧟 Wildemanner Wandernadel · Stempel-Fenster: runterziehen repariert, folgt dem Finger · ➕ Stempel in Begleitheften hinzufügen (Admin)",
+ "code": 145,
+ "version": "1.02 Test",
+ "notes": "1.02 · Admins immer im Testkanal · Tester-Schalter heißt jetzt „Test-Updates an / Keine Test-Updates“",
  "apk": "Stempelpass-test.apk"
 }
