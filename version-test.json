@@ -1,6 +1,6 @@
 {
- "code": 136,
- "version": "0.9.96 Test",
- "notes": "✂️ Wanderung mitten drin schneiden (z. B. Autofahrt raus) · genaue Zeiten je Punkt bei neuen Aufnahmen · ↺ Original jederzeit zurück",
+ "code": 137,
+ "version": "0.9.97 Test",
+ "notes": "✨ Was ist neu · 🌦️ Wege-Zustand am Stempel · ⛈️ Wetter-Warnung unterwegs · 📥 Offline entlang der Route · 📸 Fotos auf der Wanderkarte · 🧭 Widget-Knopf Hin · 🐀 Rattenfänger (Admins) · Profilbild immer mittig · UI aufgeräumt",
  "apk": "Stempelpass-test.apk"
 }
