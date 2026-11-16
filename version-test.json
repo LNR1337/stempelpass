@@ -1,6 +1,6 @@
 {
- "code": 140,
+ "code": 141,
  "version": "1.0",
- "notes": "🎉 Stempeljagd 1.0 – raus aus der Beta · 🎯 Fast geschafft · ☕ Pausen im Wanderbericht · 🏷️ Stichworte & Filter · 📍 Stempel auf der Karte ziehen (Admin) · 🛡️ Schutz bei geänderten Stempel-Nummern · neue Regions-Icons",
+ "notes": "1.0 · Wege-Zustand repariert: Meldung lässt sich jetzt ändern („✅ Ist wieder frei“) · genaue Fehlermeldung",
  "apk": "Stempelpass-test.apk"
 }
