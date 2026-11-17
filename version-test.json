@@ -1,6 +1,6 @@
 {
- "code": 156,
- "version": "1.13 Test",
- "notes": "🧭 Routen auf der Karte wieder sichtbar (Touringen & Co.) · 👥 Freunde auf der Karte jetzt auch für Tester (Admin → Layout)",
+ "code": 157,
+ "version": "1.14 Test",
+ "notes": "📈 Punkt beim Ziehen am Höhenprofil sitzt wieder auf der Strecke · 🗺️ Wanderwege-Ebene & Satelliten-Beschriftung wieder sichtbar · 🛠️ Gründer sieht in der Freundesliste, was Admins & Mods gerade machen",
  "apk": "Stempelpass-test.apk"
 }
