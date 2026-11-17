@@ -1,6 +1,6 @@
 {
- "code": 153,
- "version": "1.10 Test",
- "notes": "👁 Admin-Layout: kleine Handy-Vorschau bei jeder Option",
+ "code": 154,
+ "version": "1.11 Test",
+ "notes": "👥 Freunde-Leiste auf der Karte (erst Gründer) · ✨ Neue Ideen zum Ausprobieren: Foto-Kacheln, Gummistempel, Foto-Pins, Wanderungs-Karten, Gebiet wischen, echtes Stempelheft (Admin → Layout schaltbar)",
  "apk": "Stempelpass-test.apk"
 }
