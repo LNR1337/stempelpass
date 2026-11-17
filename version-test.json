@@ -1,6 +1,6 @@
 {
- "code": 151,
- "version": "1.08 Test",
- "notes": "⬆️ Update-Hinweis in 7 Stilen – Admin wählt unter Layout (Standard: Fuchs-Sprechblase) · 👁 Vorschau im Admin-Bereich",
+ "code": 152,
+ "version": "1.09 Test",
+ "notes": "🗺️ Eingeklappter Kopf repariert (schmale Zeile ohne Ring) · Layout: Kopf einklappen Aus / Tester / Alle mit Vorschau",
  "apk": "Stempelpass-test.apk"
 }
