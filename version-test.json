@@ -1,6 +1,6 @@
 {
- "code": 154,
- "version": "1.11 Test",
- "notes": "👥 Freunde-Leiste auf der Karte (erst Gründer) · ✨ Neue Ideen zum Ausprobieren: Foto-Kacheln, Gummistempel, Foto-Pins, Wanderungs-Karten, Gebiet wischen, echtes Stempelheft (Admin → Layout schaltbar)",
+ "code": 155,
+ "version": "1.12 Test",
+ "notes": "📌 Nadel-Fotos: im Profil Heft aufklappen, je Nadel ein Feld zum Foto reinladen – Freunde sehen sie auch · 👥 Freunde-Knopf jetzt bei den Kartenknöpfen · Kaputt-Hinweis überdeckt nichts mehr",
  "apk": "Stempelpass-test.apk"
 }
