@@ -1,6 +1,6 @@
 {
- "code": 155,
- "version": "1.12 Test",
- "notes": "📌 Nadel-Fotos: im Profil Heft aufklappen, je Nadel ein Feld zum Foto reinladen – Freunde sehen sie auch · 👥 Freunde-Knopf jetzt bei den Kartenknöpfen · Kaputt-Hinweis überdeckt nichts mehr",
+ "code": 156,
+ "version": "1.13 Test",
+ "notes": "🧭 Routen auf der Karte wieder sichtbar (Touringen & Co.) · 👥 Freunde auf der Karte jetzt auch für Tester (Admin → Layout)",
  "apk": "Stempelpass-test.apk"
 }
