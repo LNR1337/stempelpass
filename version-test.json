@@ -1,6 +1,6 @@
 {
- "code": 146,
- "version": "1.03 Test",
- "notes": "1.03 · 🧭 Karte drehen + Kompass · Was mach ich heute? · 🏅 Nadel abholbar + Erinnerung · 📊 Statistik pro Monat · ❄️ Winter · 📥 Gebiet offline · 🗣️ Ansage am Stempel · 🌙 abends dunkle Karte",
+ "code": 147,
+ "version": "1.04 Test",
+ "notes": "1.04 · ❓ Liste „Ohne Position“ + Markierung in der Stempel-Liste (Admin/Mod) · 💡 Vorschläge beim Pin-Setzen (Ortssuche + Nutzer-Meldungen) · 🙋 Nutzer schlagen beim Stempeln die Lage vor · ↩️ Rückgängig im Änderungsprotokoll",
  "apk": "Stempelpass-test.apk"
 }
