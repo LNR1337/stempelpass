@@ -1,6 +1,6 @@
 {
- "code": 152,
- "version": "1.09 Test",
- "notes": "🗺️ Eingeklappter Kopf repariert (schmale Zeile ohne Ring) · Layout: Kopf einklappen Aus / Tester / Alle mit Vorschau",
+ "code": 153,
+ "version": "1.10 Test",
+ "notes": "👁 Admin-Layout: kleine Handy-Vorschau bei jeder Option",
  "apk": "Stempelpass-test.apk"
 }
