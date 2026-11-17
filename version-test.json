@@ -1,6 +1,6 @@
 {
- "code": 150,
- "version": "1.07 Test",
- "notes": "1.07 · 🧪 Tester bekommen eine Benachrichtigung, wenn eine neue Testversion da ist · bei offener App Prüfung alle 5 Min.",
+ "code": 151,
+ "version": "1.08 Test",
+ "notes": "⬆️ Update-Hinweis in 7 Stilen – Admin wählt unter Layout (Standard: Fuchs-Sprechblase) · 👁 Vorschau im Admin-Bereich",
  "apk": "Stempelpass-test.apk"
 }
