@@ -1,6 +1,6 @@
 {
- "code": 148,
- "version": "1.05 Test",
- "notes": "1.05 · 🧭 Kompass-Knopf sperrt/entsperrt das Drehen der Karte (🔒) · Schalter auch im Kartenmenü",
+ "code": 149,
+ "version": "1.06 Test",
+ "notes": "1.06 · 🧭 Karte dreht mit Laufrichtung · 📖 Wissen am Stempel · ⚡ Fotos per Wischen freigeben · Stempel-Fenster mit Reitern · Filter mit Schaltern · Guten-Morgen-Streifen · einheitliche Linien-Icons · Kopf klappt ein (Tester) · Aufnahme: nach Neustart sofort Standort",
  "apk": "Stempelpass-test.apk"
 }
