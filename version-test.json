@@ -1,6 +1,6 @@
 {
- "code": 147,
- "version": "1.04 Test",
- "notes": "1.04 · ❓ Liste „Ohne Position“ + Markierung in der Stempel-Liste (Admin/Mod) · 💡 Vorschläge beim Pin-Setzen (Ortssuche + Nutzer-Meldungen) · 🙋 Nutzer schlagen beim Stempeln die Lage vor · ↩️ Rückgängig im Änderungsprotokoll",
+ "code": 148,
+ "version": "1.05 Test",
+ "notes": "1.05 · 🧭 Kompass-Knopf sperrt/entsperrt das Drehen der Karte (🔒) · Schalter auch im Kartenmenü",
  "apk": "Stempelpass-test.apk"
 }
