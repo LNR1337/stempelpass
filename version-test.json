@@ -1,6 +1,6 @@
 {
- "code": 159,
- "version": "1.16 Test",
- "notes": "🧹 Aufgeräumt: Kartenleiste, Menü (Verwalten / Einstellungen), Liste, Routen, Stempel-Fenster · ⚠️ Kaputte Stempel im Kopf, in der Liste und am Pin · 🔄 Zoomen dreht die Karte nicht mehr aus Versehen · 👋 Winken als Benachrichtigung + zurückwinken · 👉 Wischen zum Stempeln & Name aufs Foto (schaltbar)",
+ "code": 160,
+ "version": "1.17 Test",
+ "notes": "1.17 Test: Stempelhefte neu mit Fortschritts-Ring, Rückgängig nach Stempeln und Löschen (Foto, Notiz, Wanderung, Route), Tipps beim ersten Mal, Erster Start mit 3 Seiten (Admin-Schalter), Was ist neu für 1.1, Cloud-Abgleich beim Löschen verbessert",
  "apk": "Stempelpass-test.apk"
 }
