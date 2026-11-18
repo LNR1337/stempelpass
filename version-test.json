@@ -1,6 +1,6 @@
 {
- "code": 157,
- "version": "1.14 Test",
- "notes": "📈 Punkt beim Ziehen am Höhenprofil sitzt wieder auf der Strecke · 🗺️ Wanderwege-Ebene & Satelliten-Beschriftung wieder sichtbar · 🛠️ Gründer sieht in der Freundesliste, was Admins & Mods gerade machen",
+ "code": 158,
+ "version": "1.15 Test",
+ "notes": "👥 Freunde-Leiste: 12 Listen-Stile (Standard Zeitleiste mit Uhrzeit), Admin → Layout umschaltbar · 👋 Freunden zuwinken · 🔄 Karte dreht jetzt mit den Fingern mit, Kompass & Laufrichtung-oben korrigiert",
  "apk": "Stempelpass-test.apk"
 }
