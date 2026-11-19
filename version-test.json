@@ -1,6 +1,6 @@
 {
- "code": 160,
- "version": "1.17 Test",
- "notes": "1.17 Test: Stempelhefte neu mit Fortschritts-Ring, Rückgängig nach Stempeln und Löschen (Foto, Notiz, Wanderung, Route), Tipps beim ersten Mal, Erster Start mit 3 Seiten (Admin-Schalter), Was ist neu für 1.1, Cloud-Abgleich beim Löschen verbessert",
+ "code": 161,
+ "version": "1.18 Test",
+ "notes": "1.18 Test: Heft aufklappen direkt darunter mit Stufen-Kette, Profil aufgeräumt (Abzeichen hinter dem Namen, So sehen dich Freunde), Konfetti + +1 beim Stempeln, Nadel-Feuerwerk, großer Abdruck abschaltbar, Menü-Icons einheitlich, Tipps nicht mehr über Fenstern",
  "apk": "Stempelpass-test.apk"
 }
