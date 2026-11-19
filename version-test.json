@@ -1,6 +1,6 @@
 {
- "code": 161,
- "version": "1.18 Test",
- "notes": "1.18 Test: Heft aufklappen direkt darunter mit Stufen-Kette, Profil aufgeräumt (Abzeichen hinter dem Namen, So sehen dich Freunde), Konfetti + +1 beim Stempeln, Nadel-Feuerwerk, großer Abdruck abschaltbar, Menü-Icons einheitlich, Tipps nicht mehr über Fenstern",
+ "code": 162,
+ "version": "1.19 Test",
+ "notes": "1.19 Test: Stein-Börse (Admin-Schalter Aus/Admins/Tester/Alle, Knopf unten + Menü, Raster/Kompakt), Freunde zur Nadel gratulieren, Wochenend-Serie + 2 Abzeichen, Effekt-Testknöpfe im Admin-Layout",
  "apk": "Stempelpass-test.apk"
 }
