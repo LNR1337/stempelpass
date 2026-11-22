@@ -1,6 +1,6 @@
 {
- "code": 165,
- "version": "1.22",
- "notes": "1.22 (Test): einheitliche Strich-Icons für Mülleimer, Schloss, Regeln, Melden, Auswählen · gemerkte Stempel jetzt blau (Karte + Filter) · „Alles wieder anzeigen“ im Filter besser lesbar · selbst geplante Routen blau auf der Karte, antippen öffnet den Planer · Planer-Linie blau",
+ "code": 166,
+ "version": "1.23",
+ "notes": "1.23 (Test): Navi springt bei Runden mit gleichem Hin- und Rückweg nicht mehr ans Ende · Planer-Linie türkis, gespeicherte Routen beim Planen ausgeblendet · Kopf-Bilder gehen bis an den Rand, Wahrzeichen nicht mehr riesig im klassischen Kopf · neue Wahrzeichen für Deister, Zittauer Gebirge, Wilde Heimat, Bad Lauterberg, Brotterode, Wippertal, Dreiländereck, Nördl. Harzvorland",
  "apk": "Stempelpass-test.apk"
 }
