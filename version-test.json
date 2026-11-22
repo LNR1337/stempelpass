@@ -1,6 +1,6 @@
 {
- "code": 171,
- "version": "1.28",
- "notes": "1.28 (Test): Zuwinken ausgebaut – 👋 Winken, 🥾 Lust zu wandern?, ☕ Pause zusammen?, 💪 Stark!, ❤️ Herz · Antworten mit einem Tipp (👍 Ja / 🙅 Heute nicht / 🙏 Danke) · passende Push-Texte · Zuwinken auch im Freundes-Profil · neue Firestore-Regel nötig",
+ "code": 172,
+ "version": "1.29",
+ "notes": "1.29 (Test): 3D-Flug-Video wird Bild für Bild erzeugt – immer volle Länge mit flüssigen 30 fps als MP4, statt nur ein paar Sekunden zu schnell",
  "apk": "Stempelpass-test.apk"
 }
