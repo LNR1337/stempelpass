@@ -1,6 +1,6 @@
 {
- "code": 164,
- "version": "1.21",
- "notes": "1.21 (Test): Story-Leiste im Freunde-Zeitstrahl mit Verlaufs-Ringen, Glühen-Puls und Tageszähler (Puls-Variante im Admin umschaltbar) · Standort-Knopf führt zum nächsten offenen Stempel im 5-km-Umkreis (Admin-Schalter, standardmäßig aus) · Neuigkeiten mit Vorschau und Detail-Ansicht · Extra-Stempel bleiben beim Reinzoomen sichtbar · zurückgenommene Stempel verschwinden bei Freunden · Heft-Leiste bei nur einem Heft ausgeblendet · Kopf-Hintergründe (J Standard, H/G/C im Admin) · Freunde sehen, wer gerade eine Tour plant oder hinläuft",
+ "code": 165,
+ "version": "1.22",
+ "notes": "1.22 (Test): einheitliche Strich-Icons für Mülleimer, Schloss, Regeln, Melden, Auswählen · gemerkte Stempel jetzt blau (Karte + Filter) · „Alles wieder anzeigen“ im Filter besser lesbar · selbst geplante Routen blau auf der Karte, antippen öffnet den Planer · Planer-Linie blau",
  "apk": "Stempelpass-test.apk"
 }
