@@ -1,6 +1,6 @@
 {
- "code": 166,
- "version": "1.23",
- "notes": "1.23 (Test): Navi springt bei Runden mit gleichem Hin- und Rückweg nicht mehr ans Ende · Planer-Linie türkis, gespeicherte Routen beim Planen ausgeblendet · Kopf-Bilder gehen bis an den Rand, Wahrzeichen nicht mehr riesig im klassischen Kopf · neue Wahrzeichen für Deister, Zittauer Gebirge, Wilde Heimat, Bad Lauterberg, Brotterode, Wippertal, Dreiländereck, Nördl. Harzvorland",
+ "code": 167,
+ "version": "1.24",
+ "notes": "1.24 (Test): Navi-Neuberechnung zum Ziel statt Umweg · Wahl kurz & steil oder lang & entspannt · Tour-Abstecher: zurück zur Abzweigung oder weiter vorne · Warnung bei falscher Richtung · Hinweg über Wanderwege, weniger Asphalt · offline gestrichelte Linie zurück zur Route · Wegeart beim Start · Ansage bei steilen Stücken · Akku-Warnung · Karte & Weg in der Navi (Karte/Satellit/Topo, Wanderwege farbig) · Tour planen nach Zeit",
  "apk": "Stempelpass-test.apk"
 }
