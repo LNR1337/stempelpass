@@ -1,6 +1,6 @@
 {
- "code": 162,
- "version": "1.19 Test",
- "notes": "1.19 Test: Stein-Börse (Admin-Schalter Aus/Admins/Tester/Alle, Knopf unten + Menü, Raster/Kompakt), Freunde zur Nadel gratulieren, Wochenend-Serie + 2 Abzeichen, Effekt-Testknöpfe im Admin-Layout",
+ "code": 164,
+ "version": "1.21",
+ "notes": "1.21 (Test): Story-Leiste im Freunde-Zeitstrahl mit Verlaufs-Ringen, Glühen-Puls und Tageszähler (Puls-Variante im Admin umschaltbar) · Standort-Knopf führt zum nächsten offenen Stempel im 5-km-Umkreis (Admin-Schalter, standardmäßig aus) · Neuigkeiten mit Vorschau und Detail-Ansicht · Extra-Stempel bleiben beim Reinzoomen sichtbar · zurückgenommene Stempel verschwinden bei Freunden · Heft-Leiste bei nur einem Heft ausgeblendet · Kopf-Hintergründe (J Standard, H/G/C im Admin) · Freunde sehen, wer gerade eine Tour plant oder hinläuft",
  "apk": "Stempelpass-test.apk"
 }
