@@ -1,6 +1,6 @@
 {
- "code": 170,
- "version": "1.27",
- "notes": "1.27 (Test): Gesperrte Wege aus OpenStreetMap auf der Karte (rot = gesperrt, orange = zeitweise, ab Zoom 14) · Warnung in der Navi, wenn man auf einem gesperrten Weg läuft · an/aus im Ebenen-Menü und unter Karte & Weg",
+ "code": 171,
+ "version": "1.28",
+ "notes": "1.28 (Test): Zuwinken ausgebaut – 👋 Winken, 🥾 Lust zu wandern?, ☕ Pause zusammen?, 💪 Stark!, ❤️ Herz · Antworten mit einem Tipp (👍 Ja / 🙅 Heute nicht / 🙏 Danke) · passende Push-Texte · Zuwinken auch im Freundes-Profil · neue Firestore-Regel nötig",
  "apk": "Stempelpass-test.apk"
 }
