@@ -1,6 +1,6 @@
 {
- "code": 169,
- "version": "1.26",
- "notes": "1.26 (Test): Wanderungen umbenennen (Stift neben dem Namen, Vorschläge aus den Stempeln) · Navi: steht man auf einem Weg, den die Routen-Server nicht kennen, wird das Stück bis zum lila Punkt gestrichelt angezeigt statt dauernd „neben dem Weg“",
+ "code": 170,
+ "version": "1.27",
+ "notes": "1.27 (Test): Gesperrte Wege aus OpenStreetMap auf der Karte (rot = gesperrt, orange = zeitweise, ab Zoom 14) · Warnung in der Navi, wenn man auf einem gesperrten Weg läuft · an/aus im Ebenen-Menü und unter Karte & Weg",
  "apk": "Stempelpass-test.apk"
 }
