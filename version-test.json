@@ -1,6 +1,6 @@
 {
- "code": 168,
- "version": "1.25",
- "notes": "1.25 (Test): Navi wegklappen – App weiter benutzen, unten Knopf zurück zur Navi · Aufnahme-Knopf in Liste/Freunde/Routen · Strich-Icons in der Navi und im Auswahlfenster · Akku-Leiste antippen = Sparmodus · Gehzeiten im Auswahlfenster nach DIN wie in der Navi",
+ "code": 169,
+ "version": "1.26",
+ "notes": "1.26 (Test): Wanderungen umbenennen (Stift neben dem Namen, Vorschläge aus den Stempeln) · Navi: steht man auf einem Weg, den die Routen-Server nicht kennen, wird das Stück bis zum lila Punkt gestrichelt angezeigt statt dauernd „neben dem Weg“",
  "apk": "Stempelpass-test.apk"
 }
