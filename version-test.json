@@ -1,6 +1,6 @@
 {
- "code": 173,
- "version": "1.30",
- "notes": "1.30 (Test): 3D-Flug: übereinanderliegende Stempel-Schilder werden zusammengefasst (z. B. 72 · 7) · Strich-Icons statt Emojis in Flug und Video · keine Tipps mehr über dem Flug",
+ "code": 174,
+ "version": "1.31",
+ "notes": "1.31 (Test): 3D-Flug-Video jetzt auch in Full HD (1080p) – Qualität HD/Full HD vor dem Format wählen",
  "apk": "Stempelpass-test.apk"
 }
