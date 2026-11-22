@@ -1,6 +1,6 @@
 {
- "code": 174,
- "version": "1.31",
- "notes": "1.31 (Test): 3D-Flug-Video jetzt auch in Full HD (1080p) – Qualität HD/Full HD vor dem Format wählen",
+ "code": 175,
+ "version": "1.32",
+ "notes": "1.32 (Test): 3D-Flug-Video mit WhatsApp-Modus (Standard) – ruhigerer Flug, 25 fps, Karte leicht weich, Schrift scharf, damit es nach dem Senden besser aussieht · HD und Full HD weiterhin wählbar",
  "apk": "Stempelpass-test.apk"
 }
