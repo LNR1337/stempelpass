@@ -1,6 +1,6 @@
 {
- "code": 167,
- "version": "1.24",
- "notes": "1.24 (Test): Navi-Neuberechnung zum Ziel statt Umweg · Wahl kurz & steil oder lang & entspannt · Tour-Abstecher: zurück zur Abzweigung oder weiter vorne · Warnung bei falscher Richtung · Hinweg über Wanderwege, weniger Asphalt · offline gestrichelte Linie zurück zur Route · Wegeart beim Start · Ansage bei steilen Stücken · Akku-Warnung · Karte & Weg in der Navi (Karte/Satellit/Topo, Wanderwege farbig) · Tour planen nach Zeit",
+ "code": 168,
+ "version": "1.25",
+ "notes": "1.25 (Test): Navi wegklappen – App weiter benutzen, unten Knopf zurück zur Navi · Aufnahme-Knopf in Liste/Freunde/Routen · Strich-Icons in der Navi und im Auswahlfenster · Akku-Leiste antippen = Sparmodus · Gehzeiten im Auswahlfenster nach DIN wie in der Navi",
  "apk": "Stempelpass-test.apk"
 }
