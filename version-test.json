@@ -1,6 +1,6 @@
 {
- "code": 172,
- "version": "1.29",
- "notes": "1.29 (Test): 3D-Flug-Video wird Bild für Bild erzeugt – immer volle Länge mit flüssigen 30 fps als MP4, statt nur ein paar Sekunden zu schnell",
+ "code": 173,
+ "version": "1.30",
+ "notes": "1.30 (Test): 3D-Flug: übereinanderliegende Stempel-Schilder werden zusammengefasst (z. B. 72 · 7) · Strich-Icons statt Emojis in Flug und Video · keine Tipps mehr über dem Flug",
  "apk": "Stempelpass-test.apk"
 }
