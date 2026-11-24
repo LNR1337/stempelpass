@@ -1,6 +1,6 @@
 {
- "code": 175,
- "version": "1.32",
- "notes": "1.32 (Test): 3D-Flug-Video mit WhatsApp-Modus (Standard) – ruhigerer Flug, 25 fps, Karte leicht weich, Schrift scharf, damit es nach dem Senden besser aussieht · HD und Full HD weiterhin wählbar",
+ "code": 176,
+ "version": "1.33",
+ "notes": "1.33 (Test): Bereich „Wandern“ (Geplant/Gelaufen/Von Freunden) · „Hier stempeln“-Karte an der Stempelstelle · Sperrungen melden (lange auf die Karte drücken) – alle sehen sie, Navi warnt und weicht aus, noch gesperrt / wieder frei · Freunde in der Navi als Bubbles · Freundesliste über ganze Breite · Fix: Freundesliste blieb über der Navi · Mit wem unterwegs: Freund bekommt Bescheid und kann die Wanderung übernehmen · Heute-Karte neu · mehr Kontrast · Erster-Stempel-Hilfe · Wanderungen als Karten im Kalender",
  "apk": "Stempelpass-test.apk"
 }
