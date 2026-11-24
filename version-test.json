@@ -1,6 +1,6 @@
 {
- "code": 176,
- "version": "1.33",
- "notes": "1.33 (Test): Bereich „Wandern“ (Geplant/Gelaufen/Von Freunden) · „Hier stempeln“-Karte an der Stempelstelle · Sperrungen melden (lange auf die Karte drücken) – alle sehen sie, Navi warnt und weicht aus, noch gesperrt / wieder frei · Freunde in der Navi als Bubbles · Freundesliste über ganze Breite · Fix: Freundesliste blieb über der Navi · Mit wem unterwegs: Freund bekommt Bescheid und kann die Wanderung übernehmen · Heute-Karte neu · mehr Kontrast · Erster-Stempel-Hilfe · Wanderungen als Karten im Kalender",
+ "code": 177,
+ "version": "1.34",
+ "notes": "1.34: Code-Review-Fixes – Hier-stempeln-Karte nicht mehr verdeckt, Sperrungs-Hinweis nur einmal, weniger Akkuverbrauch in der Navi",
  "apk": "Stempelpass-test.apk"
 }
