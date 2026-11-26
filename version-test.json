@@ -1,6 +1,6 @@
 {
- "code": 178,
- "version": "1.35",
- "notes": "⚠️ 1.35 braucht EINMAL eine Neuinstallation (neuer App-Schlüssel): erst anmelden oder Backup machen, dann alte App löschen und diese installieren. Neu: Heft-Schalter oben (per Admin umschaltbar).",
+ "code": 179,
+ "version": "1.36",
+ "notes": "Neu: Heft-Schalter oben, „Für wen?“ (Personen/Hund), Vorschlag für heute bei Wandern, Liste mit Entfernung, Profil mit „Dein nächstes Ziel“, beschriftete Knöpfe am Stempel, Linien-Icons. Wer noch eine Version vor 1.35 hat: einmal Backup/anmelden, alte App löschen, neu installieren.",
  "apk": "Stempelpass-test.apk"
 }
