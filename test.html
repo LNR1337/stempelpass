@@ -2167,8 +2167,41 @@ body.has-frtop .mapbad{top:86px}body.has-frtop.frsel .mapbad{display:none}
   html.desk #sheet .sv-map{height:50px!important;min-height:0!important;background:none!important;margin-bottom:0!important}
   html.desk #sheet .sv-head{margin-top:6px!important}
   html.desk #scrim{right:auto!important;width:var(--sbw,430px)!important}
-  html.desk .toast{left:calc(var(--sbw,430px) + (100vw - var(--sbw,430px)) / 2)!important;max-width:520px}
+  html.desk .toast{left:calc(76px + var(--sbw,430px) + (100vw - 76px - var(--sbw,430px)) / 2)!important;max-width:520px}
+  /* Kopfzeile oben + Icon-Leiste links */
+  html.desk body{padding-top:58px!important;height:100vh!important;box-sizing:border-box;grid-template-columns:76px var(--sbw,430px) 1fr!important}
+  html.desk header{grid-column:2!important}
+  html.desk main{grid-column:3!important;height:calc(100vh - 58px)!important}
+  html.desk nav.bottom{display:none!important}
+  html.desk main>.panel{left:76px!important;top:calc(var(--hh,160px) + 58px)!important;bottom:0!important}
+  html.desk #sheet{left:76px!important;max-height:calc(100vh - 66px)!important}
+  html.desk #scrim{left:76px!important;top:58px!important}
+  html.desk .dtop,html.desk .drail{display:flex}
 }
+.dtop,.drail{display:none}
+.dtop{position:fixed;left:0;right:0;top:0;height:58px;z-index:900;align-items:center;gap:14px;padding:0 16px 0 18px;background:#173a2b;color:#f4efe2;box-shadow:0 2px 10px rgba(0,0,0,.2);box-sizing:border-box}
+.dtop .dt-lg{display:flex;align-items:center;gap:12px;font:700 1.15rem var(--display);color:#fff;border:0;background:none;padding:0;cursor:pointer}
+.dtop .dt-lg i{width:36px;height:36px;border-radius:10px;background:#f2c14e;display:grid;place-items:center;color:#173a2b;font-style:normal}
+.dtop .dt-sr{margin-left:auto;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border-radius:12px;padding:0 12px;width:300px;height:40px;box-sizing:border-box}
+.dtop .dt-sr input{flex:1;min-width:0;border:0;background:none;color:#fff;font:inherit;outline:none}
+.dtop .dt-sr input::placeholder{color:rgba(244,239,226,.7)}
+.dtop .dt-me{display:flex;align-items:center;gap:8px;border:0;background:rgba(255,255,255,.1);color:#fff;border-radius:999px;padding:4px 12px 4px 4px;font-weight:700;cursor:pointer;max-width:240px}
+.dtop .dt-me b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dtop .dt-me .pav{width:32px;height:32px;font-size:1rem}
+.dtop .dt-me em{font-style:normal;background:#e0794a;color:#fff;border-radius:999px;font-size:.7rem;padding:1px 6px}
+.ddm{position:fixed;right:16px;top:64px;width:300px;z-index:950;background:var(--surface,#fff);color:var(--ink,var(--fg));border-radius:16px;box-shadow:0 12px 36px rgba(0,0,0,.28);padding:8px}
+.ddm[hidden]{display:none}
+.ddm button{display:flex;align-items:center;gap:12px;width:100%;padding:10px 12px;border-radius:10px;font-weight:600;border:0;background:none;color:inherit;text-align:left;cursor:pointer;font-size:.95rem}
+.ddm button:hover{background:color-mix(in srgb,var(--fg) 7%,transparent)}
+.ddm button svg{opacity:.75;flex:none}
+.ddm hr{border:0;border-top:1px solid color-mix(in srgb,var(--fg) 10%,transparent);margin:6px 0}
+.ddm .dd-hd{display:flex;gap:10px;align-items:center;padding:10px 12px}.ddm .dd-hd small{display:block;opacity:.6}
+.ddm .dd-hd .pav{width:40px;height:40px}
+.drail{grid-column:1;grid-row:1/4;background:#1c4632;color:#f4efe2;flex-direction:column;align-items:center;padding:12px 0;gap:6px;z-index:30}
+.drail button{width:64px;border:0;background:none;color:#f4efe2;opacity:.75;display:flex;flex-direction:column;align-items:center;gap:4px;padding:9px 0;border-radius:12px;font-size:.68rem;font-weight:700;cursor:pointer}
+.drail button:hover{opacity:1;background:rgba(255,255,255,.07)}
+.drail button.on{background:rgba(255,255,255,.15);opacity:1}
+.drail .dr-sp{flex:1}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
@@ -3409,6 +3442,9 @@ body.st-ov .sv-view.car .vw-pend{bottom:auto;top:40px}
 <input type="file" id="reportPhotoInput" accept="image/*" capture="environment" hidden>
 <input type="file" id="fileInput" accept=".json,application/json,text/plain" hidden>
 
+<div class="dtop" id="dTop"><button class="dt-lg" id="dtHome" type="button"><i></i>Stempeljagd</button><label class="dt-sr"><span id="dtSrIc"></span><input id="dtQ" type="search" placeholder="Stempel, Orte suchen …" autocomplete="off"></label><button class="dt-me" id="dtMe" type="button" aria-haspopup="true"></button></div>
+<div class="ddm" id="dtMenu" hidden></div>
+<nav class="drail" id="dRail" aria-label="Bereiche"></nav>
 <nav class="bottom">
   <div class="nseg">
     <button data-view="map" class="on" id="v-map" aria-label="Karte"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z"/><path d="M9 4v14M15 6v14"/></svg></i><span>Karte</span></button>
@@ -5738,8 +5774,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
 for (const x of XS_ON) SETS[x.key] = Object.assign({ near: x.near }, x.set);
-const APP_VERSION = "1.38";
-const APP_CODE = 181;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "1.39";
+const APP_CODE = 182;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 /* 🏪 Play-Store-Version (build.sh mit STORE=1): keine eigenen Updates, kein Testkanal – Updates nur über Google Play
@@ -7874,6 +7910,7 @@ function pickHeft(pick){
 }
 function render(fit){
   try { applyHdrBg(); } catch(e) {}
+  if (document.documentElement.classList.contains("desk")) setTimeout(() => { try { deskSync(); } catch(e) {} }, 60);
   if (!shownRegions.includes(REGION[current])) { shownRegions = shownRegions.concat([REGION[current]]); save("sp.regions", shownRegions); renderTabs(); }
   document.querySelectorAll(".tabs button").forEach(b => b.classList.toggle("on", b.dataset.region === REGION[current]));
   { const box = document.querySelector(".tabs"), on = box.querySelector(".on"); if (on && box.classList.contains("lots")) box.scrollTo({ left: on.offsetLeft - box.clientWidth / 2 + on.offsetWidth / 2, behavior: "smooth" }); }
@@ -19158,8 +19195,9 @@ function deskSync(){
   if (on) {
     const h = document.querySelector("header"), n = document.querySelector("nav.bottom");
     document.documentElement.style.setProperty("--hh", (h ? h.getBoundingClientRect().height : 160) + "px");
-    document.documentElement.style.setProperty("--nh", (n ? n.getBoundingClientRect().height + 10 : 76) + "px");
+    document.documentElement.style.setProperty("--nh", "0px");
     if (typeof view !== "undefined" && view === "map") setView("list");
+    try { deskChrome(); } catch(e) {}
   }
   if (on !== was) setTimeout(() => { try { map.invalidateSize(); } catch(e) {} }, 50);
 }
@@ -19167,8 +19205,44 @@ try { if (DESK_Q) DESK_Q.addEventListener("change", deskSync); } catch(e) {}
 window.addEventListener("resize", () => { clearTimeout(deskSync.t); deskSync.t = setTimeout(deskSync, 120); });
 try { const ro = new ResizeObserver(() => { if (document.documentElement.classList.contains("desk")) deskSync(); }); setTimeout(() => { const h = document.querySelector("header"); if (h) ro.observe(h); }, 0); } catch(e) {}
 setTimeout(deskSync, 0); setTimeout(deskSync, 1500);
+/* 🖥️ PC: Kopfzeile (Logo, Suche, Menü) + Icon-Leiste links */
+function deskChrome(){
+  const top = $("#dTop"); if (!top) return;
+  if (!top.dataset.ok) {
+    top.dataset.ok = "1";
+    $("#dtHome i").innerHTML = licS("📍", 20); $("#dtSrIc").innerHTML = licS("🧭", 18);
+    $("#dtHome").onclick = () => { closeSheet(); setView("list"); render(true); };
+    $("#dtQ").addEventListener("input", e => { if (view !== "list") setView("list"); const q = $("#q"); if (q) { q.value = e.target.value; q.dispatchEvent(new Event("input", { bubbles: true })); } });
+    $("#dtMe").onclick = e => { e.stopPropagation(); deskMenu(); };
+    document.addEventListener("click", e => { const m = $("#dtMenu"); if (m && !m.hidden && !m.contains(e.target)) m.hidden = true; });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") { const m = $("#dtMenu"); if (m) m.hidden = true; } });
+    const R = [["list", "▦", "Liste"], ["routes", "🗺", "Wandern"], ["friends", "👥", "Freunde"], ["stats", "📊", "Statistik"], ["cal", "📅", "Kalender"], ["watch", "⭐", "Merkliste"]];
+    $("#dRail").innerHTML = R.map(([k, ic, t]) => `<button type="button" data-dr="${k}">${licS(ic, 22)}${t}</button>`).join("") + `<span class="dr-sp"></span><button type="button" data-dr="menu">${licS("⋯", 22)}Mehr</button>`;
+    $("#dRail").onclick = e => { const b = e.target.closest("[data-dr]"); if (!b) return; const k = b.dataset.dr;
+      if (["list", "routes", "friends"].includes(k)) { closeSheet(); setView(k); return; }
+      ({ stats: openStats, cal: () => openCalendar(), watch: openWatchlist, menu: openMenu })[k](); };
+  }
+  const nm = username ? username.name : profileName(), staffN = isStaff() && typeof inboxCount !== "undefined" ? inboxCount : 0;
+  $("#dtMe").innerHTML = `${avatarHtml(myCard, "pav sm")}<b>${esc(nm)}</b>${staffN ? `<em>${staffN}</em>` : ""} ▾`;
+  deskRailSync();
+}
+function deskRailSync(){ document.querySelectorAll("#dRail [data-dr]").forEach(b => b.classList.toggle("on", b.dataset.dr === view)); }
+function deskMenu(){
+  const m = $("#dtMenu"); if (!m.hidden) { m.hidden = true; return; }
+  const nm = username ? username.name : profileName();
+  const it = (id, ic, t) => `<button type="button" data-dm="${id}">${licS(ic, 18)} ${t}</button>`;
+  m.innerHTML = `<div class="dd-hd">${avatarHtml(myCard, "pav sm")}<div><b>${esc(nm)}</b><small>${isOwner ? "Gründer · " : isAdmin ? "Admin · " : isMod ? "Moderator · " : ""}${done[current] ? Object.keys(done[current]).length : 0} Stempel hier</small></div></div><hr>
+    ${it("prof", "🥾", "Mein Profil")}${it("year", "🏅", "Wanderjahr " + reviewYear())}${it("hikes", "🧭", "Wanderungen")}${it("album", "📸", "Fotoalbum")}${it("invite", "💌", "Freunde einladen")}<hr>
+    ${isStaff() ? it("staff", "🛡", isAdmin ? "Verwalten" : "Moderation") : ""}${it("set", "⚙", "Einstellungen & Daten")}${it("menu", "⋯", "Komplettes Menü")}`;
+  m.hidden = false;
+  m.onclick = e => { const b = e.target.closest("[data-dm]"); if (!b) return; m.hidden = true;
+    ({ prof: openMyProfile, year: openYearReview, hikes: openHikes, album: openAlbum, set: openSettings, menu: openMenu,
+       staff: () => isAdmin ? openStaffPick() : openModArea(),
+       invite: () => { openMenu(); setTimeout(() => { const x = $("#mInvite"); if (x) x.click(); }, 50); } })[b.dataset.dm](); };
+}
 function setView(v){
   if (v === "map" && typeof deskOn === "function" && deskOn()) v = "list";
+  setTimeout(() => { try { deskRailSync(); } catch(e) {} }, 0);
   if (v !== "map") setMiniHdr(false);
   if (v !== "map" && typeof closeFd === "function") { closeFd(); }
   setTimeout(() => { try { renderFdTab(); } catch(e) {} }, 0);
