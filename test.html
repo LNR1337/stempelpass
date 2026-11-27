@@ -5738,8 +5738,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
 for (const x of XS_ON) SETS[x.key] = Object.assign({ near: x.near }, x.set);
-const APP_VERSION = "1.37";
-const APP_CODE = 180;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "1.38";
+const APP_CODE = 181;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 /* 🏪 Play-Store-Version (build.sh mit STORE=1): keine eigenen Updates, kein Testkanal – Updates nur über Google Play
@@ -11122,14 +11122,34 @@ function updateGoogleUi(){ const b = $("#wGoogle"); if (b) b.hidden = !googleOn(
 function startGoogle(){
   if (!googleOn()) { toast("Google-Anmeldung ist noch nicht eingerichtet"); return; }
   if (NATIVE && hasNative("openExternal")) { NATIVE.openExternal(WEB_BASE + "auth.html?app=1"); toast("Google-Anmeldung öffnet sich im Browser …"); return; }
-  openSheet(`<div class="kicker">Konto</div><h2>Mit Google anmelden</h2><p>Tippe auf den Knopf und wähle dein Google-Konto.</p><div id="gBtn" style="display:flex;justify-content:center;min-height:48px;margin:14px 0">Lädt …</div><div class="actions"><button class="btn quiet" id="sClose">Abbrechen</button></div>`);
+  /* Handy-Browser / iPhone-Startbildschirm: Popups gehen dort oft nicht → Anmeldung per Weiterleitung über Google */
+  if (googleUseRedirect()) { googleRedirect(); return; }
+  openSheet(`<div class="kicker">Konto</div><h2>Mit Google anmelden</h2><p>Tippe auf den Knopf und wähle dein Google-Konto.</p><div id="gBtn" style="display:flex;justify-content:center;min-height:48px;margin:14px 0">Lädt …</div><p class="hint" style="text-align:center">Es öffnet sich nichts? <a href="#" id="gRedir">Über Weiterleitung anmelden</a></p><div class="actions"><button class="btn quiet" id="sClose">Abbrechen</button></div>`);
   bindClose();
+  $("#gRedir").onclick = e => { e.preventDefault(); googleRedirect(); };
   const go = () => {
     google.accounts.id.initialize({ client_id: googleCfg.clientId, callback: r => { closeSheet(); googleToken(r.credential); }, ux_mode: "popup", auto_select: false });
     $("#gBtn").innerHTML = ""; google.accounts.id.renderButton($("#gBtn"), { theme: "outline", size: "large", text: "continue_with", shape: "pill", locale: "de" });
   };
   if (window.google && google.accounts) go();
   else { const sc = document.createElement("script"); sc.src = "https://accounts.google.com/gsi/client"; sc.onload = go; sc.onerror = () => { const b = $("#gBtn"); if (b) b.textContent = "Google ist gerade nicht erreichbar."; }; document.head.appendChild(sc); }
+}
+/* 🔁 Google per Weiterleitung (ohne Popup): Google → auth.html → zurück auf diese Seite; das Token liegt kurz im Speicher */
+function googleUseRedirect(){
+  try { return matchMedia("(pointer: coarse)").matches || matchMedia("(display-mode: standalone)").matches || navigator.standalone === true; } catch(e) { return false; }
+}
+function googleRedirect(){
+  const nonce = Array.from(crypto.getRandomValues(new Uint8Array(16)), b => b.toString(16).padStart(2, "0")).join("");
+  const back = /test\.html$/.test(location.pathname) ? "test" : "main";
+  const q = new URLSearchParams({ client_id: googleCfg.clientId, redirect_uri: WEB_BASE + "auth.html", response_type: "id_token", scope: "openid email profile", nonce, prompt: "select_account", state: "web:" + back });
+  toast("Weiter zu Google …");
+  location.href = "https://accounts.google.com/o/oauth2/v2/auth?" + q.toString();
+}
+function googleRedirectBack(){
+  let g = null; try { g = JSON.parse(localStorage.getItem("sp.gRedirect") || "null"); localStorage.removeItem("sp.gRedirect"); } catch(e) {}
+  if (!g) return;
+  if (g.err) { toast("Google-Anmeldung: " + g.err); return; }
+  if (g.t && Date.now() - (g.ts || 0) < 10 * 60e3) googleToken(g.t);
 }
 /* Rückkehr aus dem Browser (Android) */
 window.__google = () => { if (!hasNative("pendingGoogle")) return; const t = NATIVE.pendingGoogle(); if (!t) return; if (t[0] === "!") { toast("Google-Anmeldung: " + t.slice(1)); return; } googleToken(t); };
@@ -21573,7 +21593,7 @@ loadPhotos().then(() => { if (view === "list") renderList(); });
 setTimeout(() => loadOfficial(false), 300);
 setTimeout(async () => {
   showNews();
-  if (fb.ready()) { loadNews(); loadReports(); loadModDefects(); checkBan(); setTimeout(() => { if (isStaff()) loadInbox().catch(() => {}); }, 4000); await loadCustomHefte(); await loadFixes(); loadRoles(); loadGoogleCfg(); setTimeout(() => window.__google(), 500); try { await syncUsername(); } catch(e) {} try { await pullStamps(); } catch(e) {} await checkAdmin(); checkUpdate();
+  if (fb.ready()) { loadNews(); loadReports(); loadModDefects(); checkBan(); setTimeout(() => { if (isStaff()) loadInbox().catch(() => {}); }, 4000); await loadCustomHefte(); await loadFixes(); loadRoles(); loadGoogleCfg(); setTimeout(() => window.__google(), 500); if (!NATIVE) setTimeout(googleRedirectBack, 600); try { await syncUsername(); } catch(e) {} try { await pullStamps(); } catch(e) {} await checkAdmin(); checkUpdate();
     /* neue App-Version einmal ans Profil melden, damit Admins sie sehen */
     const vs = (NATIVE ? 0 : 10000) + APP_CODE;
     if ((load("sp.verSent", 0) !== vs || load("sp.statLvl", -1) !== 0) && username && username.code) pushProfile().then(() => save("sp.verSent", vs)).catch(() => {}); }

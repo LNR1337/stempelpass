@@ -1,6 +1,6 @@
 {
- "code": 180,
- "version": "1.37",
- "notes": "Neu: PC-Ansicht im Browser (Liste links, große Karte rechts). Dazu alles aus 1.36: Heft-Schalter, „Für wen?“, Vorschlag für heute, Liste mit Entfernung, Profil mit „Dein nächstes Ziel“. Wer noch eine Version vor 1.35 hat: einmal Backup/anmelden, alte App löschen, neu installieren.",
+ "code": 181,
+ "version": "1.38",
+ "notes": "Google-Anmeldung auf der Webseite am Handy/iPhone jetzt ohne Popup (Weiterleitung). Dazu PC-Ansicht und alles aus 1.36/1.37.",
  "apk": "Stempelpass-test.apk"
 }

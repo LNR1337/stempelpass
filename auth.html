@@ -22,6 +22,14 @@ small{display:block;margin-top:16px;color:#8a978e;font-size:12px}
 </div>
 <script>
 const P = new URLSearchParams(location.search), app = P.get("app");
+/* Rückkehr von Google nach Anmeldung per Weiterleitung (Webseite am Handy/iPhone): Token kurz speichern und zurück zur Seite */
+(function(){
+  const H = new URLSearchParams(location.hash.slice(1)), st = H.get("state") || "";
+  if (!/^web:/.test(st) || !(H.get("id_token") || H.get("error"))) return;
+  try { localStorage.setItem("sp.gRedirect", JSON.stringify(H.get("id_token") ? { t: H.get("id_token"), ts: Date.now() } : { err: H.get("error") })); } catch(e) {}
+  location.replace(st === "web:test" ? "test.html" : "./");
+  throw 0;
+})();
 const msg = document.getElementById("msg"), btn = document.getElementById("btn"), back = document.getElementById("back");
 const toApp = q => "intent://google?" + q + "#Intent;scheme=stempelpass;package=de.stempelpass.app;end";
 fetch("google.json?t=" + Date.now()).then(r => r.json()).then(cfg => {
