@@ -1,5 +1,5 @@
 /* Stempeljagd Web-App: App offline verfügbar, Kartenkacheln zwischenspeichern */
-const V = "sp-143-1794850888";
+const V = "sp-143-t179";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(V).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => {
@@ -15,9 +15,11 @@ self.addEventListener("fetch", e => {
   const req = e.request; if (req.method !== "GET") return;
   const u = new URL(req.url);
   /* App selbst: erst Internet (immer die neueste Version), sonst aus dem Speicher */
-  if (req.mode === "navigate" || (u.origin === location.origin && /\/(index\.html)?$/.test(u.pathname))) {
-    e.respondWith(fetch(req).then(r => { if (r.ok) { const c = r.clone(); caches.open(V).then(x => x.put("index.html", c)); } return r; })
-      .catch(() => caches.match("index.html").then(h => h || caches.match("./"))));
+  if (req.mode === "navigate" || (u.origin === location.origin && /\/((index|test)\.html)?$/.test(u.pathname))) {
+    /* Test-Webseite (test.html) getrennt zwischenspeichern, damit sie nie die normale Seite überschreibt */
+    const key = /test\.html$/.test(u.pathname) ? "test.html" : "index.html";
+    e.respondWith(fetch(req).then(r => { if (r.ok) { const c = r.clone(); caches.open(V).then(x => x.put(key, c)); } return r; })
+      .catch(() => caches.match(key).then(h => h || caches.match("./"))));
     return;
   }
   /* Kartenkacheln: aus dem Speicher, im Hintergrund auffrischen */
