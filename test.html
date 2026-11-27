@@ -2149,6 +2149,26 @@ body.fd-open #todayCard,body.fd-open .today,body.fd-open #locBtn,body.fd-open .l
 .frb-b b{font:800 .8rem var(--body);margin-left:6px}
 body.has-frtop #todayCard,body.has-frtop .today{display:none!important}
 body.has-frtop .mapbad{top:86px}body.has-frtop.frsel .mapbad{display:none}
+
+/* 🖥️ PC-Ansicht: links Seitenleiste (Kopf, Liste/Wandern/Freunde, Fenster), rechts immer die große Karte */
+@media (min-width:1000px){
+  html.desk body{display:grid!important;grid-template-columns:var(--sbw,430px) 1fr;grid-template-rows:auto 1fr auto;height:100vh;max-width:none!important;margin:0!important;padding-bottom:0!important;overflow:hidden}
+  html.desk header{grid-column:1;grid-row:1;z-index:20}
+  html.desk nav.bottom{grid-column:1;grid-row:3;position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;width:auto!important;margin:0 10px 10px!important;transform:none!important}
+  html.desk nav.bottom [data-view="map"]{display:none!important}
+  html.desk .nseg{display:flex!important;align-items:center;gap:4px}
+  html.desk .nseg>button[data-view]{flex:1 1 0;min-width:0}
+  html.desk .nseg>button[data-view].on{flex:1.7 1 0}
+  html.desk .nseg>:not(button[data-view]){flex:none}
+  html.desk main{grid-column:2;grid-row:1/4;position:relative;height:100vh;border-left:1px solid rgba(0,0,0,.12)}
+  html.desk main>.panel{position:fixed!important;left:0!important;right:auto!important;width:var(--sbw,430px)!important;top:var(--hh,160px)!important;bottom:var(--nh,76px)!important;height:auto!important;box-sizing:border-box}
+  html.desk #sheet{left:0!important;right:auto!important;width:var(--sbw,430px)!important;max-width:none!important;bottom:0!important;border-radius:20px 20px 0 0;box-shadow:6px 0 24px rgba(0,0,0,.18)}
+  html.desk #sheet .sv-map .minimap,html.desk #sheet .sv-map .sv-big{display:none!important}
+  html.desk #sheet .sv-map{height:50px!important;min-height:0!important;background:none!important;margin-bottom:0!important}
+  html.desk #sheet .sv-head{margin-top:6px!important}
+  html.desk #scrim{right:auto!important;width:var(--sbw,430px)!important}
+  html.desk .toast{left:calc(var(--sbw,430px) + (100vw - var(--sbw,430px)) / 2)!important;max-width:520px}
+}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
@@ -5718,8 +5738,8 @@ SETS.sax = { title: "Wanderpass Sächsische Schweiz", short: "Sächs. Schweiz", 
   info: "Der Urlaubsmagie-Wanderpass: 25 fertige Wandertouren mit Route, Komoot-Link (QR-Code im Pass), Einkehr-Tipp und eigenem Stempel pro Tour. Die 25 Stempel gibt es an 23 Stempelstellen – Bauden, Cafés und Gasthäuser mit eigenen Öffnungszeiten (Daxensteinbaude und Schrammsteinbaude haben je 2 Stempel). Mit allen 25 gibt es die Wandernadel im Büro in Sebnitz.",
   url: "https://urlaubsmagie.com/wanderpass/", linkLabel: "Zum Wanderpass" };
 for (const x of XS_ON) SETS[x.key] = Object.assign({ near: x.near }, x.set);
-const APP_VERSION = "1.36";
-const APP_CODE = 179;   // muss zur versionCode im AndroidManifest passen
+const APP_VERSION = "1.37";
+const APP_CODE = 180;   // muss zur versionCode im AndroidManifest passen
 const MADE_BY_RAW = "Tino";
 const MADE_BY = MADE_BY_RAW.startsWith("/*") ? "" : MADE_BY_RAW;
 /* 🏪 Play-Store-Version (build.sh mit STORE=1): keine eigenen Updates, kein Testkanal – Updates nur über Google Play
@@ -8155,6 +8175,7 @@ function openStamp(k){
   const s = byKey[current].get(k); if (!s) return;
   const set = current;
   selectedKey = k; drawMarkers(false);
+  if (typeof deskOn === "function" && deskOn() && hasPos(s)) { try { const ll = L.latLng(s.lat, s.lon); if (!map.getBounds().pad(-0.15).contains(ll) || map.getZoom() < 12) map.flyTo(ll, Math.max(map.getZoom(), 13), { duration: .6 }); } catch(e) {} }
   const d = done[set][k], m = methodOf(set, k), bad = isBroken(set, k);
   const ph = photos[set][k] || [], rs = routesFor(set, k), fr = friendsWith(set, k);
   const hefte = groupMembers(set, k), alerts = stampAlerts(set, k, s).concat(s.bonus ? [["bonus", "🎁 Bonusstempel", "Ein Extra – zählt nicht für die Wandernadel und nicht beim Heft-Fortschritt."]] : []).concat(isWinterTime() && !isDone(set, k) && winterWhy(set, s) ? [["winter", "❄️ Im Winter schwierig", winterWhy(set, s)]] : []);
@@ -19107,7 +19128,27 @@ $("#locChipX").onclick = () => { clearInterval(locTimer); locTimer = null; locLa
 /* ---------- Ansicht & Ereignisse ---------- */
 const ICO = {cam:'<path d="M4 8h3l1.6-2.2h6.8L17 8h3v11H4Z"/><circle cx="12" cy="13.2" r="3.4"/>',stone:'<ellipse cx="12" cy="18.2" rx="8.2" ry="3"/><ellipse cx="12.4" cy="12.6" rx="5.6" ry="2.6"/><ellipse cx="11.6" cy="7.4" rx="3.4" ry="2.2"/>',star:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/>',starf:'<path fill="currentColor" d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/>',more:'<circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/>',pin:'<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/>',compass:'<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z"/>',rec:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/>',hash:'<path d="M5 9h14M5 15h14M10 4 8 20M16 4l-2 16"/>',phone:'<rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18h2"/>',nav:'<path d="M3 11 21 3l-8 18-2-8-8-2Z"/>'};
 const ico = (k, sz = 19) => `<svg viewBox="0 0 24 24" width="${sz}" height="${sz}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="ico">${ICO[k]}</svg>`;
+
+/* 🖥️ PC-Ansicht einschalten (nur im Browser, nicht in der Android-App) */
+const DESK_Q = window.matchMedia ? matchMedia("(min-width: 1000px)") : null;
+function deskOn(){ return !NATIVE && DESK_Q && DESK_Q.matches; }
+function deskSync(){
+  const on = deskOn(), was = document.documentElement.classList.contains("desk");
+  document.documentElement.classList.toggle("desk", on);
+  if (on) {
+    const h = document.querySelector("header"), n = document.querySelector("nav.bottom");
+    document.documentElement.style.setProperty("--hh", (h ? h.getBoundingClientRect().height : 160) + "px");
+    document.documentElement.style.setProperty("--nh", (n ? n.getBoundingClientRect().height + 10 : 76) + "px");
+    if (typeof view !== "undefined" && view === "map") setView("list");
+  }
+  if (on !== was) setTimeout(() => { try { map.invalidateSize(); } catch(e) {} }, 50);
+}
+try { if (DESK_Q) DESK_Q.addEventListener("change", deskSync); } catch(e) {}
+window.addEventListener("resize", () => { clearTimeout(deskSync.t); deskSync.t = setTimeout(deskSync, 120); });
+try { const ro = new ResizeObserver(() => { if (document.documentElement.classList.contains("desk")) deskSync(); }); setTimeout(() => { const h = document.querySelector("header"); if (h) ro.observe(h); }, 0); } catch(e) {}
+setTimeout(deskSync, 0); setTimeout(deskSync, 1500);
 function setView(v){
+  if (v === "map" && typeof deskOn === "function" && deskOn()) v = "list";
   if (v !== "map") setMiniHdr(false);
   if (v !== "map" && typeof closeFd === "function") { closeFd(); }
   setTimeout(() => { try { renderFdTab(); } catch(e) {} }, 0);

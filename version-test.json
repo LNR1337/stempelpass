@@ -1,6 +1,6 @@
 {
- "code": 179,
- "version": "1.36",
- "notes": "Neu: Heft-Schalter oben, „Für wen?“ (Personen/Hund), Vorschlag für heute bei Wandern, Liste mit Entfernung, Profil mit „Dein nächstes Ziel“, beschriftete Knöpfe am Stempel, Linien-Icons. Wer noch eine Version vor 1.35 hat: einmal Backup/anmelden, alte App löschen, neu installieren.",
+ "code": 180,
+ "version": "1.37",
+ "notes": "Neu: PC-Ansicht im Browser (Liste links, große Karte rechts). Dazu alles aus 1.36: Heft-Schalter, „Für wen?“, Vorschlag für heute, Liste mit Entfernung, Profil mit „Dein nächstes Ziel“. Wer noch eine Version vor 1.35 hat: einmal Backup/anmelden, alte App löschen, neu installieren.",
  "apk": "Stempelpass-test.apk"
 }
