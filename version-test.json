@@ -1,6 +1,6 @@
 {
- "code": 183,
- "version": "1.40",
- "notes": "PC-Ansicht mit Kopfzeile, Menü und Icon-Leiste, Tastenkürzel, Liste↔Karte. Google-Anmeldung am Handy ohne Popup. Dazu alles aus 1.36–1.38.",
+ "code": 184,
+ "version": "1.41",
+ "notes": "GPX: Knopf an jeder Route, Stempel an der Strecke als Wegpunkte, Beschreibung mit km/Höhe/Gehzeit, „Alle als GPX“, Teilen auf der Webseite. Dazu PC-Ansicht und alles aus 1.36–1.40.",
  "apk": "Stempelpass-test.apk"
 }
