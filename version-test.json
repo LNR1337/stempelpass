@@ -1,6 +1,6 @@
 {
- "code": 181,
- "version": "1.38",
- "notes": "Google-Anmeldung auf der Webseite am Handy/iPhone jetzt ohne Popup (Weiterleitung). Dazu PC-Ansicht und alles aus 1.36/1.37.",
+ "code": 183,
+ "version": "1.40",
+ "notes": "PC-Ansicht mit Kopfzeile, Menü und Icon-Leiste, Tastenkürzel, Liste↔Karte. Google-Anmeldung am Handy ohne Popup. Dazu alles aus 1.36–1.38.",
  "apk": "Stempelpass-test.apk"
 }
