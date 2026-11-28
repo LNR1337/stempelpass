@@ -1,6 +1,6 @@
 {
- "code": 184,
- "version": "1.41",
- "notes": "GPX: Knopf an jeder Route, Stempel an der Strecke als Wegpunkte, Beschreibung mit km/Höhe/Gehzeit, „Alle als GPX“, Teilen auf der Webseite. Dazu PC-Ansicht und alles aus 1.36–1.40.",
+ "code": 185,
+ "version": "1.42",
+ "notes": "Neue Android-Hülle: GPX-Dateien aus WhatsApp mit Stempeljagd öffnen, GPX als echte Datei teilen. Planer nimmt Wanderweg statt Straße (Varianten), Navi-Zeitachse ohne Überlappung.",
  "apk": "Stempelpass-test.apk"
 }
