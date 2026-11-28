@@ -1,6 +1,6 @@
 {
- "code": 186,
- "version": "1.43",
- "notes": "Standort-Knopf zentriert nur noch die Karte. Aufzeichnung zählt keine Sprünge/Zittern mehr. Stempel-Fenster: Knopfreihe passt, Info-Kasten nicht mehr übers Foto, „Nächster Stempel“ ohne Code-Text.",
+ "code": 187,
+ "version": "1.44",
+ "notes": "Tagesüberblick (Zeitachse/Karte/Fotos, Teilen als Bild/Story, Wetter), Heute-Karte mit Tagesziel, Abend-Erinnerung. Aufnahme: Dunkelheits-Warnung, Foto unterwegs, Zurück zum Auto. Doppelte Stempel nachfragen. Name aufs Foto passt.",
  "apk": "Stempelpass-test.apk"
 }
