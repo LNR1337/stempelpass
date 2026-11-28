@@ -1,6 +1,6 @@
 {
- "code": 187,
- "version": "1.44",
- "notes": "Tagesüberblick (Zeitachse/Karte/Fotos, Teilen als Bild/Story, Wetter), Heute-Karte mit Tagesziel, Abend-Erinnerung. Aufnahme: Dunkelheits-Warnung, Foto unterwegs, Zurück zum Auto. Doppelte Stempel nachfragen. Name aufs Foto passt.",
+ "code": 188,
+ "version": "1.45",
+ "notes": "Eigene Aussicht-Fotos landen jetzt auch im Fotoalbum und im Tagesüberblick (frühere werden beim Öffnen des Stempels nachgeholt).",
  "apk": "Stempelpass-test.apk"
 }
